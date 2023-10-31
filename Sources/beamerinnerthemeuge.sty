@@ -1,0 +1,335 @@
+%% ---------------------------------------------------------------------------
+%% Copyright 2019 Thibaud TOULLIER, Romain NOËL
+%%
+%% Based on the UGE theme presentation ppt and graphical charter
+%% ---------------------------------------------------------------------------
+
+%\mode<presentation>
+
+%%%
+%%%	Title and part pages.
+%==============================================================================
+
+%% Title %%%
+%%%%%%%%%%%%
+% FROM beamerinnerthememetropolis.dtx
+\setbeamertemplate{title}{
+	%\raggedright% %%%%% COMMENT ADDED !
+	\linespread{1.0}%
+	\inserttitle%
+	\par%
+	\vspace*{0.5em}
+}
+% FROM beamerinnerthememetropolis.dtx
+\setbeamertemplate{subtitle}{
+	%\raggedright%  %%%%% COMMENT ADDED !
+	\insertsubtitle%
+	\par%
+	\vspace*{0.5em}
+}
+% FROM beamerinnerthememetropolis.dtx
+\setbeamertemplate{title graphic}{
+	\vbox{% \vbox to 0pt {% %%%%% MODIFIED !
+		% \vspace*{2em} %%%%% COMMENT ADDED !
+		\inserttitlegraphic%
+	}%
+	\nointerlineskip%
+}
+
+\newcommand{\UGEtitlelogo}{%
+	\ifbool{reversedColor}{% Dark true 
+		\ifscreenratio{% 169
+			\includegraphics[height=0.08\paperheight]{\PathSO/Logos/UGE-logo.pdf}%%
+		}{% 43
+			\includegraphics[height=0.065\paperheight]{\PathSO/Logos/UGE-logo.pdf}%%
+		}%
+	}{% Light
+		\ifscreenratio{% 169
+			\includegraphics[height=0.08\paperheight]{\PathSO/Logos/UGE-logo_white.pdf}%%
+		}{% 43
+			\includegraphics[height=0.065\paperheight]{\PathSO/Logos/UGE-logo_white.pdf}%%
+		}%
+	}%
+}
+
+\newcommand{\UGEtitlepage}{%
+	\ifbool{reversedColor}{% Dark true 
+		\ifscreenratio{% 169
+			\includegraphics[width=\paperwidth, height=\paperheight]{\PathSO/Logos/pattern-titlepage-reverse.pdf}%%
+		}{% 43
+			\includegraphics[width=\paperwidth, height=\paperheight]{\PathSO/Logos/pattern-titlepage-reverse-43.pdf}%%
+		}%	
+	}{% Light
+		\ifscreenratio{% 169
+			\includegraphics[width=\paperwidth, height=\paperheight]{\PathSO/Logos/pattern-titlepage.pdf}%%
+		}{% 43
+			\includegraphics[width=\paperwidth, height=\paperheight]{\PathSO/Logos/pattern-titlepage43.pdf}%%
+		}%
+	}%
+}
+
+\setbeamertemplate{title page}{
+	\setbeamercolor{progress bar}{fg=normal text.bg}
+	\ifscreenratio{% 169
+		\begin{picture}(0,0)
+		\put(-28,-128){\UGEtitlepage}
+		
+		\put(-30,-125){\noindent%
+			\ifbool{reversedColor}{% Dark true 
+				\fcolorbox{pale}{pale}%{
+			}{% Light
+				\fcolorbox{dark}{dark}%{
+			}% end if
+			{% begin third argument fcolorobx
+				%\fcolorbox{normal text.fg}{normal text.fg}{%
+				\begin{minipage}[b][\paperheight]{0.9\textwidth}
+				\ifbool{reversedColor}{ % Dark true 
+					\setbeamercolor{normal text}{fg=dark, }%
+				}{% Light
+					\setbeamercolor{normal text}{fg=pale, }%
+				}%
+				\centering
+				\vfill%
+				\ifx\inserttitle\@empty\else\quad\usebeamertemplate*{title}\fi
+				\ifx\insertsubtitle\@empty\else\quad\usebeamertemplate*{subtitle}\fi
+				\hbox{\hspace{2pt}\usebeamertemplate*{title separator}\hspace{1pt}}
+				\ifx\beamer@shortauthor\@empty\else\usebeamertemplate*{author}\fi
+				\ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
+				\ifx\insertinstitute\@empty\else{\parbox{0.9\textwidth}{\raggedright\usebeamertemplate*{institute}} }\fi
+				\vfill
+				\vbox{}
+				\end{minipage}%
+			}%
+		}
+		
+		\put(234,-120){%
+			\UGEtitlelogo
+		}
+		
+		\put(-27,-123){\noindent\vbox{%
+				\begin{minipage}[b][0.96\paperheight]{0.899\textwidth}%
+				\ifx\inserttitlegraphic\@empty\else\usebeamertemplate*{title graphic}\fi%
+				\end{minipage}%
+			}%
+		}
+		\end{picture}
+	}{% 43
+		\begin{picture}(0,0)
+		\put(-29.25,-136){\UGEtitlepage}
+		
+		\put(-28.75,-136){\noindent%
+			\ifbool{reversedColor}{% Dark true 
+				\fcolorbox{pale}{pale}%{
+			}{% Light
+				\fcolorbox{dark}{dark}%{
+			}% end if
+			{% begin third argument fcolorobx
+				%\fcolorbox{normal text.fg}{normal text.fg}{%
+				\begin{minipage}[b][\paperheight]{0.9\textwidth}
+				\ifbool{reversedColor}{ % Dark true 
+					\setbeamercolor{normal text}{fg=dark, }%
+				}{% Light
+					\setbeamercolor{normal text}{fg=pale, }%
+				}%
+				\centering
+				\vfill%
+				\ifx\inserttitle\@empty\else\quad\usebeamertemplate*{title}\fi
+				\ifx\insertsubtitle\@empty\else\quad\usebeamertemplate*{subtitle}\fi
+				\hbox{\hspace{2pt}\usebeamertemplate*{title separator}\hspace{1pt}}
+				\ifx\beamer@shortauthor\@empty\else\usebeamertemplate*{author}\fi
+				\ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
+				\ifx\insertinstitute\@empty\else{\parbox{0.9\textwidth}{\raggedright\usebeamertemplate*{institute}} }\fi
+				\vfill
+				\vbox{}
+				\end{minipage}%
+			}%
+		}
+		
+		\put(164,-130){%
+			\UGEtitlelogo
+		}
+		
+		\put(-25,-130){\noindent\vbox{%
+				\begin{minipage}[b][0.96\paperheight]{0.899\textwidth}%
+				\ifx\inserttitlegraphic\@empty\else\usebeamertemplate*{title graphic}\fi%
+				\end{minipage}%
+			}%
+		}
+		\end{picture}
+	}% end ifscrenratio
+}
+
+%% Section %%%
+%%%%%%%%%%%%%%
+
+\providebool{UGE@section}
+
+\newcommand{\UGEstandout}{%
+	\ifbool{reversedColor}{% Dark true 
+		\ifscreenratio{% 169
+			\includegraphics[height=\paperheight]{\PathSO/Logos/pattern-section.pdf}%%
+		}{% 43
+			\includegraphics[height=\paperheight]{\PathSO/Logos/pattern-section43.pdf}%%
+		}%
+	}{% Light
+		\ifscreenratio{% 169
+			\includegraphics[height=\paperheight]{\PathSO/Logos/pattern-standout.pdf}%
+		}{% 43
+			\includegraphics[height=\paperheight]{\PathSO/Logos/pattern-standout43.pdf}%
+		}%
+	}%
+}
+
+\newcommand{\UGEsection}{%
+	\ifbool{reversedColor}{% Dark true 
+		\ifscreenratio{% 169
+			\includegraphics[height=\paperheight]{\PathSO/Logos/pattern-standout.pdf}%
+		}{% 43
+			\includegraphics[height=\paperheight]{\PathSO/Logos/pattern-standout43.pdf}%
+		}%
+	}{% Light
+		\ifscreenratio{% 169
+			\includegraphics[height=\paperheight]{\PathSO/Logos/pattern-section.pdf}%%
+		}{% 43
+			\includegraphics[height=\paperheight]{\PathSO/Logos/pattern-section43.pdf}%%
+		}%
+	}%
+}
+
+
+%\addtobeamertemplate{section page}{}{%
+%	\setbeamertemplate*{background}{
+%		\includegraphics[width=8.5mm]{\PathSO/Logos/pattern-eps-converted-to.pdf}
+%	}
+%}
+\providebool{sectionContent}
+\booltrue{sectionContent}
+
+\renewcommand{\metropolis@enablesectionpage}{
+	\AtBeginSection{
+		\booltrue{UGE@section}
+		\ifbeamer@inframe
+			\sectionpage
+		\else
+			\frame[plain,c, noframenumbering]{\sectionpage}
+		\fi
+%		\boolfalse{UGE@section}
+		
+		\ifbool{sectionContent}{% true
+			\begin{frame}[plain, noframenumbering]
+			\frametitle{Contents}
+				{\tableofcontents[currentsection,currentsubsection, 
+					hideothersubsections, 
+					sectionstyle=show/shaded,
+					]
+				}
+			\end{frame}
+		}{% else 
+		} % end ifbool
+	}% end atbeginsection
+
+	% Subsection
+	\AtBeginSubsection[]{
+		\booltrue{UGE@section}
+		\ifbeamer@inframe
+			\subsectionpage
+		\else
+			\frame[plain,c, noframenumbering]{\subsectionpage}
+		\fi
+%		\boolfalse{UGE@section}
+	}% end atbeginsubsection
+}% end renewcommand
+
+
+\providebool{waterMark}
+\booltrue{waterMark}
+
+\providebool{defaultWaterMark}
+\booltrue{defaultWaterMark}
+
+\BeforeBeginEnvironment{frame}{%
+	\boolfalse{UGE@section} % by default the style section is disable.
+	\ifbool{defaultWaterMark}{ %true
+		\booltrue{waterMark} % by default the watermark is enable.
+	}{ % false
+		\boolfalse{waterMark} % by default the watermark is disable.	
+	}
+}
+
+\makeatletter
+	\define@key{beamerframe}{standin}[true]{%
+		\booltrue{UGE@section}
+	}
+	\define@key{beamerframe}{nowatermark}[true]{%
+		\boolfalse{waterMark}
+	}
+	\define@key{beamerframe}{watermark}[true]{%
+		\booltrue{waterMark}
+	}
+\makeatother
+
+
+\newcommand{\UGEwatermark}{%
+	\ifscreenratio{% 169
+		\includegraphics[width=8.3mm]{\PathSO/Logos/pattern-frame.pdf}%
+	}{% 43
+		\includegraphics[width=8.3mm]{\PathSO/Logos/pattern-frame43.pdf}%
+	}%
+}
+
+
+%%% Background 
+%\setbeamertemplate{background}{%}
+% Change background on section pages
+%%% Length
+\newlength{\imageBGoffset}
+\setlength{\imageBGoffset}{\paperwidth}
+\addtolength{\imageBGoffset}{-8.5mm}
+\setbeamertemplate{background}{%
+	\ifbool{metropolis@standout}{% standout=true 
+		\UGEstandout
+	}{% standout=false  
+		\ifbool{UGE@section}{ % section=true 
+			% section page
+			\UGEsection
+		}{% section=false 
+			\ifnum\thepage>1{ % title false so "normal" frame
+				\ifbool{waterMark}{% true
+					\hspace*{\imageBGoffset}%
+					\UGEwatermark
+				}{ %false
+					% nothing
+				}
+			} \else { % title true
+				% nothing handle by the title command itself
+			}% In the main.
+			\fi
+		}
+	}
+}
+
+
+%%% Itemize environments.
+	\setbeamertemplate{itemize item}{$\bullet$}
+	\setbeamertemplate{itemize subitem}[triangle]
+	\setbeamertemplate{itemize subsubitem}{-}
+	
+%%% Enumerate environments.
+	% metropolis style
+%%% Description environments.
+	% metropolis style
+%%% Block environments.
+	% metropolis style
+%%% Theorem and proof environments.
+	% metropolis style + corrections from MyPackages
+%%% Figures and tables.
+	% metropolis style
+%%% Footnotes.
+	% metropolis style + corrections from MyPackages
+%%% Bibliography entries.
+	% metropolis style + corrections from MyPackages
+
+%\mode<all>
+
+%%
+%% End of file `beamerinnerthemeuge.sty'.

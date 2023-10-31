@@ -1,0 +1,62 @@
+%==============================================================================
+%
+% Created by Romain NOEL
+% MyBeamerExtra 0.1.a
+% 2020-12-12
+% univ-Eiffel corporate design
+% Based on LaTeX UGE Presentation Template
+%
+%==============================================================================
+\ProvidesPackage{beamerthemeMetropolisBeamerExtra}[2020/12/12]
+
+
+%	Colors of Metropolis
+%==============================================================================
+% To Redefined the Colors of Metropolis !!
+%\definecolor{mDarkBrown}{HTML}{604c38}
+%\definecolor{mDarkTeal}{HTML}{23373b}
+%\definecolor{mLightBrown}{HTML}{EB811B}
+%\definecolor{mLightGreen}{HTML}{14B03D}
+\definecolor{pale}{RGB}{255, 255, 240}
+\definecolor{dark}{HTML}{23373b}
+
+\providebool{reversedColor}
+\boolfalse{reversedColor}
+
+%% Redefine the white color as pale in the metroset call.
+\makeatletter
+\renewcommand{\metropolis@colors@dark}{%
+	\setbeamercolor{normal text}{%
+		fg=pale,
+		bg=dark
+	}%
+	\usebeamercolor[fg]{normal text}%
+	\booltrue{reversedColor}%
+}
+\renewcommand{\metropolis@colors@light}{%
+	\setbeamercolor{normal text}{%
+		fg=dark,
+		bg=pale
+	}%
+	\usebeamercolor[fg]{normal text}%
+	\boolfalse{reversedColor}%
+}
+\metropolis@colors@light % set to default !
+\makeatother
+
+
+%	Progress Bar Settings
+%==============================================================================
+	% Set color
+	\colorlet{ColorProgBar}{orange!65} %mLightBrown , structure
+	\setbeamercolor{progress bar}{fg=ColorProgBar}%,bg=gray}
+	%	\setbeamercolor{title separator}{ ... }
+	%	\setbeamercolor{progress bar in head/foot}{ ... }
+	%	\setbeamercolor{progress bar in section page}{ ... }
+	
+	% Set size
+	\makeatletter
+		\setlength{\metropolis@progressinheadfoot@linewidth}{1.2ex}%{1.0ex}
+		\setlength{\metropolis@titleseparator@linewidth}{2pt}
+		\setlength{\metropolis@progressonsectionpage@linewidth}{2pt}
+	\makeatother

@@ -1,0 +1,104 @@
+* UGE-beamer theme
+
+#+HTML: <img src="https://img.shields.io/github/license/KirmTwinty/uge-beamer"/>
+
+The purpose of this beamer theme is to provide a beamer template for presentation for Université Gustave Eiffel.
+The presentation is tested and must be compiled with =XeTeX=.
+
+[[https://github.com/KirmTwinty/uge-beamer/raw/master/screenshot.png]]
+
+** Contents
+:PROPERTIES:
+:TOC: :include siblings :depth 2
+:END:
+
+:CONTENTS:
+- [[#installation][Installation]]
+- [[#usage][Usage]]
+  - [[#replacing-logos][Replacing logos]]
+  - [[#authors-and-affiliation][Authors and affiliation]]
+  - [[#thanks-frame][Thanks-frame]]
+  - [[#appendices][Appendices]]
+  - [[#fonts][Fonts]]
+  - [[#inria-fonts-optional][Inria Fonts (optional)]]
+  - [[#colors][Colors]]
+  - [[#169-or-43-formats][16/9 or 4/3 formats]]
+:END:
+
+** Installation
+To use the theme, download the =.sty= files and the =img= folder by the method of your choice (download the archive directly or using =git clone=).
+
+You can also try the theme by compiling the provided =test.tex= file. The file provides details on how to use the theme in comments.
+
+** Usage
+*** Replacing logos
+If you want to replace the logos images by your own (for example two logos side by side), you can do it by using this command before =\begin{document}=:
+
+#+BEGIN_SRC latex
+\titlelogo[width=2cm]{img/mycustomlogo-title.eps}   % Replace the logo in the title page
+\footerlogo[width=2cm]{img/mycustomlogo-footer.eps} % Replace the logo in all other pages (footer)
+#+END_SRC
+
+
+*** Authors and affiliation
+Authors are added successively to make it easier to read, with the following syntax: 
+#+BEGIN_SRC latex
+\author[mail address (optional)]{Author Name}{Affiliation index}
+#+END_SRC
+Then, the affiliation are also added recursively: 
+#+BEGIN_SRC latex
+\affil[affiliation number]{Name of affiliation}
+#+END_SRC
+
+*** Thanks-frame
+You can add a "thank-you" frame by using the =\thanksframe= command. By default, the title page template is taken with the title, subtitle, your "thank-you" message, conference name and date. 
+For instance:
+#+BEGIN_SRC: latex
+{\thanksframe{{\huge\textbf{Thank you!}}}}
+#+END_SRC
+
+If you want to add appendices, do not forget to add the brackets ={...}= surrounding the =\thanksframe= command. This will make the thanksframe environment not propagating to the appendices.
+
+*** Appendices
+
+To remove the numbering from the appendices frame, you can add the =noframenumbering= option to the frame:
+#+BEGIN_SRC: latex
+\begin{frame}[noframenumbering]
+...
+\end{frame}
+#+END_SRC
+
+
+*** Fonts
+UGE's graphical guidelines ask to use =TT Norms®=. However those fonts appear to be non-free and not well adapted for equations.
+Therefore, the guidelines recommend to use =Tahoma= when =TT Norms®= is not available. However, =Tahoma= was made for on-screen reading and is even worst than =TT Norms®= for equations. 
+As a consequence, by default, the beamer theme uses =Tahoma= for text and =Computer Modern Serif= for maths equation, used by LaTeX by defaults.
+
+*** Inria Fonts (optional)
+Another way though is to use the [[https://black-foundry.com/blog/inria-serif-and-inria][Inria]] fonts, under an =Open Font License=. 
+**** _Method 1:_ download and install the fonts on your machine
+Download the fonts and install them on your machine (usually, you just have to open the =.ttf= fonts files). Then, use the option =inriafonts= in the theme: 
+#+BEGIN_SRC latex
+\usetheme[inriafonts]{uge} % Use Inria fonts, make sure to have the ttf files in the same directory.
+#+END_SRC 
+**** _Method 2:_ no font install
+Download the fonts and place the files =InriaSans-Regular.ttf= and =InriaSerif-Regular.ttf= in the same directory than the =.sty= files and your main =.tex= file. Then, use the option =inriafonts= in the theme: 
+#+BEGIN_SRC latex
+\usetheme[inriafonts]{uge} % Use Inria fonts, make sure to have the ttf files in the same directory.
+#+END_SRC 
+
+
+*** Colors
+You can inverse the colors of the title page by using the =reversed= option of the theme. By default the background is blue and fonts are in white.
+#+BEGIN_SRC latex
+\usetheme{uge}           % background blue, foreground white
+\usetheme[reversed]{uge} % background white, foreground blue
+#+END_SRC
+
+*** 16/9 or 4/3 formats
+The theme has been tested on either =16:9= or =4:3= formats (by default). 
+To get a =16:9= format, you can customize the =aspectratio= option parameter in the document class:
+#+BEGIN_SRC latex
+\documentclass[aspectratio=169]{beamer}
+#+END_SRC
+

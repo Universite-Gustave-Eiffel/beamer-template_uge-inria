@@ -1,0 +1,49 @@
+%% ---------------------------------------------------------------------------
+%% Copyright 2019 Thibaud TOULLIER, Romain NOËL
+%%
+%% Based on the UGE theme presentation ppt and graphical charter
+%% ---------------------------------------------------------------------------
+
+%\mode<presentation>
+
+%%% 
+%%% === The head- and footline. ==============================================
+
+\newcommand{\UGElogo}{%
+	\ifbool{reversedColor}{% Dark true 
+		\includegraphics[width=23.5mm]{\PathSO/Logos/UGE-logo.pdf}%
+	}{% Light
+		\includegraphics[width=23.5mm]{\PathSO/Logos/UGE-logo_white.pdf}%
+	}%
+}
+
+%%% Footer
+\setbeamertemplate{frame footer}{%
+	%	\insertshortdate 
+	\hfill \ 
+	\hfill \ %\insertshorttitle
+	\hfill \ %
+	\hfill \
+	\insertshortauthor \hspace{-7em}
+}%
+%\addtobeamertemplate{frame footer}{}{\vspace*{-2.5ex}} % decrease space between progress bar and footer
+\addtobeamertemplate{frame footer}{}{\vspace*{-1.5\metropolis@progressinheadfoot@linewidth}} % decrease space between progress bar and footer
+
+%%% Header
+\AtBeginDocument{% To avoid redefinition when using \metroset. Not the best style ever but I don't know how to do otherwise.
+	\setbeamercolor{frametitle}{bg=normal text.fg, fg=normal text.bg}
+	\addtobeamertemplate{frametitle}{}{%
+		\vspace*{-1.65em}\hspace*{\fill}\UGElogo\hspace{-22pt}\mbox{}%
+	}
+}
+
+%%% The sidebars.
+%%% The logo.
+%\addtobeamertemplate{logo}{}{\vspace{0.72\paperheight}}
+%%% The frame title.
+
+%\mode<all>
+
+%%
+%% End of file `beamerouterthemeuge.sty'.
+

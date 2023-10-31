@@ -1,0 +1,60 @@
+%%%% 		UsersPackagesCommands.tex			%%%%
+%%%%		version 0.0.1 du 12/12/2020			%%%%
+%%%% 		Author: Romain NOËL					%%%%
+%%%%		email: romain.noel@univ-eiffel.fr			%%%%
+%%%%--------------------------------------------%%%%
+
+%%%%---- OS & FONT     -------------------------%%%%
+%%%%---- POLICE     ----------------------------%%%%
+%%%%---- TEXT FORMATTING -----------------------%%%%
+%%%%---- SPACING & JUSTIFICATION ---------------%%%%
+%%%%---- LAYOUT & MARGINS ----------------------%%%%
+%%%%---- FOOT PAGE & HEAD ----------------------%%%%
+%%%%---- TABLE of CONTENT & FIGURES ------------%%%%
+%%%%---- PARTS & CHAPTERS ----------------------%%%%
+%%%%---- WATERMARKS ----------------------------%%%%
+%%%%---- COVER PAGE ----------------------------%%%%
+%%%%---- IMAGES & FLOAT ------------------------%%%%
+%%%%---- DRAWING & GRAPHS ----------------------%%%%
+%%%%---- TABLES & BOXES ------------------------%%%%
+%%%%---- SYMBOLS -------------------------------%%%%
+%%%%---- MATHS & PHYSICS -----------------------%%%%
+%%%%---- THEOREMS ------------------------------%%%%
+%%%%---- CHEMISTRY & BIO -----------------------%%%%
+%%%%---- CODING --------------------------------%%%%
+%%%%---- INCLUDE OTHER FILES -------------------%%%%
+%%%%---- LaTeX PROGRAMMING  --------------------%%%%
+%%%%---- TESTING & EXTRA -----------------------%%%%
+%%%%---- LINKS & REFERENCES --------------------%%%%
+%%%%---- INDEX & GLOSSARIES --------------------%%%%
+%%%%---- BIBLIOGRAPHY --------------------------%%%%
+%%%%---- TRANSLATION ---------------------------%%%%
+%%%%---- VARIABLES -----------------------------%%%%
+%%%%---- MACROS --------------------------------%%%%
+%%%%---- HYPHENATIONS & ACCRONYMS --------------%%%%
+
+% Lexique							% type=main
+		
+% Acronymes							% type=abbreviation
+	\newabbreviation{pc}{PC}{Personal Computer}
+	\newabbreviation{html}{HTML}{hypertext markup language}
+	\newabbreviation{ascii}{ASCII}{American Standard Code for Information Interchange}
+	\newabbreviation{lbm}{LBM}{Lattice \famName{Boltzmann} Method}
+    
+	
+% Nomenclature						% type=symbols
+	\newglossaryentry{dens}{type=symbol,
+			name={\ensuremath{ \rho }},
+			text={ \rho },
+			sort=dens,
+			description={mass density},
+		}
+
+	\newglossaryentry{BoltzDist}{type=symbol, %
+		name={\ensuremath{ f }}, %
+		description={density distribution function over velocity space}, %
+		%unit= {\si{ \kg\m\tothe{-\glspt{dim}-1} \s\tothe{1} } }, %
+		category= {distribution},
+	}
+					
+%EoF

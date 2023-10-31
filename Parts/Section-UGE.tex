@@ -1,0 +1,133 @@
+%
+\section{UGE Theme}
+
+	\begin{frame}
+		\frametitle{Why this template ?}
+
+		This template is here to help UGE Beamer users forgotten by the administration.
+		\bigskip
+
+		The template is available via the following links:\\
+		\textbullet GitHub: %\\
+		\url{https://github.com/KirmTwinty/uge-beamer}
+
+		\textbullet Overleaf: %\\
+		\url{https://www.overleaf.com/read/vxnjgfmyvccj}
+		\bigskip
+
+		Currently the main authors and maintainers of the template are:
+		Romain NOËL and Thibaud TOULLIER.\\
+		We are always looking for any good wills to help. us
+	\end{frame}
+
+
+	\begin{frame}[fragile]
+		\frametitle{Title Page}
+
+		The UGE template is keeping Beamer primitives such as: \\
+		\quad \verb#\institute# for affiliations, or \\
+		\quad \verb#\titlegraphic# for logos on the title page, or \\
+		\quad \verb#aspectratio=169# or \verb|43| for the beamer class option (with other ratios the layout was not setup).
+		\bigskip
+		
+		The background can be changed manually using:
+		\begin{verbatim} 
+		{\usebackgroundtemplate{\includegraphics{YourBackground.pdf}}
+		\begin{frame} \titlepage \end{frame}
+		}
+		\end{verbatim}
+	\end{frame}
+
+
+	\begin{frame}[fragile]
+		\frametitle{Conserved Metropolis settings}
+
+		The UGE style also respect primitives from Metropolis !
+
+		So the pages for section can use a progress bar, the frame can numbered and use a progress bar in the footer or the header, the background can be light or dark...
+		\bigskip
+
+		All of these feature are accessible at anytime using:%
+		\begin{verbatim}
+			\metroset{
+			   sectionpage= progressbar,
+			   numbering=fraction,
+			   progressbar= foot, 
+			   block= fill,
+			   background= light,
+			}
+		\end{verbatim}
+	\end{frame}
+
+
+	\begin{frame}[fragile]
+		\frametitle{Dependencies}
+
+		So the UGE theme cannot work without previously loading some dependencies:
+		\begin{verbatim}
+			% Include some custum modifications but quite handy.
+			\usetheme{BeamerExtra}
+			% Metropolis Theme.
+			\usetheme{metropolis}
+			% Change progress bar size and redefine some colors.
+			\usetheme{MetropolisBeamerExtra}
+		\end{verbatim}
+		\bigskip
+
+		From BeamerExtra the boolean \verb|sectionContent| (default is True) is used to print the content of the section after the section frame. 
+		This can be turned of with \verb|\boolfalse{sectionContent}|.
+	\end{frame}
+
+
+	\begin{frame}[fragile, nowatermark]
+		\frametitle{Normal Slide}
+
+		The default normal slide is including:
+		\begin{itemize}
+			\item a header (from Metropolis) with the UGE logo
+			\item an extra logo: it can be change via the beamer command \verb|\logo{}|
+			\item an email address in the footer: it can be disable by using in the preamble 
+				\verb|\author[]{Your NAME\inst{1} ...}|
+			\item a watermark on left side (from UGE graphical charter). This can be turned off locally using \verb|\begin{frame}[nowatermark]| or globally with \verb|\boolfalse{defaultWaterMark}|. If it is globally disabled it can be turned on locally using \verb|\begin{frame}[watermark]|
+		\end{itemize}
+	\end{frame}
+
+
+	\begin{frame}[fragile, standin]
+		\frametitle{Standout vs standin}
+
+		From Metropolis theme a standout slide is available and was inspired by the UGE visit card Style.
+		
+		But also in addition the inverted color of the standout, called standin, was introducted.
+		This standin style is used for section slide layout.
+		
+		Both standout and standin layout can be used on any slide using 
+		\verb|\begin{frame}[standout]| and \verb|\begin{frame}[standin]|.
+	\end{frame}
+
+
+	\begin{frame}
+		\frametitle{Graphical guidelines not respected}
+
+		By doing this UGE template, we also took some liberties about the graphical charter.
+		Thus using the template you are accepting consequences.
+		\bigskip
+		
+		Some elements of the graphical charter not respected:
+		\begin{alertblock}{Alert}
+			\begin{itemize}
+			 	\item fonts because the official ones are not free and not easy to install
+			 	\item title page since the official one is not convenient
+			\end{itemize}
+	   \end{alertblock}
+	\end{frame}
+
+	\begin{frame}[fragile]
+		\frametitle{Known Issues}
+
+		First compilation might fails.
+		But compile a second time and it should be fine.
+		This is due to 'numbered' section in the appendices that can not be numbered.
+
+		Incompatibilities between \verb|thrm| and \verb|alert| (but this a Beamer issue).
+	\end{frame}

@@ -1,0 +1,169 @@
+%==============================================================================
+%
+% Created by Romain NOEL
+% MyBeamerExtra 0.1.a
+% 2020-12-12
+% UGE corporate design
+% Based on LaTeX UGE Presentation Template
+%
+%==============================================================================
+\ProvidesPackage{beamerthemeBeamerExtra}[2020/12/12]
+
+%	Back Up Slides ?
+%==============================================================================
+\RequirePackage{appendixnumberbeamer} 	% So the progressbar end at appendix
+	
+% To Do what ?
+%	\expandafter\def\expandafter\insertshorttitle\expandafter{%
+%		\insertshorttitle\hfill\insertframenumber\,/\,\inserttotalframenumber}
+	
+	% deactivate the link to just to a certain silde after \miniframesoff.
+	% Working for Madrid style but not really with metropolis.
+	\makeatletter
+		\let\beamer@writeslidentry@miniframeson=\beamer@writeslidentry
+		\def\beamer@writeslidentry@miniframesoff{%
+			\expandafter\beamer@ifempty\expandafter{\beamer@framestartpage}{}% does not happen normally
+			{%else
+				% removed \addtocontents commands
+				\clearpage\beamer@notesactions%
+			}
+		}
+		\newcommand*{\miniframeson}{\let\beamer@writeslidentry=\beamer@writeslidentry@miniframeson}
+		\newcommand*{\miniframesoff}{\let\beamer@writeslidentry=\beamer@writeslidentry@miniframesoff}
+	\makeatother	
+
+	\renewcommand\appendixname{Appendix}
+	
+%	Sections options
+%==============================================================================
+
+\providebool{sectionContent}
+\booltrue{sectionContent}
+
+%%% Make a table of content for each section
+	\setbeamertemplate{section in toc}[sections numbered]
+	\setbeamertemplate{subsection in toc}[subsections numbered]
+	%\setbeamertemplate{section page}[sections numbered] % marche pas vraiment avec metropolis
+	
+	\AtBeginSection[]{
+		\frame[plain,c]{\sectionpage}
+		\ifbool{sectionContent}{% true
+			\begin{frame}[plain, noframenumbering]
+			\frametitle{Contents}
+				{\tableofcontents[currentsection,currentsubsection, 
+					hideothersubsections, 
+					sectionstyle=show/shaded,
+				]
+				}
+			\end{frame}
+		}{% else 
+		}
+	}
+	\AtBeginSubsection[]{
+		\frame[plain,c, noframenumbering]{\subsectionpage}
+	}
+
+%%% Create Section page template with picture
+\makeatletter
+% FROM \defbeamertemplate{section page}{progressbar} of Metropolis
+\defbeamertemplate{section page}{mytheme}[1][]{
+	\centering
+	\begin{minipage}{22em}
+		\raggedright
+		\usebeamercolor[fg]{section title}
+		\usebeamerfont{section title}
+		\insertsectionhead\\[-1ex]
+		\usebeamertemplate*{progress bar in section page}
+		\par
+		\ifx\insertsubsectionhead\@empty\else%
+			\usebeamercolor[fg]{subsection title}%
+			\usebeamerfont{subsection title}%
+			\insertsubsectionhead
+		\fi
+		\vskip0.5cm
+		\ifstrempty{#1}{}{%
+			\includegraphics[width=.4\textwidth]{#1}%
+		}
+	\end{minipage}
+	\par
+	\vspace{\baselineskip}
+}
+\makeatother
+
+%%% Define a command to include picture in section, 
+%%% make section, and revert to old template
+\newcommand{\sectionpic}[2]{
+	\setbeamertemplate{section page}[mytheme][#2]
+	\section{#1}
+	\setbeamertemplate{section page}[mytheme]
+}
+
+%	Footer & Header options
+%==============================================================================
+
+%% Set the color of the footline !
+%\setbeamercolor{footline}{fg=white,bg=black}
+% Set the size of the font in the footline: 0 will be replaced with the next bigger size.
+%\setbeamerfont{footline}{size=\fontsize{3pt}{3pt}\selectfont}
+
+%% Change the footer contained in the footline.
+%\setbeamertemplate{frame footer}{%
+%	\hspace{0.2\linewidth}\insertshortauthor\quad\insertshortdate
+%}%
+
+% Set the footline.
+% To redefine a Beamer template, first relax its name to reuse it.
+%\expandafter\let\csname beamer@@tmpop@footline@plain\endcsname\relax
+%% Taken from metropolis, just change sep=3ex ->1ex.
+%\defbeamertemplate{footline}{plain}{%
+%	\begin{beamercolorbox}[wd=\textwidth, sep=0.5ex]{footline}%
+%		\usebeamerfont{page number in head/foot}%
+%		\usebeamertemplate*{frame footer}
+%		\hfill%
+%		\usebeamertemplate*{frame numbering}
+%	\end{beamercolorbox}%
+%}
+
+
+%	Codes according to the Ratios
+%==============================================================================
+% \ifratio{169}{Code for 169}{Code for aspect ratio other than 169} to use it.
+\makeatletter
+\providecommand\ifratio[3]{%
+	\ifnum#1=169%
+  \ifdim\beamer@paperwidth=16.00cm\relax%
+      \ifdim\beamer@paperheight=9.00cm\relax%
+          #2%
+      \else%
+          #3%
+      \fi%
+  \else%
+      #3%
+  \fi%
+	\else%
+  \ifnum#1=43%
+      \ifdim\beamer@paperwidth=12.80cm\relax%
+          \ifdim\beamer@paperheight=9.60cm\relax%
+              #2%
+          \else%
+              #3%
+          \fi%
+      \else%
+          #3%
+      \fi%
+  \fi%
+	\fi%
+}
+\providecommand\ifscreenratio[2]{%
+	\ifdim\beamer@paperwidth=16.00cm\relax%
+	\ifdim\beamer@paperheight=9.00cm\relax%
+		#1%
+	\fi%
+	\fi%
+	\ifdim\beamer@paperwidth=12.80cm\relax%
+	\ifdim\beamer@paperheight=9.60cm\relax%
+		#2%
+	\fi%
+	\fi%
+}
+\makeatother

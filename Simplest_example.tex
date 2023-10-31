@@ -1,0 +1,30 @@
+% Compile it with pdflatex --shell-escape Minimal_example.tex
+\makeatletter
+	\providecommand{\PathSO}{./Sources/} 	% Path to Sources folders
+	\def\input@path{{\PathSO}} % find packages in Source folders.
+\makeatother
+
+\documentclass[aspectratio=169]{beamer}
+	%  BEAMER OPTIONS
+	% dependencies
+	\usetheme{BeamerExtra,metropolis,MetropolisBeamerExtra}
+	% UGE Style
+	\usetheme{UGE}
+		
+	%	PRESENTATION INFORMATION
+	\title{Univ-Eiffel Template}
+	\author{John DOE}
+	\institute{Université Gustave Eiffel, INRIA, COSYS/SII, I4S, France}
+
+
+\begin{document}
+	\maketitle
+
+	\begin{frame}{Hello}
+		World !
+	\end{frame}
+
+	\begin{frame}[standout]{Thank You !}
+		Questions?
+	\end{frame}
+\end{document}
