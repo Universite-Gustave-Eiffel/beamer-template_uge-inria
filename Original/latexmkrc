@@ -1,0 +1,1 @@
+$pdflatex = 'pdflatex %O %S --shell-escape';

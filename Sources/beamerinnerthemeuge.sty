@@ -12,6 +12,7 @@
 
 %% Title %%%
 %%%%%%%%%%%%
+
 % FROM beamerinnerthememetropolis.dtx
 \setbeamertemplate{title}{
 	%\raggedright% %%%%% COMMENT ADDED !
@@ -36,6 +37,7 @@
 	\nointerlineskip%
 }
 
+% The command to insert the institute logo on title page
 \newcommand{\UGEtitlelogo}{%
 	\ifbool{reversedColor}{% Dark true 
 		\ifscreenratio{% 169
@@ -52,6 +54,7 @@
 	}%
 }
 
+% The command to insert the background title page
 \newcommand{\UGEtitlepage}{%
 	\ifbool{reversedColor}{% Dark true 
 		\ifscreenratio{% 169
@@ -68,102 +71,113 @@
 	}%
 }
 
+% The title page template
 \setbeamertemplate{title page}{
 	\setbeamercolor{progress bar}{fg=normal text.bg}
 	\ifscreenratio{% 169
 		\begin{picture}(0,0)
-		\put(-28,-128){\UGEtitlepage}
-		
-		\put(-30,-125){\noindent%
-			\ifbool{reversedColor}{% Dark true 
-				\fcolorbox{pale}{pale}%{
-			}{% Light
-				\fcolorbox{dark}{dark}%{
-			}% end if
-			{% begin third argument fcolorobx
-				%\fcolorbox{normal text.fg}{normal text.fg}{%
-				\begin{minipage}[b][\paperheight]{0.9\textwidth}
-				\ifbool{reversedColor}{ % Dark true 
-					\setbeamercolor{normal text}{fg=dark, }%
+			% The background picture
+			\put(-28,-128){\UGEtitlepage}
+			
+			% The text: title, author, institute, etc.
+			\put(-30,-125){\noindent%
+				\ifbool{reversedColor}{% Dark true 
+					\fcolorbox{pale}{pale}%{
 				}{% Light
-					\setbeamercolor{normal text}{fg=pale, }%
+					\fcolorbox{dark}{dark}%{
+				}% end if
+				{% begin third argument fcolorobx
+					%\fcolorbox{normal text.fg}{normal text.fg}{%
+					\begin{minipage}[b][\paperheight]{0.9\textwidth}
+						\ifbool{reversedColor}{ % Dark true 
+							\setbeamercolor{normal text}{fg=dark, }%
+						}{% Light
+							\setbeamercolor{normal text}{fg=pale, }%
+						}%
+						\centering
+						\vfill%
+						\ifx\inserttitle\@empty\else\quad\usebeamertemplate*{title}\fi
+						\ifx\insertsubtitle\@empty\else\quad\usebeamertemplate*{subtitle}\fi
+						\hbox{\hspace{2pt}\usebeamertemplate*{title separator}\hspace{1pt}}
+						\ifx\beamer@shortauthor\@empty\else\usebeamertemplate*{author}\fi
+						\ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
+						\ifx\insertinstitute\@empty\else{\parbox{0.9\textwidth}{\raggedright\usebeamertemplate*{institute}} }\fi
+						\vfill
+						\vbox{}
+					\end{minipage}%
 				}%
-				\centering
-				\vfill%
-				\ifx\inserttitle\@empty\else\quad\usebeamertemplate*{title}\fi
-				\ifx\insertsubtitle\@empty\else\quad\usebeamertemplate*{subtitle}\fi
-				\hbox{\hspace{2pt}\usebeamertemplate*{title separator}\hspace{1pt}}
-				\ifx\beamer@shortauthor\@empty\else\usebeamertemplate*{author}\fi
-				\ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
-				\ifx\insertinstitute\@empty\else{\parbox{0.9\textwidth}{\raggedright\usebeamertemplate*{institute}} }\fi
-				\vfill
-				\vbox{}
-				\end{minipage}%
-			}%
-		}
-		
-		\put(234,-120){%
-			\UGEtitlelogo
-		}
-		
-		\put(-27,-123){\noindent\vbox{%
-				\begin{minipage}[b][0.96\paperheight]{0.899\textwidth}%
-				\ifx\inserttitlegraphic\@empty\else\usebeamertemplate*{title graphic}\fi%
-				\end{minipage}%
-			}%
-		}
+			}
+			
+			% the institute logo on title page
+			\put(234,-120){%
+				\UGEtitlelogo
+			}
+			
+			% the extra logos on title page (\inserttitlegraphic)
+			\put(-27,-123){%
+				\noindent\vbox{%
+					\begin{minipage}[b][0.96\paperheight]{0.899\textwidth}%
+					\ifx\inserttitlegraphic\@empty\else\usebeamertemplate*{title graphic}\fi%
+					\end{minipage}%
+				}%
+			}
 		\end{picture}
-	}{% 43
+	}{% if ratio 43
 		\begin{picture}(0,0)
-		\put(-29.25,-136){\UGEtitlepage}
-		
-		\put(-28.75,-136){\noindent%
-			\ifbool{reversedColor}{% Dark true 
-				\fcolorbox{pale}{pale}%{
-			}{% Light
-				\fcolorbox{dark}{dark}%{
-			}% end if
-			{% begin third argument fcolorobx
-				%\fcolorbox{normal text.fg}{normal text.fg}{%
-				\begin{minipage}[b][\paperheight]{0.9\textwidth}
-				\ifbool{reversedColor}{ % Dark true 
-					\setbeamercolor{normal text}{fg=dark, }%
+			% The background picture
+			\put(-29.25,-136){\UGEtitlepage}
+			
+			% The text: title, author, institute, etc.
+			\put(-28.75,-136){\noindent%
+				\ifbool{reversedColor}{% Dark true 
+					\fcolorbox{pale}{pale}%{
 				}{% Light
-					\setbeamercolor{normal text}{fg=pale, }%
+					\fcolorbox{dark}{dark}%{
+				}% end if
+				{% begin third argument fcolorobx
+					%\fcolorbox{normal text.fg}{normal text.fg}{%
+					\begin{minipage}[b][\paperheight]{0.9\textwidth}
+						\ifbool{reversedColor}{ % Dark true 
+							\setbeamercolor{normal text}{fg=dark, }%
+						}{% Light
+							\setbeamercolor{normal text}{fg=pale, }%
+						}%
+						\centering
+						\vfill%
+						\ifx\inserttitle\@empty\else\quad\usebeamertemplate*{title}\fi
+						\ifx\insertsubtitle\@empty\else\quad\usebeamertemplate*{subtitle}\fi
+						\hbox{\hspace{2pt}\usebeamertemplate*{title separator}\hspace{1pt}}
+						\ifx\beamer@shortauthor\@empty\else\usebeamertemplate*{author}\fi
+						\ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
+						\ifx\insertinstitute\@empty\else{\parbox{0.9\textwidth}{\raggedright\usebeamertemplate*{institute}} }\fi
+						\vfill
+						\vbox{}
+					\end{minipage}%
 				}%
-				\centering
-				\vfill%
-				\ifx\inserttitle\@empty\else\quad\usebeamertemplate*{title}\fi
-				\ifx\insertsubtitle\@empty\else\quad\usebeamertemplate*{subtitle}\fi
-				\hbox{\hspace{2pt}\usebeamertemplate*{title separator}\hspace{1pt}}
-				\ifx\beamer@shortauthor\@empty\else\usebeamertemplate*{author}\fi
-				\ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
-				\ifx\insertinstitute\@empty\else{\parbox{0.9\textwidth}{\raggedright\usebeamertemplate*{institute}} }\fi
-				\vfill
-				\vbox{}
-				\end{minipage}%
-			}%
-		}
-		
-		\put(164,-130){%
-			\UGEtitlelogo
-		}
-		
-		\put(-25,-130){\noindent\vbox{%
-				\begin{minipage}[b][0.96\paperheight]{0.899\textwidth}%
-				\ifx\inserttitlegraphic\@empty\else\usebeamertemplate*{title graphic}\fi%
-				\end{minipage}%
-			}%
-		}
+			}
+			
+			% the institute logo on title page
+			\put(164,-130){%
+				\UGEtitlelogo
+			}
+			
+			% the extra logos on title page (\inserttitlegraphic)
+			\put(-25,-130){%
+				\noindent\vbox{%
+					\begin{minipage}[b][0.96\paperheight]{0.899\textwidth}%
+					\ifx\inserttitlegraphic\@empty\else\usebeamertemplate*{title graphic}\fi%
+					\end{minipage}%
+				}%
+			}
 		\end{picture}
 	}% end ifscrenratio
 }
 
+
 %% Section %%%
 %%%%%%%%%%%%%%
 
-\providebool{UGE@section}
-
+% command to add standout background
 \newcommand{\UGEstandout}{%
 	\ifbool{reversedColor}{% Dark true 
 		\ifscreenratio{% 169
@@ -180,6 +194,7 @@
 	}%
 }
 
+% command to add section (standin) background
 \newcommand{\UGEsection}{%
 	\ifbool{reversedColor}{% Dark true 
 		\ifscreenratio{% 169
@@ -196,28 +211,26 @@
 	}%
 }
 
-
-%\addtobeamertemplate{section page}{}{%
-%	\setbeamertemplate*{background}{
-%		\includegraphics[width=8.5mm]{\PathSO/Logos/pattern-eps-converted-to.pdf}
-%	}
-%}
+% repeated from BeamerExtra
 \providebool{sectionContent}
 \booltrue{sectionContent}
+\providecommand{\secContentName}{Contents}
 
+%
 \renewcommand{\metropolis@enablesectionpage}{
+	%Section
 	\AtBeginSection{
 		\booltrue{UGE@section}
 		\ifbeamer@inframe
 			\sectionpage
 		\else
-			\frame[plain,c, noframenumbering]{\sectionpage}
+			\frame[plain, c, noframenumbering]{\sectionpage}
 		\fi
-%		\boolfalse{UGE@section}
+		% \boolfalse{UGE@section}
 		
 		\ifbool{sectionContent}{% true
 			\begin{frame}[plain, noframenumbering]
-			\frametitle{Contents}
+			\frametitle{\secContentName}
 				{\tableofcontents[currentsection,currentsubsection, 
 					hideothersubsections, 
 					sectionstyle=show/shaded,
@@ -234,80 +247,101 @@
 		\ifbeamer@inframe
 			\subsectionpage
 		\else
-			\frame[plain,c, noframenumbering]{\subsectionpage}
+			\frame[plain, c, noframenumbering]{\subsectionpage}
 		\fi
-%		\boolfalse{UGE@section}
+		% \boolfalse{UGE@section}
 	}% end atbeginsubsection
 }% end renewcommand
 
 
+%% New options %%%
+%%%%%%%%%%%%%%%%%%
+
+% Bool to detect the section frame (or standin).
+\providebool{UGE@section}
+
+% At every new frame, reset the options to default (unless some options/keys are given)
+\BeforeBeginEnvironment{frame}{%
+	\boolfalse{UGE@section}% by default the style section is disable.
+}
+
+% Capture new options/keys for frames 
+% \makeatletter
+	\define@key{beamerframe}{standin}[true]{% if key 'standin' captured:
+		\booltrue{UGE@section}% then, turn on UGE@section bool 
+	}
+% \makeatother
+
+% bool to trigger the add of watermark in background
 \providebool{waterMark}
 \booltrue{waterMark}
 
+% bool to display the watermark by default (or not)
 \providebool{defaultWaterMark}
-\booltrue{defaultWaterMark}
+\boolfalse{defaultWaterMark}
 
+% At every new frame, reset the options to default (unless some options/keys are given)
 \BeforeBeginEnvironment{frame}{%
-	\boolfalse{UGE@section} % by default the style section is disable.
-	\ifbool{defaultWaterMark}{ %true
-		\booltrue{waterMark} % by default the watermark is enable.
-	}{ % false
-		\boolfalse{waterMark} % by default the watermark is disable.	
-	}
+	\ifbool{defaultWaterMark}{% true
+		\booltrue{waterMark}% by default the watermark is enable.
+	}{% false
+		\boolfalse{waterMark}% by default the watermark is disable.	
+	}%
 }
 
+% Capture new options/keys for frames 
 \makeatletter
-	\define@key{beamerframe}{standin}[true]{%
-		\booltrue{UGE@section}
+	\define@key{beamerframe}{nowatermark}[true]{% if key 'nowatermark' captured:
+		\boolfalse{waterMark}% then, turn off UGE@section bool
 	}
-	\define@key{beamerframe}{nowatermark}[true]{%
-		\boolfalse{waterMark}
-	}
-	\define@key{beamerframe}{watermark}[true]{%
-		\booltrue{waterMark}
+	\define@key{beamerframe}{watermark}[true]{%if key 'watermark' captured:
+		\booltrue{waterMark}% then, turn on UGE@section bool
 	}
 \makeatother
 
 
+%% Background %%%
+%%%%%%%%%%%%%%%%%
+
+% Command to add watermark in background
 \newcommand{\UGEwatermark}{%
-	\ifscreenratio{% 169
-		\includegraphics[width=8.3mm]{\PathSO/Logos/pattern-frame.pdf}%
-	}{% 43
-		\includegraphics[width=8.3mm]{\PathSO/Logos/pattern-frame43.pdf}%
-	}%
+	\begin{tikzpicture}[overlay,remember picture]
+		\node[color=red, opacity=0.3, scale=5, rotate=45] at ([shift={(0,0)}]current page.center) {DRAFT};
+	\end{tikzpicture}%
 }
 
+% Background lengths
+% \newlength{\imageBGoffset}
+% \setlength{\imageBGoffset}{\paperwidth}
+% \addtolength{\imageBGoffset}{-8.5mm}
 
-%%% Background 
 %\setbeamertemplate{background}{%}
 % Change background on section pages
-%%% Length
-\newlength{\imageBGoffset}
-\setlength{\imageBGoffset}{\paperwidth}
-\addtolength{\imageBGoffset}{-8.5mm}
 \setbeamertemplate{background}{%
 	\ifbool{metropolis@standout}{% standout=true 
 		\UGEstandout
 	}{% standout=false  
-		\ifbool{UGE@section}{ % section=true 
+		\ifbool{UGE@section}{% section=true 
 			% section page
 			\UGEsection
 		}{% section=false 
-			\ifnum\thepage>1{ % title false so "normal" frame
-				\ifbool{waterMark}{% true
-					\hspace*{\imageBGoffset}%
+			\ifnum\thepage>1{% title false so "normal" frame
+				\ifbool{waterMark}{% waterMark=true
 					\UGEwatermark
-				}{ %false
+				}{% waterMark=false
 					% nothing
 				}
-			} \else { % title true
-				% nothing handle by the title command itself
+			} \else {% page=1 -> titlepage true
+				% nothing to add, it's handled by the title command itself
 			}% In the main.
 			\fi
 		}
 	}
 }
 
+
+%% Environments styles %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%% Itemize environments.
 	\setbeamertemplate{itemize item}{$\bullet$}

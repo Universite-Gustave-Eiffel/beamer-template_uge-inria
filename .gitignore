@@ -1,0 +1,23 @@
+*~
+**/auto/*
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.nav
+*.out
+ /*.pdf
+*.snm
+*.gz
+*.toc
+*.glstex
+*-msets.bib
+*.vrb
+*.bbl
+*.bcf
+*.blg
+*.glg
+*.run.xml
+*.thm
+*MyProgressBar.sty
+*Demo_metroUGE_persoPB.*

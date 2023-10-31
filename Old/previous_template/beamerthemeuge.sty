@@ -1,0 +1,165 @@
+%% ---------------------------------------------------------------------------
+%% Copyright 2019 Thibaud Toullier
+%%
+%% Based on the Uge theme presentation ppt
+%% ---------------------------------------------------------------------------
+
+
+
+\mode<presentation>
+
+%% Requirement
+\RequirePackage{tikz} % For drawing
+\RequirePackage{xargs} % Handling multiple optional parameters
+\RequirePackage{ifthen}
+
+\newboolean{reversed}\setboolean{reversed}{false}
+\newboolean{inriafonts}\setboolean{inriafonts}{false}
+\newboolean{inriafonts@local}\setboolean{inriafonts@local}{false}
+\DeclareOptionBeamer{reversed}{\setboolean{reversed}{true}}
+\DeclareOptionBeamer{inriafonts}{\setboolean{inriafonts}{true}}
+\DeclareOptionBeamer{inriafonts@local}{\setboolean{inriafonts@local}{true}}
+
+\ProcessOptionsBeamer
+
+
+%% Variables for graphic displaying
+%% --- Title page
+% Geometry
+\def\titlePatternWidth{0.25\paperwidth}
+  \def\titleLogoWidth{2cm}
+  \def\titleWidth{0.75\paperwidth}
+
+% Color
+  \ifthenelse{\boolean{reversed}}{
+    \def\titleBackground{white}
+    \def\titleLogo{img/logo.eps}
+    \def\titlePattern{img/pattern_reversed.eps}
+    \def\titlePageColor{uge-primary}
+}{
+    \def\titleBackground{uge-primary}
+    \def\titleLogo{img/logo_white.eps}
+    \def\titlePattern{img/pattern.eps}
+    \def\titlePageColor{white}
+}
+
+% Theme settings
+\useinnertheme{uge}
+\useoutertheme{uge}
+\usecolortheme{uge}
+\usefonttheme{uge}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{blocks}[rounded][shadow=false]
+
+
+\mode<all>
+%% Define the logo
+{\newcommand\titlelogo[2][]{%
+    \edef\inserttitlelogo{%
+      \ifx\relax#2\relax\else
+        \noexpand\includegraphics[#1]{#2}%
+      \fi}%
+    }%
+    \titlelogo[width=\titleLogoWidth,keepaspectratio]{\titleLogo}
+
+  \newcommand\footerlogo[2][]{%
+    \edef\insertfooterlogo{%
+      \ifx\relax#2\relax\else
+        \noexpand\includegraphics[#1]{#2}%
+      \fi}%
+    }%
+  \footerlogo[height=10pt]{./img/logo.eps}}
+
+%% Define the pattern
+{\newcommand\pattern[2][]{%
+    \edef\insertpattern{%
+      \ifx\relax#2\relax\else
+        \noexpand\includegraphics[#1]{#2}%
+      \fi}%
+    }%
+  \pattern[width=3cm,keepaspectratio]{./img/pattern.eps}}
+
+\newcommand\frameoffset{1}
+
+% Custom definitions
+\def\@conference{}
+\newcommand{\conference}[1]{\def\@conference{#1}}
+\newcommand{\insertconference}{\@conference}
+
+% Macro to check emptyness
+\newcommand{\checkempty}[3]{
+  \if\relax #1\relax #2\else #3\fi
+}
+
+
+%% For authors handling
+\edef\@authorsString{}
+\edef\@affilsString{}
+\renewcommand{\author}[3][default1]{
+  \g@addto@macro\@authorsString{
+    \parbox[][30pt][c]{3cm}{
+      \baselineskip=10pt
+      \noindent\centering #2$^{#3}$\\ 
+      {\scriptsize\texttt{#1}}}
+    \hskip0.5cm
+  }
+}
+
+\newcommand{\affil}[2][1]{
+  \g@addto@macro\@affilsString{
+    $^{#1}$#2\\
+  }
+}
+\newcommand{\insertauthors}{\@authorsString}
+\newcommand{\insertaffiliation}{\@affilsString}
+\newcommand{\thanksframe}[1]{
+  \makeatletter
+  \setbeamertemplate{footline}{}
+  \setbeamertemplate{background}{
+    \begin{tikzpicture}
+      \def\w{\the\paperwidth};
+      \def\h{\the\paperheight};
+      \useasboundingbox (0,0) rectangle(\w,\h);
+      \fill[color=\titleBackground] (0,0) rectangle (\w,\h);
+      % \fill[color=white] (\titlePatternX,0) rectangle (\w, \h);
+      \node[anchor=south west] (logo) at (0.05*\w,0.05*\h) {\inserttitlelogo};
+      \node[anchor=south east] (pattern) at (\w+3, -.1) {\includegraphics[height=\h,width=\titlePatternWidth]{\titlePattern}};
+
+      % \ifnum\thepage>1\relax%
+      % \fill[white,opacity=1] (0,0) rectangle(\the\paperwidth,\the\paperheight);
+      % \fi
+    \end{tikzpicture}
+  }
+  \setbeamertemplate{headline}%No navigation
+  {}
+  \begin{frame}
+    \hspace{-1cm}%
+    \begin{beamercolorbox}[wd=\titleWidth,sep=15pt,dp=2.5ex,center]{title page header}
+      \usebeamerfont{title}\inserttitle\par%
+    \end{beamercolorbox}%
+    \vskip-30pt
+    \hspace{-1cm}%
+    \begin{beamercolorbox}[wd=\titleWidth,sep=15pt,center]{title page header}
+      \usebeamerfont{subtitle}\insertsubtitle\par%
+    \end{beamercolorbox}%
+    \vfill
+    \hspace{-1cm}%
+    \begin{beamercolorbox}[wd=\titleWidth,sep=15pt,center]{date}
+      #1\par
+    \end{beamercolorbox}
+    \vfill
+    \hspace{-1cm}%
+    \begin{beamercolorbox}[wd=\titleWidth,sep=15pt,center]{date}
+      \usebeamerfont{author}\insertconference%
+    \end{beamercolorbox}
+    \vskip-20pt
+    \hspace{-1cm}
+    \begin{beamercolorbox}[wd=\titleWidth,sep=15pt,center]{date}
+      \usebeamerfont{institute}\insertdate%
+    \end{beamercolorbox}
+    \vfill\end{frame}
+}
+
+%%
+%% End of file `beamerthemeuge.sty'.

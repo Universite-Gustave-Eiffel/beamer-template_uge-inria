@@ -18,21 +18,27 @@
 		\end{verbatim}
 	\end{frame}
 
-	\begin{frame}[fragile]{section content}
+	\begin{frame}[fragile]{Section Content}
 		The table of content after the section slide can be turn on or off with the command:
 		\begin{verbatim}
 			\boolfalse{sectionContent} % to turn off the table of content.
 		\end{verbatim}
 	
 		From example, the table of content will be turn of for the next section (on the following slide).
+
+		The name the content slide can also be modified thanks to the command:
+		\begin{verbatim}
+			\renewcommand{\secContentName}{def} % to redefine the title on section content.
+		\end{verbatim}
 	\end{frame}
 	
+	\renewcommand{\secContentName}{refined name}
 	\boolfalse{sectionContent}
 \section{Things good to know about Beamer (not BeamerExtra)}
 	\booltrue{sectionContent}
 	
 	\begin{frame}[fragile]
-		\frametitle{link to Hidden slide}
+		\frametitle{link to hidden slide}
 		
 		Thanks to Beamer, you can create buttons to just to hidden slides that are in the appendices
 		\begin{verbatim}			
@@ -102,3 +108,4 @@
 		BY opposition with \begin{verbatim} \documentclass[]{beamer}
 		\end{verbatim}
 	\end{frame}
+	

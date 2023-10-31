@@ -1,21 +1,19 @@
 %==============================================================================
 %
 % Created by Romain NOEL
-% MyBeamerExtra 0.1.a
-% 2020-12-12
+% MyBeamerExtra 1.0.b
+% 2023-10-30
 % UGE corporate design
 % Based on LaTeX UGE Presentation Template
 %
 %==============================================================================
-\ProvidesPackage{beamerthemeBeamerExtra}[2020/12/12]
+\ProvidesPackage{beamerthemeBeamerExtra}[2023/03/20]
+
 
 %	Back Up Slides ?
 %==============================================================================
-\RequirePackage{appendixnumberbeamer} 	% So the progressbar end at appendix
-	
-% To Do what ?
-%	\expandafter\def\expandafter\insertshorttitle\expandafter{%
-%		\insertshorttitle\hfill\insertframenumber\,/\,\inserttotalframenumber}
+\RequirePackage{appendixnumberbeamer} 	% So the progressbar ends before the appendix
+	\gdef\appendixtotalframenumber{1} % trick to avoid overflow error at first compilation.
 	
 	% deactivate the link to just to a certain silde after \miniframesoff.
 	% Working for Madrid style but not really with metropolis.
@@ -34,22 +32,25 @@
 
 	\renewcommand\appendixname{Appendix}
 	
+
 %	Sections options
 %==============================================================================
 
+% repeated in UGE inner !!
 \providebool{sectionContent}
 \booltrue{sectionContent}
+\providecommand{\secContentName}{Contents}
 
 %%% Make a table of content for each section
 	\setbeamertemplate{section in toc}[sections numbered]
 	\setbeamertemplate{subsection in toc}[subsections numbered]
-	%\setbeamertemplate{section page}[sections numbered] % marche pas vraiment avec metropolis
+	%\setbeamertemplate{section page}[sections numbered] % does not work with metropolis
 	
 	\AtBeginSection[]{
 		\frame[plain,c]{\sectionpage}
 		\ifbool{sectionContent}{% true
 			\begin{frame}[plain, noframenumbering]
-			\frametitle{Contents}
+			\frametitle{\secContentName}
 				{\tableofcontents[currentsection,currentsubsection, 
 					hideothersubsections, 
 					sectionstyle=show/shaded,
@@ -60,13 +61,13 @@
 		}
 	}
 	\AtBeginSubsection[]{
-		\frame[plain,c, noframenumbering]{\subsectionpage}
+		\frame[plain, c, noframenumbering]{\subsectionpage}
 	}
 
 %%% Create Section page template with picture
 \makeatletter
 % FROM \defbeamertemplate{section page}{progressbar} of Metropolis
-\defbeamertemplate{section page}{mytheme}[1][]{
+\defbeamertemplate{section page}{progressbar with picture}[1][]{
 	\centering
 	\begin{minipage}{22em}
 		\raggedright
@@ -93,10 +94,11 @@
 %%% Define a command to include picture in section, 
 %%% make section, and revert to old template
 \newcommand{\sectionpic}[2]{
-	\setbeamertemplate{section page}[mytheme][#2]
+	\setbeamertemplate{section page}[progressbar with picture][#2]
 	\section{#1}
-	\setbeamertemplate{section page}[mytheme]
+	\setbeamertemplate{section page}[progressbar with picture]
 }
+
 
 %	Footer & Header options
 %==============================================================================
@@ -107,9 +109,9 @@
 %\setbeamerfont{footline}{size=\fontsize{3pt}{3pt}\selectfont}
 
 %% Change the footer contained in the footline.
-%\setbeamertemplate{frame footer}{%
-%	\hspace{0.2\linewidth}\insertshortauthor\quad\insertshortdate
-%}%
+% \setbeamertemplate{frame footer}{%
+% 	\hspace{0.2\linewidth}\insertshortauthor\quad\insertshortdate
+% }%
 
 % Set the footline.
 % To redefine a Beamer template, first relax its name to reuse it.
@@ -167,3 +169,5 @@
 	\fi%
 }
 \makeatother
+
+% EoF

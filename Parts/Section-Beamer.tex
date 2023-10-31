@@ -1,3 +1,25 @@
+	\makeatletter
+		\ifx\c@levelstanda\undefined 	% to create a newcounter if it doesn't exists.
+			\newcounter{levelstanda}
+		\else
+			{}% it already exist
+		\fi
+	\makeatother
+
+\documentclass[aspectratio=169]{beamer}
+
+	\usepackage{standalone}
+	\usepackage{tikz} 	%
+	\usepackage{pgfplots} 	%
+
+	\usepackage{tabularray} % Typeset tabulars and arrays (contains equivalent of longtable, booktabs and dcolumn at least) 
+		\UseTblrLibrary{booktabs} % to load extra commands from booktabs
+
+
+\begin{document} % 
+\stepcounter{levelstanda}
+
+
 \section{Introduction: Beamer}
 
 	\begin{frame}[fragile]{Title page}
@@ -20,11 +42,11 @@
 		The usual page is printed and defined using the command:			
 		\begin{verbatim}
 			begin{frame}
-			   \frametitle{Title on top of the frame}
-			   contenu...
+	   \frametitle{Title on top of the frame}
+	   contenu...
 			end{frame}
 		\end{verbatim}
-		²
+		
 		Note that the logo printed on this page are defined in the preamble by
 		\begin{verbatim}
 			\logo{\includegraphics[height=1.5cm, draft]{logo.pdf}}
@@ -70,19 +92,19 @@
 			\column{0.33\textwidth}
 				Items
 				\begin{itemize}
-				  \item Milk \item Eggs \item Potatoes
+		  \item Milk \item Eggs \item Potatoes
 				\end{itemize}
 			
 			\column{0.33\textwidth}
 				Enumerations
 				\begin{enumerate}
-				  \item First, \item Second and \item Last.
+		  \item First, \item Second and \item Last.
 				\end{enumerate}
 			
 			\column{0.33\textwidth}
 				Descriptions
 				\begin{description}
-				  \item[PowerPoint] Meeh. \item[Beamer] Yeeeha.
+		  \item[PowerPoint] Meeh. \item[Beamer] Yeeeha.
 				\end{description}
 		\end{columns}
 		
@@ -92,7 +114,7 @@
 	
 	\begin{frame}{Animation}
 		\begin{itemize}%[<+- | alert@+>]
-			\item \alert<4>{This is\only<4>{ really} important}
+			\item \alert<2>{This is\only<2>{ really} important}
 			\item Now this
 			\item And now this
 		\end{itemize}
@@ -106,19 +128,19 @@
 			\begin{tikzpicture}
 				\def\couleur{alerted text.fg}
 				\path[coordinate] (0,0)  coordinate(A)
-				            ++( 90:5cm) coordinate(B)
-				            ++(0:5cm) coordinate(C)
-				            ++(-90:5cm) coordinate(D);
+		            ++( 90:5cm) coordinate(B)
+		            ++(0:5cm) coordinate(C)
+		            ++(-90:5cm) coordinate(D);
 				\draw[fill=\couleur!\thedensity] (A) -- (B) -- (C) --(D) -- cycle;
 				\foreach \x in {1,...,40}{%
-				    \pgfmathsetcounter{density}{\thedensity+20}
-				    \setcounter{density}{\thedensity}
-				    \path[coordinate] coordinate(X) at (A){};
-				    \path[coordinate] (A) -- (B) coordinate[pos=.10](A)
-				                        -- (C) coordinate[pos=.10](B)
-				                        -- (D) coordinate[pos=.10](C)
-				                        -- (X) coordinate[pos=.10](D);
-				    \draw[fill=\couleur!\thedensity] (A)--(B)--(C)-- (D) -- cycle;
+		    \pgfmathsetcounter{density}{\thedensity+20}
+		    \setcounter{density}{\thedensity}
+		    \path[coordinate] coordinate(X) at (A){};
+		    \path[coordinate] (A) -- (B) coordinate[pos=.10](A)
+		                        -- (C) coordinate[pos=.10](B)
+		                        -- (D) coordinate[pos=.10](C)
+		                        -- (X) coordinate[pos=.10](D);
+		    \draw[fill=\couleur!\thedensity] (A)--(B)--(C)-- (D) -- cycle;
 				}
 			\end{tikzpicture}
 			\caption{Rotated square with Tikz package from
@@ -148,15 +170,15 @@
 		Three different block environments are pre-defined.
 		
 		\begin{block}{Default}
-		  Block content.
+  Block content.
 		\end{block}
 		
 		\begin{alertblock}{Alert}
-		  Block content.
+  Block content.
 		\end{alertblock}
 		
 		\begin{exampleblock}{Example}
-		  Block content.
+  Block content.
 		\end{exampleblock}
 	\end{frame}
 	
@@ -217,3 +239,7 @@
 	\begin{frame}{References}
 		Some references to showcase [allowframebreaks] \cite{Knuth92,ConcreteMath,Simpson,Er01,greenwade93}
 	\end{frame}
+
+
+\addtocounter{levelstanda}{-1}
+\end{document}

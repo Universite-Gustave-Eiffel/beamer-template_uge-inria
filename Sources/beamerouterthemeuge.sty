@@ -6,44 +6,204 @@
 
 %\mode<presentation>
 
-%%% 
+%%%
 %%% === The head- and footline. ==============================================
 
+% command to insert institute logo on 'standard' frame
 \newcommand{\UGElogo}{%
-	\ifbool{reversedColor}{% Dark true 
+	\ifbool{reversedColor}{% Dark true
 		\includegraphics[width=23.5mm]{\PathSO/Logos/UGE-logo.pdf}%
 	}{% Light
 		\includegraphics[width=23.5mm]{\PathSO/Logos/UGE-logo_white.pdf}%
 	}%
 }
 
-%%% Footer
-\setbeamertemplate{frame footer}{%
-	%	\insertshortdate 
-	\hfill \ 
-	\hfill \ %\insertshorttitle
-	\hfill \ %
-	\hfill \
-	\insertshortauthor \hspace{-7em}
-}%
-%\addtobeamertemplate{frame footer}{}{\vspace*{-2.5ex}} % decrease space between progress bar and footer
-\addtobeamertemplate{frame footer}{}{\vspace*{-1.5\metropolis@progressinheadfoot@linewidth}} % decrease space between progress bar and footer
 
-%%% Header
-\AtBeginDocument{% To avoid redefinition when using \metroset. Not the best style ever but I don't know how to do otherwise.
-	\setbeamercolor{frametitle}{bg=normal text.fg, fg=normal text.bg}
-	\addtobeamertemplate{frametitle}{}{%
-		\vspace*{-1.65em}\hspace*{\fill}\UGElogo\hspace{-22pt}\mbox{}%
-	}
+%% New options %%%
+%%%%%%%%%%%%%%%%%%
+
+% bool to trigger the add of rotation of the footer
+\providebool{rotateFooter}
+\booltrue{rotateFooter}
+
+% bool to display the rotated footer by default (or not)
+\providebool{defaultRotateFooter}
+\boolfalse{defaultRotateFooter}
+
+% At every new frame, reset the options to default (unless some options/keys are given)
+\BeforeBeginEnvironment{frame}{%
+	\ifbool{defaultRotateFooter}{% true
+		\booltrue{rotateFooter}% by default the rotateFooter is enable.
+	}{% false
+		\boolfalse{rotateFooter}% by default the rotateFooter is disable.	
+	}%
 }
 
-%%% The sidebars.
-%%% The logo.
+% Capture new options/keys for frames 
+%\makeatletter
+	\define@key{beamerframe}{rotateFooter}[true]{% if key 'rotateFooter' captured:
+		\booltrue{rotateFooter}% then, turn on rotateFooter bool 
+	}
+	\define@key{beamerframe}{norotatefooter}[true]{% if key 'norotatefooter' captured:
+		\boolfalse{rotateFooter}% then, turn off rotateFooter bool
+	}
+%\makeatother
+
+
+% bool to trigger the add of filigrane/edging in sidebar
+\providebool{edging}
+\booltrue{edging}
+
+% bool to display the edging by default (or not)
+\providebool{defaultEdging}
+\booltrue{defaultEdging}
+
+% At every new frame, reset the options to default (unless some options/keys are given)
+\BeforeBeginEnvironment{frame}{%
+	\ifbool{defaultEdging}{% true
+		\booltrue{edging}% by default the edging is enable.
+	}{% false
+		\boolfalse{edging}% by default the edging is disable.	
+	}%
+}
+
+% Capture new options/keys for frames 
+%\makeatletter
+	\define@key{beamerframe}{edging}[true]{% if key 'edging' captured:
+		\booltrue{edging}% then, turn on edging bool 
+	}
+	\define@key{beamerframe}{noedging}[true]{% if key 'noedging' captured:
+		\boolfalse{edging}% then, turn off edging bool
+	}
+%\makeatother
+
+
+%% Footline & Footer %%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Footline lengths
+\newlength{\footlineOffset}% space between to bottom of the text (or the footnote) and the footline
+\setlength{\footlineOffset}{-2.5ex} 
+\newlength{\footerOffset}% space between the footer and the bottom of the page (or the progressbar)
+\setlength{\footerOffset}{-1.5\metropolis@progressinheadfoot@linewidth}
+
+\newlength{\hposRotFooter}% horizontal position (in picture env) for the rotated footer.
+\ifscreenratio{% 169
+	\setlength{\hposRotFooter}{105pt}%
+}{% 43
+	\setlength{\hposRotFooter}{88pt}%
+}%
+
+%% Footline
+\expandafter\let\csname beamer@@tmpop@footline@plain\endcsname\relax % clear the template
+\defbeamertemplate{footline}{plain}{% redef from metropolis
+	\vspace*{\footlineOffset} % new line to phantom the footline.
+	\begin{beamercolorbox}[wd=\textwidth, sep=3ex]{footline}%
+		\usebeamerfont{page number in head/foot}%
+		\usebeamertemplate*{frame footer}
+		\hfill%
+		\usebeamertemplate*{frame numbering}
+	\end{beamercolorbox}%
+}
+\setbeamertemplate{footline}[plain] % and reapply
+
+%% frame footer
+\setbeamertemplate{frame footer}{%
+	\ifbool{rotateFooter}{% rotateFooter true
+		\begin{picture}(0,0)(0,0)
+			\put(-5,0){\rotatebox{90}{\insertshortdate}}
+		\end{picture}
+	}{% rotateFooter false
+		\insertshortdate
+	}
+	\hfill \
+	\hfill \ \insertshorttitle
+	\hfill \ %
+	\hfill \
+	\ifbool{rotateFooter}{% rotateFooter true
+		\begin{picture}(0,0)(0,0)
+			% \put(105,13){\rotatebox{90}{\insertshortauthor}}
+			\put(\hposRotFooter,13){\rotatebox{90}{\insertshortauthor}}
+		\end{picture}
+	}{% rotateFooter false
+		\insertshortauthor \hspace{-7em}
+	}
+}%
+
+%% decrease space between progress bar and footer
+\addtobeamertemplate{frame footer}{}{%
+	\vspace*{\footerOffset}
+} 
+
+
+%% Header & Frame title %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Header color
+\setbeamercolor{frametitle}{bg=normal text.fg, fg=normal text.bg}
+
+%%% Header
+% redef header itself
+\expandafter\let\csname beamer@@tmpop@frametitle@plain\endcsname\relax % clear the template
+\defbeamertemplate{frametitle}{plain}{% redef from metropolis
+  \nointerlineskip%
+  \begin{beamercolorbox}[%
+      wd=\paperwidth,%
+      sep=0pt,%
+      leftskip=\metropolis@frametitle@padding,%
+      rightskip=\metropolis@frametitle@padding,%
+    ]{frametitle}%
+  \metropolis@frametitlestrut@start%
+  \insertframetitle%
+  	\ifx\insertframesubtitle\@empty%% if subtitle to the frame is not empty
+   \else%
+      { -- \usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle}%% add subtitle
+   \fi%% end if
+  \nolinebreak%
+  \metropolis@frametitlestrut@end%
+  \end{beamercolorbox}%
+  \vspace*{-1.65em}\hspace*{\fill}\UGElogo\hspace{-22pt}\mbox{}% add logo
+}
+
+
+%% Sidebars %%%
+%%%%%%%%%%%%%%%
+
+% sidebar lengths
+\newlength{\sidebarRightOffset}
+\setlength{\sidebarRightOffset}{-8.4mm}
+% \addtolength{\sidebarRightoffset}{}
+
+% Command to add filigrane/edging in sidebar
+\newcommand{\UGEfiligrane}{%
+	\ifscreenratio{% 169
+		\includegraphics[width=8.3mm]{\PathSO/Logos/pattern-frame.pdf}%
+	}{% 43
+		\includegraphics[width=8.3mm]{\PathSO/Logos/pattern-frame43.pdf}%
+	}%
+}
+
+% \makeatletter
+	\setbeamertemplate{sidebar canvas right}{}
+	\defbeamertemplate{sidebar canvas right}{filigrane}{%
+		\ifbool{edging}{% if edging bool = true
+			\hspace*{\sidebarRightOffset}% pull to the left otherwise, the filigrane is outside of the frame.
+			\UGEfiligrane%
+		}{% edging = false
+			% nothing
+		}% end if
+	}
+	\setbeamertemplate{sidebar canvas right}[filigrane]
+% \makeatother
+
+
+%% logo %%%
+%%%%%%%%%%%
+% Is left for extra institute logos
 %\addtobeamertemplate{logo}{}{\vspace{0.72\paperheight}}
-%%% The frame title.
+
 
 %\mode<all>
 
 %%
 %% End of file `beamerouterthemeuge.sty'.
-

@@ -1,0 +1,116 @@
+\documentclass[compress, aspectratio=169]{beamer}
+\synctex=1
+% Load the theme see the README for optional parameters
+\usetheme{uge}
+
+% Define the title of the presentation
+\title{Title of the presentation, that can spread over multiple lines, made for long titles.}
+
+% You can also give a subtitle, or not
+\subtitle{You can even add a subtitle}
+
+% Put the date
+\date{September, 3rd 2020}
+
+% The conference name
+\conference{$42^{\textrm{nd}}$ Conference}
+
+% List of authors such as:
+%  \author[mail adress (optional)]{Author name}{Affiliation index}
+\author[author1@univ-some.com]{Author 1}{1}
+\author[author2@univ-some.com]{Author 2}{1}
+\author[author3@univ-else.com]{Author 3}{1,2}
+\author[author4@univ-else.com]{Author 4}{2}
+\author{Author 5}{2}
+
+% List of affiliations such as:
+%  \affil[affiliation number]{Name of affiliation}
+\affil[1]{University of Somewhere, in some country}
+\affil[2]{University of Elsewhere, in another country}
+
+
+\begin{document}
+
+%% Generate Titlepage
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \tableofcontents
+\end{frame}
+
+
+\section{First section}
+\subsection{Theorem example}
+\begin{frame} 
+\frametitle{There Is No Largest Prime Number} 
+\framesubtitle{The proof uses \textit{reductio ad absurdum}.} 
+\begin{theorem}
+There is no largest prime number. \end{theorem} 
+\begin{enumerate} 
+\item<1-| alert@1> Suppose $p$ were the largest prime number. 
+\item<2-> Let $q$ be the product of the first $p$ numbers. 
+\item<3-> Then $q+1$ is not divisible by any of them. 
+\item<4-> But every number $> 1$ has a prime divisor
+\item<1-> Thus there is a prime number greater than p
+\end{enumerate}
+\end{frame}
+
+\subsection{Some long title}
+\begin{frame}{A very long title to show that you have some space to write down your ideas}
+\begin{itemize}
+\item one
+\begin{itemize}
+  \item two
+  \begin{itemize}
+  \item three
+  \end{itemize}
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\section{Second section}
+\subsection{Equation example}
+\begin{frame}{Another slide}
+  Some equation:
+  \begin{equation*}
+    \frac{\partial\phi}{\partial t} = \nabla \cdot \left(\phi V\right) = S
+    \label{eq:1}
+  \end{equation*}
+
+  
+\end{frame}
+
+\thanksframe{{\huge\textbf{Thank you!}}}
+
+\section{Second section}
+\subsection{Equation example}
+\begin{frame}[noframenumbering]{Another slide}
+  Some equation:
+  \begin{equation*}
+    \frac{\partial\phi}{\partial t} = \nabla \cdot \left(\phi V\right) = S
+    \label{eq:1}
+  \end{equation*}
+
+  
+\end{frame}
+
+\begin{frame}[noframenumbering]{Another slide 2}
+  Some equation:
+  \begin{equation*}
+    \frac{\partial\phi}{\partial t} = \nabla \cdot \left(\phi V\right) = S
+    \label{eq:1}
+  \end{equation*}
+
+  
+\end{frame}
+
+
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-engine: xetex
+%%% End:

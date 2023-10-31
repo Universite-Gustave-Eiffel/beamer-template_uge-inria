@@ -1,13 +1,14 @@
-%%%% 		UsersPackagesCommands.tex			%%%%
-%%%%		version 0.0.3 du 12/12/2020			%%%%
-%%%% 		Author: Romain NOËL					%%%%
-%%%%		email: romain.noel@univ-eiffel.fr			%%%%
+%%%% 		UsersPackagesCommands.tex
+%%%%		version 0.1.1 du 01/11/2023
+%%%% 		Author: Romain NOËL
+%%%%		email: romain.noel@univ-eiffel.fr
 %%%%--------------------------------------------%%%%
 
 %%%%---- OS & FONT     -------------------------%%%%
 %%%%---- POLICE     ----------------------------%%%%
 %%%%---- TEXT FORMATTING -----------------------%%%%
-%	\usepackage{enumitem}
+	% \usepackage{enumitem}
+	% \usepackage{ulem}
 		
 	%%%% Personal %%%%
 	\makeatletter
@@ -18,71 +19,64 @@
 	\makeatother
 	\newcommand{\famName}[1]{\textsc{#1}}
 	
-\usepackage{ulem}
 
 %%%%---- SPACING & JUSTIFICATION ---------------%%%%
 %%%%---- LAYOUT & MARGINS ----------------------%%%%
 %%%%---- FOOT PAGE & HEAD ----------------------%%%%
 %%%%---- TABLE of CONTENT & FIGURES ------------%%%%
 %%%%---- PARTS & CHAPTERS ----------------------%%%%
-	\usepackage{booktabs}
-	
-	
 %%%%---- WATERMARKS ----------------------------%%%%
 %%%%---- COVER PAGE ----------------------------%%%%
 %%%%---- IMAGES --------------------------------%%%%
-	\usepackage{placeins} 	% provide FloatBarrier
-	\usepackage[absolute,overlay]{textpos} % for positionning text or floats at absolute coords.
+	%\usepackage{placeins} 	% provide FloatBarrier
+	%\usepackage[absolute,overlay]{textpos} % for positioning text or floats at absolute coords.
+	\usepackage{subcaption} 	% multiple figures 
+		%\renewcommand{\thesubfigure}{{\normalfont\alph{subfigure}}} %
 
 %%%%---- DRAWING & GRAPHS ----------------------%%%%
-	\usepackage{subcaption} 			    % Figures multiples
-		\renewcommand{\thesubfigure}{{\normalfont\alph{subfigure}}} %
 	\usepackage{import}
-	\usepackage{tikz}					    %
-	\usepackage{pgfplots}				    %
-		\pgfplotsset{compat=newest}		    %
-	\pdfsuppresswarningpagegroup=1
+	\usepackage{tikz} 	%
+	\usepackage{pgfplots} 	%
+		\pgfplotsset{compat=newest} 	%
+		\pdfsuppresswarningpagegroup=1
+
 
 %%%%---- TABLES & BOXES ------------------------%%%%
-	\usepackage{multirow}
+	% \usepackage{tcolorbox} % colored box with a lot of flexibility
+	% 	\tcbuselibrary{skins,theorems} % extra for pseudo(code)
+	\usepackage{tabularray} % Typeset tabulars and arrays (contains equivalent of longtable, booktabs and dcolumn at least) 
+		\UseTblrLibrary{booktabs} % to load extra commands from booktabs
+		% \UseTblrLibrary{diagbox} % for cells with a diagbox
+		% \UseTblrLibrary{varwidth} % for cell with variable width
+		% \UseTblrLibrary{amsmath} % to improve with +array, +matrix, +bmatrix, +Bmatrix, +pmatrix, +vmatrix, +Vmatrix and +cases
+		% \UseTblrLibrary{siunitx} % for cell using SI formatting
+
 
 %%%%---- SYMBOLS -------------------------------%%%%
 %%%%---- MATHS & PHYSICS -----------------------%%%%
-	\usepackage{siunitx}				    % Unites internationales
-%		\addto\extrasfrench{\sisetup{locale = FR}}
-		\AtBeginDocument{
-			\sisetup{inter-unit-product = \ensuremath { { }. },
-				exponent-product = \ensuremath { { }. } }
-		}
-	\usepackage{amsmath}  % Pacakage of Americain Mathemitics Society 
-	\usepackage{amssymb, amscd, amsxtra}	% pacakage AMS extra
-	
+	\usepackage{amsmath, amsfonts, amssymb} % American Math Standard
+	\usepackage{mathtools} % extension of AMS with tools
+	\usepackage{mleftright} % better left and right bracket management
+	\usepackage{derivative} % standard and customable derivative operators
+	\usepackage{siunitx} % International System units
+	% \usepackage{tensors} % work in progress ^^
+	% \usepackage{empheq} % emphasize equations
 	\usepackage[amsthm, amsmath, thmmarks, hyperref]{ntheorem}%[standard]
 		\newtheorem{proposition}{Proposition}
 		\newtheorem{defs}{Definition}
 		\newtheorem{theorem}{Theorem}
-%		\newtheorem{proof}{Proof}
-	\usepackage[ntheorem]{empheq} 	% 
-	\usepackage{stmaryrd} 	% Package pour les intervales d'entiers \llbracket \rrbracket
-		\SetSymbolFont{stmry}{bold}{U}{stmry}{m}{n} % to substitue fonts and remove warnings
-	\usepackage{bm} 	% boldmath 
+		% \newtheorem{proof}{Proof}
+	% \usepackage[ntheorem]{empheq} 	% emphasize equations
+
 
 %%%%---- THEOREMS ------------------------------%%%%
 %%%%---- CHEMISTRY & BIO -----------------------%%%%
 %%%%---- CODING, LINKS & OTHERS ----------------%%%%
-	\usepackage[linesnumbered,algonl,lined, \langue]{algorithm2e} %,ruled
-		\renewcommand\AlCapFnt{\normalfont\scshape} % to fit with EMSE style caption
-		%\renewcommand\AlCapNameFnt{\small\itshape}
+	% \usepackage{listings} % to include piece of codes
+	% \usepackage{pseudo} % for flexible pseudocode
+	% 	\newtcbtheorem{algorithm}{Algorithm}{pseudo/booktabs, float}{alg} % create a float env for algoritms
 	\usepackage{cleveref}%
-%%		\crefdefaultlabelformat{\!{#2}#1#3}
-%		\makeatletter		% 
-%			%\crefname{equation}{\textit{eq.}\!}{\textit{eqs.}\!}
-%			\crefname{algorithm}{{Algorithm}}{{Algorithms}}
-%			\crefname{figure}{{Figure}}{{Figures}}
-%			\crefname{table}{{Table}}{{Tables}}
-%			%\crefname{section}{textit{sec.}}{textit{secs.}}
-%		\makeatother
-	\usepackage{standalone}				    % Other include compilable alone.
+	\usepackage{standalone} 	% Other include compilable alone.
 		
 		
 %%%%---- INDEX & GLOSSARIES --------------------%%%%
@@ -98,11 +92,11 @@
 		% define style of the abbreviation in the text
 		\setabbreviationstyle[acronym]{long-short}
 		\setabbreviationstyle[foreignabbreviation]{long-short-user}
-		\setabbreviationstyle[inline]{long-short}     % applicat du styl normal pr la classe inline d'acronym
-		\setabbreviationstyle[footer]{footnote}       % applicat du styl footnote pr la classe footer d'acronym
+		\setabbreviationstyle[inline]{long-short}	% 
+		\setabbreviationstyle[footer]{footnote} 	% 
 		
 		
-%		\newcommand{\AtEndPreambPerso}{
+		% \newcommand{\AtEndPreambPerso}{
 		\GlsXtrLoadResources[
 			src={\PathSymbolsEntries}, % entries in symbols.bib
 			%selection=all,
@@ -129,11 +123,12 @@
 			symbol-sort-fallback=description,% sort @symbol entries by name field
 			identical-sort-action=name,% sort by description if sort value identical
 			sort={letter-nocase},
-%			symbol-sort-fallback=name,% sort @symbol entries by name field
-%			identical-sort-action=description,% sort by description if sort value identical
+			% symbol-sort-fallback=name,% sort @symbol entries by name field
+			% identical-sort-action=description,% sort by description if sort value identical
 		]
-%		}
+		% }
 		\glsdisablehyper
+
 
 %%%%---- BIBLIOGRAPHY --------------------------%%%%
 	\usepackage[%citestyle=numeric,  	% style de citation : alphabetic, numeric, 		authoryear,
@@ -144,7 +139,7 @@
 		subentry,				% have entry that referes to another (not with authoryear)
 		labelnumber, 			%
 		citetracker=true,		% To track citations
-%		backref=true,			% afficher les pages ou les citations sont dans la biblio
+		% backref=true,			% afficher les pages ou les citations sont dans la biblio
 		url=false,
 		giveninits=true,   	% Initials for first name
 		maxcitenames=3,			% nb max de noms lors de \cite, audela "et al."
@@ -153,7 +148,7 @@
 		backend=biber			% bibtex, biber
 	]{biblatex}
 
-%		\AtEveryBibitem{\clearfield{url}}
+		% \AtEveryBibitem{\clearfield{url}}
 		\renewcommand{\mkbibnamefamily}[1]{\textsc{#1}}
 
 		\addbibresource[datatype=bibtex]{\Pathbasebib}
@@ -199,7 +194,7 @@
 			\renewcommand{\thefootnote}{\arabic{footnote}}% Switch to footnote with numbers
 			\footnotemark[\thefield{labelnumber}]% Add the mark corresponding to the number entry% 
 			\footnotetext[\thefield{labelnumber}]{%  Add the footnote text with same number entry.
-%				\printfield{labelnumber}
+				% \printfield{labelnumber}
 				\printnames{labelname}% The name 
 				\setunit{\printdelim{nametitledelim}}% separator
 				\printfield[citetitle]{labeltitle}% The title
@@ -225,6 +220,8 @@
 		
 		
 %%%%---- MULTIMEDIA ---------------------------%%%%
+	\usepackage{animate} % Create embedded animation from images on all OS and viewer !
+
 		% Os variables for the macros
 		%\def\OSvar{linux} % windows, mac, linux
 		\def\OSlinux{linux}
@@ -272,8 +269,8 @@
 			}% end of the new command
 		\fi
 		
-	\usepackage{animate} % Create embbeded animation from images on all OS and viewer !
+
 %%%%---- TRANSLATION ---------------------------%%%%
 %%%%---- VARIABLES -----------------------------%%%%
 %%%%---- MACROS --------------------------------%%%%
-%%%%---- HYPHENATIONS & ACCRONYMS --------------%%%%
+%%%%---- HYPHENATIONS & ACRONYMS --------------%%%%

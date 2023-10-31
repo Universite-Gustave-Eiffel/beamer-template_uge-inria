@@ -1,0 +1,89 @@
+\mode<presentation>
+\setbeamertemplate{mini frames}[box]
+\setbeamersize{text margin left=1cm,text margin right=1.5cm}
+\setbeamertemplate{headline}
+{%
+\leavevmode
+\ifnum\insertframenumber>1\relax%
+\begin{beamercolorbox}[wd=\the\paperwidth,ht=20pt]{section in head/foot}
+  \begin{tikzpicture}
+    \def\w{\the\paperwidth};
+    \def\h{\the\paperheight};
+    \def\marginX{10pt};
+    \def\marginY{10pt};
+    \useasboundingbox[](0,0) rectangle(\w,\marginY);
+    \fill[uge-cyan] (0,16pt) rectangle ({(\insertframenumber - \frameoffset - 1)/(\inserttotalframenumber-\frameoffset -1)*\w}, 20pt);
+    \node[anchor= west] at (0.1,0.3){\insertnavigation{0.85\paperwidth}};
+
+  \end{tikzpicture}
+\end{beamercolorbox}
+\fi
+\vskip-17pt% Hack: just to prevent overfull \vboxes
+}
+% Frame title
+\defbeamertemplate*{frametitle}{uge}[1][]
+{
+  \begin{beamercolorbox}[wd=\paperwidth,ht=1.5cm]{frametitle} 
+  \begin{tikzpicture}    
+    \def\w{\the\paperwidth};
+    \def\h{\the\paperheight};
+    \def\marginX{10pt};
+    \def\marginY{10pt};
+    \useasboundingbox[color=white] (\marginX,\marginY*2) rectangle (\w - \marginX,\h - \marginY);
+    \ifx\insertframesubtitle\@empty%
+        {\node[anchor=west] at (2*\marginX,3*\marginY){\usebeamerfont{frametitle}\insertframetitle};}
+        \else%
+            {\node[anchor= west] at (2*\marginX,3*\marginY){\usebeamerfont{frametitle}\insertframetitle};%
+              \node[anchor= west] at (2*\marginX,2*\marginY){\usebeamerfont{framesubtitle}\insertframesubtitle};}%
+            \fi
+  \end{tikzpicture}
+  \end{beamercolorbox}
+}
+
+% Footer
+\defbeamertemplate*{footline}{uge}[1][]
+{
+  
+  %\leavevmode
+  %\vskip5pt%Margin for footnote
+  \ifnum\insertframenumber>1\relax% Not on title page
+  \hbox to \paperwidth{
+    \hbox{\hspace*{0.2cm}\insertfooterlogo}
+    \hfill
+    \hbox{\usebeamerfont{date in head/foot}
+      \insertshortdate{}
+      \hspace*{0.2cm}
+      {\the\numexpr \insertframenumber - \frameoffset} / {\the\numexpr \inserttotalframenumber - \frameoffset}
+      \hspace*{0.1cm}
+    }
+  }
+
+  %\vskip5pt
+  % \begin{minipage}[t]{0.48\paperwidth}
+  %   \hbox{
+  %     \hspace{0.2cm}\includegraphics[height=10pt]{./img/logo.eps} 
+  %   }    
+  % \end{minipage}
+  % \hfill
+  % \noindent\fcolorbox{red}{gray}{\begin{minipage}[t]{0.48\paperwidth}
+
+  %     \hbox{
+  %   \begin{flushright}
+  %       \usebeamerfont{date in head/foot}\insertshortdate{} \hspace{0.2cm}
+  %       {\the\numexpr \insertframenumber - \frameoffset} / {\the\numexpr \inserttotalframenumber - \frameoffset}
+  %   \end{flushright}
+  %     }
+
+  % \end{minipage}}
+  % \hbox{%
+  %   \hspace{0.01\paperwidth}\includegraphics[height=10pt]{./img/logo.eps} 
+  %   \begin{beamercolorbox}[wd=.78\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+  %   \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+  %   {\the\numexpr \insertframenumber - \frameoffset} / {\the\numexpr \inserttotalframenumber - \frameoffset} \hspace*{2ex} 
+  % \end{beamercolorbox}}
+% 
+  \fi
+  \vskip10pt%
+
+}
+\mode<all>
