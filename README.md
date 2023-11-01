@@ -13,6 +13,7 @@ The purpose of this LaTeX/Beamer theme is to provide a template for presentation
 
 ## Warning
 !!! This not an official template !!! 
+
 Despite our efforts, we are not respecting *strictly* the graphical charter, we prioritized ergonomic and reading solutions.
 However, thanks to Oliver FRANÇOIS, an official Beamer template, respecting graphical charter, can be found at: https://intranet.univ-eiffel.fr/communication/logos-et-documents-chartes .
 Many other PowerPoint materials can also be found at the previous link.
