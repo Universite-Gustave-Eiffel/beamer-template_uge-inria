@@ -21,12 +21,22 @@ Many other PowerPoint materials can also be found at the previous link.
 But our template is much more convenient and prettier.
 
 
-
-## Some links
-
-- Overleaf link: https://www.overleaf.com/read/vxnjgfmyvccj
+## How to use/install
+There is two major ways to use this template: downloading from Git or "make a copy" from Overleaf.
 
 - Github link: https://github.com/Universite-Gustave-Eiffel/beamer-template_uge-inria
+
+  If you have a LaTeX distribution installed on your comptuer, you can download the sources by clicking on `<> Code`/`Download ZIP`.
+  After extracting the sources, you can directly edit (and probably rename) the file `Ready2Go.tex`.
+  Then, you can compile your presentation using your favorite LaTeX compiler (pdflatex, xelatex, luatex, arara, latexmk...).
+  If you use the `glossaires` package (or some others) as given in the example, do not forget to add the compilation option `--shell-escape`.
+  This remark stands also for your favorite LaTeX IDE (~~VSCode~~ Codium, TeXStudio, TeXMaker, Lyx, Emacs, ...)
+  Compilation command example: `pdflatex output.pdf Ready2Go.tex --shell-escape`.
+
+- Overleaf link (read only): https://www.overleaf.com/read/vxnjgfmyvccj
+
+  If you do not want to install a LaTeX distribution or just want to try first, on Overleaf you can click on `Make a copy` (or `copy project`, according to where you are).
+  This copy will be editable so you will be able to play around. 
 
 
 ## Features
@@ -50,5 +60,11 @@ But our template is much more convenient and prettier.
 - **Simplest_example**
 
 
+## How to contribute
+- raising [issues](https://github.com/Universite-Gustave-Eiffel/beamer-template_uge-inria/issues) on git
+- giving stars on git
+- buying us a coffee
+- mailing us 
+
 ## Credits
-The previous version of the repo was host here: https://github.com/KirmTwinty/uge-beamer
+The previous version of the repo was hosted here: https://github.com/KirmTwinty/uge-beamer
