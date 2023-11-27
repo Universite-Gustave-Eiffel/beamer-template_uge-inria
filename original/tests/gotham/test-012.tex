@@ -3,14 +3,14 @@
 % !TeX spellcheck = en_GB
 %-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 \providecommand{\langue}{english}		% english, french
-\providecommand{\PathP}{.../parts/} 		% Path to Parts folders
-\providecommand{\PathR}{.../resources/}  % Path to Resources folders
+\providecommand{\PathP}{../../../parts/} 		% Path to Parts folders
+\providecommand{\PathR}{../../../resources/}  % Path to Resources folders
 \providecommand{\PathSO}{../../../sources/} 	% Path to Sources folders
-\providecommand{\PathS}{.../supplies/} 	% Path to Supplies folders
+\providecommand{\PathS}{../../../supplies/} 	% Path to Supplies folders
 \providecommand{\BuildTrigger}{buildnew} % Trigger to build or not standalone parts.
 
 \makeatletter
-	\def\input@path{{\PathSO}{\PathSO/Inria/}{\PathSO/Inria/}} 		% to be able to find package in resource folders.
+	\def\input@path{{\PathSO}{\PathSO/Inria/}} 		% to be able to find package in resource folders.
 	\ifx\c@levelstanda\undefined 	% to create a newcounter if it doesn't exists.
 		\newcounter{levelstanda}
 	\else
