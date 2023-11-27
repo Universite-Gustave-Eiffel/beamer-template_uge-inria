@@ -1,0 +1,58 @@
+%% ---------------------------------------------------------------------------
+%% Copyright 2019 Thibaud TOULLIER, Romain NOËL
+%%
+%% Based on the UGE theme presentation ppt and graphical charter
+%% ---------------------------------------------------------------------------
+
+%\mode<presentation>
+
+%%%
+%%% === The head- and footline. ==============================================
+
+% command to insert institute logo on 'standard' frame
+\newcommand{\UGElogo}{%
+	\ifbool{reversedColor}{% Dark true
+		\includegraphics[width=23.5mm]{\PathSOuge/logos/UGE-logo.pdf}%
+	}{% Light
+		\includegraphics[width=23.5mm]{\PathSOuge/logos/UGE-logo_white.pdf}%
+	}%
+}
+
+%% Header & Frame title %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Header color
+% \expandafter\let\csname beamer@@tmpop@frametitle@plain\endcsname\relax % clear the template
+% \defbeamertemplate{frametitle}{plain}{% redef from metropolis
+\AtEndPreamble{%
+	\addtobeamertemplate{frametitle}{}{ %}{plain}
+		\vspace*{-1.65em}\hspace*{\fill}\UGElogo\hspace{-22pt}\mbox{}% add logo
+	}
+}
+
+% \setbeamertemplate{navigation symbols}[bottomline]
+
+
+%% Sidebars %%%
+%%%%%%%%%%%%%%%
+
+% sidebar lengths
+\setlength{\sidebarRightOffset}{-8.4mm}
+% \addtolength{\sidebarRightoffset}{}
+
+% Command to add filigrane/edging in sidebar
+\renewcommand{\gothamFiligrane}{%
+	\ifscreenratio{% 169
+		\includegraphics[width=8.3mm]{\PathSOuge/logos/pattern-frame.pdf}%
+	}{% 43
+		\includegraphics[width=8.3mm]{\PathSOuge/logos/pattern-frame43.pdf}%
+	}%
+}
+
+
+
+
+%\mode<all>
+
+%%
+%% End of file `beamerouterthemeuge.sty'.

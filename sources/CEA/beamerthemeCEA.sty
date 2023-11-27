@@ -1,0 +1,32 @@
+%==============================================================================
+%
+% Created by Romain NOËL
+% UGEbeamer 1.0.2.b
+% 2023-11-01
+% UGE corporate design
+% Based on LaTeX UGE template 
+%
+%==============================================================================
+\ProvidesPackage{beamerthemeUGE}[2023/11/01]
+
+% Require Packages
+\RequirePackage{etoolbox}
+\RequirePackage{xkeyval}
+
+	% remove extra space before verbatim environement !
+	\makeatletter
+		\preto{\@verbatim}{\topsep=0pt \partopsep=0pt }
+	\makeatother
+
+% Theme settings
+
+%\mode<presentation>
+
+\usefonttheme{uge}
+\usecolortheme{uge}
+\useinnertheme{uge}
+\useoutertheme{uge}
+
+%\mode<all>
+
+% EOF

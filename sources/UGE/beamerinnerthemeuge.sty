@@ -1,0 +1,218 @@
+%% ---------------------------------------------------------------------------
+%% Copyright 2019 Thibaud TOULLIER, Romain NOËL
+%%
+%% Based on the UGE theme presentation ppt and graphical charter
+%% ---------------------------------------------------------------------------
+
+%\mode<presentation>
+
+%%%
+%%%	Title and part pages.
+%==============================================================================
+
+%% Title %%%
+%%%%%%%%%%%%
+
+
+% The command to insert the institute logo on title page
+\newcommand{\UGEtitlelogo}{%
+	\ifbool{reversedColor}{% Dark true 
+		\ifscreenratio{% 169
+			\includegraphics[height=0.08\paperheight]{\PathSOuge/logos/UGE-logo.pdf}%%
+		}{% 43
+			\includegraphics[height=0.065\paperheight]{\PathSOuge/logos/UGE-logo.pdf}%%
+		}%
+	}{% Light
+		\ifscreenratio{% 169
+			\includegraphics[height=0.08\paperheight]{\PathSOuge/logos/UGE-logo_white.pdf}%%
+		}{% 43
+			\includegraphics[height=0.065\paperheight]{\PathSOuge/logos/UGE-logo_white.pdf}%%
+		}%
+	}%
+}
+
+% The command to insert the background title page
+\newcommand{\UGEtitlepage}{%
+	\ifbool{reversedColor}{% Dark true 
+		\ifscreenratio{% 169
+			\includegraphics[width=\paperwidth, height=\paperheight]{\PathSOuge/logos/pattern-titlepage-reverse.pdf}%%
+		}{% 43
+			\includegraphics[width=\paperwidth, height=\paperheight]{\PathSOuge/logos/pattern-titlepage-reverse-43.pdf}%%
+		}%	
+	}{% Light
+		\ifscreenratio{% 169
+			\includegraphics[width=\paperwidth, height=\paperheight]{\PathSOuge/logos/pattern-titlepage.pdf}%%
+		}{% 43
+			\includegraphics[width=\paperwidth, height=\paperheight]{\PathSOuge/logos/pattern-titlepage43.pdf}%%
+		}%
+	}%
+}
+
+% The title page template
+\setbeamertemplate{title page}{
+	\setbeamercolor{progress bar}{fg=normal text.bg}
+	\ifscreenratio{% 169
+		\begin{picture}(0,0)
+			% The background picture
+			\put(-28,-128){\UGEtitlepage}
+			
+			% The text: title, author, institute, etc.
+			\put(-30,-125){\noindent%
+				\ifbool{reversedColor}{% Dark true 
+					\fcolorbox{pale}{pale}%{
+				}{% Light
+					\fcolorbox{dark}{dark}%{
+				}% end if
+				{% begin third argument fcolorobx
+					%\fcolorbox{normal text.fg}{normal text.fg}{%
+					\begin{minipage}[b][\paperheight]{0.9\textwidth}
+						\ifbool{reversedColor}{ % Dark true 
+							\setbeamercolor{normal text}{fg=dark, }%
+						}{% Light
+							\setbeamercolor{normal text}{fg=pale, }%
+						}%
+						\centering
+						\vfill%
+						\ifx\inserttitle\@empty\else\quad\usebeamertemplate*{title}\fi
+						\ifx\insertsubtitle\@empty\else\quad\usebeamertemplate*{subtitle}\fi
+						\hbox{\hspace{2pt}\usebeamertemplate*{title separator}\hspace{1pt}}
+						\ifx\beamer@shortauthor\@empty\else\usebeamertemplate*{author}\fi
+						\ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
+						\ifx\insertinstitute\@empty\else{\parbox{0.9\textwidth}{\raggedright\usebeamertemplate*{institute}} }\fi
+						\vfill
+						\vbox{}
+					\end{minipage}%
+				}%
+			}
+			
+			% the institute logo on title page
+			\put(234,-120){%
+				\UGEtitlelogo
+			}
+			
+			% the extra logos on title page (\inserttitlegraphic)
+			\put(-27,-123){%
+				\noindent\vbox{%
+					\begin{minipage}[b][0.96\paperheight]{0.899\textwidth}%
+					\ifx\inserttitlegraphic\@empty\else\usebeamertemplate*{title graphic}\fi%
+					\end{minipage}%
+				}%
+			}
+		\end{picture}
+	}{% if ratio 43
+		\begin{picture}(0,0)
+			% The background picture
+			\put(-29.25,-136){\UGEtitlepage}
+			
+			% The text: title, author, institute, etc.
+			\put(-28.75,-136){\noindent%
+				\ifbool{reversedColor}{% Dark true 
+					\fcolorbox{pale}{pale}%{
+				}{% Light
+					\fcolorbox{dark}{dark}%{
+				}% end if
+				{% begin third argument fcolorobx
+					%\fcolorbox{normal text.fg}{normal text.fg}{%
+					\begin{minipage}[b][\paperheight]{0.9\textwidth}
+						\ifbool{reversedColor}{ % Dark true 
+							\setbeamercolor{normal text}{fg=dark, }%
+						}{% Light
+							\setbeamercolor{normal text}{fg=pale, }%
+						}%
+						\centering
+						\vfill%
+						\ifx\inserttitle\@empty\else\quad\usebeamertemplate*{title}\fi
+						\ifx\insertsubtitle\@empty\else\quad\usebeamertemplate*{subtitle}\fi
+						\hbox{\hspace{2pt}\usebeamertemplate*{title separator}\hspace{1pt}}
+						\ifx\beamer@shortauthor\@empty\else\usebeamertemplate*{author}\fi
+						\ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
+						\ifx\insertinstitute\@empty\else{\parbox{0.9\textwidth}{\raggedright\usebeamertemplate*{institute}} }\fi
+						\vfill
+						\vbox{}
+					\end{minipage}%
+				}%
+			}
+			
+			% the institute logo on title page
+			\put(164,-130){%
+				\UGEtitlelogo
+			}
+			
+			% the extra logos on title page (\inserttitlegraphic)
+			\put(-25,-130){%
+				\noindent\vbox{%
+					\begin{minipage}[b][0.96\paperheight]{0.899\textwidth}%
+					\ifx\inserttitlegraphic\@empty\else\usebeamertemplate*{title graphic}\fi%
+					\end{minipage}%
+				}%
+			}
+		\end{picture}
+	}% end ifscrenratio
+}
+
+
+%% Section %%%
+%%%%%%%%%%%%%%
+
+% command to add standout background
+\renewcommand{\gothamStandoutBG}{%
+	\ifbool{reversedColor}{% Dark true 
+		\ifscreenratio{% 169
+			\includegraphics[height=\paperheight]{\PathSOuge/logos/pattern-section.pdf}%%
+		}{% 43
+			\includegraphics[height=\paperheight]{\PathSOuge/logos/pattern-section43.pdf}%%
+		}%
+	}{% Light
+		\ifscreenratio{% 169
+			\includegraphics[height=\paperheight]{\PathSOuge/logos/pattern-standout.pdf}%
+		}{% 43
+			\includegraphics[height=\paperheight]{\PathSOuge/logos/pattern-standout43.pdf}%
+		}%
+	}%
+}
+
+% command to add section (standin) background
+\renewcommand{\gothamStandinBG}{%
+	\ifbool{reversedColor}{% Dark true 
+		\ifscreenratio{% 169
+			\includegraphics[height=\paperheight]{\PathSOuge/logos/pattern-standout.pdf}%
+		}{% 43
+			\includegraphics[height=\paperheight]{\PathSOuge/logos/pattern-standout43.pdf}%
+		}%
+	}{% Light
+		\ifscreenratio{% 169
+			\includegraphics[height=\paperheight]{\PathSOuge/logos/pattern-section.pdf}%%
+		}{% 43
+			\includegraphics[height=\paperheight]{\PathSOuge/logos/pattern-section43.pdf}%%
+		}%
+	}%
+}
+
+
+%% Environments styles %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Itemize environments.
+	\setbeamertemplate{itemize item}{$\bullet$}
+	\setbeamertemplate{itemize subitem}[triangle]
+	\setbeamertemplate{itemize subsubitem}{-}
+	
+%%% Enumerate environments.
+	% metropolis style
+%%% Description environments.
+	% metropolis style
+%%% Block environments.
+	% metropolis style
+%%% Theorem and proof environments.
+	% metropolis style + corrections from MyPackages
+%%% Figures and tables.
+	% metropolis style
+%%% Footnotes.
+	% metropolis style + corrections from MyPackages
+%%% Bibliography entries.
+	% metropolis style + corrections from MyPackages
+
+%\mode<all>
+
+%%
+%% End of file `beamerinnerthemeuge.sty'.

@@ -1,0 +1,73 @@
+%% ---------------------------------------------------------------------------
+%% Copyright 2019 Thibaud Toullier
+%%
+%% Based on the Uge theme presentation ppt
+%% ---------------------------------------------------------------------------
+\mode<presentation>
+\setbeamertemplate{background}{
+  \ifnum\c@framenumber=1 %% On title page
+  \begin{tikzpicture}
+    \def\w{\the\paperwidth};
+    \def\h{\the\paperheight};
+    \useasboundingbox (0,0) rectangle(\w,\h);
+    \fill[color=\titleBackground] (0,0) rectangle (\w,\h);
+    % \fill[color=white] (\titlePatternX,0) rectangle (\w, \h);
+    \node[anchor=south west] (logo) at (0.05*\w,0.05*\h) {\inserttitlelogo};
+    \node[anchor=south east] (pattern) at (\w+3, -.1) {\includegraphics[height=\h,width=\titlePatternWidth]{\titlePattern}};
+
+    %\ifnum\thepage>1\relax%
+    %\fill[white,opacity=1] (0,0) rectangle(\the\paperwidth,\the\paperheight);
+    %\fi
+  \end{tikzpicture}
+  \else
+  \begin{tikzpicture}
+    \def\w{\the\paperwidth};
+    \def\h{\the\paperheight};
+    \def\marginX{10pt};
+    \def\marginY{10pt};
+    \useasboundingbox[fill=white](0,0) rectangle(\w,\h);
+    \fill[color=uge-secondary] (0, \h - 2 * \marginY) rectangle (\w,\h);
+    \node[anchor=north east,opacity=1] (pattern) at (\w+5, \h - 1.9 * \marginY) {\includegraphics[height=150pt]{./img/pattern2.eps}};
+  \end{tikzpicture}
+
+  \fi%
+  
+}
+
+% Title page
+\defbeamertemplate*{title page}{uge}[1][]
+{ 
+  \hspace{-1cm}%
+  \begin{beamercolorbox}[wd=\titleWidth,sep=15pt,dp=2.5ex,center]{title page header}
+    \usebeamerfont{title}\inserttitle\par%
+  \end{beamercolorbox}%
+  \vskip-30pt
+  \hspace{-1cm}%
+  \begin{beamercolorbox}[wd=\titleWidth,sep=15pt,center]{title page header}
+    \usebeamerfont{subtitle}\insertsubtitle\par%
+  \end{beamercolorbox}%
+  \vskip-20pt
+  \hspace{-1cm}%
+  \begin{beamercolorbox}[wd=\titleWidth,sep=15pt,center]{author}
+    \usebeamerfont{author}\insertauthors%
+  \end{beamercolorbox}
+  \vskip-25pt
+  \hspace{-1cm}%
+  \begin{beamercolorbox}[wd=\titleWidth,sep=15pt,center]{institute}
+    \usebeamerfont{institute}\insertaffiliation
+  \end{beamercolorbox}
+  \vskip-15pt
+  \hspace{-1cm}%
+  \begin{beamercolorbox}[wd=\titleWidth,sep=15pt,center]{date}
+    \usebeamerfont{author}\insertconference%
+  \end{beamercolorbox}
+  \vskip-20pt
+  \hspace{-1cm}
+  \begin{beamercolorbox}[wd=\titleWidth,sep=15pt,center]{date}
+    \usebeamerfont{institute}\insertdate%
+  \end{beamercolorbox}
+  \vfill
+}
+\mode<all>
+%%
+%% End of file `beamerinnerthemeuge.sty'.

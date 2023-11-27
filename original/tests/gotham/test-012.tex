@@ -1,0 +1,151 @@
+% !TEX TS-program = pdflatex
+% !TeX encoding = UTF-8
+% !TeX spellcheck = en_GB
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+\providecommand{\langue}{english}		% english, french
+\providecommand{\PathP}{.../parts/} 		% Path to Parts folders
+\providecommand{\PathR}{.../resources/}  % Path to Resources folders
+\providecommand{\PathSO}{../../../sources/} 	% Path to Sources folders
+\providecommand{\PathS}{.../supplies/} 	% Path to Supplies folders
+\providecommand{\BuildTrigger}{buildnew} % Trigger to build or not standalone parts.
+
+\makeatletter
+	\def\input@path{{\PathSO}{\PathSO/Inria/}{\PathSO/Inria/}} 		% to be able to find package in resource folders.
+	\ifx\c@levelstanda\undefined 	% to create a newcounter if it doesn't exists.
+		\newcounter{levelstanda}
+	\else
+		{}% it already exist
+	\fi
+\makeatother
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+\documentclass[notheorems, noamsthm, aspectratio=169, 10pt]{beamer}
+\usepackage[l2tabu, orthodox]{nag}	% Help to prevent buggus with warnings
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%        DEFAULT PACKAGES
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{changepage}
+\usepackage{lipsum}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%        BEAMER OPTIONS
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+% Gotham Theme
+\usetheme{gotham}
+
+\usetheme{gothamInria}
+
+	\gothamset{
+		numbering= none, %none, counter, fraction
+		progressbar= foot, %none, head, frametitle, foot
+		background= transparent, %dark, %light, %
+	}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	PRESENTATION INFORMATION
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+\title[shorttitle]{Title long}
+\subtitle[shortsubtitle]{Subtile long Subtile long Subtile long Subtile long Subtile long Subtile long}
+\date[shortdate]{\today}
+\author[john.doe@mail.com]{John DOE\inst{1,2,3}}
+\institute[shortinstitute]{\inst{1} An Awesome Company
+
+\inst{2} An Awesome Company
+
+\inst{3} An Awesome Company}
+% \titlegraphic{LOGO-title}
+\titlegraphic{\hspace*{-0.38\textwidth}%
+   \vbox{
+      \includegraphics[height=0.09\paperheight]{\PathSO/UGE/logos/UGE-logo_white.pdf}%
+      \vspace{156.mm}%
+   }
+}
+\logo{LOGO}
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+\defbeamertemplate*{background canvas}{normal perso}[1][]
+{%
+	\begin{tikzpicture}[overlay,remember picture]
+		\node[color=red, opacity=0.3, scale=5, rotate=45] at ([shift={(0,0)}]current page.center) {NORMAL};
+	\end{tikzpicture}%
+}
+
+
+\makeatletter
+
+
+\makeatother
+% \booltrue{defaultEdging}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+\begin{document} %
+
+\begin{frame}[plain,noframenumbering]
+   \titlepage
+   % \note{Everything you want}
+\end{frame}
+
+\begin{frame}[toc]{Sommaire}
+   \tableofcontents
+\end{frame}
+
+
+{
+   \begin%
+   {frame}
+   [nofooter, edging]
+      nofooter, edging, no title
+   \end{frame}
+}
+
+\begin{frame}[edging,nofooter]{test}
+      \lipsum[2]
+\end{frame}
+
+\begin{frame}{test extended frame}
+   \begin{adjustwidth}{-2em}{-2em}
+      \lipsum[2]
+   \end{adjustwidth}
+\end{frame}
+
+
+\section{test sec}
+\subsection{test subsec}
+\subsubsection{test subsec}
+\subsubsection{test subsec}
+\subsection{test subsec}
+
+
+%Chapitre 1
+% { 
+	\begin{frame}[edging,noBGC]{titre}
+		edging,noBGC %noBGC,edging,
+	\end{frame}
+% } 
+
+\section{test sec}
+\subsection{test subsec}
+\subsubsection{test subsec}
+
+
+\begin{frame}[watermark]{title}  
+   test watermark
+\end{frame}
+
+\begin{frame}[standout]{title}
+   question
+\end{frame}
+
+\begin{frame}[standin]{title}
+   standin
+\end{frame}
+
+\begin{frame}[plain]{title}
+   plain
+\end{frame}
+
+\end{document}

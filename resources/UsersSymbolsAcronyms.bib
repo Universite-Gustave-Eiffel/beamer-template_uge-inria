@@ -1,0 +1,74 @@
+%%%% 		UsersPackagesCommands.tex			%%%%
+%%%%		version 0.0.1 du 12/12/2020			%%%%
+%%%% 		Author: Romain NOËL					%%%%
+%%%%		email: romain.noel@univ-eiffel.fr			%%%%
+%%%%--------------------------------------------%%%%
+
+%%%%---- OS & FONT     -------------------------%%%%
+%%%%---- POLICE     ----------------------------%%%%
+%%%%---- TEXT FORMATTING -----------------------%%%%
+%%%%---- SPACING & JUSTIFICATION ---------------%%%%
+%%%%---- LAYOUT & MARGINS ----------------------%%%%
+%%%%---- FOOT PAGE & HEAD ----------------------%%%%
+%%%%---- TABLE of CONTENT & FIGURES ------------%%%%
+%%%%---- PARTS & CHAPTERS ----------------------%%%%
+%%%%---- WATERMARKS ----------------------------%%%%
+%%%%---- COVER PAGE ----------------------------%%%%
+%%%%---- IMAGES & FLOAT ------------------------%%%%
+%%%%---- DRAWING & GRAPHS ----------------------%%%%
+%%%%---- TABLES & BOXES ------------------------%%%%
+%%%%---- SYMBOLS -------------------------------%%%%
+%%%%---- MATHS & PHYSICS -----------------------%%%%
+%%%%---- THEOREMS ------------------------------%%%%
+%%%%---- CHEMISTRY & BIO -----------------------%%%%
+%%%%---- CODING --------------------------------%%%%
+%%%%---- INCLUDE OTHER FILES -------------------%%%%
+%%%%---- LaTeX PROGRAMMING  --------------------%%%%
+%%%%---- TESTING & EXTRA -----------------------%%%%
+%%%%---- LINKS & REFERENCES --------------------%%%%
+%%%%---- INDEX & GLOSSARIES --------------------%%%%
+%%%%---- BIBLIOGRAPHY --------------------------%%%%
+%%%%---- TRANSLATION ---------------------------%%%%
+%%%%---- VARIABLES -----------------------------%%%%
+%%%%---- MACROS --------------------------------%%%%
+%%%%---- HYPHENATIONS & ACCRONYMS --------------%%%%
+
+% Lexique							% type=main
+		
+% Acronymes							% type=abbreviation
+	@acronym{pc,short= {PC}, long= {Personal Computer}} 
+	@acronym{html,
+	  	short= {HTML}, 
+	  	long= {hypertext markup language},
+	  	category={inline},
+	}
+	@acronym{shtml,
+		short= {SHTML}, 
+		long= {server-parsed HTML},
+		category={footer},
+	}
+	@foreignabbreviation{fft,
+	  	short = {FFT},
+	  	foreignlong = {Fast Fourier Transform},
+	  	nativelong = {Transformada R\'{a}pida de Fourier}
+	}
+	@acronym{ascii, short={ASCII}, long={American Standard Code for Information Interchange}}	
+	@acronym{lbm,short= {LBM}, long= {Lattice \famName{Boltzmann} Method}}
+    
+	
+% Nomenclature						% type=symbols
+	@symbol{dens,
+		name={\ensuremath{ \rho }},	% 
+		description={mass density},
+		unit= {\si{\kg\m\tothe{-\glspt{dim}} } },
+		category= {scalar variable},
+	}
+
+	@symbol{BoltzDist, %
+		name={\ensuremath{ f }}, %
+		description={density distribution function over velocity space}, %
+		unit= {\si{ \kg\m\tothe{-\glspt{dim}-1} \s\tothe{1} } }, %
+		category= {distribution},
+	}
+					
+%EoF

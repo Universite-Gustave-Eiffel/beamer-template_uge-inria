@@ -1,0 +1,90 @@
+% !TEX TS-program = pdflatex
+% !TeX encoding = UTF-8
+% !TeX spellcheck = en_GB
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+\providecommand{\langue}{english}		% english, french
+\providecommand{\PathP}{../parts/} 		% Path to Parts folders
+\providecommand{\PathR}{../resources/}  % Path to Resources folders
+\providecommand{\PathSO}{../sources/} 	% Path to Sources folders
+\providecommand{\PathS}{../supplies/} 	% Path to Supplies folders
+\providecommand{\BuildTrigger}{buildnew} % Trigger to build or not standalone parts.
+
+\makeatletter
+	\def\input@path{{\PathSO}{\PathSO/UGE/}} 		% to be able to find package in resource folders.
+	\ifx\c@levelstanda\undefined 	% to create a newcounter if it doesn't exists.
+		\newcounter{levelstanda}
+	\else
+		{}% it already exist
+	\fi
+\makeatother
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+\documentclass[notheorems, noamsthm, aspectratio=169, 10pt]{beamer}
+\usepackage[l2tabu, orthodox]{nag}	% Help to prevent buggus with warnings
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%        DEFAULT PACKAGES
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%        BEAMER OPTIONS
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+% Gotham Theme
+\usetheme{gotham}
+
+   \gothamset{
+      % numbering= fraction, %none, counter, fraction
+      % progressbar= foot, %none, head, frametitle, foot
+   }
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	PRESENTATION INFORMATION
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+\title[shorttitle]{Title long}
+\subtitle[shortsubtitle]{Subtile long}
+\date[shortdate]{\today}
+\author[john.doe@mail.com]{John DOE\inst{1}}
+\institute[shortinstitute]{\inst{1} An Awesome Company}
+\titlegraphic{LOGO-title}
+\logo{LOGO}
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+
+%%%%---- 
+\addtobeamertemplate{frametitle}{}{\vspace*{-1.5em}\hspace*{\fill}LLLLOGO\hspace{-25pt}\mbox{}}
+
+\addtolength{\rightFooterPadding}{4ex}
+% \addtolength{\leftFooterPadding}{4ex}
+
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+\begin{document} %
+
+\begin{frame}[fragile, noedging]
+   \frametitle{Normal slide}
+
+   The default normal slide is including:
+   \begin{itemize}
+      \item a header (from Metropolis) with the UGE logo
+      \item an extra logo: it can be change via the beamer command \verb|\logo{}|
+      \item an email address in the footer: it can be disable by using in the preamble 
+         \verb|\author[]{Your NAME\inst{1} ...}|
+      \item a edging on left side (from UGE graphical charter). This can be turned off locally using \verb|\begin{frame}[noedging]| or globally with \verb|\boolfalse{defaultedging}|. If it is globally disabled it can be turned on locally using \verb|\begin{frame}[edging]|
+   \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile, rotateFooter, watermark]
+   \frametitle{Extra frame options}
+
+   \begin{itemize}
+      \item \verb|\begin{frame}[rotateFooter]|
+      \item a watermark on left side (from UGE graphical charter). This can be turned off locally using \verb|\begin{frame}[nowatermark]| or globally with \verb|\boolfalse{defaultWaterMark}|. If it is globally disabled it can be turned on locally using \verb|\begin{frame}[watermark]| .
+      \item \verb|\renewcommand{\UGEwatermark}{otot}|
+   \end{itemize}
+\end{frame}
+
+\end{document}

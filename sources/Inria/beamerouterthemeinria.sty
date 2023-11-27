@@ -1,0 +1,119 @@
+%% ---------------------------------------------------------------------------
+%% Copyright 2019 Thibaud TOULLIER, Romain NOËL
+%%
+%% Based on the UGE theme presentation ppt and graphical charter
+%% ---------------------------------------------------------------------------
+
+%\mode<presentation>
+
+%%%
+%%% === The head- and footline. ==============================================
+
+% command to insert institute logo on 'standard' frame
+\newcommand{\InriaLogo}{%
+	\ifbool{reversedColor}{% Dark true
+		\includegraphics[width=23.5mm]{\PathSOinria/logos/inr_logo_rouge.pdf}%
+	}{% Light
+		\includegraphics[width=23.5mm]{\PathSOinria/logos/inr_logo_blanc.pdf}%
+	}%
+}
+
+%% Header & Frame title %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setlength{\gotham@frametitle@leftpadding}{8.2ex}
+\newlength{\inriaFrametitleHeight}
+\setlength{\inriaFrametitleHeight}{0pt}
+\addtolength{\inriaFrametitleHeight}{\gotham@frametitle@toppadding}
+\addtolength{\inriaFrametitleHeight}{1.9ex}
+\addtolength{\inriaFrametitleHeight}{\gotham@frametitle@bottompadding}
+
+%% Header color
+\AtEndPreamble{%
+	\addtobeamertemplate{frametitle}{% pre patch
+		\nointerlineskip
+		\begin{beamercolorbox}[%
+				wd=\paperwidth,%
+				sep=0pt,%
+				leftskip=0pt,%
+			]{frametitle}%{frametitlePadding}%
+			\gotham@frametitlestrut@start%
+			\tikz[overlay,remember picture]{
+				\fill[color=InriaRed]  (0.0,-0.33) rectangle (1.0,0.9);% horizontal rectangle
+				% \filldraw[color=InriaRed]  (0.0,0.9) -- (0.0,-1.9) -- (0.5,-1.9) -- (0.5,-0.33) -- (1.0,-0.33) -- (1.0,0.9);% top left corner
+			}%
+			\nolinebreak%
+			\gotham@frametitlestrut@end%
+		\end{beamercolorbox}%
+		\vspace*{-\inriaFrametitleHeight}%\gotham@frametitlestrut@start}
+	}{%post patch
+	}
+}
+
+
+%% Footer
+\setlength{\rightFooterPadding}{22.5ex}
+
+% \defbeamertemplate*{frame footer}{inria}[1][]{
+% 	\vspace*{-1ex}%
+% 	\hspace*{\fill}%
+% 	\smash{% suppresses the height and depth of its argument
+% 		\raisebox{-2.5ex}{%
+% 			\includegraphics[width=2.5cm]{\PathSOinria/logos/inr_logo_grisbleu.pdf}%
+% 		}%
+% 	}%
+% 	\hspace{22pt}%
+% 	\mbox{}%
+% 	\setbeamertemplate{frame footer}[gotham]
+% 	\usebeamertemplate{frame footer}
+% }
+
+\AtEndPreamble{%
+	\addtobeamertemplate{frame footer}{% pre patch
+		\vspace*{-1ex}%
+		\hspace*{\fill}%
+		\smash{% suppresses the height and depth of its argument
+			\raisebox{-2.5ex}{%
+				\includegraphics[width=2.5cm]{\PathSOinria/logos/inr_logo_grisbleu.pdf}%
+			}%
+		}%
+		\hspace{22pt}%
+		\mbox{}%
+	}{%post patch
+	}
+}
+
+
+%% Sidebars %%%
+%%%%%%%%%%%%%%%
+
+% sidebar lengths
+\setlength{\sidebarRightOffset}{-0.0mm}
+% \addtolength{\sidebarRightoffset}{}
+
+\boolfalse{defaultEdging}
+
+
+% Command to add filigrane/edging in sidebar
+\renewcommand{\gothamFiligrane}{%
+	\ifscreenratio{% 169
+		\tikz[overlay,remember picture]{%
+			% \fill[fill=colorFiligrane]  (-15.0,0.0) rectangle (0.0,-0.975); % vertical rectangle
+			% \fill[fill=colorFiligrane]  (0.0,0.0) rectangle (-0.50,-9.0);% horizontal rectangle
+			% \fill[fill=colorFiligrane]  (-0.40,-9.0) rectangle (-16.0,-8.475);% horizontal rectangle
+			% \fill[fill=colorFiligrane]  (-16.0,-8.5) rectangle (-15.50,0.0);% vertical rectangle
+			\filldraw[color=colorFiligrane] (-15.51,0.0) -- (-15.51,-0.965) -- (-0.5,-0.965) -- (-0.50,-8.475) -- (-15.50,-8.475) -- (-15.50,0.0) -- (-16.0,0.0) -- (-16.0,-9.0) -- (0.0,-9.0) -- (0.0,0.0)
+			;% vertical rectangle (-15.0,0.0) -- (-15.0,-0.965)
+		}%
+	}{% 43
+		filigrane 43 TODO
+	}%
+}
+
+
+
+
+%\mode<all>
+
+%%
+%% End of file `beamerouterthemeuge.sty'.

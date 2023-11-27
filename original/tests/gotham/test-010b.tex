@@ -1,0 +1,93 @@
+% !TEX TS-program = pdflatex
+% !TeX encoding = UTF-8
+% !TeX spellcheck = en_GB
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+\providecommand{\langue}{english}		% english, french
+\providecommand{\PathP}{../parts/} 		% Path to Parts folders
+\providecommand{\PathR}{../resources/}  % Path to Resources folders
+\providecommand{\PathSO}{../sources/} 	% Path to Sources folders
+\providecommand{\PathS}{../supplies/} 	% Path to Supplies folders
+\providecommand{\BuildTrigger}{buildnew} % Trigger to build or not standalone parts.
+
+\makeatletter
+	\def\input@path{{\PathSO}{\PathSO/Inria/}} 		% to be able to find package in resource folders.
+	\ifx\c@levelstanda\undefined 	% to create a newcounter if it doesn't exists.
+		\newcounter{levelstanda}
+	\else
+		{}% it already exist
+	\fi
+\makeatother
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+\documentclass[notheorems, noamsthm, aspectratio=169, 10pt]{beamer}
+\usepackage[l2tabu, orthodox]{nag}	% Help to prevent buggus with warnings
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%        DEFAULT PACKAGES
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+
+
+\makeatletter
+\defbeamertemplate*{background canvas}{normal}[1][]{%
+   \begin{tikzpicture}[overlay,remember picture]
+      \node[color=red, opacity=0.3, scale=5, rotate=45] at ([shift={(0,0)}]current page.center) {DRAFT};
+   \end{tikzpicture}%
+}%
+
+\setbeamercolor{background standout}{fg=red,bg=violet}
+
+\defbeamertemplate{background canvas}{standout mystyle}[1][]{%
+   \hspace*{25.15pt}
+   \begin{beamercolorbox}[wd=\paperwidth,
+      ht=\paperheight,
+      ]
+      {background standout}
+      dldzqdknqnd
+   \end{beamercolorbox}
+   \begin{tikzpicture}[overlay,remember picture]
+      \node[color=gray, opacity=0.3, scale=5, rotate=45] at ([shift={(0,0)}]current page.center) {STANDOUT};
+   \end{tikzpicture}%
+}%
+
+
+\defbeamertemplate*{standout}{mystyle}[1][]{%
+	\setbeamertemplate{background canvas}[standout mystyle]
+	% \usebeamertemplate{background canvas}%[standout mystyle]
+}%
+
+\providebool{mystyle@standout}
+\define@key{beamerframe}{standout}[true]{%
+	\booltrue{mystyle@standout}
+	\begingroup
+		\usebeamertemplate{standout}
+}
+	\apptocmd{\beamer@reseteecodes}{%
+		\ifbool{mystyle@standout}{
+			\endgroup
+			\boolfalse{mystyle@standout}
+		}{}
+	}{}{}
+\makeatother
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+\begin{document} %
+
+
+   \begin{frame}{title}
+      toto
+   \end{frame}
+
+
+   \begin{frame}[standout]{standout test}
+      questions ?
+   \end{frame}
+
+{\setbeamertemplate{background canvas}[standout mystyle]
+   \begin{frame}{test}
+      answers
+   \end{frame}
+}
+
+\end{document}

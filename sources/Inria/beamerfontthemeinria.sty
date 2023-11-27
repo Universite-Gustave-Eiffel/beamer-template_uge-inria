@@ -1,0 +1,26 @@
+% Uge font
+% Do not forget to install the fonts on your computer and then use
+% XeLaTeX
+%% Note on the UGE graphical charter.
+%% The UGE recommends to use TTNorm which is a non-free font and thus unusable by almost all agents.
+%% Furthermore, this font is not well suited for mathematical expressions and symbols...
+%% --
+%% Regarding the Tahoma equivalent recommendation:
+%%   - Tahoma was made for on-screen reading
+%%   - Tahoma is worst than TTNorm for the mathematical expressions.
+%% 
+%%   As a consequence, I recommend to use the Inria Fonts, FREELY available
+%% at https://black-foundry.com/blog/inria-serif-and-inria/ and under an Open Font Licence.
+%%
+
+%\mode<presentation>
+
+% === font ====================================================================
+%%	\linespread{1.12}           % enlarge line space
+\RequirePackage{lmodern}        % latin modern font
+%\RequirePackage[scaled=.95]{helvet}% helvetica as the origin of arial
+%\RequirePackage[helvet]{sfmath}    % for the mathematical enviroments
+%	\renewcommand{\familydefault}{\sfdefault}
+\RequirePackage{microtype}         % for character protrusion and font expansion
+
+%\mode<all>

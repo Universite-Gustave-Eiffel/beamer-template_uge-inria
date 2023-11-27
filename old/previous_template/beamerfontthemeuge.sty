@@ -1,0 +1,126 @@
+% Uge font
+% Do not forget to install the fonts on your computer and then use
+% XeLaTeX
+%% Note on the UGE graphical charter.
+%% The UGE recommends to use TTNorm which is a non-free font and thus unusable by almost all agents.
+%% Furthermore, this font is not well suited for mathematical expressions and symbols...
+%% --
+%% Regarding the Tahoma equivalent recommendation:
+%%   - Tahoma was made for on-screen reading
+%%   - Tahoma is worst than TTNorm for the mathematical expressions.
+%% 
+%%   As a consequence, I recommend to use the Inria Fonts, FREELY available
+%% at https://black-foundry.com/blog/inria-serif-and-inria/ and under an Open Font Licence.
+%%
+\RequirePackage{etoolbox}
+\RequirePackage{ifxetex}
+\RequirePackage{ifluatex}
+
+\ifboolexpr{bool {xetex} or bool {luatex}}{
+  \@ifpackageloaded{fontspec}{
+    \PassOptionsToPackage{no-math}{fontspec}
+  }{
+    \RequirePackage[no-math]{fontspec}
+  }
+  \newcounter{fontsnotfound}
+  \newcommand{\checkfont}[1]{%
+    \suppressfontnotfounderror=1%
+    \font\x = "#1" at 10pt
+    \selectfont
+    \ifx\x\nullfont%
+      \stepcounter{fontsnotfound}%
+    \fi%
+    \suppressfontnotfounderror=0%
+  }
+
+  \newcommand{\iffontsavailable}[3]{%
+    \setcounter{fontsnotfound}{0}%
+    \expandafter\forcsvlist\expandafter%
+    \checkfont\expandafter{#1}%
+    \ifnum\value{fontsnotfound}=0%
+      #2%
+    \else%
+      #3%
+    \fi%
+  }
+  \ifthenelse{\boolean{inriafonts} \or \boolean{inriafonts@local}}{
+    \iffontsavailable{Inria Sans}{
+      \RequirePackage{mathspec}
+      \setmainfont{Inria Sans}[Scale=MatchLowercase]
+      \setsansfont{Inria Sans}[Scale=MatchLowercase]
+      \setmathfont(Digits,Latin,Greek,Symbols)[Scale=MatchLowercase]{Inria Serif}
+      \setmathrm[Scale=MatchLowercase]{Inria Sans}
+      \RequirePackage{mathastext}
+    }{
+      \iffontavailable{[InriaSerif-Regular.ttf]}{
+        \RequirePackage{mathspec}
+        \setmainfont{[InriaSans-Regular.ttf]}[Scale=MatchLowercase]
+        \setsansfont{[InriaSans-Regular.ttf]}[Scale=MatchLowercase]
+        \setmathfont(Digits,Latin,Greek,Symbols)[Scale=MatchLowercase]{[InriaSerif-Regular.ttf]}
+        \setmathrm[Scale=MatchLowercase]{[InriaSans-Regular.ttf]}
+        \RequirePackage{mathastext}}
+    }{
+      \PackageWarning{beamerthemeuge}{%
+        You passed the inriafonts command but neither 'Inria Sans' nor 'InriaSans-Regular.ttf' were found.
+      }
+    }
+  }{
+    \iffontsavailable{Tahoma}{
+      \setsansfont{Tahoma}[Scale=MatchLowercase]
+    }{
+      \iffontsavailable{[Tahoma.ttf]}{
+        \setsansfont{[Tahoma.ttf]}[Scale=MatchLowercase]
+      }{
+        \PackageWarning{beamerthemeuge}{%
+          Tahoma font not found. 
+          You can put 'Tahoma.ttf' in the root directory so I can find it. 
+          Using the defaults beamer font.%
+        }
+      }
+    }
+  }
+}{%
+  {\PackageWarning{beamerthemeuge}{%
+    You need to compile with XeLaTeX or LuaLaTeX to use the Tahoma or InriaFonts%
+  }}
+}
+
+
+
+
+
+
+%\RequirePackage[no-math]{mathspec}
+
+%\setmainfont{Tahoma}[Scale=MatchLowercase]
+
+%\setmathfont(Digits,Latin,Greek,Symbols)[Scale=MatchLowercase]{Computer Modern Sans Seri}
+% \usefonttheme[onlymath]{serif}
+% \setmainfont{[InriaSans-Regular.ttf]}[Scale=MatchLowercase]
+% \setsansfont{[InriaSans-Regular.ttf]}[Scale=MatchLowercase]
+% \setmathfont(Digits,Latin,Greek,Symbols)[Scale=MatchLowercase]{[InriaSerif-Regular.ttf]}
+% \setmathrm[Scale=MatchLowercase]{[InriaSans-Regular.ttf]}
+%\RequirePackage{mathastext}
+
+\setbeamerfont{title}{
+  size=\Large,%
+  series=\bfseries}
+
+\setbeamerfont{frametitle}{
+  size=\Large,%
+  series=\bfseries
+}
+\setbeamerfont{framesubtitle}{
+  size=\small,%
+  series=\bfseries
+}
+\setbeamerfont{block title}{
+  size=\large,
+  series=\bfseries
+}
+\setbeamerfont{date in head/foot}{
+  size=\scriptsize
+}
+\setbeamertemplate{itemize item}{$\bullet$}
+\setbeamertemplate{itemize subitem}[triangle]
+\setbeamertemplate{itemize subsubitem}{-}

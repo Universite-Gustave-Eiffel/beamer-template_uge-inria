@@ -1,0 +1,161 @@
+% !TEX TS-program = pdflatex
+% !TeX encoding = UTF-8
+% !TeX spellcheck = en_GB
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+\providecommand{\langue}{english}		% english, french
+\providecommand{\PathP}{../parts/} 		% Path to Parts folders
+\providecommand{\PathR}{../resources/}  % Path to Resources folders
+\providecommand{\PathSO}{../sources/} 	% Path to Sources folders
+\providecommand{\PathS}{../supplies/} 	% Path to Supplies folders
+\providecommand{\BuildTrigger}{buildnew} % Trigger to build or not standalone parts.
+
+\makeatletter
+	\def\input@path{{\PathSO}{\PathSO/Inria/}} 		% to be able to find package in resource folders.
+	\ifx\c@levelstanda\undefined 	% to create a newcounter if it doesn't exists.
+		\newcounter{levelstanda}
+	\else
+		{}% it already exist
+	\fi
+\makeatother
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+\documentclass[notheorems, noamsthm, aspectratio=169, 10pt]{beamer}
+\usepackage[l2tabu, orthodox]{nag}	% Help to prevent buggus with warnings
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%        DEFAULT PACKAGES
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%        BEAMER OPTIONS
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+% Gotham Theme
+\usetheme{gotham}
+
+\usetheme{gothamInria}
+
+
+	\gothamset{
+		% numbering= fraction, %none, counter, fraction
+		progressbar= foot, %none, head, frametitle, foot
+	}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	PRESENTATION INFORMATION
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+\title[shorttitle]{Title long}
+\subtitle[shortsubtitle]{Subtile long}
+\date[shortdate]{\today}
+\author[john.doe@mail.com]{John DOE\inst{1}}
+\institute[shortinstitute]{\inst{1} An Awesome Company}
+\titlegraphic{LOGO-title}
+\logo{LOGO}
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+
+%% Section %%%
+%%%%%%%%%%%%%%
+\makeatletter
+
+\defbeamertemplate{background canvas}{toc inria}{
+	\tikz[overlay,remember picture]{
+		\fill[color=InriaDarkgray]  (1.,-1.) rectangle (15.,-8.);% horizontal rectangle
+	}%
+}
+
+
+\defbeamertemplate{frametitle}{toc inria}[1][]
+{
+	\nointerlineskip%
+	\hspace*{-1.155cm}
+	\begin{beamercolorbox}[%
+			wd=0.3\paperwidth,%
+			sep=0pt,%
+			leftskip=\gotham@frametitle@leftpadding,%
+			rightskip=\gotham@frametitle@rightpadding,%
+		]{frametitleSection}%
+		\gotham@frametitlestrut@start%
+		\parbox[c][4.5cm][c]{0.22\paperwidth}{
+			\insertframetitle%
+			\ifx\insertframesubtitle\@empty%% if subtitle to the frame is not empty
+			\else%
+				{ -- \usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle}%% add subtitle
+			\fi%% end if
+		}
+		\nolinebreak%
+		\gotham@frametitlestrut@end%
+	\end{beamercolorbox}%
+	\vspace*{-5.25cm}
+}
+
+\defbeamertemplate*{toc page}{inria}[1][]
+{%
+	% toc page inria
+	% % {%
+	\setbeamertemplate{background canvas}[toc inria]%
+	\setbeamertemplate{frametitle}[toc inria]%
+	\setbeamercolor{section in toc}{fg=white}%
+	\setbeamercolor{subsection in toc}{fg=white}%
+	\setbeamercolor{subsubsection in toc}{fg=white}%
+	% % }%
+}
+
+
+\setbeamertemplate{section in toc}{%
+  {\color{InriaRed}{\two@digits{\inserttocsectionnumber}}.}~\inserttocsection%
+}
+\setbeamertemplate{subsection in toc}{%
+  \quad{\color{InriaRed}{\two@digits{\inserttocsectionnumber}}.\inserttocsubsectionnumber.}~\inserttocsubsection%
+}
+\setbeamertemplate{subsubsection in toc}{%
+  \qquad{\color{InriaRed}{\two@digits{\inserttocsectionnumber}}.\inserttocsubsectionnumber.\inserttocsubsubsectionnumber.}~\inserttocsubsubsection%
+}
+
+\makeatother
+
+
+% \booltrue{defaultWaterMark}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+\begin{document} %
+
+%Chapitre 1
+{
+	\begin{frame}[toc]{Sommaire}
+		\begin{columns}
+		\column{0.30\textwidth}
+		\column{0.70\textwidth}
+			\tableofcontents
+		\end{columns}
+	\end{frame}
+
+
+	\begin{frame}{titre}
+		toto
+	\end{frame}
+} 
+ 
+\section{Titre du chapitre}
+\subsection{Titre du sub}
+
+
+\begin{frame}[fragile,edging]
+	\frametitle{Cite in the footnote}
+
+	Some text that requires a reference%\footfullciteBeamer{Knuth92},
+	using the command\footnote{Please note that this command can be used side-by-side the command footnote long long long long long long long long long long long long.}
+	\begin{verbatim}
+			\footfullciteBeamer{<bibKey>}
+	\end{verbatim}
+
+	The command to cite in text mode is also possible with
+	\begin{verbatim}
+			\fullciteBeamer{<bibKey>}
+	\end{verbatim}
+	and giving %\fullciteBeamer{ConcreteMath}
+\end{frame}
+
+\end{document}
