@@ -10,27 +10,25 @@
 %%% === The head- and footline. ==============================================
 
 % command to insert institute logo on 'standard' frame
-\newcommand{\UGElogo}{%
-	\ifbool{reversedColor}{% Dark true
-		\includegraphics[width=23.5mm]{\PathSOuge/logos/UGE-logo.pdf}%
-	}{% Light
-		\includegraphics[width=23.5mm]{\PathSOuge/logos/UGE-logo_white.pdf}%
-	}%
-}
+% \pgfdeclareimage[option]{label}{file}%
+\ifbool{reversedColor}{% Dark true
+	\pgfdeclareimage[width=23.5mm]{UGElogo}{\PathSOuge/logos/UGE-logo.pdf}%
+}{% Light
+	\pgfdeclareimage[width=23.5mm]{UGElogo}{\PathSOuge/logos/UGE-logo_white.pdf}%
+}%
+
 
 %% Header & Frame title %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Header color
-% \expandafter\let\csname beamer@@tmpop@frametitle@plain\endcsname\relax % clear the template
-% \defbeamertemplate{frametitle}{plain}{% redef from metropolis
 \AtEndPreamble{%
-	\addtobeamertemplate{frametitle}{}{ %}{plain}
-		\vspace*{-1.65em}\hspace*{\fill}\UGElogo\hspace{-22pt}\mbox{}% add logo
+	\defbeamertemplate*{frametitle}{uge}[1][]{
+		\setbeamertemplate{frametitle}[plain]%gotham uses plain redefinition
+		\usebeamertemplate{frametitle}
+		\vspace*{-1.65em}\hspace*{\fill}\pgfuseimage{UGElogo}\hspace{-22pt}\mbox{}% add logo
 	}
 }
-
-% \setbeamertemplate{navigation symbols}[bottomline]
 
 
 %% Sidebars %%%
@@ -40,13 +38,15 @@
 \setlength{\sidebarRightOffset}{-8.4mm}
 % \addtolength{\sidebarRightoffset}{}
 
+\ifscreenratio{% 169
+	\pgfdeclareimage[width=8.3mm]{UGEfiligrane}{\PathSOuge/logos/pattern-frame.pdf}%
+}{% 43
+	\pgfdeclareimage[width=8.3mm]{UGEfiligrane}{\PathSOuge/logos/pattern-frame43.pdf}%
+}%
+
 % Command to add filigrane/edging in sidebar
 \renewcommand{\gothamFiligrane}{%
-	\ifscreenratio{% 169
-		\includegraphics[width=8.3mm]{\PathSOuge/logos/pattern-frame.pdf}%
-	}{% 43
-		\includegraphics[width=8.3mm]{\PathSOuge/logos/pattern-frame43.pdf}%
-	}%
+	\pgfuseimage{UGEfiligrane}
 }
 
 

@@ -83,13 +83,9 @@
 
 \defbeamertemplate*{subsection frame}{inria}[1][]%
 {%
-	% \usebeamertemplate*{section page}% already included
-	\setbeamertemplate{background canvas}[section gotham]%
-	\setbeamertemplate{frametitle}[section inria]%
-	% \setbeamertemplate{sidebar canvas right}[gotham filigrane]%
-	\setbeamertemplate{sidebar canvas right}[empty]%
-	\setbeamertemplate{footline}[empty]%
-	\setbeamertemplate{logo}[empty]%
+	% \usebeamertemplate*{subsection page}% already included
+	\setbeamertemplate{section frame}[section inria]%
+	\usebeamertemplate{section frame}%
 }%
 
 \addtobeamertemplate{subsection page}{%pre-text
@@ -99,13 +95,9 @@
 
 \defbeamertemplate*{subsubsection frame}{inria}[1][]%
 {%
-	% \usebeamertemplate*{section page}% already included
-	\setbeamertemplate{background canvas}[section gotham]%
-	\setbeamertemplate{frametitle}[section inria]%
-	% \setbeamertemplate{sidebar canvas right}[gotham filigrane]%
-	\setbeamertemplate{sidebar canvas right}[empty]%
-	\setbeamertemplate{footline}[empty]%
-	\setbeamertemplate{logo}[empty]%
+	% \usebeamertemplate*{subsubsection page}% already included
+	\setbeamertemplate{section frame}[section uge]%
+	\usebeamertemplate{section frame}%
 }%
 
 \addtobeamertemplate{subsubsection page}{%pre-text
@@ -226,6 +218,8 @@
 	\inserttitlegraphic%
 }
 
+\pgfdeclareimage[width=2.1cm]{InriaLogoSection}{\PathSOinria/logos/inr_logo_rouge.pdf}%
+
 % The title page template
 \defbeamertemplate*{title page}{inria}[1][]
 {%
@@ -239,7 +233,7 @@
 	\tikz[overlay,remember picture]{
 		\node [rectangle, anchor=north west, minimum width=0.3\paperwidth, minimum height=4.5cm] %, draw
 		 	(box) at (current page.north west) 
-			{\includegraphics[height=1.cm]{\PathSOinria/logos/inr_logo_blanc.pdf}};
+			{\pgfuseimage{InriaLogoSection}};
 	}%
 	\\
 	\addtolength{\leftskip}{13em}%

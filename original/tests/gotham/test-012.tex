@@ -10,7 +10,7 @@
 \providecommand{\BuildTrigger}{buildnew} % Trigger to build or not standalone parts.
 
 \makeatletter
-	\def\input@path{{\PathSO}{\PathSO/Inria/}} 		% to be able to find package in resource folders.
+	\def\input@path{{\PathSO}{\PathSO/Inria/}{\PathSO/UGE/}} 		% to be able to find package in resource folders.
 	\ifx\c@levelstanda\undefined 	% to create a newcounter if it doesn't exists.
 		\newcounter{levelstanda}
 	\else
@@ -37,7 +37,8 @@
 % Gotham Theme
 \usetheme{gotham}
 
-\usetheme{gothamInria}
+\usetheme{gothamUGE}
+% \usetheme{gothamInria}
 
 	\gothamset{
 		numbering= none, %none, counter, fraction
@@ -51,7 +52,7 @@
 \title[shorttitle]{Title long}
 \subtitle[shortsubtitle]{Subtile long Subtile long Subtile long Subtile long Subtile long Subtile long}
 \date[shortdate]{\today}
-\author[john.doe@mail.com]{John DOE\inst{1,2,3}}
+\author[john.doe@mail.com]{John DOE\inst{1,2,3} John DOE\inst{1,2,3} John DOE\inst{1,2,3}}
 \institute[shortinstitute]{\inst{1} An Awesome Company
 
 \inst{2} An Awesome Company

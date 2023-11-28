@@ -49,7 +49,7 @@
 }
 
 % The title page template
-\setbeamertemplate{title page}{
+\defbeamertemplate*{title page}{UGE}{
 	\setbeamercolor{progress bar}{fg=normal text.bg}
 	\ifscreenratio{% 169
 		\begin{picture}(0,0)
@@ -150,44 +150,142 @@
 	}% end ifscrenratio
 }
 
+\pgfdeclareimage[height=\paperheight]{UGEtocOfficial}{\PathSOuge/logos/page2_4K.jpg}%
+\defbeamertemplate{background canvas}{toc uge official}{%
+	\tikz[overlay,remember picture]{
+		\node (box) at ([shift={(0,0)}]current page.center) {\pgfuseimage{UGEtocOfficial}};%
+	}%
+}
+
+\defbeamertemplate{toc page}{uge}[1][]
+{%
+	\addtolength{\leftskip}{12em} %
+	\setbeamertemplate{background canvas}[toc uge official]%
+	% \setbeamertemplate{frametitle}[toc inria]%
+	\setbeamercolor{section in toc}{fg=pale}%
+	\setbeamercolor{subsection in toc}{fg=pale}%
+	\setbeamercolor{subsubsection in toc}{fg=pale}%
+}
+
 
 %% Section %%%
 %%%%%%%%%%%%%%
 
-% command to add standout background
-\renewcommand{\gothamStandoutBG}{%
-	\ifbool{reversedColor}{% Dark true 
-		\ifscreenratio{% 169
-			\includegraphics[height=\paperheight]{\PathSOuge/logos/pattern-section.pdf}%%
-		}{% 43
-			\includegraphics[height=\paperheight]{\PathSOuge/logos/pattern-section43.pdf}%%
-		}%
-	}{% Light
-		\ifscreenratio{% 169
-			\includegraphics[height=\paperheight]{\PathSOuge/logos/pattern-standout.pdf}%
-		}{% 43
-			\includegraphics[height=\paperheight]{\PathSOuge/logos/pattern-standout43.pdf}%
-		}%
+
+\ifbool{reversedColor}{% Dark true
+	\ifscreenratio{% 169
+		\pgfdeclareimage[height=\paperheight]{UGEStandInBG}{\PathSOuge/logos/pattern-standout.pdf}%
+		\pgfdeclareimage[height=\paperheight]{UGEStandOutBG}{\PathSOuge/logos/pattern-section.pdf}%
+	}{% 43
+		\pgfdeclareimage[height=\paperheight]{UGEStandInBG}{\PathSOuge/logos/pattern-standout43.pdf}%
+		\pgfdeclareimage[height=\paperheight]{UGEStandOutBG}{\PathSOuge/logos/pattern-section43.pdf}%
 	}%
+}{% Light
+	\ifscreenratio{% 169
+		\pgfdeclareimage[height=\paperheight]{UGEStandInBG}{\PathSOuge/logos/pattern-section.pdf}%
+		\pgfdeclareimage[height=\paperheight]{UGEStandOutBG}{\PathSOuge/logos/pattern-standout.pdf}%
+	}{% 43
+		\pgfdeclareimage[height=\paperheight]{UGEStandInBG}{\PathSOuge/logos/pattern-section43.pdf}%
+		\pgfdeclareimage[height=\paperheight]{UGEStandOutBG}{\\PathSOuge/logos/pattern-standout43.pdf}%
+	}%
+}%
+
+\defbeamertemplate{background canvas}{section uge}{
+	\pgfuseimage{UGEStandInBG}
 }
 
-% command to add section (standin) background
-\renewcommand{\gothamStandinBG}{%
-	\ifbool{reversedColor}{% Dark true 
-		\ifscreenratio{% 169
-			\includegraphics[height=\paperheight]{\PathSOuge/logos/pattern-standout.pdf}%
-		}{% 43
-			\includegraphics[height=\paperheight]{\PathSOuge/logos/pattern-standout43.pdf}%
-		}%
-	}{% Light
-		\ifscreenratio{% 169
-			\includegraphics[height=\paperheight]{\PathSOuge/logos/pattern-section.pdf}%%
-		}{% 43
-			\includegraphics[height=\paperheight]{\PathSOuge/logos/pattern-section43.pdf}%%
-		}%
-	}%
-}
+\defbeamertemplate*{section frame}{uge}[1][]%
+{%
+	% \usebeamertemplate*{section page}% already included
+	\setbeamertemplate{background canvas}[section uge]%
+	% \setbeamertemplate{sidebar canvas right}[gotham filigrane]%
+	\setbeamertemplate{sidebar canvas right}[empty]%
+	\setbeamertemplate{footline}[empty]%
+	\setbeamertemplate{logo}[empty]%
+}%
 
+
+\defbeamertemplate*{subsection frame}{uge}[1][]%
+{%
+	% \usebeamertemplate*{subsection page}% already included
+	\setbeamertemplate{section frame}[section uge]%
+	\usebeamertemplate{section frame}%
+}%
+
+\defbeamertemplate*{subsubsection frame}{uge}[1][]%
+{%
+	% \usebeamertemplate*{subsubsection page}% already included
+	\setbeamertemplate{section frame}[section uge]%
+	\usebeamertemplate{section frame}%
+}%
+
+
+
+%% Standout %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\defbeamertemplate*{background canvas}{standin uge}[1][]{%
+	\pgfuseimage{UGEStandInBG}
+}%
+
+\defbeamertemplate*{standin}{uge}[1][]{%
+	\setbeamertemplate{background canvas}[standin uge]
+	% \usebeamertemplate{background canvas}%[standin gotham]
+	\usebeamerfont{standin}
+}%
+
+\defbeamertemplate*{background canvas}{standout uge}[1][]{%
+	\pgfuseimage{UGEStandOutBG}
+}%
+
+\defbeamertemplate*{standout}{uge}[1][]{%
+	\setbeamertemplate{background canvas}[standout uge]
+	% \usebeamertemplate{background canvas}%[standout gotham]
+	\setbeamertemplate{sidebar canvas right}[empty]
+	\usebeamerfont{standout}
+	\ifbeamercolorempty[bg]{palette primary}{%true : empty background (light)
+		\setbeamercolor{background canvas}{
+			use=palette primary,
+			bg=palette primary.fg %-palette primary.fg
+		}
+	}{%false : background not empty (dark)
+		\setbeamercolor{background canvas}{
+			use=palette primary,
+			bg=palette primary.bg
+		}
+	}
+	\setbeamercolor{local structure}{
+		fg=palette primary.bg
+	}
+	\usebeamercolor[fg]{palette primary}
+}%
+
+\pgfdeclareimage[height=\paperheight]{UGEoutOfficial}{\PathSOuge/logos/page4_4K.jpg}%
+\defbeamertemplate{background canvas}{standout uge official}[1][]{%
+	\pgfuseimage{UGEoutOfficial}
+}%
+
+\defbeamertemplate{standout}{uge official}[1][]{%
+	\setbeamertemplate{background canvas}[standout uge official]
+	% \usebeamertemplate{background canvas}%[standout gotham]
+	\setbeamertemplate{sidebar canvas right}[empty]
+	\usebeamerfont{standout}
+	\ifbeamercolorempty[bg]{palette primary}{%true : empty background (light)
+		\setbeamercolor{background canvas}{
+			use=palette primary,
+			bg=palette primary.fg %-palette primary.fg
+		}
+	}{%false : background not empty (dark)
+		\setbeamercolor{background canvas}{
+			use=palette primary,
+			bg=palette primary.bg
+		}
+	}
+	\setbeamercolor{local structure}{
+		fg=palette primary.bg
+	}
+	\usebeamercolor[fg]{palette primary}
+}%
 
 %% Environments styles %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
