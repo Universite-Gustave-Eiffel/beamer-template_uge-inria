@@ -1,0 +1,178 @@
+\section{Things brought by good practices in UserPackage}
+
+	% FRAME
+	\begin{frame}{Theorem with thmtools}
+		The interactions between thmtools and beamer has been solved.
+
+		\begin{theorem}
+			contenu...
+		\end{theorem}
+
+		\begin{proof}
+			contenu...
+		\end{proof}
+	\end{frame}
+
+	% FRAME
+	\begin{frame}{Glossaries}
+		Here is an example of acronym using glossaries: \gls{lbm}
+
+		And an example of equation in colors, the Boltzmann equation:
+		\begin{equation}
+			{\color{blue} \partial_t \gls{BoltzDist}(x,\xi,t)} + {\color{red} \xi\cdot\partial_x \gls{BoltzDist}(x,\xi,t)} + {\color{green!60!black!80} g\cdot\partial_\xi f(x,\xi,t)}
+			= {\color{yellow!80!orange!85!black} \Omega(\gls{BoltzDist},\gls{BoltzDist})}
+		\end{equation}
+		where $\gls{BoltzDist}$ is a variable defined through glossaries.
+	\end{frame}
+
+	% FRAME
+	\begin{frame}[fragile]{Cite in the footnote}
+		Some text that requires a reference\footfullciteBeamer{Knuth92},
+		using the command\footnote{Please note that this command can be used side-by-side the command footnote long long long long long long long long long long long long.}
+		\begin{verbatim}
+				\footfullciteBeamer{<bibKey>}
+		\end{verbatim}
+
+		The command to cite in text mode is also possible with
+		\begin{verbatim}
+				\fullciteBeamer{<bibKey>}
+		\end{verbatim}
+		and giving \fullciteBeamer{ConcreteMath}
+	\end{frame}
+
+	% FRAME
+	\begin{frame}%[fragile]
+	\frametitle{Video using media9/multimedia}
+
+		\begin{columns}[c,onlytextwidth]
+		\column{0.49\textwidth}
+			The last but not least feature present is a macro simplifying the way to include videos in beamer presentation.
+
+			It requires to define the OS on which the pdf will be red, thanks to the command:
+			\begin{center}
+				\ttfamily
+				\textbackslash def\textbackslash OSvar\{linux\}
+			\end{center}
+
+			Then, the video can be included with the command:\\[0.25em]
+			\begin{flushleft}
+				\ttfamily
+				\textbackslash includeVideo[\% no space\\
+				\qquad width=7cm, height=5cm,%\\
+				]\% Options \\
+				\{\textbackslash PathS/video.mp4\}\% Video File\\
+				\{\textbackslash includegraphics[width, height]\%\\
+				\qquad	\{\textbackslash PathS/screenshot.png\}\%\\
+				\}\% Poster image.
+			\end{flushleft}
+
+		\column{0.49\textwidth}
+			Leading to the following result:
+			\begin{figure}
+				\centering
+				\includeVideo[% no space
+						width=0.75\linewidth, height=0.54\linewidth,
+					]% Options
+					{\PathS/Air_convec.mp4}% Video File
+					{\includegraphics[width=0.75\linewidth,height=0.54\linewidth]%
+						{\PathS/Thermal_convec.png}%
+					}
+				\caption{Example of embedded video using \texttt{\textbackslash includeVideo}.}
+				\label{vid:includeVideo}
+			\end{figure}
+		\end{columns}
+	\end{frame}
+
+	% FRAME
+	\begin{frame}<handout:1|beamer:0>[fragile]{Warning about \texttt{\textbackslash includeVideo}.}
+		\begin{alertblock}{Warning}
+			I SHOULD TRY EMBEDDED VIDEO SUPPORT...
+		\end{alertblock}
+	\end{frame}
+
+	% FRAME
+	\begin{frame}[fragile]{Warning about \texttt{\textbackslash includeVideo}.}
+		\begin{alertblock}{Warning}
+			Currently the method to include video using \texttt{\textbackslash includeVideo} is no longer work on Windows because \texttt{flash player} is no longer supported.
+		\end{alertblock}
+		Up to now, this solution is still working on Linux with \texttt{okular}, \texttt{poppler} and \texttt{phonon-backend-vlc} installed.
+
+		A possible workaround is to used external player rather than embedded solutions.
+		An example of external inclusion on Windows with \texttt{multimedia} package is:
+		\begin{verbatim}
+			\movie[externalviewer]%
+			{\includegraphics[width=\textheight]%
+				{figures/image.jpg}%
+			}{video_beamer.mp4}
+		\end{verbatim}
+	\end{frame}
+
+
+	\newcounter{r}
+	\newcommand{\escalar}[1]{
+		\setcounter{r}{#1 * #1 * #1}
+	}
+	%
+	\newcounter{m}
+	\setcounter{m}{0}
+	\newcounter{mc}
+	% FRAME
+	\begin{frame}[fragile]{Video using animate}
+		\vspace{0.5em}
+		\begin{columns}[c,onlytextwidth]
+		\column{0.49\textwidth}
+			Another solution which is use a animation from a stack of image:
+			\begin{verbatim}
+				\animategraphics[autoplay, loop,
+						width=\textwidth, controls
+					]%
+				{<frame rate>}}{Img/Image_}{0}{99}
+			\end{verbatim}\vspace{-1.5em}
+			or for more complex drawing:
+			\begin{verbatim}
+				\begin{animateinline}[<opt>]{<rate>}
+		   ... typeset material ...
+				\newframe[<frame rate>]
+		   ... typeset material ...
+				\newframe
+		   ...
+				\end{animateinline}
+			\end{verbatim}
+		\column{0.49\textwidth}
+			\begin{figure}
+				\centering
+				\begin{animateinline}[loop, poster = first, controls, palindrome]{2}
+					\whiledo{\them < 21}{
+		    \begin{tikzpicture}[scale=0.95]
+			   \draw[red,thick,<->] (-1,1) parabola bend (0,0) (2.1,4.41)
+			       node[below right] {$y=x^2$};
+			   \draw[loosely dotted] (-1,0) grid (4,4);
+			   %\path[use as bounding box] (-2,-1) rectangle (5,5);
+			   \draw[->] (-0.2,0) -- (4.25,0) node[right] {$x$};
+			   \draw[->] (0,-0.25) -- (0,4.25) node[above] {$y$};
+			   \foreach \x/\xtext in {1/1, 2/2, 3/3}
+			   \draw[shift={(\x,0)}] (0pt,2pt) -- (0pt,-2pt) node[below] {$\xtext$};
+			   \foreach \y/\ytext in {1/1, 2/2, 3/3, 4/4}
+			   \draw[shift={(0,\y)}] (2pt,0pt) -- (-2pt,0pt) node[left] {$\ytext$};
+						%
+			   \setcounter{mc}{\value{m}*\value{m}}
+			   \shade[top color=blue,bottom color=gray!50]
+			       (0,0) parabola (0.1*\them,0.01*\themc) |- (0,0);
+			   \escalar{\them}
+			   \draw (3cm,2pt) node[above]
+			       {$\displaystyle\int\limits_0^{\them/10} \!\!x^2\mathrm{d}x =
+			           \displaystyle\frac{\ther}{3000}$};
+			   \draw[fill=orange,color=orange] (0.1*\them,0.01*\themc) circle (0.5pt);
+		   \end{tikzpicture}
+				%
+				\stepcounter{m}
+				\ifthenelse{\them < 21}{
+					\newframe
+				}{
+				\end{animateinline}\relax % BREAK
+				} } % END \whiledo...
+				\caption{Example of embedded video using \texttt{\textbackslash animategraphics}.}
+				\label{vid:animate}
+      	\end{figure}
+     	\end{columns}
+	\end{frame}

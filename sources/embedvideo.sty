@@ -1,0 +1,82 @@
+% !TeX encoding = UTF-8
+% !TeX spellcheck = en_EN
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+\ProvidesPackage{embedvideo}[2022/09/22]
+\typeout{*** Package Embed Video  : (Alexander Grahn and others)}
+%% From https://www.overleaf.com/project/5ff76fa5686edd3e034cfedb
+%% or : https://tex.stackexchange.com/questions/516029
+%%-------------------------
+%% On windows do (as admin):
+%% [HKEY_LOCAL_MACHINE\Software\Wow6432Node\Adobe\Acrobat Reader\DC\FeatureState]
+%% "HonorControls"=dword:00000001
+%---------------------------
+%% Usage :  \embedvideo{<poster or text>}{<video file (MP4+H264)>}
+%% or starred variant \embedvideo*{...}{...} for autoplay :
+%---------------------------
+\RequirePackage{graphicx}
+\PassOptionsToPackage{bigfiles}{pdfbase}
+\RequirePackage{pdfbase}
+\ExplSyntaxOn
+%%begin novalidate
+\cs_new:Npn\embedvideo#1#2{
+%%end novalidate
+  \leavevmode
+  \pbs_pdfobj:nnn{}{fstream}{{}{#2}}
+  \pbs_pdfobj:nnn{}{dict}{
+    /Type/Filespec/F~(#2)/UF~(#2)
+    /EF~<</F~\pbs_pdflastobj:>>
+  }
+  \tl_set:Nx\video{\pbs_pdflastobj:}%
+  %
+  \pbs_pdfobj:nnn{}{dict}{
+    /Type/RichMediaInstance/Subtype/Video
+    /Asset~\video
+    /Params~<</Binding/Foreground>>
+  }
+  %
+  \pbs_pdfobj:nnn{}{dict}{
+    /Type/RichMediaConfiguration/Subtype/Video
+    /Instances~[\pbs_pdflastobj:]
+  }
+  %
+  \pbs_pdfobj:nnn{}{dict}{
+    /Type/RichMediaContent
+    /Assets~<<
+      /Names~[(#2)~\video]
+    >>
+    /Configurations~[\pbs_pdflastobj:]
+  }
+  \tl_set:Nx\rmcontent{\pbs_pdflastobj:}%
+  %
+  \pbs_pdfobj:nnn{}{dict}{
+    /Activation~<<
+      /Condition/XA
+      /Presentation~<<
+        /Transparent~true
+        /Style/Embedded
+        /PassContextClick~true
+      >>
+    >>
+    /Deactivation~<</Condition/PC>>
+  }
+  %
+  \hbox_set:Nn\l_tmpa_box{#1}
+  \tl_set:Nx\l_box_wd_tl{\dim_use:N\box_wd:N\l_tmpa_box}
+  \tl_set:Nx\l_box_ht_tl{\dim_use:N\box_ht:N\l_tmpa_box}
+  \tl_set:Nx\l_box_dp_tl{\dim_use:N\box_dp:N\l_tmpa_box}
+  \pbs_pdfxform:nnnnn{1}{1}{}{}{\l_tmpa_box}
+  %
+  \pbs_pdfannot:nnnn{\l_box_wd_tl}{\l_box_ht_tl}{\l_box_dp_tl}{
+    /Subtype/RichMedia
+    /BS~<</W~0/S/S>>
+    /Contents~(embedded~video~file:#2)
+    /NM~(rma:#2)
+    /AP~<</N~\pbs_pdflastxform:>>
+    /RichMediaSettings~\pbs_pdflastobj:
+    /RichMediaContent~\rmcontent
+  }
+  \phantom{#1}
+}%
+\ExplSyntaxOff
+\endinput
+%end of  package

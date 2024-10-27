@@ -1,0 +1,60 @@
+%% --------------------------------------------------------------------
+%% Copyright 2024 Romain NOËL
+%%
+%% Based on the NewInst theme presentation ppt and graphical charter
+%% --------------------------------------------------------------------
+
+\ProvidesExplPackage{beamercolorthemegothamNewInst}{2024-10-15}{1.1.1.a}{NewInst color theme}
+%\mode<presentation>
+
+%%% NewInst colors
+% === colors ==========================================================
+% \RequirePackage{xcolor}     % color package; load before tocstyle
+
+\definecolor{NewInstblue}{RGB}{47,42,133} % NewInst1: blue-ish
+\definecolor{NewInstundef}{RGB}{133,42,133} % 
+
+
+\cs_new_protected:Nn \__gotham_color_set_style_NewInstA:{
+	%%% apply changes in the color set
+	% \colorlet{colorPale}{gPaleYell} % BG in light/normal mode
+	% \colorlet{colorDark}{gDarkBlack} % FG in light/normal mode
+	\colorlet{colorA}{NewInstblue} % frametitle, standin.out,
+	\colorlet{colorAreversed}{NewInstundef} % frametitle, standin.out,
+	% \colorlet{colorB}{gMidGrey} % gray BG: progress bar, blocks
+	\colorlet{colorC}{NewInstblue} % progress bar
+	% \colorlet{colorD}{gLightOrange} % alert
+	% \colorlet{colorE}{gLightGreen} % example
+
+	%%% reload modified
+	% \colorlet{colorFG}{colorDark}
+	% \colorlet{colorBG}{colorPale}
+	% %%\colorlet{colorStandin}{colorBG/FG}% light/dark BG color overset
+	% %%\colorlet{colorStandout}{colorA/reserved}% light/dark BG color overset
+	% %%\colorlet{colorFrametitle}{colorA/reserved}% light/dark BG color overset
+	% %%\colorlet{colorTitlepage}{colorA/reserved}% light/dark BG color overset
+	% \colorlet{colorFiligrane}{colorB}
+	% \colorlet{colorBackElement}{colorB}
+	\colorlet{colorProgBar}{colorC}
+	% \colorlet{colorAlert}{colorD}
+	% \colorlet{colorExample}{colorE}
+
+	% \renewcommand{\gothamHookPostColorBGSet}{
+	% 	\ifbool{darkBG}{% Dark true
+	% 		\colorlet{colorStandout}{colorA/reserved}
+	% 		\setbeamercolor{frametitle}{use=primary~palette, parent=primary~palette}
+	% 	}{% Light true
+	% 		\colorlet{colorStandout}{colorA/reserved}
+	% 		\setbeamercolor{frametitle}{use=primary~palette, parent=primary~palette}
+	% 	}
+	% }
+}
+
+\keys_define:nn { gotham / color }
+{
+	colorset / NewInst .code:n = { \__gotham_color_set_style_NewInstA: },
+}
+
+%\mode<all>
+
+%% End of file `beamercolorthemeNewInst.sty'.

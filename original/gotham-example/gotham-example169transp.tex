@@ -1,0 +1,91 @@
+\providecommand{\langue}{english} 	% english, french
+\providecommand{\PathP}{../../parts/} 	% Path to Parts folders
+\providecommand{\PathR}{../../resources/} 	% Path to Resources folders
+\providecommand{\PathSO}{../../sources/} 	% Path to Sources folders
+\providecommand{\PathS}{../../supplies/} 	% Path to Supplies folders
+\providecommand{\BuildTrigger}{buildnew} 	% Trigger to build or not standalone parts.
+
+\makeatletter
+	\def\input@path{{\PathSO}{\PathSO/gotham}} % to be able to find package in resource folders.
+	\ifx\c@levelstanda\undefined 	% to create a newcounter if it doesn't exists.
+		\newcounter{levelstanda}
+	\else
+		{}% it already exist
+	\fi
+\makeatother
+
+
+\documentclass[notheorems, noamsthm, aspectratio=169, 10pt]{beamer}
+	% use this instead for 16:9 aspect ratio: [aspectratio=169]
+	% supported aspect ratios  1610  169 149 54 43 (default) 32
+	%
+	% The option "handout, " allows to the print the hidden slides made by <handout:1|beamer:0>[noframenumbering].
+	%
+	% the option "notes=only, " to print only the notes !
+	\usepackage[l2tabu, orthodox]{nag}	% Help to prevent buggus with warnings
+
+   \usepackage[utf8]{inputenc}
+	\usepackage[T1]{fontenc}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%        LOADING MY PACKAGES
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+	\newcommand{\Pathbasebib}{\PathR/Presentation.bib}
+	\newcommand{\PathSymbolsEntries}{\PathR/UsersSymbolsAcronyms}%.bib
+	\def\OSvar{linux} % windows, mac, linux
+
+	\input{\PathR/UsersPackagesDefs.tex}
+	\input{\PathR/UsersMathsCommands.tex}
+   \usepackage{ccicons}
+
+\usetheme{gotham}
+
+   \gothamset{
+      numbering= framenumber,
+      % tocframe template= gotham simple,
+      parttocframe default=off,
+      sectiontocframe default=off,
+      subsectiontocframe default=off,
+   }
+
+   \newcommand{\themename}{\textbf{\textsc{Gotham}}}
+
+\title[]{Gotham}
+\subtitle{A Modern, versatile and extendable theme for Beamer}
+\date[]{\today}
+\author[]{Romain NOËL}
+\institute{Center for modern beamer themes}
+% \titlegraphic{\hfill\includegraphics[height=1.5cm]{logo.pdf}}
+
+
+\begin{document}
+
+\maketitle
+
+   \begin{frame}[toc]{Table of contents}%
+      \tableofcontents%[hideallsubsections]
+   \end{frame}
+
+   
+%%%%%%%%%%%%%%%%%%%%
+%%%  MAINMATTER  %%%
+%%%%%%%%%%%%%%%%%%%%
+\input{section-Beamer.tex}
+
+\input{section-Gotham.tex}
+
+\input{section-Conclusion.tex}
+
+
+\appendix
+
+   \begin{frame}[fragile]{Backup slides}
+      Sometimes, it is useful to add slides at the end of your presentation to refer to during audience questions.
+
+      The best way to do this is to include \verb|\usepackage{appendixnumberbeamer}| in your preamble and call \verb|\appendix| before your backup slides.
+
+      \themename{} will automatically turn off slide numbering and progress bars for slides in the appendix.
+   \end{frame}
+
+
+\end{document}

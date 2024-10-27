@@ -1,19 +1,19 @@
 % !TEX TS-program = pdflatex
 % !TeX encoding = UTF-8
 % !TeX spellcheck = en_GB
-%==============================================================================
-%== template for LaTeX presentation ===========================================
-%==============================================================================
-\providecommand{\langue}{english}		% english, french
-\providecommand{\PathP}{../parts/} 		% Path to Parts folders
-\providecommand{\PathR}{../resources/}  % Path to  Resources folders
-\providecommand{\PathSO}{../sources/} 	% Path to Sources folders
-\providecommand{\PathS}{../supplies/} 	% Path to Supplies folders
-\providecommand{\BuildTrigger}{buildnew} % Trigger to build or not standalone parts.
+%======================================================================
+%==  template for LaTeX presentation  =================================
+%======================================================================
+\providecommand{\lang}{english} 	% english, french
+\providecommand{\PathP}{../gotham-example/} 	% Path to Parts folders
+\providecommand{\PathR}{../../resources/} 	% Path to Resources folders
+\providecommand{\PathSO}{../../sources/} 	% Path to Sources folders
+\providecommand{\PathS}{../../supplies/} 	% Path to Supplies folders
+\providecommand{\BuildTrigger}{buildnew} 	% Trigger to build or not standalone parts.
 
 \makeatletter
-	\def\input@path{{\PathSO}{\PathSO/UGE/}{\PathSO/Inria/}} 		% to be able to find package in resource folders.
-	\ifx\c@levelstanda\undefined 	% to create a newcounter if it doesnt exists.
+	\def\input@path{{\PathSO}{\PathSO/gotham}{\PathSO/UGE}{\PathSO/Inria}{\PathSO/CEA}} % to be able to find package in resource folders.
+	\ifx\c@levelstanda\undefined 	% to create a newcounter if it doesn't exists.
 		\newcounter{levelstanda}
 	\else
 		{}% it already exist
@@ -28,40 +28,10 @@
 	% The option "handout, " allows to the print the hidden slides made by <handout:1|beamer:0>[noframenumbering].
 	%
 	% the option "notes=only, " to print only the notes !
-	\usepackage[l2tabu, orthodox]{nag}	% Help to prevent buggus with warnings
+	\usepackage[orthodox]{nag}	% Help to prevent buggus with warnings
 
-%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-%        DEFAULT PACKAGES
-%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-	\usepackage[utf8]{inputenc}
+   \usepackage[utf8]{inputenc}
 	\usepackage[T1]{fontenc}
-
-
-%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-%        BEAMER OPTIONS
-%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-	% Gotham Theme
-	\usetheme{gotham}
-
-	% UGE/Inria/CEA Style
-	\usetheme{gothamUGE}
-	% \usetheme{gothamInria}
-	% \usetheme{gothamCEA}
-
-		% Apply all Metropolis setting.
-		\gothamset{
-			% titleformat=%regular, smallcaps, allsmallcaps, allcaps
-			sectionpage= progressbar, %none, simple, progressbar
-			numbering= fraction, %none, counter, fraction
-			progressbar= foot, %none, head, frametitle, foot
-			block= fill, %transparent,% fill,%
-			background= light, %dark, %light, %
-		}
-
-	% Change color of the progress bar
-	%%%\usetheme{MyProgressBar}
-	%	\colorlet{ColorProgBar}{orange} % from MetropolisBeamerExtra
-
 
 %-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 %        LOADING MY PACKAGES
@@ -71,115 +41,115 @@
 	\def\OSvar{linux} % windows, mac, linux
 
 	\input{\PathR/UsersPackagesDefs.tex}
-		%\input{\PathR/UsersSymbolsAcronyms.tex}
 	\input{\PathR/UsersMathsCommands.tex}
 
-
-	%	\usepackage{booktabs}
-	\usepackage[scale=2]{ccicons}
-	%	\usepackage{pgfplots}
-	\usepgfplotslibrary{dateplot}
-	\newcommand{\themename}{\textbf{\textsc{Univ-Eiffel Theme}} }
-
-	% To see notes !
-	%\setbeameroption{show notes} % un-comment to see the notes in
-	%\usepackage{pgfpages}
-	% See notes
-	%\setbeameroption{show notes on second screen=right} % Requires \usepackage{pgfpages} and pympress or pdfpc
-
+	\usetheme{gotham}
+		% Apply Gotham settings.
+		\gothamset{
+			format title= titlecase,
+			format subtitle= titlecase,
+			format frametitle= titlecase,
+			sectiontocframe default= on, %off
+			subsectiontocframe default= on, %off
+			numbering= totalframenumber, %none, totalframenumber
+			progressbar position= foot, %none, head, frametitle, foot
+			background= light, %dark, %light, %
+		}
+		
+	% Your institution style
+	\usetheme{gothamUGE}
+		\UgeSet{official}% apply specific gotham set for unofficial uge
+	% \usetheme{gothamInria}
+	% \usetheme{gothamCEA}
+		
 
 %-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 %	PRESENTATION INFORMATION
 %-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-
 	\title[]{Univ-Eiffel Template}
-	\subtitle{A modern beamer theme based}
+	\subtitle{A modern beamer theme based on Gotham}
 	\date[]{\today}
-	\author[romain.noel@univ-eiffel.fr]{Romain NOËL\inst{1}\inst{2}\inst{3}
-		\and Thibaud TOULLIER\inst{1}\inst{2}\inst{3} \and John DOE\inst{4}}
-	\institute[Univ. Eiffel]{\inst{1} Université Gustave {Eiffel}, INRIA, COSYS/SII, I4S, F-44344 Bouguenais, France %
-		\and \inst{2} Université Gustave Eiffel \and \inst{3} INRIA Rennes \and \inst{4} An Awesome Company}
-	\titlegraphic{\hspace*{0.52\textwidth}\vspace{1.6mm}%
-		\includegraphics[height=0.08\paperheight]{\PathS/inr_logo_rouge.pdf}}
+	\author[romain.noel@univ-eiffel.fr]{
+		Romain NOËL\inst{1}\inst{2}
+		\and John DOE\inst{3}
+	}
+	\institute[Univ. Eiffel]{
+		\inst{1} Université Gustave Eiffel 
+		\and \inst{2} Inria
+		\and \inst{3} An Awesome Company
+	}
+	\titlegraphic{
+		\hspace*{0.52\textwidth}\vspace{1.6mm}%
+		\includegraphics[height=0.08\paperheight]{\PathSO/Inria/logos/inr_logo_rouge.pdf}%
+	}
 
-	\logo{\includegraphics[width=1.5cm]{\PathS/inr_logo_rouge.pdf}}
+	\logo{\includegraphics[width=1.5cm]{\PathSO/Inria/logos/inr_logo_rouge.pdf}}
 	\addtobeamertemplate{logo}{\vspace{0.76\paperheight}}{} % Top Right
 	%\addtobeamertemplate{logo}{}{\hspace{0.885\paperwidth}} % Bottom Left
 	%\addtobeamertemplate{logo}{\vspace{0.72\paperheight}}{\hspace{0.885\paperwidth}} % Top Left
 
-	\hypersetup{
-		pdfpagemode = FullScreen, % Display the presentation in fullscreen at launch.
-		pdfauthor 	= {R. NOEL}, %
-		pdfproducer = {LaTeX-Beamer} %
-	}
+
+	\usepackage{ccicons}
+	\newcommand{\themename}{\textbf{\textsc{Gotham}}}
 
 
-\begin{document} %
+\begin{document}
 \stepcounter{levelstanda}
 
 %%%%%%%%%%%%%%%%%%%%%
 %%%  FRONTMATTER  %%%
 %%%%%%%%%%%%%%%%%%%%%
 	% FRAME
-	{%\usebackgroundtemplate{\includegraphics[scale=0.80]{\PathS/eth_logo_kurz_pos.pdf}}
+	%\maketitle
 	\begin{frame}[plain,noframenumbering]
 		\titlepage
 		\note{Everything you want}
 	\end{frame}
-	}
 
 	% FRAME
-	\begin{frame}{Outline}
-   \begin{columns}[T,onlytextwidth]
-			\column{0.7\textwidth}
-             \tableofcontents[hideallsubsections]
-   \column{0.275\textwidth}
-       \includegraphics[width=0.99\textwidth]{\PathSO/UGE/logos/EiffelTower.pdf}
-   \end{columns}
+	\begin{frame}[toc]{Outline}
+		\begin{columns}[T,onlytextwidth]
+		\column{0.65\textwidth}
+			\tableofcontents[hideallsubsections]
+		\column{0.275\textwidth}
+			\includegraphics[width=0.99\textwidth]{\PathSO/UGE/logos/EiffelTower.pdf}
+		\end{columns}
 	\end{frame}
+
 
 %%%%%%%%%%%%%%%%%%%%
 %%%  MAINMATTER  %%%
 %%%%%%%%%%%%%%%%%%%%
-\input{\PathP/Section-Beamer.tex}
+\input{\PathP/section-Beamer.tex}
 
-\input{\PathP/Section-Metropolis.tex}
+\input{\PathP/section-Gotham.tex}
 
-\input{\PathP/Section-UGE.tex}
+\input{\PathP/section-Conclusion.tex}
 
-\section{Conclusion}
-
-	\begin{frame}{Summary}
-
-		Get the source of Metropolis theme and the demo presentation from
-
-		\begin{center}\url{github.com/matze/mtheme}\end{center}
-
-		The theme \emph{itself} is licensed under a
-		\href{http://creativecommons.org/licenses/by-sa/4.0/}{Creative Commons
-			Attribution-ShareAlike 4.0 International License}.
-
-		\begin{center}\ccbysa\end{center}
-	\end{frame}
-
-	\begin{frame}[standout, plain]
-		Questions?
-	\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%
 %%%  BACKMATTER  %%%
 %%%%%%%%%%%%%%%%%%%%
-	\begin{frame}[noframenumbering, allowframebreaks]{References}
 
+	% FRAME
+	\begin{frame}[noframenumbering, allowframebreaks]{References}
 		\printbibliography[heading=none]
-	%	  \bibliography{demo}
-	%	  \bibliographystyle{abbrv}
+		% \bibliography{demo}
+		% \bibliographystyle{abbrv}
 	\end{frame}
+
 
 %%  APPENDIX  %%
 %%%%%%%%%%%%%%%%
 \appendix
-\miniframesoff % to deactive the navigation bar
+% \miniframesoff % to deactive the navigation bar requires ()
+
+	% FRAME
+	\begin{frame}[fragile]{Backup slides}
+		Sometimes, it is useful to add slides at the end of your presentation to refer to during audience questions.
+
+		The best way to do this is to include \verb|\usepackage{appendixnumberbeamer}| in your preamble and call \verb|\appendix| before your backup slides.
+	\end{frame}
 
 \input{\PathP/Section-BeamerExtra.tex}
 
@@ -188,3 +158,4 @@
 
 \addtocounter{levelstanda}{-1}
 \end{document}
+% EoF

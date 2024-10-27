@@ -1,18 +1,18 @@
 % !TEX TS-program = pdflatex
 % !TeX encoding = UTF-8
 % !TeX spellcheck = en_GB
-%==============================================================================
-%== template for LaTeX presentation ===========================================
-%==============================================================================
+%=======================================================================
+%== Template for LaTeX presentation ====================================
+%=======================================================================
 \providecommand{\langue}{english}		% english, french
-\providecommand{\PathP}{./Parts/} 		% Path to Parts folders
-\providecommand{\PathR}{./Resources/} 	% Path to Resources folders
-\providecommand{\PathSO}{./Sources/} 	% Path to Sources folders
-\providecommand{\PathS}{./Supplies/} 	% Path to Supplies folders
+\providecommand{\PathP}{./parts/} 		% Path to Parts folders
+\providecommand{\PathR}{./resources/} 	% Path to Resources folders
+\providecommand{\PathSO}{./sources/} 	% Path to Sources folders
+\providecommand{\PathS}{./supplies/} 	% Path to Supplies folders
 \providecommand{\BuildTrigger}{buildnew} % Trigger to build or not standalone parts.
 
 \makeatletter
-	\def\input@path{{\PathSO}} 		% to be able to find package in resource folders.
+	\def\input@path{{\PathSO}{\PathSO/gotham}{\PathSO/UGE/}{\PathSO/Inria/}} 		% to be able to find package in resource folders.
 	\ifx\c@levelstanda\undefined 	% to create a newcounter if it doesn't exists.
 		\newcounter{levelstanda}
 	\else
@@ -40,32 +40,24 @@
 %-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 %        BEAMER OPTIONS
 %-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-	% Include some custum modifications but quite universal,
-	% like set the size appendices or hidden slides...
-	\usetheme{BeamerExtra}
+	% Gotham Theme
+	\usetheme{gotham}
+	\usetheme{gothamUGE}
+		\UgeSet{unofficial}% {official,unofficial}
+	% \usetheme{gothamInria}
+	% 	\InriaSet{old1}% {RF,old1,old2,old3}
+	% \usetheme{gothamCEA}
 
-	% Metropolis Theme
-	\usetheme{metropolis}
-
-	% Change progress bar size and redefine some colors.
-	\usetheme{MetropolisBeamerExtra}
-
-	% UGE Style
-	\usetheme{UGE}
-
-		% Apply all Metropolis setting.
-		\metroset{
-			% titleformat=%regular, smallcaps, allsmallcaps, allcaps
-			sectionpage= progressbar, %none, simple, progressbar
-			numbering=fraction, %none, counter, fraction
-			progressbar= foot, %none, head, frametitle, foot
+		% Apply all Gotham setting.
+		\gothamset{
+			% format title=titlecase, format frametitle=titlecase,
+			% sectionframe default=on,
+			% sectiontocframe default=on,
+			numbering= totalframenumber, %none, framenumber,
+			progressbar position= foot, %none, head, frametitle, foot
 			block= fill, %transparent,% fill,%
 			background= light, %dark, %light, %
 		}
-
-	% Change color of the progress bar
-	%%%\usetheme{MyProgressBar}
-	%	\colorlet{ColorProgBar}{orange} % from MetropolisBeamerExtra
 
 
 %-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -92,14 +84,21 @@
 	\title[]{Univ-Eiffel Template}
 	\subtitle{A modern beamer theme based}
 	\date[]{\today}
-	\author[romain.noel@univ-eiffel.fr]{Romain NOËL\inst{1}\inst{2}\inst{3}
-		\and Thibaud TOULLIER\inst{1}\inst{2}\inst{3} \and John DOE\inst{4}}
-	\institute[Univ. Eiffel]{\inst{1} Université Gustave {Eiffel}, INRIA, COSYS/SII, I4S, F-44344 Bouguenais, France %
-		\and \inst{2} Université Gustave Eiffel \and \inst{3} INRIA Rennes \and \inst{4} An Awesome Company}
-	\titlegraphic{\hspace*{0.52\textwidth}\vspace{1.6mm}%
-		\includegraphics[height=0.08\paperheight]{\PathS/inr_logo_rouge.pdf}}
+	\author[romain.noel@univ-eiffel.fr]{
+		Romain NOËL\inst{1}\inst{2}
+		\and John DOE\inst{3}
+	}
+	\institute[Univ. Eiffel]{
+		\inst{1} Université Gustave Eiffel
+		\and \inst{2} Inria Rennes
+		\and \inst{3} An Awesome Company
+	}
+	\titlegraphic{%
+		\hspace*{0.52\textwidth}\vspace{1.6mm}%
+		\includegraphics[height=0.08\paperheight]{\PathSO/Inria/logos/inr_logo_rouge.pdf}%
+	}
 
-	\logo{\includegraphics[width=1.5cm]{\PathS/inr_logo_rouge.pdf}}
+	\logo{\includegraphics[width=1.5cm]{\PathSO/Inria/logos/inr_logo_rouge.pdf}}
 	\addtobeamertemplate{logo}{\vspace{0.76\paperheight}}{} % Top Right
 	%\addtobeamertemplate{logo}{}{\hspace{0.885\paperwidth}} % Bottom Left
 	%\addtobeamertemplate{logo}{\vspace{0.72\paperheight}}{\hspace{0.885\paperwidth}} % Top Left
@@ -111,6 +110,9 @@
 	}
 
 
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	DOCUMENT
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 \begin{document} %
 \stepcounter{levelstanda}
 
@@ -118,21 +120,14 @@
 %%%  FRONTMATTER  %%%
 %%%%%%%%%%%%%%%%%%%%%
 	% FRAME
-	{%\usebackgroundtemplate{\includegraphics[scale=0.80]{\PathS/eth_logo_kurz_pos.pdf}}
 	\begin{frame}[plain,noframenumbering]
 		\titlepage
 		\note{Everything you want}
 	\end{frame}
-	}
 
 	% FRAME
-	\begin{frame}{Outline}
-   \begin{columns}[T,onlytextwidth]
-			\column{0.7\textwidth}
-             \tableofcontents[hideallsubsections]
-   \column{0.275\textwidth}
-       \includegraphics[width=0.99\textwidth]{\PathSO/logos/EiffelTower.pdf}
-   \end{columns}
+	\begin{frame}[toc]{Outline}
+		\tableofcontents[hideallsubsections]
 	\end{frame}
 
 
@@ -140,37 +135,44 @@
 %%%  MAINMATTER  %%%
 %%%%%%%%%%%%%%%%%%%%
 \section{name your section}
-\input{\PathP/new-section.tex}
+\input{\PathP/new_part.tex}
 
 	% FRAME
 	\begin{frame}[standout, plain]
+		\centering
 		Thank you for your attention !
 		
 		---
 
-		Do you have any question?
+		Do you have any question ?
 	\end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%
 %%%  BACKMATTER  %%%
 %%%%%%%%%%%%%%%%%%%%
-	\begin{frame}[noframenumbering, allowframebreaks]{References}
-		\printbibliography[heading=none]
-		% \bibliography{demo}
-		% \bibliographystyle{abbrv}
-	\end{frame}
+	% \begin{frame}[noframenumbering, allowframebreaks]{References}
+	% 	\printbibliography[heading=none]
+	% 	% \bibliography{demo}
+	% 	% \bibliographystyle{abbrv}
+	% \end{frame}
 
 
 %%  APPENDIX  %%
 %%%%%%%%%%%%%%%%
 \appendix
-\miniframesoff % to deactive the navigation bar
+% \miniframesoff % to deactive the navigation bar
 
 	% FRAME
 	\begin{frame}[standout, plain]
-		Back up
+		\centering
+		Back up !
 	\end{frame}
+
+	% % FRAME
+	% \begin{frame}{title}
+	% 	toto
+	% \end{frame}
 
 \addtocounter{levelstanda}{-1}
 \end{document}

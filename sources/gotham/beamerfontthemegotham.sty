@@ -1,0 +1,580 @@
+%%
+%% This is file `beamerfontthemegotham.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% gotham.dtx  (with options: `font')
+%% 
+%% Copyright (C) 2023-20** by Romain NOËL <romainoel@free.fr>
+%% 
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%% http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%% 
+%% This work has the LPPL maintenance status `maintained'.
+%% 
+%% The Current Maintainer of this work is Romain NOËL.
+%% Contributors: Romain NOËL (2023-20**)
+%% 
+\ProvidesExplPackage{beamerfontthemegotham}{2024-10-15}{1.1.1.a}{gotham font theme}
+\RequirePackage{expl3}
+\RequirePackage{xparse}
+\RequirePackage{etoolbox}
+\RequirePackage{ifxetex}
+\RequirePackage{ifluatex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%   FONT      %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\msg_new:nnn { gotham } { font-not-found }
+{
+   Could~not~find~font~'#1'.\c_space_tl
+}
+
+\msg_new:nnn { gotham } { fonts-not-available }
+{
+   No~suitable~fonts~found.~Using~fallback~fonts.
+}
+
+\msg_new:nnn { gotham } { compiler-xe-or-lua }
+{
+   You~need~to~compile~with~XeLaTeX~or~LuaLaTeX~to~use~the~Fira~fonts.
+}
+
+\int_new:N \g_gotham_fontsnotfound_int
+
+\cs_new_protected:Nn \checkfont:n
+{
+\fontspec_font_if_exist:nF { #1 }
+{
+\fontspec_font_if_exist:nF { #1~Regular }
+{
+\int_incr:N \g_gotham_fontsnotfound_int
+\msg_warning:nnn { gotham } { font-not-found } { #1 }
+}
+}
+}
+
+\providecommand{\iffontsavailable}[3]
+{
+\int_zero:N \g_gotham_fontsnotfound_int
+\clist_map_function:nN { #1 } \checkfont:n
+\int_compare:nTF { \g_gotham_fontsnotfound_int = 0 }
+{% True
+#2
+}{% False
+#3
+}
+}
+
+\ifboolexpr{bool~{xetex}~or~bool~{luatex}}{
+\@ifpackageloaded{fontspec}{
+\PassOptionsToPackage{no-math}{fontspec}
+}{
+\RequirePackage[no-math]{fontspec}
+}
+\iffontsavailable{FiraSans-Light.otf,
+FiraSans-LightItalic.otf,
+FiraSans-Regular.otf,
+FiraSans-Italic.otf}
+{
+\setsansfont[ItalicFont={FiraSans-LightItalic.otf},
+BoldFont={FiraSans-Regular.otf},
+BoldItalicFont={FiraSans-Italic.otf}]
+{FiraSans-Light.otf}
+}{
+\iffontsavailable{FiraSans~Light~OT,
+FiraSans~LightItalic~OT,
+FiraSans~Regular~OT,
+FiraSans~Italic~OT}
+{
+\setsansfont[ItalicFont={Fira~Sans~LightItalic~OT},
+BoldFont={Fira~Sans~Regular~OT},
+BoldItalicFont={Fira~Sans~Italic~OT}]
+{Fira~Sans~Light~OT}
+}{
+\msg_warning:nn { gotham } { fonts-not-available }%
+}
+}
+\iffontsavailable{FiraMono-Medium.otf, FiraMono-Bold.otf}{
+\setmonofont[BoldFont={FiraMono-Medium.otf}]{FiraMono-Bold.otf}
+}{
+\iffontsavailable{Fira~Mono~Medium~OT, Fira~Mono~Bold~OT}{
+\setmonofont[BoldFont={Fira~Mono~Medium~OT}]{Fira~Mono~Bold~OT}
+}{
+\msg_warning:nn { gotham } { fonts-not-available }
+}
+}
+\AtBeginEnvironment{tabular}{
+\addfontfeature{Numbers={Monospaced}}
+}
+}{
+\msg_warning:nn { gotham } { compiler-xe-or-lua }
+\DeclareFontShape{OT1}{cmss}{bx}{sc}{<-> cmbcsc10}{}
+\DeclareFontShape{OT1}{cmss}{bx}{it}{<->sub*cmss/m/sl}{}
+}
+
+\setbeamerfont{title}{size=\Large, series=\bfseries}
+\setbeamerfont*{subtitle}{size=\large}
+\setbeamerfont{author}{size=\small}
+\setbeamerfont{date}{size=\small}
+
+\setbeamerfont{section~title}{size=\Large, series=\bfseries}
+\setbeamerfont{subsection~title}{size=\large, series=\bfseries}
+\setbeamerfont{subsubsection~title}{size=\normalsize, series=\bfseries}
+
+\setbeamerfont{frametitle}{size=\large, series=\bfseries}
+\setbeamerfont{frametitleToc}{size=\LARGE, series=\bfseries}
+\setbeamerfont{frametitleSection}{size*={60}{1}, series=\bfseries}
+
+\setbeamerfont{block~title}{size=\normalsize, series=\bfseries}
+\setbeamerfont{block~title~alerted}{size=\normalsize, series=\bfseries}
+\setbeamerfont{caption}{size=\small}
+\setbeamerfont{caption~name}{series=\bfseries}
+\setbeamerfont{description~item}{series=\bfseries}
+\setbeamerfont{page~number~in~head/foot}{size=\scriptsize}
+
+\setbeamerfont{bibliography~entry~author}{size=\normalsize, series=\normalfont}
+\setbeamerfont{bibliography~entry~title}{size=\normalsize, series=\bfseries}
+\setbeamerfont{bibliography~entry~location}{size=\normalsize, series=\normalfont}
+\setbeamerfont{bibliography~entry~note}{size=\small, series=\normalfont}
+\setbeamerfont{standout}{size=\Large, series=\bfseries}
+
+\def\gotham@titleformat#1{#1}
+\def\gotham@subtitleformat#1{#1}
+\def\gotham@parttitleformat#1{#1}
+\def\gotham@sectiontitleformat#1{#1}
+\def\gotham@subsectiontitleformat#1{#1}
+\def\gotham@frametitleformat#1{#1}
+\def\gotham@framesubtitleformat#1{#1}
+
+\ExplSyntaxOff
+\patchcmd{\beamer@title}
+{\def\inserttitle{#2}}
+{\def\inserttitle{\gotham@titleformat{#2}}}
+{}
+{\PackageError{beamerfontthemegotham}{Patching~title~failed}\@ehc}
+\patchcmd{\beamer@subtitle}
+{\def\insertsubtitle{#2}}
+{\def\insertsubtitle{{\gotham@subtitleformat{#2}}}}
+{}
+{\PackageError{beamerfontthemegotham}{Patching~subtitle~failed}\@ehc}
+\patchcmd{\sectionentry} % beamerbasenavigation.sty l.335
+{\def\insertsectionhead{#2}}
+{\def\insertsectionhead{\gotham@sectiontitleformat{#2}}}
+{}
+{\PackageError{beamerfontthemegotham}{Patching~section~title~failed}\@ehc}%
+%% NOT WORKING YET!
+%% \patchcmd{\subsectionentry} % beamerbasenavigation.sty l.384
+%%  {\def\insertsubsectionhead{##5}}
+%%  {\def\insertsubsectionhead{\gotham@subsectiontitleformat{##5}}}
+%%  {}
+%%  {\PackageError{beamerfontthemegotham}{Patching~subsection~title~failed}\@ehc}%
+\@tempswafalse
+\patchcmd{\beamer@section} % beamerbasesection.sty l. 209
+{\def\insertsectionhead{\hyperlink{Navigation\the\c@page}{#1}}}
+{\def\insertsectionhead{\hyperlink{Navigation\the\c@page}{\gotham@sectiontitleformat{#1}}}}
+{\@tempswatrue}
+{}
+\patchcmd{\beamer@section} % beamerbasesection.sty l. 209
+{\edef\insertsectionhead{\noexpand\hyperlink{Navigation\the\c@page}{\unexpanded{#1}}}}
+{\edef\insertsectionhead{\noexpand\hyperlink{Navigation\the\c@page}{\noexpand\gotham@sectiontitleformat{\unexpanded{#1}}}}}
+{\@tempswatrue}
+{}
+\if@tempswa\else
+{\PackageError{beamerfontthemegotham}{Patching~section~title~failed}\@ehc}
+\fi
+\@tempswafalse
+%% NOT WORKING YET !
+%% \patchcmd{\beamer@subsection} % beamerbasesection.sty l. 209
+%%  {\def\insertsubsectionhead{\hyperlink{Navigation\the\c@page}{#1}}}
+%%  {\def\insertsubsectionhead{\hyperlink{Navigation\the\c@page}\gotham@subsectiontitleformat{#1}}}
+%%  % \__gotham_subsection_title_format:n{#2}
+%%  {\@tempswatrue}
+%%  {}
+%% \patchcmd{\beamer@subsection} % beamerbasesection.sty l. 209
+%%  {\protected@edef\insertsubsectionhead{\noexpand\hyperlink{Navigation\the\c@page}{#1}}}
+%%  {\protected@edef\insertsubsectionhead{\noexpand\hyperlink{Navigation\the\c@page}{\noexpand\gotham@subsectiontitleformat{#1}}}}
+%%  % \exp_not:N \__gotham_subsection_title_format:n {#1}
+%%  {\@tempswatrue}
+%%  {}
+%% \if@tempswa\else
+%%  {\PackageError{beamerfontthemegotham}{Patching~subsection~title~failed}\@ehc}
+%% \fi%
+%% \@tempswafalse
+\providecommand{\beamer@insertframetitlecontinuation}{
+\usebeamertemplate*{frametitle~continuation}
+}
+\patchcmd{\beamer@@frametitle} % beamerbaselocalstructure.sty l. 32
+{\gdef\insertframetitle{{%
+#2%
+\ifnum\beamer@autobreakcount>0
+\relax{}\space%
+\beamer@insertframetitlecontinuation%
+\fi%
+}}%
+}
+{\gdef\insertframetitle{{%
+\gotham@frametitleformat{#2}%
+\ifnum\beamer@autobreakcount>0
+\relax{}\space%
+\beamer@insertframetitlecontinuation%
+\fi%
+}}%
+}
+{}
+{\PackageWarning{beamerfontthemegotham}{Patching~frametitle~failed}\@ehc}
+%% NOT WORKING YET !
+%% \patchcmd{\framesubtitle} % beamerbaselocalstructure.sty l.55
+%%  {\only#2{\ifblank{#1}{}{\gdef\insertframesubtitle{{#1}}\beamer@aftersubtitle}}}
+%%  {\only{#2}{\ifblank{#1}{}{\gdef\insertframesubtitle{{#1}}\beamer@aftersubtitle}}}
+%%  {}
+%%  {\PackageWarning{beamerfontthemegotham}{Patching~framesubtitle~failed}\@ehc}
+\ExplSyntaxOn
+
+%%%%
+\keys_define:nn { gotham / font }
+{
+format~title .choice:,
+format~title .usage:n = { general },
+format~title .default:n = { regular },
+format~title / regular .code:n =
+{
+\let\gotham@titleformat\@empty
+},
+format~title / lower .code:n =
+{
+\let\gotham@titleformat \text_lowercase:n %\lowercase
+\PackageWarning{ gotham } { Be~aware~that~format~title=lower~can~lead~to~problems. }
+},
+format~title / upper .code:n =
+{
+\let\gotham@titleformat \text_uppercase:n %\uppercase
+\PackageWarning{ gotham } { Be~aware~that~format~title=upper~can~lead~to~problems. }
+},
+format~title / titlecase .code:n =
+{
+\let\gotham@titleformat \text_titlecase_all:n %\MakeTitlecase
+\PackageWarning{ gotham } { Be~aware~that~format~title=titlecase~can~lead~to~problems. }
+},
+format~title / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'\l_keys_value_tl'~is~unknown~for~the~(known)~option~'\l_keys_key_tl',~so~being~ignored. }{helping~message: format~title / unknown } },
+}
+\keys_define:nn { gotham / font }
+{
+shape~title .choice:,
+shape~title .usage:n = { general },
+shape~title .default:n = { regular },
+shape~title / regular .code:n =
+{
+\setbeamerfont{title}{shape=\normalfont}
+},
+shape~title / smallcaps .code:n =
+{
+\setbeamerfont{title}{shape=\scshape}
+},
+shape~title / italic .code:n =
+{
+\setbeamerfont{title}{shape=\itshape}
+},
+shape~title / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'\l_keys_value_tl'~is~unknown~for~the~(known)~option~'\l_keys_key_tl',~so~being~ignored. }{helping~message: shape~title / unknown} },
+}
+
+\keys_define:nn { gotham / font }
+{
+format~subtitle .choice:,
+format~subtitle .usage:n = { general },
+format~subtitle .default:n = { regular },
+format~subtitle / regular .code:n =
+{
+\let\gotham@subtitleformat\@empty
+},
+format~subtitle / lower .code:n =
+{
+\let\gotham@subtitleformat \text_lowercase:n %\lowercase
+\PackageWarning{ gotham } { Be~aware~that~format~subtitle=lower~can~lead~to~problems. }
+},
+format~subtitle / upper .code:n =
+{
+\let\gotham@subtitleformat \text_uppercase:n %\uppercase
+\cs_set_eq:NN \__gotham_subtitle_format:n \text_uppercase:n
+\PackageWarning{ gotham } { Be~aware~that~format~subtitle=upper~can~lead~to~problems. }
+},
+format~subtitle / titlecase .code:n =
+{
+\let\gotham@subtitleformat \text_titlecase_all:n %\MakeTitlecase
+\PackageWarning{ gotham } { Be~aware~that~format~subtitle=titlecase~can~lead~to~problems. }
+},
+format~subtitle / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'\l_keys_value_tl'~is~unknown~for~the~(known)~option~'\l_keys_key_tl',~so~being~ignored. }{helping~message: format~subtitle / unknown} },
+}
+\keys_define:nn { gotham / font }
+{
+shape~subtitle .choice:,
+shape~subtitle .usage:n = { general },
+shape~subtitle .default:n = { regular },
+shape~subtitle / regular .code:n =
+{
+\setbeamerfont{subtitle}{shape=\normalfont}
+},
+shape~subtitle / smallcaps .code:n =
+{
+\setbeamerfont{subtitle}{shape=\scshape}
+},
+shape~subtitle / italic .code:n =
+{
+\setbeamerfont{subtitle}{shape=\itshape}
+},
+shape~subtitle / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'\l_keys_value_tl'~is~unknown~for~the~(known)~option~'\l_keys_key_tl',~so~being~ignored. }{helping~message: shape~subtitle / unknown} },
+}
+
+\keys_define:nn { gotham / font }
+{
+format~frametitle .choice:,
+format~frametitle .usage:n = { general },
+format~frametitle .default:n = { regular },
+format~frametitle / regular .code:n =
+{
+\let\gotham@frametitleformat\@empty
+},
+format~frametitle / lower .code:n =
+{
+\let\gotham@frametitleformat \text_lowercase:n %\lowercase
+\PackageWarning{ gotham } { Be~aware~that~format~frametitle=lower~can~lead~to~problems. }
+},
+format~frametitle / upper .code:n =
+{
+\let\gotham@frametitleformat \text_uppercase:n %\uppercase
+\PackageWarning{ gotham } { Be~aware~that~format~frametitle=upper~can~lead~to~problems. }
+},
+format~frametitle / titlecase .code:n =
+{
+\let\gotham@frametitleformat \text_titlecase_all:n %\Maketitlecase
+\PackageWarning{ gotham } { Be~aware~that~format~frametitle=titlecase~can~lead~to~problems. }
+},
+format~frametitle / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'\l_keys_value_tl'~is~unknown~for~the~(known)~option~'\l_keys_key_tl',~so~being~ignored. }{helping~message: format~frametitle / unknown} },
+}
+\keys_define:nn { gotham / font }
+{
+shape~frametitle .choice:,
+shape~frametitle .usage:n = { general },
+shape~frametitle .default:n = { regular },
+shape~frametitle / regular .code:n =
+{
+\setbeamerfont{frametitle}{shape=\normalfont}
+},
+shape~frametitle / smallcaps .code:n =
+{
+\setbeamerfont{frametitle}{shape=\scshape}
+},
+shape~frametitle / italic .code:n =
+{
+\setbeamerfont{frametitle}{shape=\itshape}
+},
+shape~frametitle / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'\l_keys_value_tl'~is~unknown~for~the~(known)~option~'\l_keys_key_tl',~so~being~ignored. }{helping~message: shape~frametitle / unknown} },
+}
+
+\keys_define:nn { gotham / font }
+{
+format~framesubtitle .choice:,
+format~framesubtitle .usage:n = { general },
+format~framesubtitle .default:n = { regular },
+format~framesubtitle / regular .code:n =
+{
+\let\gotham@framesubtitleformat\@empty
+},
+format~framesubtitle / lower .code:n =
+{
+\let\gotham@framesubtitleformat \text_lowercase:n %\lowercase
+\PackageWarning{ gotham } { Be~aware~that~format~framesubtitle=lower~can~lead~to~problems. }
+},
+format~framesubtitle / upper .code:n =
+{
+\let\gotham@framesubtitleformat \text_uppercase:n %\uppercase
+\PackageWarning{ gotham } { Be~aware~that~format~framesubtitle=upper~can~lead~to~problems. }
+},
+format~framesubtitle / titlecase .code:n =
+{
+\let\gotham@framesubtitleformat \text_titlecase_all:n %\Maketitlecase
+\PackageWarning{ gotham } { Be~aware~that~format~framesubtitle=titlecase~can~lead~to~problems. }
+},
+format~framesubtitle / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'\l_keys_value_tl'~is~unknown~for~the~(known)~option~'\l_keys_key_tl',~so~being~ignored. }{helping~message: format~framesubtitle / unknown} },
+}
+\keys_define:nn { gotham / font }
+{
+shape~framesubtitle .choice:,
+shape~framesubtitle .usage:n = { general },
+shape~framesubtitle .default:n = { regular },
+shape~framesubtitle / regular .code:n =
+{
+\setbeamerfont{framesubtitle}{shape=\normalfont}
+},
+shape~framesubtitle / smallcaps .code:n =
+{
+\setbeamerfont{framesubtitle}{shape=\scshape}
+},
+shape~framesubtitle / italic .code:n =
+{
+\setbeamerfont{framesubtitle}{shape=\itshape}
+},
+shape~framesubtitle / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'\l_keys_value_tl'~is~unknown~for~the~(known)~option~'\l_keys_key_tl',~so~being~ignored. }{helping~message: shape~framesubtitle / unknown} },
+}
+
+\keys_define:nn { gotham / font }
+{
+format~part .choice:,
+format~part .usage:n = { general },
+format~part .default:n = { regular },
+format~part / regular .code:n =
+{
+\let\gotham@parttitleformat\@empty
+},
+format~part / lower .code:n =
+{
+\let\gotham@parttitleformat \text_lowercase:n %\lowercase
+\PackageWarning{ gotham } { Be~aware~that~format~part=lower~can~lead~to~problems. }
+},
+format~part / upper .code:n =
+{
+\let\gotham@parttitleformat \text_uppercase:n %\uppercase
+\PackageWarning{ gotham } { Be~aware~that~format~part=upper~can~lead~to~problems. }
+},
+format~part / titlecase .code:n =
+{
+\let\gotham@parttitleformat\text_titlecase_all:n %\Maketitlecase
+\PackageWarning{ gotham } { Be~aware~that~format~part=titlecase~can~lead~to~problems. }
+},
+format~part / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'\l_keys_value_tl'~is~unknown~for~the~(known)~option~'\l_keys_key_tl',~so~being~ignored. }{helping~message: format~part / unknown} },
+}
+\keys_define:nn { gotham / font }
+{
+shape~part .choice:,
+shape~part .usage:n = { general },
+shape~part .default:n = { regular },
+shape~part / regular .code:n =
+{
+\setbeamerfont{part~title}{shape=\normalfont}
+},
+shape~part / smallcaps .code:n =
+{
+\setbeamerfont{part~title}{shape=\scshape}
+},
+shape~part / italic .code:n =
+{
+\setbeamerfont{part~title}{shape=\itshape}
+},
+shape~part / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'\l_keys_value_tl'~is~unknown~for~the~(known)~option~'\l_keys_key_tl',~so~being~ignored. }{helping~message: shape~part / unknown} },
+}
+
+\keys_define:nn { gotham / font }
+{
+format~section .choice:,
+format~section .usage:n = { general },
+format~section .default:n = { regular },
+format~section / regular .code:n =
+{
+\let\gotham@sectiontitleformat\@empty
+},
+format~section / lower .code:n =
+{
+\let\gotham@sectiontitleformat \text_lowercase:n %\lowercase
+\PackageWarning{ gotham } { Be~aware~that~format~section=lower~can~lead~to~problems. }
+},
+format~section / upper .code:n =
+{
+\let\gotham@sectiontitleformat \text_uppercase:n %\uppercase
+\PackageWarning{ gotham } { Be~aware~that~format~section=upper~can~lead~to~problems. }
+},
+format~section / titlecase .code:n =
+{
+\let\gotham@sectiontitleformat \text_titlecase_all:n %\Maketitlecase
+\PackageWarning{ gotham } { Be~aware~that~format~section=titlecase~can~lead~to~problems. }
+},
+format~section / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'\l_keys_value_tl'~is~unknown~for~the~(known)~option~'\l_keys_key_tl',~so~being~ignored. }{helping~message: format~section / unknown} },
+}
+\keys_define:nn { gotham / font }
+{
+shape~section .choice:,
+shape~section .usage:n = { general },
+shape~section .default:n = { regular },
+shape~section / regular .code:n =
+{
+\setbeamerfont{section~title}{shape=\normalfont}
+},
+shape~section / smallcaps .code:n =
+{
+\setbeamerfont{section~title}{shape=\scshape}
+},
+shape~section / italic .code:n =
+{
+\setbeamerfont{section~title}{shape=\itshape}
+},
+shape~section / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'\l_keys_value_tl'~is~unknown~for~the~(known)~option~'\l_keys_key_tl',~so~being~ignored. }{helping~message: shape~section / unknown} },
+}
+
+\keys_define:nn { gotham / font }
+{
+format~subsection .choice:,
+format~subsection .usage:n = { general },
+format~subsection .default:n = { regular },
+format~subsection / regular .code:n =
+{
+\let\gotham@subsectiontitleformat\@empty
+},
+format~subsection / lower .code:n =
+{
+\let\gotham@subsectiontitleformat \text_lowercase:n %\lowercase
+\PackageWarning{ gotham } { Be~aware~that~format~subsection=lower~can~lead~to~problems. }
+},
+format~subsection / upper .code:n =
+{
+\let\gotham@subsectiontitleformat \text_uppercase:n %\uppercase
+\PackageWarning{ gotham } { Be~aware~that~format~subsection=upper~can~lead~to~problems. }
+},
+format~subsection / titlecase .code:n =
+{
+\let\gotham@subsectiontitleformat\text_titlecase_all:n %\Maketitlecase
+\PackageWarning{ gotham } { Be~aware~that~format~subsection=titlecase~can~lead~to~problems. }
+},
+format~subsection / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'\l_keys_value_tl'~is~unknown~for~the~(known)~option~'\l_keys_key_tl',~so~being~ignored. }{helping~message: format~subsection / unknown} },
+}
+\keys_define:nn { gotham / font }
+{
+shape~subsection .choice:,
+shape~subsection .usage:n = { general },
+shape~subsection .default:n = { regular },
+shape~subsection / regular .code:n =
+{
+\setbeamerfont{subsection~title}{shape=\normalfont}
+},
+shape~subsection / smallcaps .code:n =
+{
+\setbeamerfont{subsection~title}{shape=\scshape}
+},
+shape~subsection / italic .code:n =
+{
+\setbeamerfont{subsection~title}{shape=\itshape}
+},
+shape~subsection / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'\l_keys_value_tl'~is~unknown~for~the~(known)~option~'\l_keys_key_tl',~so~being~ignored. }{helping~message: shape~subsection / unknown} },
+}
+
+\keys_set:nn { gotham / font } {
+format~title, shape~title,
+format~subtitle, shape~subtitle,
+format~frametitle, shape~frametitle,
+format~framesubtitle, shape~framesubtitle,
+format~part, shape~part,
+format~section, shape~section,
+format~subsection, shape~subsection,
+}
+
+\ProcessKeyOptions[ gotham / font ]
+%% 
+%% Adapted from classic "A model .dtx file" by Joseph Wright
+%% https://www.texdev.net/2009/10/06/a-model-dtx-file/
+%%
+%% End of file `beamerfontthemegotham.sty'.

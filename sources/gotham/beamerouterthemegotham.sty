@@ -1,0 +1,2170 @@
+%%
+%% This is file `beamerouterthemegotham.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% gotham.dtx  (with options: `outer')
+%% 
+%% Copyright (C) 2023-20** by Romain NOËL <romainoel@free.fr>
+%% 
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%% http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%% 
+%% This work has the LPPL maintenance status `maintained'.
+%% 
+%% The Current Maintainer of this work is Romain NOËL.
+%% Contributors: Romain NOËL (2023-20**)
+%% 
+\ProvidesExplPackage{beamerouterthemegotham}{2024-10-15}{1.1.1.a}{gotham outer theme}
+\RequirePackage{expl3}
+\RequirePackage{xfp}
+\RequirePackage{calc}
+\RequirePackage{tikz}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%   OUTER     %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\@ifundefined{\string\color@colorProgBar}{
+\providebool{darkBG} \boolfalse{darkBG}
+\providebool{transparentBG} \booltrue{transparentBG}
+\colorlet{colorBG}{white}
+\colorlet{colorFG}{black}
+\colorlet{colorFrametitle}{purple}
+\colorlet{colorStandout}{purple}
+\colorlet{colorStandin}{purple}
+\colorlet{colorTitlepage}{purple}
+\colorlet{colorFiligrane}{gray}
+\colorlet{colorBackElement}{gray}
+\colorlet{colorProgBar}{orange}
+\colorlet{colorAlert}{red}
+\colorlet{colorExample}{green}
+\setbeamercolor{progress~bar}{
+use=alerted~text,
+fg=colorProgBar,
+bg=alerted~text.fg!50!black!30
+}
+\setbeamercolor{progress~bar~in~head/foot}{%
+use=progress~bar,
+parent=progress~bar
+}
+\setbeamercolor{progress~bar~in~part~page}{
+use=progress~bar,
+parent=progress~bar
+}
+\setbeamercolor{progress~bar~in~section~page}{
+use=progress~bar,
+parent=progress~bar
+}
+\setbeamercolor{progress~bar~in~splitvert}{
+use=progress~bar,
+parent=progress~bar
+}
+\setbeamercolor{frametitleSection}{use=primary~palette, bg=, fg=primary~palette.bg}
+\setbeamercolor{standout}{use=primary~palette, bg=colorStandout, fg=primary~palette.bg}
+\setbeamercolor{standin}{use=normal~text, bg=colorStandin, fg=normal~text.fg}
+\setbeamercolor{section~in~toc}{use=normal~text, parent=normal~text,}
+\setbeamercolor{subsection~in~toc}{use=normal~text, parent=normal~text,}
+\setbeamercolor{subsubsection~in~toc}{use=normal~text, parent=normal~text,}
+}{
+}
+
+%%%%%%
+\prop_if_exist:NTF \l__gotham_template_name_prop
+{}{
+\prop_new:N \l__gotham_template_name_prop
+}
+
+\seq_if_exist:NTF \l__gotham_tmpa_seq
+{}{
+\seq_new:N \l__gotham_tmpa_seq
+}
+\tl_if_exist:NTF \l__gotham_tmpa_tl
+{}{
+\tl_new:N \l__gotham_tmpa_tl
+}
+\tl_if_exist:NTF \l__gotham_tmpb_tl
+{}{
+\tl_new:N \l__gotham_tmpb_tl
+}
+
+\cs_if_exist:NTF \__gotham_set_prop_template:nn {}{
+\cs_new_protected:Nn \__gotham_set_prop_template:nn
+{
+\tl_if_in:nnTF { #1 } { / }
+{
+\seq_set_split:Nnn \l__gotham_tmpa_seq { / } { #1 }
+\tl_set:Nn \l__gotham_tmpa_tl { \seq_item:Nn \l__gotham_tmpa_seq { 1 } }
+\tl_set:Nn \l__gotham_tmpb_tl { \seq_item:Nn \l__gotham_tmpa_seq { 2 } }
+\cs_if_exist:cTF {beamer@@tmpop@\exp_not:V \l__gotham_tmpa_tl @\exp_not:V \l__gotham_tmpb_tl /#2} {
+\prop_put:Nnn \l__gotham_template_name_prop {#1} {#2}
+}{
+\PackageError{beamerthemegotham}
+{The~beamer~template~named~'\l__gotham_tmpa_tl'~with~the~option~'\l__gotham_tmpb_tl/#2'~does~not~exist}
+{helping~message}
+}
+}{% false -> error
+\PackageError{beamerthemegotham}
+{
+When~using~'\c_backslash_str\cs_to_str:N \__gotham_set_prop_template'~the~first~argument~should~contain~a~'/'~to~respect~the~naming~convention~used~(Template/what/Who~name),~but~you~gave~'#1'.~
+As~example:~if~'\c_backslash_str defbeamertemplate{background}{watermark/gotham~draft}'...,~then~use~'\c_backslash_str\cs_to_str:N \__gotham_set_prop_template{background/watermark}{gotham~draft}'
+}{helping~message}
+}
+}
+}
+
+\seq_if_exist:NTF \l__gotham_frameoption_tmp_seq {}{
+\seq_new:N \l__gotham_frameoption_tmp_seq
+}
+
+\cs_if_exist:NTF \__gotham_add_beamerframe_key:n {}{
+
+\cs_new_protected:Nn \__gotham_add_beamerframe_key:n {
+\define@key{beamerframe}{ #1 }[true]{
+\begin{#1env}
+\seq_put_left:Nn \l__gotham_frameoption_tmp_seq { \end{#1env} }
+}
+}
+
+\apptocmd{\beamer@reseteecodes}{
+\seq_use:Nn \l__gotham_frameoption_tmp_seq {}
+\seq_clear:N \l__gotham_frameoption_tmp_seq
+}{}{}
+}
+
+%%%%%%
+\cs_if_exist:NTF \__gotham_set_template:nn {}{
+
+\cs_new_protected:Nn \__gotham_set_template:nn
+{
+\cs_if_exist:cTF {beamer@@tmpop@#1@#2} {
+\setbeamertemplate{#1}[#2]
+}{
+\PackageError{beamerinnerthemegotham}
+{The~beamer~template~named~'#1'~with~the~option~'#2'~does~not~exist}
+{helping~message unknown setbeamertemplate option}
+} 
+}
+}
+
+%%% Sidebars %%%
+%%%%%%%%%%%%%%%%
+
+%%%%%%
+\newlength{\sidebarRightHOffset}
+\setlength{\sidebarRightHOffset}{-2.5ex}
+\newlength{\sidebarLeftHOffset}
+\setlength{\sidebarLeftHOffset}{+0.5ex}
+
+%%%%%%
+\providecommand{\gothamRightFiligrane}{
+}
+\providecommand{\gothamLeftFiligrane}{
+}
+
+\defbeamertemplate{sidebar~right}{default/beamer}{
+\vfill
+\llap{\insertlogo\hskip0.1cm}
+\vskip2pt
+\llap{\usebeamertemplate***{navigation~symbols}\hskip0.1cm}
+\vskip2pt
+}
+\defbeamertemplate{sidebar~right}{default/empty}{}
+\defbeamertemplate{sidebar~canvas~right}{default/empty}{}
+\defbeamertemplate{sidebar~canvas~right}{default/gotham~filigrane}{
+\hspace*{\sidebarRightHOffset}
+\gothamRightFiligrane
+}
+\defbeamertemplate{sidebar~left}{default/empty}{}
+\defbeamertemplate{sidebar~canvas~left}{default/empty}{}
+\defbeamertemplate{sidebar~canvas~left}{default/gotham~filigrane}{
+\hspace*{\sidebarLeftHOffset}
+\gothamLeftFiligrane
+}
+\prop_put:Nnn \l__gotham_template_name_prop {sidebar~canvas~left/default} {gotham~filigrane}
+\prop_put:Nnn \l__gotham_template_name_prop {sidebar~canvas~right/default} {gotham~filigrane}
+\prop_put:Nnn \l__gotham_template_name_prop {sidebar~left/default} {empty}
+\prop_put:Nnn \l__gotham_template_name_prop {sidebar~right/default} {beamer}
+
+%%%%%%
+\bool_new:N \l_gotham_defaultEdging
+\bool_set_false:N \l_gotham_defaultEdging
+\BeforeBeginEnvironment{frame}{ 
+\bool_if:NTF \l_gotham_defaultEdging {
+\setbeamertemplate{sidebar~canvas~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~canvas~left/default}]
+\setbeamertemplate{sidebar~canvas~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~canvas~right/default}]
+}{
+\setbeamertemplate{sidebar~canvas~left}[default/empty]
+\setbeamertemplate{sidebar~canvas~right}[default/empty]
+}
+}
+
+%%%%%%
+\newenvironment{edgingenv}{
+\setbeamertemplate{sidebar~canvas~left}[
+default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~canvas~left/default}
+]
+\setbeamertemplate{sidebar~canvas~right}[
+default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~canvas~right/default}
+]
+}{}
+\__gotham_add_beamerframe_key:n {edging}
+
+%%%%%%
+\newenvironment{noedgingenv}{
+\setbeamertemplate{sidebar~canvas~left}[default/empty]
+\setbeamertemplate{sidebar~canvas~right}[default/empty]
+}{}
+\__gotham_add_beamerframe_key:n {noedging}
+
+%%%%
+\keys_define:nn { gotham / outer }
+{
+sidebar~canvas~right~template .usage:n = { general },
+sidebar~canvas~right~template .default:n = { gotham~filigrane },
+sidebar~canvas~right~template .code:n = { \__gotham_set_prop_template:nn{sidebar~canvas~right/default}{#1} },
+}
+\keys_define:nn { gotham / outer }
+{
+sidebar~canvas~left~template .usage:n = { general },
+sidebar~canvas~left~template .default:n = { gotham~filigrane },
+sidebar~canvas~left~template .code:n = { \__gotham_set_prop_template:nn{sidebar~canvas~left/default}{#1} },
+}
+\keys_define:nn { gotham / outer }{
+edging~default .choice:,
+edging~default .usage:n = { general },
+edging~default .default:n = { false },
+
+edging~default / true .code:n = { \bool_set_true:N \l_gotham_defaultEdging },
+edging~default / on .code:n = { \bool_set_true:N \l_gotham_defaultEdging },
+edging~default / enable .code:n = { \bool_set_true:N \l_gotham_defaultEdging },
+
+edging~default / false .code:n = { \bool_set_false:N \l_gotham_defaultEdging },
+edging~default / off .code:n = { \bool_set_false:N \l_gotham_defaultEdging },
+edging~default / disable .code:n = { \bool_set_false:N \l_gotham_defaultEdging },
+
+edging~default / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'#1'~is~unknown~for~the~(known)~option~'edging~default',~so~being~ignored. }{helping~message: edging~default / unknown} },
+}
+
+%%% Navigation \& Logo %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%
+\defbeamertemplate*{navigation~symbols}{empty}{}
+
+%%%%%%
+
+\defbeamertemplate{logo}{empty}{}
+
+%%%%%%
+\newenvironment{nologoenv}{
+\setbeamertemplate{logo}[empty]
+}{}
+\__gotham_add_beamerframe_key:n {nologo}
+
+%%% Headline \& Frametitle  %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Headline %%%
+
+\defbeamertemplate{headline}{default/gotham}{}
+\prop_put:Nnn \l__gotham_template_name_prop {headline/default} {gotham}
+
+\defbeamertemplate{headline}{default/gotham~section}{
+\begin{beamercolorbox}[wd=1.0\paperwidth, ht=2.5ex, dp=1.4ex, left]{headfoot}
+\usebeamerfont{section~in~head/foot}\hspace*{3.5ex}
+\usebeamertemplate{section~in~head/foot}
+\end{beamercolorbox}
+}
+
+%%% Frametitle %%%
+
+%%%%%%
+\newlength{\gotham@frametitle@toppadding}
+\setlength{\gotham@frametitle@toppadding}{2.2ex}
+\newlength{\gotham@frametitle@bottompadding}
+\setlength{\gotham@frametitle@bottompadding}{2.2ex}
+\newlength{\gotham@frametitle@leftpadding}
+\setlength{\gotham@frametitle@leftpadding}{2.2ex}
+\newlength{\gotham@frametitle@rightpadding}
+\setlength{\gotham@frametitle@rightpadding}{2.2ex}
+\providecommand{\gotham@strut}{
+\vphantom{ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz (/)}
+}
+
+\providecommand{\gotham@frametitlestrut@start}{
+\rule{0pt}{\gotham@frametitle@toppadding +
+\totalheightof{
+\ifcsdef{gotham@frametitleformat}{\gotham@frametitleformat{X}}{X}
+}
+}
+}
+\providecommand{\gotham@frametitlestrut@end}{
+\rule[-\gotham@frametitle@bottompadding]{0pt}{\gotham@frametitle@bottompadding}
+}
+
+%%%%%%
+\providecommand{\gothamInstituteLogoSquare}[1][4ex]{
+}
+\defbeamertemplate{includeLogo}{default/gotham~square}{
+\gothamInstituteLogoSquare
+}
+\prop_put:Nnn \l__gotham_template_name_prop {includeLogo/default} {gotham~square}
+
+\defbeamertemplate{includeLogo}{default/gotham~circle}{
+\gothamProgressCircle
+}
+
+\defbeamertemplate{instituteLogo}{default/gotham}{
+\raisebox{0pt}[0pt][0pt]{
+\raisebox{.5\fontcharht\font`E-0.5\height}{
+\setbeamertemplate{includeLogo}[default/\prop_item:Nn \l__gotham_template_name_prop {includeLogo/default}]
+\usebeamertemplate{includeLogo}
+}
+}
+}
+\prop_put:Nnn \l__gotham_template_name_prop {instituteLogo/default} {gotham}
+
+%%%%%%
+\providecommand{\gothamFrameSubtitleSep}{
+\ ---~
+}
+
+%%%%%%
+\newlength{\gothamFramesubtitleStrutend}
+\setlength{\gothamFramesubtitleStrutend}{0pt}
+
+\defbeamertemplate{frametitle}{default/gotham~subsameline}{
+\nointerlineskip
+\begin{beamercolorbox}[
+wd=\paperwidth,
+sep=0pt,
+leftskip=\gotham@frametitle@leftpadding,
+rightskip=\gotham@frametitle@rightpadding,
+]{frametitle}
+\gotham@frametitlestrut@start
+\insertframetitle
+\ifx\insertframesubtitle\@empty
+%% if subtitle to the frame is empty
+\else
+%% if not empty: add subtitle
+{\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\gothamFrameSubtitleSep \insertframesubtitle}
+\vspace*{\gothamFramesubtitleStrutend}
+\fi
+\nolinebreak
+%% Add logo
+\hfill{
+\setbeamertemplate{instituteLogo}[default/\prop_item:Nn \l__gotham_template_name_prop {instituteLogo/default}]
+\usebeamertemplate{instituteLogo}
+}
+\gotham@frametitlestrut@end
+\end{beamercolorbox}
+}
+\prop_put:Nnn \l__gotham_template_name_prop {frametitle/default} {gotham~subsameline}
+
+\dim_new:N \l__gotham_framesubtitle_subnewline_strutend_dim
+\defbeamertemplate{framesubtitle}{default/gotham~subnewline}{
+\nointerlineskip
+\begin{beamercolorbox}[
+wd=\paperwidth,
+sep=0pt,
+leftskip=\gotham@frametitle@leftpadding,
+rightskip=\gotham@frametitle@rightpadding,
+]{frametitle}
+\raisebox{0pt}[0pt][0pt]{
+\raisebox{-0.3ex}{
+{ \usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle}
+}
+}
+\dim_set:Nn \l__gotham_framesubtitle_subnewline_strutend_dim {1.ex+\gothamFramesubtitleStrutend}
+\vspace{\l__gotham_framesubtitle_subnewline_strutend_dim}
+\end{beamercolorbox}
+}
+\prop_put:Nnn \l__gotham_template_name_prop {framesubtitle/default} {gotham~subnewline}
+
+\defbeamertemplate{frametitle}{default/gotham~subnewline}{
+\nointerlineskip
+\begin{beamercolorbox}[
+wd=\paperwidth,
+sep=0pt,
+leftskip=\gotham@frametitle@leftpadding,
+rightskip=\gotham@frametitle@rightpadding,
+]{frametitle}
+\gotham@frametitlestrut@start
+\insertframetitle
+\nolinebreak
+\hfill{
+\setbeamertemplate{instituteLogo}[default/\prop_item:Nn \l__gotham_template_name_prop {instituteLogo/default}]
+\usebeamertemplate{instituteLogo}
+}
+\gotham@frametitlestrut@end
+\end{beamercolorbox}
+%% End of the frametitle box, start then use the subtitle template if needed.
+\ifx\insertframesubtitle\@empty
+%% if subtitle to the frame is not empty
+\else
+\vspace*{-1pt}
+\setbeamertemplate{framesubtitle}[default/\prop_item:Nn \l__gotham_template_name_prop {framesubtitle/default}]
+\usebeamertemplate{framesubtitle}
+\fi
+}
+
+%%%%
+\keys_define:nn { gotham / outer }{
+frametitle~template .usage:n = { general },
+frametitle~template .default:n = { gotham~subsameline },
+frametitle~template .code:n = {
+\__gotham_set_prop_template:nn{frametitle/default}{#1}
+\setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
+}
+}
+\keys_define:nn { gotham / outer }{
+framesubtitle~template .usage:n = { general },
+framesubtitle~template .default:n = { gotham~subnewline },
+framesubtitle~template .code:n = {
+\__gotham_set_prop_template:nn{framesubtitle/default}{#1}
+\setbeamertemplate{framesubtitle}[default/\prop_item:Nn \l__gotham_template_name_prop {framesubtitle/default}]
+}
+}
+
+%%% Continuation %%%
+
+\defbeamertemplate{frametitle~continuation}{default/beamer}{
+\usebeamerfont{frametitle}
+{
+\MakeUppercase{\romannumeral \insertcontinuationcount}
+}
+}
+
+\defbeamertemplate{frametitle~continuation}{default/tot}{
+\usebeamerfont{frametitle}
+{
+\textmd{%
+[\insertcontinuationcount
+\,/\,%
+\the\numexpr\beamer@endpageofframe+1-\beamer@startpageofframe
+]%
+}%
+}
+}
+
+\defbeamertemplate{frametitle~continuation}{default/gotham}{
+\usebeamerfont{frametitle}
+{ 
+(\romannumeral \insertcontinuationcount)
+}
+}
+\prop_put:Nnn \l__gotham_template_name_prop {frametitle~continuation/default} {gotham}
+
+%%%%
+\keys_define:nn { gotham / outer }{
+frametitle~continuation~template .usage:n = { general },
+frametitle~continuation~template .default:n = { gotham },
+frametitle~continuation~template .code:n = {
+\__gotham_set_prop_template:nn{frametitle~continuation/default}{#1}
+\setbeamertemplate{frametitle~continuation}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle~continuation/default}]
+}
+}
+
+%%% Footer \& Footline  %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Footline  %%%
+
+\defbeamertemplate{footline}{empty}{}
+
+%%%%%%
+\newenvironment{nofootlineenv}{
+\setbeamertemplate{footline}[empty]
+}{}
+\__gotham_add_beamerframe_key:n {nofootline}
+
+%%%%%%
+\newlength{\gothamFootlineOffset}
+\setlength{\gothamFootlineOffset}{-0.5ex}
+
+\newlength{\gothamFootlineHeight}
+\setlength{\gothamFootlineHeight}{1.5ex}
+\newlength{\gothamFootlineDepth}
+\setlength{\gothamFootlineDepth}{0.1ex}
+
+\defbeamertemplate*{footline}{default/gotham}{
+\vspace*{\gothamFootlineOffset}
+\begin{beamercolorbox}[
+wd=\textwidth,
+sep=0pt,
+leftskip=3ex,
+rightskip=3ex,
+ht={\gothamFootlineHeight},
+dp={\gothamFootlineDepth},
+]{footline}
+\usebeamerfont{page number in head/foot}
+\ifbeamertemplateempty{frame~footer}{
+\hfill \ \gotham@strut
+}{
+\usebeamertemplate*{frame~footer}
+}
+\hspace{\gothamRightFooterPadding}
+{\usebeamertemplate{page~number~in~head/foot}}~
+\end{beamercolorbox}
+}
+\prop_put:Nnn \l__gotham_template_name_prop {footline/default} {gotham}
+
+%%% Footer  %%%
+
+%%%%%%
+\newlength{\gothamLeftFooterPadding}
+\setlength{\gothamLeftFooterPadding}{2.0ex}
+\newlength{\gothamRightFooterPadding}
+\setlength{\gothamRightFooterPadding}{3.5ex}
+\newlength{\gothamFooterHOffset}
+\setlength{\gothamFooterHOffset}{0pt}
+
+\defbeamertemplate{frame~footer}{none}{}
+
+\defbeamertemplate{frame~footer}{empty}{
+\hspace{\gothamLeftFooterPadding}
+\hfill \
+\gotham@strut
+\vspace*{\gothamFooterHOffset}
+}
+
+%%%%%%
+\newenvironment{nofooterenv}{
+\setbeamertemplate{frame~footer}[empty]
+}{}
+\__gotham_add_beamerframe_key:n {nofooter}
+
+%%%%%%
+\bool_new:N \l_gotham_defaultRotateFooter
+\bool_set_false:N \l_gotham_defaultRotateFooter
+\bool_new:N \l_gotham_RotateFooter
+\bool_set_false:N \l_gotham_RotateFooter
+\BeforeBeginEnvironment{frame}{
+\bool_if:NTF \l_gotham_defaultRotateFooter {
+\bool_set_true:N \l_gotham_RotateFooter
+}{% false
+\bool_set_false:N \l_gotham_RotateFooter
+}
+}
+
+%%%%%%
+\define@key{beamerframe}{rotateFooter}[true]{
+\bool_set_true:N \l_gotham_RotateFooter
+}
+
+%%%%%%
+\define@key{beamerframe}{noRotateFooter}[true]{
+\bool_set_false:N \l_gotham_RotateFooter
+}
+
+%%%%
+\keys_define:nn { gotham / outer }{
+rotateFooter~default .choice:,
+rotateFooter~default .usage:n = { general },
+rotateFooter~default .default:n = { false },
+
+rotateFooter~default / true .code:n = { \bool_set_true:N \l_gotham_defaultRotateFooter },
+rotateFooter~default / on .code:n = { \bool_set_true:N \l_gotham_defaultRotateFooter },
+rotateFooter~default / enable .code:n = { \bool_set_true:N \l_gotham_defaultRotateFooter },
+
+rotateFooter~default / false .code:n = { \bool_set_false:N \l_gotham_defaultRotateFooter },
+rotateFooter~default / off .code:n = { \bool_set_false:N \l_gotham_defaultRotateFooter },
+rotateFooter~default / disable .code:n = { \bool_set_false:N \l_gotham_defaultRotateFooter },
+
+rotateFooter~default / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'#1'~is~unknown~for~the~(known)~option~'rotateFooter~default',~so~being~ignored. }{helping~message: rotateFooter~default / unknown} },
+}
+
+%%%%%%
+\newlength{\gothamFootlineRuleLeftPadding}
+\newlength{\gothamFootlineRuleHeight}
+\newlength{\gothamFootlineRuleLength}
+\setlength{\gothamFootlineRuleLeftPadding}{7mm}
+\setlength{\gothamFootlineRuleHeight}{0.0pt}
+\setlength{\gothamFootlineRuleLength}{15mm}
+
+\newlength{\gothamHposLeftRotFooter}
+\newlength{\gothamHposRightRotFooter}
+\newlength{\gothamVposLeftRotFooter}
+\newlength{\gothamVposRightRotFooter}
+
+\setlength{\gothamHposLeftRotFooter}{-7pt}
+\setlength{\gothamHposRightRotFooter}{2pt}
+\setlength{\gothamVposLeftRotFooter}{15pt}
+\setlength{\gothamVposRightRotFooter}{15pt}
+
+\newlength{\hlenRightRotFooter}
+\newlength{\hlenLeftRotFooter}
+
+\defbeamertemplate{frame~footer}{default/gotham}{
+\vbox to 0pt{
+\vss
+\hbox to 0pt{
+\hspace*{\gothamFootlineRuleLeftPadding}
+\usebeamercolor{footlineRule}
+\color{footlineRule.fg}
+\rule{\gothamFootlineRuleLength}{\gothamFootlineRuleHeight}
+\vspace*{
+\dimexpr \gothamFootlineHeight -0.25em\relax
+}
+\hss
+}
+}
+\hspace{\gothamLeftFooterPadding}
+\settowidth{\hlenLeftRotFooter}{\hspace{-\gothamLeftFooterPadding}}
+\addtolength{\hlenLeftRotFooter}{\gothamHposLeftRotFooter}
+\bool_if:NTF \l_gotham_RotateFooter {
+\begin{picture}(0,0)(0,0)
+\put(\hlenLeftRotFooter,\gothamVposLeftRotFooter){\rotatebox{90}{\insertshortdate}}
+\end{picture}
+}{
+\insertshortdate
+}
+\hfill \
+\hfill \ \insertshorttitle
+\gotham@strut
+\hfill \
+\hfill \
+\bool_if:NTF \l_gotham_RotateFooter { 
+\settowidth{\hlenRightRotFooter}{\hspace{\gothamRightFooterPadding}\usebeamertemplate{page~number~in~head/foot}}
+\addtolength{\hlenRightRotFooter}{\gothamHposRightRotFooter}
+\begin{picture}(0,0)(0,0)
+\put(\hlenRightRotFooter,\gothamVposRightRotFooter){\rotatebox{90}{\insertshortauthor}}
+\end{picture}
+}{
+\insertshortauthor
+}
+\vspace*{\gothamFooterHOffset}
+}
+\prop_put:Nnn \l__gotham_template_name_prop {frame~footer/default} {gotham}
+
+%%%%
+\keys_define:nn { gotham / outer }{
+footer~template .usage:n = { general },
+footer~template .default:n = { gotham },
+footer~template .code:n = {
+\__gotham_set_prop_template:nn{frame~footer/default}{#1}
+\setbeamertemplate{frame~footer}[
+default/\prop_item:Nn \l__gotham_template_name_prop {frame~footer/default}
+]
+}
+}
+
+%%% Numbering %%%
+%%%%%%%%%%%%%%%%%
+
+\def\inserttotalframenumber{100}
+
+\defbeamertemplate{page~number~in~head/foot}{none}{ }
+
+%%%%
+\newlength{\gothamCircleNumberingVshift}
+\setlength{\gothamCircleNumberingVshift}{1.4mm}
+\newlength{\gothamCircleNumberingHshift}
+\setlength{\gothamCircleNumberingHshift}{2.6mm}
+
+\defbeamertemplate{page~number~in~head/foot}{circle}{ 
+\hspace{+2em}
+\raisebox{\gothamCircleNumberingVshift}[0pt][0pt]{
+\begin{tikzpicture}[remember~picture, overlay]
+\coordinate (circleCenter);
+
+\usebeamercolor{frametitle}
+
+\draw[fill, color=frametitle.bg] (circleCenter) circle (6mm);
+\draw[fill, color=frametitle.fg] (circleCenter) circle (5mm);
+\node[color=frametitle.bg] at (circleCenter)
+{\small$^{\insertframenumber}\negmedspace/\negthinspace\sb{\inserttotalframenumber}$}
+;
+\end{tikzpicture}
+\hspace{\gothamCircleNumberingHshift}
+}
+}
+
+%%%%
+\keys_define:nn { gotham / outer }{
+numbering .choice:,
+numbering .usage:n = { general },
+numbering .default:n = { none },
+
+numbering / none .code:n = { \setbeamertemplate{page~number~in~head/foot}[none] },
+numbering / framenumber .code:n = { \setbeamertemplate{page~number~in~head/foot}[framenumber] },
+numbering / totalframenumber .code:n = {\setbeamertemplate{page~number~in~head/foot}[totalframenumber] },
+numbering / appendixframenumber .code:n = {\setbeamertemplate{page~number~in~head/foot}[appendixframenumber] },
+numbering / pagenumber .code:n = { \setbeamertemplate{page~number~in~head/foot}[pagenumber] },
+numbering / totalpagenumber .code:n = {\setbeamertemplate{page~number~in~head/foot}[totalpagenumber] },
+numbering / circle .code:n = {\setbeamertemplate{page~number~in~head/foot}[circle] },
+
+numbering / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'#1'~is~unknown~for~the~(known)~option~'numbering',~so~being~ignored. }{helping~message} },
+}
+
+%%% MiniFrames \& Progress bar  %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% MiniFrames %%%
+
+\defbeamertemplate{section~in~head/foot}{default/beamer}{
+\insertsectionhead
+}
+\defbeamertemplate{section~in~head/foot~shaded}{default/beamer}{
+\color{fg!50!bg}\usebeamertemplate{section~in~head/foot}
+}
+
+\prop_put:Nnn \l__gotham_template_name_prop {section~in~head/foot~shaded/default} {beamer}
+\prop_put:Nnn \l__gotham_template_name_prop {section~in~head/foot/default} {beamer}
+
+\defbeamertemplate{section~in~head/foot}{default/gotham~secSubsec}{
+\insertsectionhead
+\ifx\insertsubsection\empty\else
+\ifdefempty{\subsecname}{\relax}{
+\ \textbar\ \insertsubsectionhead
+}
+\fi
+}
+\defbeamertemplate{section~in~head/foot~shaded}{default/gotham~secSubsec}{
+\insertsectionhead
+}
+
+\defbeamertemplate{section~in~head/foot}{default/empty}{
+\vspace{3.875ex}
+}
+\defbeamertemplate{section~in~head/foot~shaded}{default/empty}{
+\vspace{3.875ex}
+}
+
+\newlength{\gotham@temp@heightFrametitle}
+\newlength{\gotham@temp@PaperheightFrametitle}
+
+\defbeamertemplate*{mini~nav~progress~head/foot}{gotham~miniframes~theme}
+{
+\begin{beamercolorbox}[ignorebg]{section~in~head/foot}
+\hfuzz=\paperwidth
+\insertnavigation{\paperwidth}
+\vspace{0.05cm}
+\end{beamercolorbox}
+}
+\defbeamertemplate*{mini~nav~progress~left}{gotham~miniframes~theme}
+{
+\settoheight{\gotham@temp@heightFrametitle}{\gotham@strut}
+\addtolength{\gotham@temp@heightFrametitle}{\gotham@frametitle@toppadding+\gotham@frametitle@bottompadding+\gothamProgressHeadFootLineheight}
+
+\setlength{\gotham@temp@PaperheightFrametitle}{\paperheight-\gotham@temp@heightFrametitle-\gothamFootlineHeight-\gothamFootlineDepth-\gothamProgressHeadFootLineheight}
+
+\vspace{-0.6\paperheight}
+\rotatebox{90}{
+\begin{beamercolorbox}[ignorebg]{section~in~head/foot}
+\hfuzz=\gotham@temp@PaperheightFrametitle
+\insertnavigation{\gotham@temp@PaperheightFrametitle}
+\end{beamercolorbox}
+}
+}
+\defbeamertemplate*{mini~nav~progress~right}{gotham~miniframes~theme}
+{
+\settoheight{\gotham@temp@heightFrametitle}{\gotham@strut}
+\addtolength{\gotham@temp@heightFrametitle}{\gotham@frametitle@toppadding+\gotham@frametitle@bottompadding+\gothamProgressHeadFootLineheight}
+
+\setlength{\gotham@temp@PaperheightFrametitle}{\paperheight-\gotham@temp@heightFrametitle-\gothamFootlineHeight-\gothamFootlineDepth-\gothamProgressHeadFootLineheight}
+
+\vspace{\gotham@temp@heightFrametitle}
+\hspace{-2.3em}
+\rotatebox{-90}{
+\begin{beamercolorbox}[ignorebg]{section~in~head/foot}
+\hfuzz=\gotham@temp@PaperheightFrametitle
+\insertnavigation{\gotham@temp@PaperheightFrametitle}
+\end{beamercolorbox}
+}
+}
+
+%% Select the bullets shape
+\defbeamertemplate{mini~frame}{gotham~box}
+{
+\begin{pgfpicture}{0pt}{0pt}{.1cm}{.1cm}
+\pgfpathrectangle{\pgfpointorigin}{\pgfpoint{0.1cm}{0.1cm}}
+\pgfusepath{fill,stroke}
+\end{pgfpicture}
+}[action]{
+\setbeamersize{mini~frame~size=.14cm, mini~frame~offset=.05cm}
+}
+\defbeamertemplate{mini~frame~in~current~subsection}{gotham~box}
+{
+\begin{pgfpicture}{0pt}{0pt}{.1cm}{.1cm}
+\pgfpathrectangle{\pgfpointorigin}{\pgfpoint{0.1cm}{0.1cm}}
+\pgfusepath{stroke}
+\end{pgfpicture}
+}
+
+\defbeamertemplate{mini~frame}{gotham~minibox}
+{
+\begin{pgfpicture}{0pt}{0pt}{.05cm}{.05cm}
+\pgfpathrectangle{\pgfpointorigin}{\pgfpoint{0.05cm}{0.05cm}}
+\pgfusepath{fill,stroke}
+\end{pgfpicture}
+}[action]{
+\setbeamersize{mini~frame~size=.08cm, mini~frame~offset=.05cm}
+}
+\defbeamertemplate{mini~frame~in~current~subsection}{gotham~minibox}
+{
+\begin{pgfpicture}{0pt}{0pt}{.05cm}{.05cm}
+\pgfpathrectangle{\pgfpointorigin}{\pgfpoint{0.05cm}{0.05cm}}
+\pgfusepath{stroke}
+\end{pgfpicture}
+}
+
+\defbeamertemplate{mini~frame}{gotham~minibullet}
+{
+\beamer@xelatex@fixminiframes
+\begin{pgfpicture}{0pt}{0pt}{0.05cm}{0.05cm}
+\pgfpathcircle{\pgfpoint{0.03cm}{0.03cm}}{0.03cm}
+\pgfusepath{fill,stroke}
+\end{pgfpicture}
+}[action]{
+\setbeamersize{mini~frame~size=.09cm, mini~frame~offset=.05cm}
+}
+\defbeamertemplate{mini~frame~in~current~subsection}{gotham~minibullet}
+{
+\beamer@xelatex@fixminiframes
+\begin{pgfpicture}{0pt}{0pt}{0.05cm}{0.05cm}
+\pgfpathcircle{\pgfpoint{0.03cm}{0.03cm}}{0.03cm}
+\pgfusepath{stroke}
+\end{pgfpicture}
+}
+
+%%%%
+\keys_define:nn { gotham / outer }{
+%% mini~frames~shape
+mini~frames~shape .usage:n = { general },
+mini~frames~shape .default:n = { gotham~minibullet },
+mini~frames~shape .code:n = {
+\setbeamertemplate{mini~frames}[#1]
+},
+}
+
+\defbeamertemplate*{miniframe~home}{beamer}{
+}
+\defbeamertemplate*{miniframe~current~slide}{beamer}{
+\usebeamertemplate{mini~frame}
+}
+\defbeamertemplate*{miniframe~done~current~section}{beamer}{
+\usebeamertemplate{mini~frame~in~current~subsection}
+}
+\defbeamertemplate*{miniframe~todo~current~section}{beamer}{
+\usebeamertemplate{mini~frame~in~current~subsection}
+}
+\defbeamertemplate*{miniframe~done~other~section}{beamer}{
+\usebeamertemplate{mini~frame~in~other~subsection}
+}
+\defbeamertemplate*{miniframe~todo~other~section}{beamer}{
+\usebeamertemplate{mini~frame~in~other~subsection}
+}
+\defbeamertemplate*{miniframe~section~current}{beamer}{}
+\defbeamertemplate*{miniframe~section~done}{beamer}{}
+\defbeamertemplate*{miniframe~section~todo}{beamer}{}
+\defbeamertemplate*{miniframe~subsection~current}{beamer}{}
+\defbeamertemplate*{miniframe~subsection~todo}{beamer}{}
+\defbeamertemplate*{miniframe~subsection~done}{beamer}{}
+\defbeamertemplate*{miniframe~section~done~in~other~section}{default}[1][50]
+{
+\color{fg!#1!bg}\usebeamertemplate{miniframe~section~done}
+}
+\defbeamertemplate*{miniframe~section~todo~in~other~section}{default}[1][50]
+{
+\color{fg!#1!bg}\usebeamertemplate{miniframe~section~todo}
+}
+\defbeamertemplate*{miniframe~subsection~done~in~other~section}{default}[1][50]
+{
+\color{fg!#1!bg}\usebeamertemplate{miniframe~subsection~done}
+}
+\defbeamertemplate*{miniframe~subsection~todo~in~other~section}{default}[1][50]
+{
+\color{fg!#1!bg}\usebeamertemplate{miniframe~subsection~todo}
+}
+
+\defbeamertemplate{miniframe~home}{gotham~mini}{
+\resizebox{0.85\beamer@boxsize}{\beamer@boxsize}{$\equiv$}
+}
+\defbeamertemplate{miniframe~current~slide}{gotham~mini}{
+\usebeamercolor[fg]{alerted~text}
+\usebeamertemplate{mini~frame}
+}
+\defbeamertemplate{miniframe~done~current~section}{gotham~mini}{
+\usebeamertemplate{mini~frame}
+}
+\defbeamertemplate{miniframe~todo~current~section}{gotham~mini}{
+\usebeamertemplate{mini~frame~in~current~subsection}
+}
+\defbeamertemplate{miniframe~done~other~section}{gotham~mini}[1][50]{
+\color{fg!#1!bg}\usebeamertemplate{mini~frame}
+}
+\defbeamertemplate{miniframe~todo~other~section}{gotham~mini}[1][50]{
+\color{fg!#1!bg}\usebeamertemplate{mini~frame~in~other~subsection}
+}
+\defbeamertemplate{miniframe~section~current}{gotham~mini}{
+\fontsize{3pt}{0pt}\selectfont
+\tl_use:N \l__gotham_minif_tmpa_tl
+\hspace{1.pt}
+}
+\defbeamertemplate{miniframe~section~done}{gotham~mini}{
+\fontsize{3pt}{0pt}\selectfont
+\tl_use:N \l__gotham_minif_tmpa_tl
+\hspace{1.pt}
+}
+\defbeamertemplate{miniframe~section~todo}{gotham~mini}{
+\fontsize{3pt}{0pt}\selectfont
+\tl_use:N \l__gotham_minif_tmpa_tl
+\hspace{1.pt}
+}
+\defbeamertemplate{miniframe~subsection~current}{gotham~mini}{
+\usebeamercolor[fg]{alerted~text}
+\hspace{-0.15pt}
+\resizebox{\beamer@boxsize}{!}{\hspace{-0.75pt}$\blacklozenge$}
+}
+\defbeamertemplate{miniframe~subsection~todo}{gotham~mini}{
+\hspace{-0.15pt} 
+\resizebox{\beamer@boxsize}{!}{\hspace{-0.75pt}$\lozenge$}
+}
+\defbeamertemplate{miniframe~subsection~done}{gotham~mini}{
+\hspace{-0.15pt} 
+\resizebox{\beamer@boxsize}{!}{\hspace{-0.75pt}$\blacklozenge$}
+}
+
+\defbeamertemplate{miniframe~home}{gotham~nano}{
+\scalebox{0.5}[0.95]{$\equiv$}
+}
+\defbeamertemplate{miniframe~current~slide}{gotham~nano}{
+o
+}
+\defbeamertemplate{miniframe~done~current~section}{gotham~nano}{
+x
+}
+\defbeamertemplate{miniframe~todo~current~section}{gotham~nano}{
+$\cdot$
+}
+\defbeamertemplate{miniframe~done~other~section}{gotham~nano}{
+x
+}
+\defbeamertemplate{miniframe~todo~other~section}{gotham~nano}{
+$\cdot$
+}
+\defbeamertemplate{miniframe~section~current}{gotham~nano}{
+\tl_use:N \l__gotham_minif_tmpa_tl
+}
+\defbeamertemplate{miniframe~section~done}{gotham~nano}{
+\tl_use:N \l__gotham_minif_tmpa_tl
+}
+\defbeamertemplate{miniframe~section~todo}{gotham~nano}{
+\tl_use:N \l__gotham_minif_tmpa_tl
+}
+\defbeamertemplate{miniframe~subsection~current}{gotham~nano}{
+\usebeamercolor[fg]{alerted~text}$\diamond$
+}
+\defbeamertemplate{miniframe~subsection~todo}{gotham~nano}{
+$\diamond$
+}
+\defbeamertemplate{miniframe~subsection~done}{gotham~nano}{
+$\diamond$
+}
+
+\defbeamertemplateparent{mini~frames~bundle}
+{  miniframe~home, miniframe~current~slide,
+miniframe~done~current~section, miniframe~todo~current~section, miniframe~done~other~section, miniframe~todo~other~section,
+miniframe~section~current, miniframe~section~done, miniframe~section~todo,
+miniframe~subsection~current, miniframe~subsection~done, miniframe~subsection~todo,
+}{}
+
+%%%%
+\keys_define:nn { gotham / outer }{
+%% mini~frames~bundle
+mini~frames~bundle .usage:n = { general },
+mini~frames~bundle .default:n = { gotham~mini },
+mini~frames~bundle .code:n = {
+\setbeamertemplate{mini~frames~bundle}[#1]
+},
+}
+
+%%% MiniFrames Navigation %%%
+
+%%%%
+\keys_define:nn { gotham / outer }{
+mini~frames~compress .choice:,
+mini~frames~compress .usage:n = { general },
+mini~frames~compress .default:n = { true },
+
+mini~frames~compress / true .code:n = { \beamer@compresstrue },
+mini~frames~compress / on .code:n = { \beamer@compresstrue },
+mini~frames~compress / enable .code:n = { \beamer@compresstrue },
+
+mini~frames~compress / false .code:n = { \beamer@compressfalse },
+mini~frames~compress / off .code:n = { \beamer@compressfalse },
+mini~frames~compress / disable .code:n = { \beamer@compressfalse },
+
+mini~frames~compress / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'#1'~is~unknown~for~the~(known)~option~'mini~frames~compress',~so~being~ignored. }{helping~message: mini~frames~compress / unknown} },
+}
+
+\newlength{\gotham@temp@MiniframeSubsecDim}
+\newlength{\gotham@temp@MiniframeSecDim}
+\def\gotham@temp@lastSec{-1}
+\tl_new:N \l__gotham_minif_tmpa_tl
+\tl_new:N \l__gotham_minif_tmpb_tl
+
+\renewcommand{\slideentry}[6]{%
+   %section number, subsection number, slide number, first/last frame, page number, part number
+\ifnum#6=\c@part\ifnum#3>0%\ifnum#6=\c@part\ifnum#1>0\ifnum#3>0 MODIF
+\ifbeamer@compress%
+\advance\beamer@xpos by1\relax%
+\else%
+\ifnum#2=0%
+\beamer@ypos@offset=1\relax%
+\fi%
+\beamer@xpos=#3\relax%
+\beamer@ypos=#2\relax%
+\advance\beamer@ypos by \beamer@ypos@offset\relax%
+\fi%
+%% Add section number and subsection symbol to miniframes.
+%% MODIF below, inspired from https://tex.stackexchange.com/questions/722523
+\ifnum#3=1%\c@subsectionslide=#3 % if =1, so it has been reset  => new section or subsection
+\ifnum#1>0\ifnum#2<2% => there no subsection in this section.
+\ifnum\gotham@temp@lastSec=#1%
+\else%
+\tl_set:Nn \l__gotham_minif_tmpa_tl {#1}
+\settowidth{\gotham@temp@MiniframeSecDim}{\usebeamertemplate{miniframe~section~current}}%
+\hbox to 0pt{%
+\beamer@tempdim=-\beamer@vboxoffset%
+\advance\beamer@tempdim by-\beamer@boxsize%
+\multiply\beamer@tempdim by\beamer@ypos%
+\advance\beamer@tempdim by -.05cm%
+\raise\beamer@tempdim\hbox{%
+\beamer@tempdim=\beamer@boxsize%
+\multiply\beamer@tempdim by\beamer@xpos%
+\advance\beamer@tempdim by -\beamer@boxsize%
+\advance\beamer@tempdim by -\gotham@temp@MiniframeSecDim% NEW
+\advance\beamer@tempdim by 1pt%
+\kern\beamer@tempdim%
+\global\beamer@section@min@dim\beamer@tempdim%
+\hbox{\beamer@link(#4){%
+\ifnum\c@section=#1%
+\ifnum\c@subsectionslide=#3%
+\usebeamertemplate{miniframe~section~current}
+\else%
+\ifnum\c@subsectionslide<#3
+\usebeamertemplate{miniframe~section~todo}
+\else%
+\usebeamertemplate{miniframe~section~done}
+\fi%
+\fi%
+\else% \ifnum\c@section=#1%
+\ifnum\c@section<#1
+\usebeamertemplate{miniframe~section~todo~in~other~section}
+\else%
+\usebeamertemplate{miniframe~section~done~in~other~section}
+\fi%
+\fi% \ifnum\c@section=#1
+}}%
+}%
+}%
+\def\gotham@temp@lastSec{#1}%
+\fi%
+\fi\fi%
+\ifnum#2>0%
+\ifbeamertemplateempty{miniframe~subsection~current}{
+}{
+\tl_set:Nn \l__gotham_minif_tmpb_tl {#2}
+\settowidth{\gotham@temp@MiniframeSubsecDim}{}%\usebeamertemplate{miniframe~subsection~current}}%
+\addtolength{\gotham@temp@MiniframeSubsecDim}{+1.\beamer@boxsize}%
+\advance\beamer@xpos by1\relax%
+\hbox to 0pt{%
+\beamer@tempdim=-\beamer@vboxoffset%
+\advance\beamer@tempdim by-\beamer@boxsize%
+\multiply\beamer@tempdim by\beamer@ypos%
+\advance\beamer@tempdim by -.05cm%
+\raise\beamer@tempdim\hbox{%
+\beamer@tempdim=\beamer@boxsize%
+\multiply\beamer@tempdim by\beamer@xpos%
+\advance\beamer@tempdim by -\beamer@boxsize%
+\advance\beamer@tempdim by -\gotham@temp@MiniframeSubsecDim% NEW
+\advance\beamer@tempdim by 1pt%
+\kern\beamer@tempdim%
+\global\beamer@section@min@dim\beamer@tempdim%
+\hbox{\beamer@link(#4){%
+\ifnum\c@section=#1%
+\ifnum\c@subsection=#2%
+\ifnum\c@subsectionslide=#3%
+\usebeamertemplate{miniframe~subsection~current}
+\else%
+\ifnum\c@subsectionslide<#3
+\usebeamertemplate{miniframe~subsection~todo}
+\else%
+\usebeamertemplate{miniframe~subsection~done}
+\fi%
+\fi%
+\else% \ifnum\c@subsection=#2%
+\ifnum\c@subsection<#2
+\usebeamertemplate{miniframe~subsection~todo}
+\else%
+\usebeamertemplate{miniframe~subsection~done}
+\fi%
+\fi% \ifnum\c@subsection=#2%
+\else% \ifnum\c@section=#1%
+\ifnum\c@section<#1
+\usebeamertemplate{miniframe~subsection~todo~in~other~section}
+\else%
+\usebeamertemplate{miniframe~subsection~done~in~other~section}
+\fi%
+\fi% \ifnum\c@section=#1
+}}% \hbox{\beamer@link
+}% raisebox
+}% hbox
+}% end if template empty
+\fi% \ifnum#2>0
+\else
+\ifbeamer@compress%
+\else%
+\ifbeamertemplateempty{miniframe~subsection~current}{
+}{
+\advance\beamer@xpos by 1\relax%
+}
+\fi%
+\fi% \ifnum#3=1
+
+%% end of modif to add section number and subsection symbol.
+\hbox to 0pt{%
+\beamer@tempdim=-\beamer@vboxoffset%
+\advance\beamer@tempdim by-\beamer@boxsize%
+\multiply\beamer@tempdim by\beamer@ypos%
+\advance\beamer@tempdim by -.05cm%
+\raise\beamer@tempdim\hbox{%
+\beamer@tempdim=\beamer@boxsize%
+\multiply\beamer@tempdim by\beamer@xpos%
+\advance\beamer@tempdim by -\beamer@boxsize%
+\advance\beamer@tempdim by 1pt%
+\kern\beamer@tempdim
+\global\beamer@section@min@dim\beamer@tempdim
+\hbox{\beamer@link(#4){%
+\usebeamerfont{mini~frame}%
+%%
+%% CHANGE FROM HERE: I rewrote this part.
+\def\gotham@temp@i{1/1}
+\def\gotham@temp@ii{#4}
+\ifx\gotham@temp@i\gotham@temp@ii
+\usebeamertemplate{miniframe~home}
+\else
+\ifnum\c@section=#1%
+\ifnum\c@subsection=#2%
+\usebeamercolor[fg]{mini~frame}%
+\ifnum\c@subsectionslide=#3%
+\usebeamertemplate{miniframe~current~slide}
+\else%
+\ifnum\c@subsectionslide<#3
+\usebeamertemplate{miniframe~todo~current~section}
+\else%
+\usebeamertemplate{miniframe~done~current~section}
+\fi%
+\fi%
+\else% \ifnum\c@subsection=#2%
+\usebeamercolor{mini~frame}%
+\ifnum\c@subsection<#2
+\usebeamertemplate{miniframe~todo~other~section}
+\else%
+\usebeamertemplate{miniframe~done~other~section}
+\fi%
+\fi% \ifnum\c@subsection=#2%
+\else% \ifnum\c@section=#1%
+\usebeamercolor{mini~frame}%
+\ifnum\c@section<#1
+\usebeamertemplate{miniframe~todo~other~section}
+\else%
+\usebeamertemplate{miniframe~done~other~section}
+\fi%
+\fi% \ifnum\c@section=#1
+\fi% \ifx\gotham@temp@i\gotham@temp@ii
+}}}\hskip-10cm plus 1fil%
+}\fi% \ifnum#1>0\ifnum#3>0%
+\else% \ifnum#6=\c@part
+\fakeslideentry{#1}{#2}{#3}{#4}{#5}{#6}%
+\fi\ignorespaces%
+}%
+
+%%%%
+\providebool{gothamZerosectionframes}
+\boolfalse{gothamZerosectionframes}
+
+\providecommand{\gothamInsertNavlength}{
+\ifbool{gothamZerosectionframes}{
+\hskip-0.5ex~plus~1fill
+}{
+\hskip-1.875ex~plus-1fill
+}%
+}
+\providecommand{\gothamPatchInsertNav}{
+\box\beamer@sectionbox\hfil\hskip.3cm
+}
+\providecommand{\gothamPatchSectionentry}{
+\hskip1.875ex~plus~1fill
+}
+\providecommand{\gothamPatchSectionbox}{
+\ht\beamer@sectionbox=1.875ex
+\dp\beamer@sectionbox=0.75ex
+}
+\ExplSyntaxOff
+\patchcmd{\insertnavigation}{\hskip-1.875ex plus-1fill}{%
+\ifnum\value{section}=0%
+\ifnum\value{framenumber}>0%
+\hskip-0ex%
+\global\booltrue{gothamZerosectionframes}%
+\fi\fi%
+\gothamInsertNavlength%
+}{}{}
+%% Remove hfill between sections => flush right bullet bar, if not corrected.
+\patchcmd{\sectionentry}{\hskip1.875ex plus 1fill}{\gothamPatchSectionentry}{}{}
+%% Centering the bullet bar
+\patchcmd{\insertnavigation}{\box\beamer@sectionbox\hfil\hskip.3cm}{\gothamPatchInsertNav}{}{}
+\patchcmd{\insertnavigation}{\ht\beamer@sectionbox=1.875ex%
+\dp\beamer@sectionbox=0.75ex%
+}{
+\gothamPatchSectionbox
+}{}{}
+\patchcmd{\sectionentry}{\ht\beamer@sectionbox=1.875ex%
+\dp\beamer@sectionbox=0.75ex%
+}{
+\gothamPatchSectionbox
+}{}{}
+\ExplSyntaxOn
+
+%%%%
+\keys_define:nn { gotham / outer }{
+mini~frames~nav~spreading .choice:,
+mini~frames~nav~spreading .usage:n = { general },
+mini~frames~nav~spreading .default:n = { spreading },
+
+mini~frames~nav~spreading / spreading .code:n = {
+\renewcommand{\gothamInsertNavlength}{
+\ifbool{gothamZerosectionframes}{
+\hskip-0.5ex
+}{
+\hskip-1.875ex~plus-1fill
+}%
+}
+\renewcommand{\gothamPatchInsertNav}{
+\box\beamer@sectionbox\hfil\hskip.3cm
+}
+\renewcommand{\gothamPatchSectionentry}{
+\hskip1.875ex~plus~1fill
+}
+},
+mini~frames~nav~spreading / centering .code:n = {
+\renewcommand{\gothamInsertNavlength}{
+\ifbool{gothamZerosectionframes}{
+\hskip-0.5ex~plus~1fill
+}{
+\hfill
+}%
+}
+\renewcommand{\gothamPatchInsertNav}{
+\box\beamer@sectionbox\hfill\hskip.3cm
+}
+%% Remove hfill between sections => flush right bullet bar, if not corrected. 
+\renewcommand{\gothamPatchSectionentry}{
+\hskip~3.5ex
+}
+},
+mini~frames~nav~spreading / left .code:n = {
+\renewcommand{\gothamInsertNavlength}{
+\ifbool{gothamZerosectionframes}{
+\hskip-0.5ex
+}{
+\hskip-1.875ex plus-1fill
+}%
+}
+\renewcommand{\gothamPatchInsertNav}{
+\box\beamer@sectionbox\hfil\hskip.3cm
+}
+%% Remove hfill between sections => flush right bullet bar, if not corrected. 
+\renewcommand{\gothamPatchSectionentry}{
+\hskip~3.5ex
+}
+},
+mini~frames~nav~spreading / right .code:n = {
+\renewcommand{\gothamInsertNavlength}{
+\ifbool{gothamZerosectionframes}{
+\hskip-0.5ex~plus~1fill
+}{
+\hskip-1.875ex plus-1fill
+}%
+}
+\renewcommand{\gothamPatchInsertNav}{
+\box\beamer@sectionbox\hfil\hskip.3cm
+}
+%% Remove hfill between sections => flush right bullet bar, if not corrected. 
+\renewcommand{\gothamPatchSectionentry}{
+\hskip~3.5ex
+}
+},
+mini~frames~nav~spreading / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'#1'~is~unknown~for~the~(known)~option~'mini~frames~nav~spreading',~so~being~ignored. }{helping~message: mini~frames~nav~spreading / unknown} },
+}
+
+%%%%
+\keys_define:nn { gotham / outer }{
+mini~frames~nav~sectioning .choice:,
+mini~frames~nav~sectioning .usage:n = { general },
+mini~frames~nav~sectioning .default:n = { secsubsection },
+
+mini~frames~nav~sectioning / none .code:n = {
+\__gotham_set_template:nn{section~in~head/foot~shaded}{default/empty}
+\__gotham_set_template:nn{section~in~head/foot}{default/empty}
+\renewcommand{\gothamPatchSectionbox}{
+\ht\beamer@sectionbox=0pt
+\dp\beamer@sectionbox=0pt
+}
+},
+mini~frames~nav~sectioning / section .code:n = {
+\__gotham_set_template:nn{section~in~head/foot~shaded}{default} %from Beamer
+\__gotham_set_template:nn{section~in~head/foot}{default} %from Beamer
+},
+mini~frames~nav~sectioning / secsubsection .code:n = {
+\__gotham_set_template:nn{section~in~head/foot~shaded}{default/gotham~secSubsec}
+\__gotham_set_template:nn{section~in~head/foot}{default/gotham~secSubsec}
+},
+
+mini~frames~nav~sectioning / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'#1'~is~unknown~for~the~(known)~option~'mini~frames~nav~sectioning',~so~being~ignored. }{helping~message: mini~frames~nav~sectioning / unknown} },
+}
+
+%%%%
+\tl_new:N \l__gotham_out_tmp_mfnposi_tl
+\keys_define:nn { gotham / outer }{
+mini~frames~nav~position .choice:,
+mini~frames~nav~position .usage:n = { general },
+mini~frames~nav~position .default:n = { none },
+
+mini~frames~nav~position / none .code:n = {
+\tl_set:Nn \l__gotham_out_tmp_mfnposi_tl {none}
+
+\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {head} {
+}{
+\setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
+}
+\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {footline} {
+}{
+\setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
+}
+\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {left} {
+}{
+\setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
+}
+\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {right} {
+}{
+\setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
+}
+},
+mini~frames~nav~position / head .code:n = {
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} {
+}{
+\tl_set:Nn \l__gotham_out_tmp_mfnposi_tl {head} 
+
+\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {head} {
+}{
+\setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
+}
+\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {footline} {
+}{
+\setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
+}
+\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {left} {
+}{
+\setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
+}
+\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {right} {
+}{
+\setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
+}
+
+\addtobeamertemplate{headline}{}{
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} {
+\usebeamertemplate*{mini~nav~progress~head/foot}
+}{}
+}
+}
+},
+mini~frames~nav~position / foot .code:n = {
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} {
+}{
+\tl_set:Nn \l__gotham_out_tmp_mfnposi_tl {foot} 
+
+\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {head} {
+}{
+\setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
+}
+\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {footline} {
+}{
+\setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
+}
+\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {left} {
+}{
+\setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
+}
+\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {right} {
+}{
+\setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
+}
+
+\addtobeamertemplate{footline}{}{
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} {
+\usebeamertemplate*{mini~nav~progress~head/foot}
+}{}
+}
+}
+},
+mini~frames~nav~position / left .code:n = {
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} {
+}{
+\tl_set:Nn \l__gotham_out_tmp_mfnposi_tl {left} 
+
+\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {head} {
+}{
+\setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
+}
+\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {footline} {
+}{
+\setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
+}
+\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {left} {
+}{
+\setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
+}
+\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {right} {
+}{
+\setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
+}
+
+\addtobeamertemplate{sidebar~left}{}{
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} {
+\usebeamertemplate*{mini~nav~progress~left}
+}{}
+}
+}
+},
+mini~frames~nav~position / right .code:n = {
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} {
+}{
+\tl_set:Nn \l__gotham_out_tmp_mfnposi_tl {right}
+
+\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {head} {
+}{
+\setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
+}
+\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {footline} {
+}{
+\setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
+}
+\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {left} {
+}{
+\setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
+}
+\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {right} {
+}{
+\setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
+}
+
+\addtobeamertemplate{sidebar~right}{}{
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} {
+\usebeamertemplate*{mini~nav~progress~right}
+}{}
+}
+}
+},
+
+mini~frames~nav~position / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'#1'~is~unknown~for~the~(known)~option~'mini~frames~nav~position',~so~being~ignored. }{helping~message: mini~frames~nav~position / unknown} },
+}
+
+%%% Progress bar %%%
+
+%%%%%%
+\newlength{\gotham@progressinheadfoot}
+\newlength{\gothamProgressHeadFootLineheight}
+\setlength{\gothamProgressHeadFootLineheight}{1.2ex}
+
+%%%%%%
+\bool_new:N \l_gotham_ProgCircleMoving_bool
+\bool_set_true:N \l_gotham_ProgCircleMoving_bool
+
+\bool_new:N \l_gotham_progbar_advancement_tlbr_bool
+\bool_set_true:N \l_gotham_progbar_advancement_tlbr_bool
+
+\bool_new:N \l_gotham_pmfn_bool
+\bool_set_false:N \l_gotham_pmfn_bool
+
+\cs_new_protected:Npn \__gotham_rectangle_box_progressbar:n #1
+{
+\setlength{\gotham@progressinheadfoot}{
+#1 * \ratio{\insertframenumber pt}{\inserttotalframenumber pt}
+}
+
+\begin{beamercolorbox}[wd=#1]{progress~bar~in~head/foot}
+\begin{tikzpicture}
+\usebeamercolor{progress~bar~in~head/foot}
+
+\fill[color=progress~bar~in~head/foot.bg]
+(0pt, 0pt) rectangle ++ (#1, \gothamProgressHeadFootLineheight)
+;
+
+\bool_if:NTF \l_gotham_progbar_advancement_tlbr_bool {
+\fill[color=progress~bar~in~head/foot.fg]
+(0pt, 0pt) rectangle ++ (\gotham@progressinheadfoot, \gothamProgressHeadFootLineheight)
+;
+}{
+\fill[color=progress~bar~in~head/foot.fg]
+(#1, \gothamProgressHeadFootLineheight) rectangle ++ (-\gotham@progressinheadfoot, -\gothamProgressHeadFootLineheight)
+;
+}
+
+\bool_if:NTF \l_gotham_pmfn_bool {
+\node at (#1/2, \gothamProgressHeadFootLineheight/2)
+[text~height=0.1pt, text~depth=0.05pt, inner~sep=0pt] %draw=red,
+{
+\usebeamercolor[fg]{normal~text}
+\raisebox{0.5\gothamProgressHeadFootLineheight+1.4pt}[0pt][0pt]{
+\hfuzz=#1
+\insertnavigation{#1}
+}
+}
+;
+}{
+}
+\end{tikzpicture}
+\end{beamercolorbox}
+}
+
+\defbeamertemplate{progress~bar~in~head/foot}{gotham~rectangle}{
+\nointerlineskip
+\__gotham_rectangle_box_progressbar:n {\paperwidth}
+}
+
+\defbeamertemplate{progress~bar~in~left}{gotham~rectangle}{
+\nointerlineskip
+
+\settoheight{\gotham@temp@heightFrametitle}{\gotham@strut}
+\addtolength{\gotham@temp@heightFrametitle}{\gotham@frametitle@toppadding+\gotham@frametitle@bottompadding+\gothamProgressHeadFootLineheight}
+
+\setlength{\gotham@temp@PaperheightFrametitle}{\paperheight-\gotham@temp@heightFrametitle-\gothamFootlineHeight-\gothamFootlineDepth-0.25\baselineskip}
+
+\vspace{0.12275\paperheight}
+\rotatebox{90}{
+\__gotham_rectangle_box_progressbar:n {\gotham@temp@PaperheightFrametitle}
+}
+}
+\defbeamertemplate{progress~bar~in~right}{gotham~rectangle}{
+\nointerlineskip
+
+\settoheight{\gotham@temp@heightFrametitle}{\gotham@strut}
+\addtolength{\gotham@temp@heightFrametitle}{\gotham@frametitle@toppadding+\gotham@frametitle@bottompadding+\gothamProgressHeadFootLineheight}
+
+\setlength{\gotham@temp@PaperheightFrametitle}{\paperheight-\gotham@temp@heightFrametitle-\gothamFootlineHeight-\gothamFootlineDepth-0.25\baselineskip}
+
+\hspace{-\gothamProgressHeadFootLineheight}
+\vspace{\gotham@temp@heightFrametitle-27.75pt}
+\rotatebox{-90}{
+\__gotham_rectangle_box_progressbar:n {\gotham@temp@PaperheightFrametitle}
+}
+}
+
+\cs_new_protected:Npn \__gotham_rounded_box_progressbar:nnnn #1#2#3#4
+{
+\setlength{\gotham@progressinheadfoot}{
+#2#1 * \ratio{\insertframenumber pt}{\inserttotalframenumber pt}
+}
+
+\begin{beamercolorbox}[wd=#1, ht=1.035\gothamProgressHeadFootLineheight]{#3}
+\;\hfill
+\begin{tikzpicture}[rounded~corners=0.5\gothamProgressHeadFootLineheight, very~thin]
+\usebeamercolor{progress~bar~in~head/foot}
+
+\shade[top~color=progress~bar~in~head/foot.bg!65, bottom~color=progress~bar~in~head/foot.bg!65, middle~color=progress~bar~in~head/foot.bg]
+(0pt, 0pt) rectangle ++ (#2#1, \gothamProgressHeadFootLineheight)
+;
+
+\bool_if:NTF \l_gotham_progbar_advancement_tlbr_bool {
+\shade[draw=progress~bar~in~head/foot.fg, top~color=progress~bar~in~head/foot.fg!70, bottom~color=progress~bar~in~head/foot.fg!70, middle~color=progress~bar~in~head/foot.fg]
+(0pt, 0pt) rectangle ++ (\gotham@progressinheadfoot, \gothamProgressHeadFootLineheight)
+;
+}{
+\shade[draw=progress~bar~in~head/foot.fg, top~color=progress~bar~in~head/foot.fg!70, bottom~color=progress~bar~in~head/foot.fg!70, middle~color=progress~bar~in~head/foot.fg]
+(#2#1, \gothamProgressHeadFootLineheight) rectangle ++ (-\gotham@progressinheadfoot, -\gothamProgressHeadFootLineheight)
+;
+}
+
+\bool_if:NTF \l_gotham_pmfn_bool {
+\node at (#2#1/2, \gothamProgressHeadFootLineheight/2)
+[text~height=0.1pt, text~depth=0.05pt, inner~sep=0pt] %draw=red,
+{
+\usebeamercolor[fg]{normal~text}
+\raisebox{0.5\gothamProgressHeadFootLineheight+1.4pt}[0pt][0pt]{
+\hfuzz=#2#1
+\insertnavigation{#2#1}
+}
+}
+;
+}{
+}
+\end{tikzpicture}
+#4
+\hfill \;
+\end{beamercolorbox}
+}
+
+\defbeamertemplate{progress~bar~in~head/foot}{gotham~rounded~box}{
+\nointerlineskip
+\__gotham_rounded_box_progressbar:nnnn {\paperwidth}{0.93}{footline}{
+\hfill
+\raisebox{0.5\gothamProgressHeadFootLineheight-1.75pt}[0pt][0pt]{
+\fontsize{5pt}{0pt}\selectfont
+\usebeamercolor[fg]{normal~text}
+\fp_eval:n {round(\insertframenumber*100/\inserttotalframenumber,0)}\,\%
+}
+}
+}
+
+\defbeamertemplate{progress~bar~in~left}{gotham~rounded~box}{
+\nointerlineskip
+
+\settoheight{\gotham@temp@heightFrametitle}{\gotham@strut}
+\addtolength{\gotham@temp@heightFrametitle}{\gotham@frametitle@toppadding+\gotham@frametitle@bottompadding+\gothamProgressHeadFootLineheight}
+
+\setlength{\gotham@temp@PaperheightFrametitle}{\paperheight-\gotham@temp@heightFrametitle-\gothamFootlineHeight-\gothamFootlineDepth-0.25\baselineskip}
+
+\vspace{0.12275\paperheight}
+\rotatebox{90}{
+\__gotham_rounded_box_progressbar:nnnn {\gotham@temp@PaperheightFrametitle}{0.89}{footline}{
+\hfill
+\raisebox{0.5\gothamProgressHeadFootLineheight-1.75pt}[0pt][0pt]{
+\fontsize{5pt}{0pt}\selectfont
+\fp_eval:n {round(\insertframenumber*100/\inserttotalframenumber,0)}\,\%
+}
+}
+}
+}
+\defbeamertemplate{progress~bar~in~right}{gotham~rounded~box}{
+\nointerlineskip
+
+\settoheight{\gotham@temp@heightFrametitle}{\gotham@strut}
+\addtolength{\gotham@temp@heightFrametitle}{\gotham@frametitle@toppadding+\gotham@frametitle@bottompadding+\gothamProgressHeadFootLineheight}
+
+\setlength{\gotham@temp@PaperheightFrametitle}{\paperheight-\gotham@temp@heightFrametitle-\gothamFootlineHeight-\gothamFootlineDepth-0.25\baselineskip}
+
+\hspace{-\gothamProgressHeadFootLineheight-0.2pt}
+\vspace{\gotham@temp@heightFrametitle-27.75pt}
+\rotatebox{-90}{
+\__gotham_rounded_box_progressbar:nnnn {\gotham@temp@PaperheightFrametitle}{0.89}{footline}{
+\hfill
+\raisebox{0.5\gothamProgressHeadFootLineheight-1.75pt}[0pt][0pt]{
+\fontsize{5pt}{0pt}\selectfont
+\fp_eval:n {round(\insertframenumber*100/\inserttotalframenumber,0)}\,\%
+}
+}
+}
+}
+
+%%%%%%
+\newlength{\gothamProgressCircHeight}
+\setlength{\gothamProgressCircHeight}{1.8\baselineskip}
+\newlength{\gothamCounterCircleRadius}
+\setlength{\gothamCounterCircleRadius}{1.12ex}
+\newlength{\gothamProgressCircBorderWidth}
+\setlength{\gothamProgressCircBorderWidth}{1.65mm}
+
+%% Induced length used internally, but can still be tuned manually by inspired people.
+\newlength{\gothamProgressCircLogoRadius}
+\setlength{\gothamProgressCircLogoRadius}{1.2\gothamProgressCircHeight/2}
+\newlength{\gothamProgressCircLogoInnerRadius}
+\setlength{\gothamProgressCircLogoInnerRadius}{1.1\gothamProgressCircLogoRadius}
+\newlength{\gothamProgressCircLogoOuterRadius}
+\setlength{\gothamProgressCircLogoOuterRadius}{\gothamProgressCircLogoInnerRadius+\gothamProgressCircBorderWidth}
+\newlength{\gothamCounterRadius}
+\setlength{\gothamCounterRadius}{\gothamProgressCircLogoInnerRadius/2+\gothamProgressCircLogoOuterRadius/2}
+
+\fp_new:N \l_gotham_ratio_progresscircle_fp
+\fp_new:N \l_gotham_angle_counterradius_fp
+\fp_set:Nn \l_gotham_angle_counterradius_fp {
+\fpeval{ 2* asind (\gothamCounterCircleRadius / (2*\gothamCounterRadius)) }
+}
+
+%%%%%%
+\providecommand{\gothamInstituteLogoCircle}[1][4ex]{
+\includegraphics[height=#1]{gotham-logo.pdf}
+}
+
+\providecommand{\gothamProgressCircle}{
+\begin{tikzpicture}[remember~picture,overlay]
+\usebeamercolor{standin}
+\usebeamercolor{frametitle}
+\usebeamercolor{progress~bar~in~head/foot}
+
+\coordinate (localCenter);
+      \fill[fill=progress~bar~in~head/foot.bg] (localCenter) circle (\gothamProgressCircLogoOuterRadius);
+      % draw the inner circle
+      \fill[fill=frametitle.bg] (localCenter) circle (\gothamProgressCircLogoInnerRadius);
+\node at (localCenter) {\gothamInstituteLogoCircle[1.9\gothamProgressCircLogoRadius]};
+
+%% draw progress circle/bar
+\bool_if:NTF \l_gotham_ProgCircleMoving_bool {
+
+%% compute the angle for the progress circle
+\bool_if:NTF \l_gotham_progbar_advancement_tlbr_bool {
+\fp_set:Nn \l_gotham_ratio_progresscircle_fp {-(360)*\insertframenumber/\inserttotalframenumber }
+}{
+\fp_set:Nn \l_gotham_ratio_progresscircle_fp {(360)*(\insertframenumber/\inserttotalframenumber)}
+}
+
+\draw[
+color=progress~bar~in~head/foot.fg,
+line~width=0.6*\gothamProgressCircBorderWidth
+]
+(localCenter)
+++
+([
+xshift=\gothamCounterRadius
+]localCenter)
+arc[
+radius=\gothamCounterRadius,
+start~angle=0,
+end~angle={\fp_eval:n \l_gotham_ratio_progresscircle_fp}
+]
+;
+
+\fill[fill=frametitle.bg]
+([
+xshift={\gothamCounterRadius}
+]localCenter.center)
+circle (0.3*\gothamProgressCircBorderWidth)
+;
+\node[
+]
+(pagenumframe) at (
+[rotate=
+{\fp_eval:n {\l_gotham_ratio_progresscircle_fp}},
+xshift=\gothamCounterRadius
+]localCenter) {}
+;
+\filldraw[
+draw=progress~bar~in~head/foot.bg,
+fill=standin.bg,
+thick,
+]
+(pagenumframe) circle (\gothamCounterCircleRadius)
+;
+\node[at=(pagenumframe.center), anchor=center] {
+{\usebeamercolor[fg]{standin}\tiny\insertframenumber}
+};
+}{
+
+%% compute the angle for the progress circle
+\bool_if:NTF \l_gotham_progbar_advancement_tlbr_bool {
+\fp_set:Nn \l_gotham_ratio_progresscircle_fp {-(360-2\l_gotham_angle_counterradius_fp)*\insertframenumber/\inserttotalframenumber -\l_gotham_angle_counterradius_fp}
+}{
+\fp_set:Nn \l_gotham_ratio_progresscircle_fp {(360-2\l_gotham_angle_counterradius_fp)*(\insertframenumber/\inserttotalframenumber) +\l_gotham_angle_counterradius_fp}
+}
+
+\draw[
+color=progress~bar~in~head/foot.fg,
+line~width=0.6*\gothamProgressCircBorderWidth
+]
+(localCenter)
+++
+([rotate={\fp_eval:n {\l_gotham_angle_counterradius_fp}},
+xshift=\gothamCounterRadius
+]localCenter)
+arc[
+radius=\gothamCounterRadius,
+start~angle={\fp_eval:n \l_gotham_angle_counterradius_fp},
+end~angle={\fp_eval:n \l_gotham_ratio_progresscircle_fp}
+]
+;
+
+\fill[fill=frametitle.bg]
+([
+rotate={\fp_eval:n {\l_gotham_ratio_progresscircle_fp}}, xshift={\gothamCounterRadius}
+]localCenter.center)
+circle (0.3*\gothamProgressCircBorderWidth)
+;
+\node[] (leftick)
+at ([xshift={\gothamProgressCircLogoOuterRadius+1.25ex}]localCenter) {}
+;
+%% draw a line ticks
+\draw[
+color=frametitle.fg,
+fill=frametitle.fg,
+]
+([xshift=\gothamProgressCircLogoOuterRadius,yshift={-0.05ex}] localCenter)
+rectangle ([yshift={0.05ex}] leftick)
+;
+\node[ at=(leftick), anchor=west, inner~sep = 1pt,]
+{\usebeamercolor[fg]{frametitle}\tiny\inserttotalframenumber}
+;
+\node[
+]
+(pagenumframe) at ([xshift=\gothamCounterRadius]localCenter) {}
+;
+\filldraw[
+draw=progress~bar~in~head/foot.bg,
+fill=standin.bg,
+thick,
+]
+(pagenumframe) circle (\gothamCounterCircleRadius)
+;
+\node[at=(pagenumframe.center), anchor=center] {
+{\usebeamercolor[fg]{standin}\tiny\insertframenumber}
+};
+}
+\end{tikzpicture}
+\bool_if:NTF \l_gotham_ProgCircleMoving_bool {
+\hspace{\gothamProgressCircLogoOuterRadius+0.75ex}
+}{
+\hspace{\gothamProgressCircLogoOuterRadius+3ex}
+}
+   % \tikzexternalenable
+}
+
+%%%%
+\tl_new:N \l__gotham_out_tmp_pbar_tl
+\keys_define:nn { gotham / outer }{
+progressbar~position .choice:,
+progressbar~position .usage:n = { general },
+progressbar~position .default:n = { none },
+
+progressbar~position / none .code:n = {
+\tl_set:Nn \l__gotham_out_tmp_pbar_tl {none}
+
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} {
+}{
+\setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
+}
+\setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} {
+}{
+\setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
+}
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} {
+}{
+\setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
+}
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} {
+}{
+\setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
+}
+
+\__gotham_set_prop_template:nn{includeLogo/default}{gotham~square} 
+\setbeamertemplate{section~in~head/foot~shaded}[default/\prop_item:Nn \l__gotham_template_name_prop {section~in~head/foot~shaded/default}]
+\setbeamertemplate{section~in~head/foot}[default/\prop_item:Nn \l__gotham_template_name_prop {section~in~head/foot/default}]
+},
+progressbar~position / head .code:n = {
+\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {head} {
+} {
+\tl_set:Nn \l__gotham_out_tmp_pbar_tl {head}
+
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} {
+}{
+\setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
+}
+\setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} {
+}{
+\setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
+}
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} {
+}{
+\setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
+}
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} {
+}{
+\setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
+}
+
+\addtobeamertemplate{headline}{}{
+\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {head} {
+\usebeamertemplate*{progress~bar~in~head/foot}
+}{}
+}
+}
+},
+progressbar~position / frametitle .code:n = {
+\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {frametitle} {
+} {
+\tl_set:Nn \l__gotham_out_tmp_pbar_tl {frametitle}
+
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} {
+}{
+\setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
+}
+\setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} {
+}{
+\setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
+}
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} {
+}{
+\setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
+}
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} {
+}{
+\setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
+}
+
+\addtobeamertemplate{frametitle}{}{
+\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {frametitle} {
+\usebeamertemplate*{progress~bar~in~head/foot}
+}{}
+}
+}
+},
+progressbar~position / foot .code:n = {
+\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {footline} {
+} {
+\tl_set:Nn \l__gotham_out_tmp_pbar_tl {footline}
+
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} {
+}{
+\setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
+}
+\setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} {
+}{
+\setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
+}
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} {
+}{
+\setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
+}
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} {
+}{
+\setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
+}
+
+\addtobeamertemplate{footline}{}{
+\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {footline} {
+\usebeamertemplate*{progress~bar~in~head/foot}
+}{}
+}
+}
+},
+progressbar~position / circlehead .code:n = {
+\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {circlehead} {
+} {
+\tl_set:Nn \l__gotham_out_tmp_pbar_tl {circlehead}
+
+%%%\prop_put:Nnn \l__gotham_template_name_SAVE_prop {includeLogo/default} {gotham~square} % not needed after all.
+\__gotham_set_prop_template:nn{includeLogo/default}{gotham~circle}
+\__gotham_set_template:nn{section~in~head/foot~shaded}{default/gotham~secSubsec}
+\__gotham_set_template:nn{section~in~head/foot}{default/gotham~secSubsec}
+
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} {
+\addtobeamertemplate{headline}{}{
+\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {circlehead} {
+\begin{beamercolorbox}[wd=1.0\paperwidth, ht=2.5ex, dp=1.4ex, left]{headfoot}
+\usebeamerfont{section~in~head/foot}\hspace*{3.5ex}
+\usebeamertemplate{section~in~head/foot}
+\end{beamercolorbox}
+}{}
+}
+}{
+\__gotham_set_template:nn{headline}{default/gotham~section}
+}
+\setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} {
+}{
+\setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
+}
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} {
+}{
+\setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
+}
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} {
+}{
+\setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
+}
+}
+},
+progressbar~position / left .code:n = {
+\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {left} {
+} {
+\tl_set:Nn \l__gotham_out_tmp_pbar_tl {left}
+
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} {
+}{
+\setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
+}
+\setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} {
+}{
+\setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
+}
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} {
+}{
+\setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
+}
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} {
+}{
+\setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
+}
+
+\addtobeamertemplate{sidebar~left}{}{
+\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {left} {
+\usebeamertemplate*{progress~bar~in~left}
+}{}
+}
+}
+},
+progressbar~position / right .code:n = {
+\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {right} {
+} {
+\tl_set:Nn \l__gotham_out_tmp_pbar_tl {right}
+
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} {
+}{
+\setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
+}
+\setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} {
+}{
+\setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
+}
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} {
+}{
+\setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
+}
+\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} {
+}{
+\setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
+}
+
+\addtobeamertemplate{sidebar~right}{}{
+\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {right} {
+\usebeamertemplate*{progress~bar~in~right}
+}{}
+}
+}
+},
+
+progressbar~position / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'#1'~is~unknown~for~the~(known)~option~'progressbar~position',~so~being~ignored. }{helping~message: progressbar~position / unknown} },
+}
+
+%%%%
+\keys_define:nn { gotham / outer }{
+progressbar~style .choice:,
+progressbar~style .usage:n = { general },
+progressbar~style .default:n = { rectangle },
+
+progressbar~style / rectangle .code:n = {
+\__gotham_set_template:nn{progress~bar~in~head/foot}{gotham~rectangle}
+\__gotham_set_template:nn{progress~bar~in~left}{gotham~rectangle}
+\__gotham_set_template:nn{progress~bar~in~right}{gotham~rectangle}
+},
+
+progressbar~style / rounded~box .code:n = {
+\__gotham_set_template:nn{progress~bar~in~head/foot}{gotham~rounded~box}
+\__gotham_set_template:nn{progress~bar~in~left}{gotham~rounded~box}
+\__gotham_set_template:nn{progress~bar~in~right}{gotham~rounded~box}
+},
+
+progressbar~style / moving~circle .code:n = {
+\bool_set_true:N \l_gotham_ProgCircleMoving_bool
+},
+
+progressbar~style / fixed~circle .code:n = {
+\bool_set_false:N \l_gotham_ProgCircleMoving_bool
+},
+
+progressbar~style / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'#1'~is~unknown~for~the~(known)~option~'progressbar~style',~so~being~ignored. }{helping~message: progressbar~style / unknown} },
+}
+
+%%%%
+\keys_define:nn { gotham / outer }{
+progressbar~advancement .choice:,
+progressbar~advancement .usage:n = { general },
+progressbar~advancement .default:n = { tlbr },
+
+progressbar~advancement / tlbr .code:n = {
+\bool_set_true:N \l_gotham_progbar_advancement_tlbr_bool
+},
+progressbar~advancement / TLBR .code:n = {
+\bool_set_true:N \l_gotham_progbar_advancement_tlbr_bool
+},
+
+progressbar~advancement / brlt .code:n = {
+\bool_set_false:N \l_gotham_progbar_advancement_tlbr_bool
+},
+progressbar~advancement / BRLT .code:n = {
+\bool_set_false:N \l_gotham_progbar_advancement_tlbr_bool
+},
+
+progressbar~advancement / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'#1'~is~unknown~for~the~(known)~option~'progressbar~advancement',~so~being~ignored. }{helping~message: progressbar~advancement / unknown} },
+}
+
+%%%%
+\keys_define:nn { gotham / outer }{
+progressbar~mfn .choice:,
+progressbar~mfn .usage:n = { general },
+progressbar~mfn .default:n = { off },
+
+progressbar~mfn / true .code:n = {
+\bool_set_true:N \l_gotham_pmfn_bool
+
+\__gotham_set_template:nn{section~in~head/foot~shaded}{default/empty}
+\__gotham_set_template:nn{section~in~head/foot}{default/empty}
+\renewcommand{\gothamPatchSectionbox}{
+\ht\beamer@sectionbox=0.ex
+\dp\beamer@sectionbox=0.ex
+}
+},
+progressbar~mfn / on .code:n = {
+\bool_set_true:N \l_gotham_pmfn_bool
+
+\__gotham_set_template:nn{section~in~head/foot~shaded}{default/empty}
+\__gotham_set_template:nn{section~in~head/foot}{default/empty}
+\renewcommand{\gothamPatchSectionbox}{
+\ht\beamer@sectionbox=0.ex
+\dp\beamer@sectionbox=0.ex
+}
+},
+progressbar~mfn / enable .code:n = {
+\bool_set_true:N \l_gotham_pmfn_bool
+
+\__gotham_set_template:nn{section~in~head/foot~shaded}{default/empty}
+\__gotham_set_template:nn{section~in~head/foot}{default/empty}
+\renewcommand{\gothamPatchSectionbox}{
+\ht\beamer@sectionbox=0.ex
+\dp\beamer@sectionbox=0.ex
+}
+},
+
+progressbar~mfn / false .code:n = { \bool_set_false:N \l_gotham_pmfn_bool },
+progressbar~mfn / off .code:n = { \bool_set_false:N \l_gotham_pmfn_bool },
+progressbar~mfn / disable .code:n = { \bool_set_false:N \l_gotham_pmfn_bool },
+
+progressbar~mfn / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'#1'~is~unknown~for~the~(known)~option~'progressbar~mfn',~so~being~ignored. }{helping~message: progressbar~mfn / unknown} },
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\keys_set:nn { gotham / outer } {
+sidebar~canvas~right~template, sidebar~canvas~left~template,
+edging~default,
+frametitle~template, framesubtitle~template, frametitle~continuation~template,
+numbering,
+rotateFooter~default,
+footer~template,
+mini~frames~shape, mini~frames~bundle,
+mini~frames~compress,
+mini~frames~nav~spreading,
+mini~frames~nav~sectioning,
+mini~frames~nav~position,
+progressbar~position, progressbar~style, progressbar~advancement, progressbar~mfn,
+}
+
+\ProcessKeyOptions[ gotham / outer ]
+
+%% 
+%% Adapted from classic "A model .dtx file" by Joseph Wright
+%% https://www.texdev.net/2009/10/06/a-model-dtx-file/
+%%
+%% End of file `beamerouterthemegotham.sty'.

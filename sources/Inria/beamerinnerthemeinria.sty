@@ -1,300 +1,536 @@
-%% ---------------------------------------------------------------------------
-%% Copyright 2019 Thibaud TOULLIER, Romain NOËL
+%% -------------------------------------------------------------------
+%% Copyright 2024 Romain NOËL
 %%
 %% Based on the Inria theme presentation ppt and graphical charter
-%% ---------------------------------------------------------------------------
+%% -------------------------------------------------------------------
+
+\ProvidesExplPackage{beamerinnerthemegothamInria}{2024-10-15}{1.0.0.a}{Inria inner theme}
 
 %\mode<presentation>
 
-
-
-
-%% Section %%%
-%%%%%%%%%%%%%%
-
-
-\defbeamertemplate{background canvas}{toc inria}{
-	\tikz[overlay,remember picture]{
-		\node [rectangle, fill=InriaDarkgray, minimum width=14\paperwidth/16, minimum height=7\paperheight/9] (box) at ([shift={(0,0)}]current page.center) {};
-		% \fill[color=InriaDarkgray] { (1.,-1.) rectangle (15.,-8.) };% horizontal rectangle
-	}%
-}
-
-\defbeamertemplate{frametitle}{toc inria}[1][]
-{%
-	\nointerlineskip%
-	\hspace*{-\leftskip-\gotham@frametitle@leftpadding+1.45ex}%
-	\begin{beamercolorbox}[%
-			wd=0.3\paperwidth,%
-			sep=0pt,%
-		]{frametitleSection}%
-		\gotham@frametitlestrut@start%
-		\parbox[c][4.5cm][c]{0.3\paperwidth}{%
-			\centering
-			\usebeamerfont{frametitleToc}
-			\insertframetitle%
-		}
-		\nolinebreak%
-		\gotham@frametitlestrut@end%
-	\end{beamercolorbox}%
-	\vspace*{-5.25cm}
-}
-
-\defbeamertemplate{frametitle}{section inria}[1][]
-{%
-	\nointerlineskip%
-	\hspace*{-\leftskip-\gotham@frametitle@leftpadding+1.45ex}%
-	\begin{beamercolorbox}[%
-			wd=0.3\paperwidth,%
-			sep=0pt,%
-			leftskip=0.5\gotham@frametitle@leftpadding,%
-			% rightskip=\gotham@frametitle@rightpadding,%
-		]{frametitleSection}%
-		\gotham@frametitlestrut@start%
-		\parbox[c][4.5cm][c]{0.3\paperwidth}{%
-			\centering
-			\usebeamerfont{frametitleSection}
-			\insertframetitle%
-		}
-		\nolinebreak%
-		\gotham@frametitlestrut@end%
-	\end{beamercolorbox}%
-	\vspace*{-5.25cm}
-}
-
-\setlength{\sectionhoffset}{7em}
-
-
-\defbeamertemplate*{section frame}{inria}[1][]%
-{%
-	% \usebeamertemplate*{section page}% already included
-	\setbeamertemplate{background canvas}[section gotham]%
-	\setbeamertemplate{frametitle}[section inria]%
-	% \setbeamertemplate{sidebar canvas right}[gotham filigrane]%
-	\setbeamertemplate{sidebar canvas right}[empty]%
-	\setbeamertemplate{footline}[empty]%
-	\setbeamertemplate{logo}[empty]%
-}%
-
-\addtobeamertemplate{section page}{%pre-text
-	\frametitle{\two@digits{\insertsectionnumber}}
-}{%post-text
-}
-
-\defbeamertemplate*{subsection frame}{inria}[1][]%
-{%
-	% \usebeamertemplate*{subsection page}% already included
-	\setbeamertemplate{section frame}[section inria]%
-	\usebeamertemplate{section frame}%
-}%
-
-\addtobeamertemplate{subsection page}{%pre-text
-	\frametitle{\two@digits{\insertsectionnumber}}
-}{%post-text
-}
-
-\defbeamertemplate*{subsubsection frame}{inria}[1][]%
-{%
-	% \usebeamertemplate*{subsubsection page}% already included
-	\setbeamertemplate{section frame}[section uge]%
-	\usebeamertemplate{section frame}%
-}%
-
-\addtobeamertemplate{subsubsection page}{%pre-text
-	\frametitle{\two@digits{\insertsectionnumber}}
-}{%post-text
-}
-
-\defbeamertemplate*{toc page}{inria}[1][]
-{%
-	\addtolength{\leftskip}{12em} %
-	\setbeamertemplate{background canvas}[toc inria]%
-	\setbeamertemplate{frametitle}[toc inria]%
-	\setbeamercolor{section in toc}{fg=pale}%
-	\setbeamercolor{subsection in toc}{fg=pale}%
-	\setbeamercolor{subsubsection in toc}{fg=pale}%
-}
-
-
-\setbeamertemplate{section in toc}{%
-	{\color{InriaRed}{\two@digits{\inserttocsectionnumber}}.}~\inserttocsection%
-	\\%
-}
-\setbeamertemplate{subsection in toc}{%
-	\quad{\color{InriaRed}{\two@digits{\inserttocsectionnumber}}.\inserttocsubsectionnumber.}~\inserttocsubsection%
-	\\%
-}
-\setbeamertemplate{subsubsection in toc}{%
-	\qquad{\color{InriaRed}{\two@digits{\inserttocsectionnumber}}.\inserttocsubsectionnumber.\inserttocsubsubsectionnumber.}~\inserttocsubsubsection%
-	\\%
-}
-
-\defbeamertemplate*{toc section frame}{inria}[1][]%
-{%
-	\addtolength{\leftskip}{12em} %
-	\setbeamertemplate{background canvas}[toc inria]%
-	\setbeamertemplate{frametitle}[toc inria]%
-	\setbeamercolor{section in toc}{fg=orange}%
-	% \setbeamercolor{section in toc shaded}{fg=gray}%
-	\setbeamercolor{subsection in toc}{fg=orange}%
-	% \setbeamercolor{subsection in toc shaded}{fg=gray}%
-	\setbeamercolor{subsubsection in toc}{fg=orange}%
-	% \setbeamercolor{subsubsection in toc shaded}{fg=gray}%
-	\setbeamertemplate{footline}[empty]%
-}%
-
-\defbeamertemplate*{toc subsection frame}{inria}[1][]%
-{%
-	\addtolength{\leftskip}{12em} %
-	\setbeamertemplate{background canvas}[toc inria]%
-	\setbeamertemplate{frametitle}[toc inria]%
-	\setbeamercolor{section in toc}{fg=orange}%
-	% \setbeamercolor{section in toc shaded}{fg=gray}%
-	\setbeamercolor{subsection in toc}{fg=orange}%
-	% \setbeamercolor{subsection in toc shaded}{fg=gray}%
-	\setbeamercolor{subsubsection in toc}{fg=orange}%
-	% \setbeamercolor{subsubsection in toc shaded}{fg=gray}%
-	\setbeamertemplate{footline}[empty]%
-}%
-
-\defbeamertemplate*{toc subsubsection frame}{inria}[1][]%
-{%
-	\addtolength{\leftskip}{12em} %
-	\setbeamertemplate{background canvas}[toc inria]%
-	\setbeamertemplate{frametitle}[toc inria]%
-	\setbeamercolor{section in toc}{fg=orange}%
-	% \setbeamercolor{section in toc shaded}{fg=gray}%
-	\setbeamercolor{subsection in toc}{fg=orange}%
-	% \setbeamercolor{subsection in toc shaded}{fg=gray}%
-	\setbeamercolor{subsubsection in toc}{fg=orange}%
-	% \setbeamercolor{subsubsection in toc shaded}{fg=gray}%
-	\setbeamertemplate{footline}[empty]%
-}%
-
-
 %%%
 %%%	Title and part pages.
-%==============================================================================
+%=====================================================================
 
 %% Title %%%
 %%%%%%%%%%%%
 
 
-% The command to insert the institute logo on title page
-% \newcommand{\Inriatitlelogo}{%
-% 	\ifbool{reversedColor}{% Dark true 
-% 		\ifscreenratio{% 169
-% 			\includegraphics[height=0.08\paperheight]{\PathSOinria/logos/inr_logo_blanc.pdf}%%
-% 		}{% 43
-% 			\includegraphics[height=0.065\paperheight]{\PathSOinria/logos/inr_logo_blanc.pdf}%%
-% 		}%
+% % The command to insert the institute logo on title page
+% \newcommand{\UGEtitlelogo}{
+% 	\ifbool{darkBG}{% Dark true 
+% 		\ifnum\insertaspectratio=169 % 16:9
+% 			\includegraphics[height=0.08\paperheight]{\PathSOuge/logos/UGE-logo.pdf}
+% 		\else
+% 		\ifnum\insertaspectratio=43 % 4:3
+% 			\includegraphics[height=0.065\paperheight]{\PathSOuge/logos/UGE-logo.pdf}
+% 		\fi% end 4:3
+% 		\fi% end 19:9
 % 	}{% Light
-% 		\ifscreenratio{% 169
-% 			\includegraphics[height=0.08\paperheight]{\PathSOinria/logos/inr_logo_blanc.pdf}%%
-% 		}{% 43
-% 			\includegraphics[height=0.065\paperheight]{\PathSOinria/logos/inr_logo_blanc.pdf}%%
-% 		}%
-% 	}%
+% 		\ifnum\insertaspectratio=169 % 16:9
+% 			\includegraphics[height=0.08\paperheight]{\PathSOuge/logos/UGE-logo_white.pdf}
+% 		\else
+% 		\ifnum\insertaspectratio=43 % 4:3
+% 			\includegraphics[height=0.065\paperheight]{\PathSOuge/logos/UGE-logo_white.pdf}
+% 		\fi% end 4:3
+% 		\fi% end 19:9
+% 	}
 % }
 
-% The command to insert the background title page
-% \newcommand{\Inriatitlepage}{%
-% 	\ifbool{reversedColor}{% Dark true 
-% 		\ifscreenratio{% 169
-% 			% \includegraphics[width=\paperwidth, height=\paperheight]{\PathSOinria/logos/pattern-titlepage-reverse.pdf}%%
-% 		}{% 43
-% 			% \includegraphics[width=\paperwidth, height=\paperheight]{\PathSOinria/logos/pattern-titlepage-reverse-43.pdf}%%
-% 		}%	
+% % The command to insert the background title page
+% \newcommand{\UGEtitlepage}{
+% 	\ifbool{darkBG}{% Dark true 
+% 		\ifnum\insertaspectratio=169 % 16:9
+% 			\includegraphics[width=\paperwidth, height=\paperheight]{\PathSOuge/logos/pattern-titlepage-reverse.pdf}
+% 		\else
+% 		\ifnum\insertaspectratio=43 % 4:3
+% 			\includegraphics[width=\paperwidth, height=\paperheight]{\PathSOuge/logos/pattern-titlepage-reverse-43.pdf}
+% 		\fi% end 4:3
+% 		\fi% end 19:9	
 % 	}{% Light
-% 		\ifscreenratio{% 169
-% 			% \includegraphics[width=\paperwidth, height=\paperheight]{\PathSOinria/logos/pattern-titlepage.pdf}%%
-% 		}{% 43
-% 			% \includegraphics[width=\paperwidth, height=\paperheight]{\PathSOinria/logos/pattern-titlepage43.pdf}%%
-% 		}%
-% 	}%
+% 		\ifnum\insertaspectratio=169 % 16:9
+% 			\includegraphics[width=\paperwidth, height=\paperheight]{\PathSOuge/logos/pattern-titlepage.pdf}
+% 		\else
+% 		\ifnum\insertaspectratio=43 % 4:3
+% 			\includegraphics[width=\paperwidth, height=\paperheight]{\PathSOuge/logos/pattern-titlepage43.pdf}
+% 		\fi% end 4:3
+% 		\fi% end 19:9
+% 	}
 % }
 
-\defbeamertemplate*{title graphic}{inria}{
-	\inserttitlegraphic%
-}
 
-\pgfdeclareimage[width=2.1cm]{InriaLogoSection}{\PathSOinria/logos/inr_logo_rouge.pdf}%
+\pgfdeclareimage[width=3.1cm]{InriaLogoSection}{\PathSOinria/logos/inr_logo_blanc.pdf}
 
 % The title page template
-\defbeamertemplate*{title page}{inria}[1][]
-{%
-	\setbeamertemplate{background canvas}[toc inria]%
-	\usebeamertemplate{background canvas}%[toc inria]%
-	%
-	% \setbeamertemplate{frametitle}[toc inria]%
-	\tikz[overlay,remember picture]{
-		\node [rectangle, fill=InriaRed, anchor=north west, minimum width=0.3\paperwidth+1pt, minimum height=4.5cm+1pt] (box) at ([shift={(-1pt,1pt)}]current page.north west) {};
-	}%
-	\tikz[overlay,remember picture]{
-		\node [rectangle, anchor=north west, minimum width=0.3\paperwidth, minimum height=4.5cm] %, draw
-		 	(box) at (current page.north west) 
-			{\pgfuseimage{InriaLogoSection}};
-	}%
-	\\
-	\addtolength{\leftskip}{13em}%
-	% \addtolength{\rightskip}{13em}%
-	\addtolength{\gotham@titleseparator@linewidth}{-15em}
-	{%
-		\ifbool{reversedColor}{ % Dark true 
-			\setbeamercolor{normal text}{fg=dark, }%
+\defbeamertemplate{title~page}{inria~old}{
+	% reuse the background from TOC
+	\setbeamertemplate{background~canvas}[toc/inria~old]
+	\usebeamertemplate{background~canvas}
+	
+	% red rectangle on top left corner
+	\tikz[overlay, remember~picture]{
+		\node [rectangle, fill=InriaRed, anchor=north~west, minimum~width=0.3\paperwidth+1pt, minimum~height=4.5cm+1pt, align=center] 
+		(box) at ([shift={(-1pt,1pt)}]current~page.north~west) { \pgfuseimage{InriaLogoSection}\\\vspace{25pt}};
+	}
+	\tikz[overlay, remember~picture]{
+		\node [align=left] at (current~page.south~west){
+			\ifx\inserttitlegraphic\@empty\else\inserttitlegraphic\fi
+		};
+	}
+	
+	\vspace{-11pt}
+	\addtolength{\leftskip}{13em}
+	\dim_add:Nn \l__gotham_titleseparator_width_dim {-15em}
+	{
+		\ifbool{darkBG}{ % Dark true 
+			\setbeamercolor{normal~text}{fg=colorDark, }
 		}{% Light
-			\setbeamercolor{normal text}{fg=pale, }%
-		}%
+			\setbeamercolor{normal~text}{fg=colorPale, }
+		}
 		% \centering%
 		\vfill%
-		\ifx\inserttitle\@empty\else\quad\usebeamertemplate*{title}\fi%
-		\ifx\insertsubtitle\@empty\else\quad\usebeamertemplate*{subtitle}\fi%
-		% \hspace*{-6pt}\hbox{\hspace{6pt}
-			\usebeamertemplate*{title separator}
-		% }%\hspace{3pt}
-		\ifx\beamer@shortauthor\@empty\else\usebeamertemplate*{author}\fi%
-		\ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi%
-		\ifx\insertinstitute\@empty\else{%
-			\parbox{0.9\textwidth-13em}{%
-				\raggedright\usebeamertemplate*{institute}%
-			}% 
-		}\fi%
-		\vfill%
-		\vbox{}%
-	}%
-	\tikz[overlay]{
-		\node {
-			\ifx\inserttitlegraphic\@empty\else\usebeamertemplate*{title graphic}\fi%
-		};%
-	}%
-}% end \defbeamertemplate{title page}{inria}
+		\ifx\inserttitle\@empty\else\quad\usebeamertemplate*{title}\fi
+		\ifx\insertsubtitle\@empty\else\quad\usebeamertemplate*{subtitle}\fi
+		\usebeamertemplate*{title~separator}
+		\ifx\beamer@shortauthor\@empty\else\usebeamertemplate*{author}\fi
+		\ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
+		\ifx\insertinstitute\@empty\else{
+			\parbox{0.9\textwidth-13em}{
+				\raggedright\usebeamertemplate*{institute}
+			}
+		}\fi
+		\vfill
+		\vbox{}
+	}
+}
+
+\defbeamertemplate{title~page}{inria~RF}{
+	%
+	\hspace*{-.10\paperwidth+4ex}
+	%
+	\begin{tikzpicture}[
+		title/.style={text=colorDark,
+			anchor=north~west, align=left,
+			text~width={\paperwidth -2*0.135\paperwidth},
+			inner~sep=0pt, outer~sep=0pt},
+		mainlogo/.style={anchor=north~west,
+			outer~sep=0pt, inner~sep=0pt},
+	]
+		\useasboundingbox (0,0) rectangle (\paperwidth,\paperheight);
+		\node [mainlogo] at (.05\paperwidth, \paperheight-.05\paperwidth+1pt) 
+			{\includegraphics[width=.3\textwidth]{\PathSOinria/logos/RF-INria_Bloc-marque.png}}
+		;
+		\node [align=left] at (current~page.south~west){
+			\ifx\inserttitlegraphic\@empty\else\inserttitlegraphic\fi
+		};
+
+		\node [title] at (.05\paperwidth+1ex+0.15\textwidth, .74\paperheight) {
+				{\Huge\textbf{\inserttitle}}\\
+				{\includegraphics[width=6em]{\PathSOinria/logos/Filet-7pt.pdf}}\\[2ex]
+				{\Large \insertsubtitle}\\[3ex]
+				{\insertauthor}\\
+				\ifx\insertdate\@empty\else{\centering\usebeamertemplate*{date}}\fi
+				\ifx\insertinstitute\@empty\else{
+					\parbox{0.9\textwidth-13em}{
+						\raggedright\usebeamertemplate*{institute}
+					}
+				}\fi
+		};
+	\end{tikzpicture}
+}
 
 
-%% Environments styles %%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %% Standout %%%
+% %%%%%%%%%%%%%%%
 
-%%% Itemize environments.
+\defbeamertemplate{standout}{inria}{
+	% \setkeys{beamerframe}{c}
+	% \setkeys{beamerframe}{noframenumbering}
+	% \centering
 	
-	\setbeamertemplate{itemize item}{${\bullet}$}
-	\setbeamertemplate{itemize subitem}[triangle]
-	\setbeamertemplate{itemize subsubitem}{-}
+	\setbeamertemplate{background~canvas}[standout/\prop_item:Nn \l__gotham_template_name_prop {background~canvas/standout}]
+	% \usebeamertemplate{background~canvas}%[standout/gotham]
+	\usebeamerfont{standout}
+	% if the background color is switched, then change foreground (font) color.
+	\ifbeamercolorempty[bg]{primary~palette}{
+		%true : empty background (transparent)
+		\setbeamercolor{background~canvas}{
+			use=primary~palette,
+			bg=primary~palette.fg 
+		}
+	}{
+		%false : background not empty (dark or light)
+		\setbeamercolor{background~canvas}{
+			use=primary~palette,
+			bg=primary~palette.bg
+		}
+	}
+	\setbeamercolor{local~structure}{fg=primary~palette.bg}
+	\usebeamercolor[fg]{primary~palette}
+	\setbeamercolor{frametitle}{use=primary~palette, fg=primary~palette.fg}
+}
+
+
+% %% TOC %%%
+% %%%%%%%%%%
+
+\defbeamertemplate{background~canvas}{toc/inria~old}{
+	\tikz[overlay, remember~picture]{
+		% dark rectangle in the center of the page
+		\node [rectangle, fill=InriaDarkgray, 
+			minimum~width=15\paperwidth/16, minimum~height=7.5\paperheight/9
+		] (box) at ([shift={(0,-0.222)}]current~page.center) {};
+	}
+}
+
+\defbeamertemplate{frametitle}{toc/inria~old}{
+	\nointerlineskip
+	\hspace*{-\leftskip-3\gotham@frametitle@leftpadding}
+	\begin{beamercolorbox}[
+			wd=0.3\paperwidth,
+			sep=0pt,
+		]{frametitleSection}
+		\gotham@frametitlestrut@start
+		\parbox[c][4.5cm][c]{0.3\paperwidth}{
+			\centering
+			\usebeamerfont{frametitleToc}
+			\insertframetitle
+		}
+		\nolinebreak
+		\gotham@frametitlestrut@end
+	\end{beamercolorbox}
+	\vspace*{-5.25cm}
+}
+
+\defbeamertemplate{part~in~toc}{inria~old}{
+	{\color{InriaRed}{\two@digits{\inserttocpartnumber}}.}~\inserttocpart
+	\\
+}
+\defbeamertemplate{section~in~toc}{inria~old}{
+	{\color{InriaRed}{\two@digits{\inserttocsectionnumber}}.}~\inserttocsection
+	\\
+}
+\defbeamertemplate{subsection~in~toc}{inria~old}{
+	\quad{\color{InriaRed}{\two@digits{\inserttocsectionnumber}}.\inserttocsubsectionnumber.}~\inserttocsubsection
+	\\
+}
+\defbeamertemplate{subsubsection~in~toc}{inria~old}{
+	\qquad{\color{InriaRed}{\two@digits{\inserttocsectionnumber}}.\inserttocsubsectionnumber.\inserttocsubsubsectionnumber.}~\inserttocsubsubsection
+	\\
+}
+
+\defbeamertemplate{toc~page}{inria~old}{
+	\setbeamertemplate{logo}[empty]
+
+	\addtolength{\leftskip}{4.25cm}
+	\setbeamercolor{section~in~toc}{use=standout, fg=standout.fg}
+	\setbeamercolor{subsection~in~toc}{use=standout, fg=standout.fg}
+	\setbeamercolor{subsubsection~in~toc}{use=standout, fg=standout.fg}
+	\setbeamertemplate{part~in~toc}[inria~old]
+	\setbeamertemplate{section~in~toc}[inria~old]
+	\setbeamertemplate{subsection~in~toc}[inria~old]
+	\setbeamertemplate{subsubsection~in~toc}[inria~old]
+
+	\setbeamertemplate{background~canvas}[toc/inria~old]
+	\setbeamercolor{frametitleSection}{bg=InriaRed}
+	\setbeamercolor{frametitle}{use=standin, fg=standin.fg, bg=}
+	\setbeamertemplate{frametitle}[toc/inria~old]
+}
+
+
+\defbeamertemplate{section~in~toc}{inria~RF}{
+	\textbf{{{\inserttocsectionnumber}.}~\inserttocsection}
+	\\
+}
+\defbeamertemplate{subsection~in~toc}{inria~RF}{
+	\quad~\inserttocsubsection	\\
+}
+\defbeamertemplate{subsubsection~in~toc}{inria~RF}{
+	\qquad~\inserttocsubsubsection \\
+}
+
+\defbeamertemplate{toc~page}{inria~RF}{
+	\addtolength{\leftskip}{1cm}
+	% \setbeamertemplate{part~in~toc}[inria~old]
+	\setbeamertemplate{section~in~toc}[inria~RF]
+	\setbeamertemplate{subsection~in~toc}[inria~RF]
+	\setbeamertemplate{subsubsection~in~toc}[inria~RF]
+}
+
+
+% %% Section %%%
+% %%%%%%%%%%%%%%
+
+\defbeamertemplate{part~frame}{inria~old}{
+	% \setbeamertemplate{background~canvas}[section/inria]
+	\setbeamertemplate{sidebar~canvas~right}[empty]
+	\setbeamertemplate{footline}[empty]
+	\setbeamertemplate{logo}[empty]
 	
-%%% Enumerate environments.
-	% metropolis style
-%%% Description environments.
-	% metropolis style
-%%% Block environments.
-	% metropolis style
-%%% Theorem and proof environments.
-	% metropolis style + corrections from MyPackages
-%%% Figures and tables.
-	% metropolis style
-%%% Footnotes.
-	% metropolis style + corrections from MyPackages
-%%% Bibliography entries.
-	% metropolis style + corrections from MyPackages
+	% \addtolength{\leftskip}{4.25cm}
+	\setlength{\sectionhoffset}{7em}
+	\setbeamercolor{frametitleSection}{bg=InriaRed}
+	\setbeamercolor{frametitle}{use=standin, fg=standin.fg, bg=}
+	\setbeamertemplate{frametitle}[section/inria~old]
+
+	\setbeamertemplate{part~page}[inria~old]
+	% \usebeamertemplate*{section~page}% activated automatically
+}
+
+\defbeamertemplate{frametitle}{section/inria~old}{
+	\nointerlineskip
+	\hspace*{-\leftskip-3\gotham@frametitle@leftpadding}
+	\begin{beamercolorbox}[
+			wd=0.3\paperwidth,
+			sep=0pt,
+		]{frametitleSection}
+		\gotham@frametitlestrut@start
+		\parbox[c][4.5cm][c]{0.3\paperwidth}{
+			\centering
+			\usebeamerfont{frametitleSection}
+			\insertframetitle
+		}
+		\nolinebreak
+		\gotham@frametitlestrut@end
+	\end{beamercolorbox}
+	\vspace*{-5.25cm}
+}
+
+\defbeamertemplate{background~canvas}{section/inria~old}{}
+
+\defbeamertemplate{section~page}{inria~old}{
+	\frametitle{\two@digits{\insertsectionnumber}}
+	\centering
+	\hspace*{\sectionhoffset}
+	\begin{minipage}{22em}
+		\raggedright
+		\usebeamercolor[fg]{section~title}
+		\usebeamerfont{section~title}
+		\insertsectionhead
+	\end{minipage}
+	\par
+}
+
+\defbeamertemplate{section~frame}{inria~old}{
+	% \setbeamertemplate{part~frame}{inria~old}
+	\usebeamertemplate{part~frame}
+	\setbeamertemplate{section~page}[inria~old]
+	% \usebeamertemplate*{section~page}% activated automatically
+}
+
+\defbeamertemplate{subsection~page}{inria~old}{
+	\frametitle{\two@digits{\insertsectionnumber}}
+	\centering
+	\hspace*{\sectionhoffset}
+	\vspace{-4ex}
+	\begin{minipage}{22em}
+		\raggedright
+		{
+			\usebeamercolor[fg]{section~title}
+			\usebeamerfont{section~title}
+			\insertsectionhead
+		}\\[1ex]
+		\par
+		\usebeamertemplate*{subsection~title}
+	\end{minipage}
+	\par
+}
+
+\defbeamertemplate{subsection~frame}{inria~old}{
+	% \setbeamertemplate{part~frame}{inria~old}
+	\usebeamertemplate{part~frame}
+	\setbeamertemplate{subsection~page}[inria~old]
+	% \usebeamertemplate*{subsection~page}% activated automatically
+}
+
+\defbeamertemplate{subsubsection~page}{inria~old}{
+	\frametitle{\two@digits{\insertsectionnumber}}
+	\centering
+	\hspace*{\sectionhoffset}
+	\begin{minipage}{22em}
+		\raggedright
+		{
+			\usebeamercolor[fg]{section~title}
+			\usebeamerfont{section~title}
+			\insertsectionhead
+		}
+		\par
+		\usebeamertemplate*{subsection~title}
+		\par
+		\usebeamertemplate*{subsubsection~title}
+	\end{minipage}
+	\par
+}
+
+\defbeamertemplate{subsubsection~frame}{inria~old}{
+	% \setbeamertemplate{part~frame}{inria~old}
+	\usebeamertemplate{part~frame}
+	\setbeamertemplate{subsubsection~page}[inria~old]
+	% \usebeamertemplate*{subsubsection~page}% activated automatically
+}
+
+\defbeamertemplate{section~page}{inria~RF}{
+	% \vspace*\fullpageinnervmargin
+	% \hspace*{-\fullpageinnerhmargin}
+	\begin{tikzpicture}[
+		title/.style={
+			draw=none, text=InriaDarkgray,
+			anchor=center, align=center,
+			text~width={\dimexpr\paperwidth-.1\paperwidth},
+			inner~sep=0pt, outer~sep=0pt
+		},
+	]
+		\useasboundingbox (0,0) rectangle (\paperwidth,\paperheight);
+		\node [title] at (\textwidth/2,.07\paperheight+\textheight/2) {
+			\begin{center}
+				\textbf{\Large
+				\two@digits{\insertsectionnumber} \\[1ex]
+				\insertsection} \\[1ex]
+				{\includegraphics[width=6em]{\PathSOinria/logos/Filet-7pt.pdf}}
+			\end{center}
+		};
+	\end{tikzpicture}
+}
+
+\defbeamertemplate{subsection~page}{inria~RF}{
+	% \vspace*\fullpageinnervmargin
+	% \hspace*{-\fullpageinnerhmargin}
+	\begin{tikzpicture}[
+		title/.style={
+			draw=none, text=InriaDarkgray,
+			anchor=center, align=center,
+			text~width={\dimexpr\paperwidth-.1\paperwidth},
+			inner~sep=0pt, outer~sep=0pt
+		},
+	]
+		\useasboundingbox (0,0) rectangle (\paperwidth,\paperheight);
+		\node [title] at (\textwidth/2,.07\paperheight+\textheight/2) {
+			\begin{center}
+				\textbf{\Large
+				\two@digits{\insertsectionnumber} \\[1ex]
+				\insertsection} \\[1ex]
+				{\includegraphics[width=6em]{\PathSOinria/logos/Filet-7pt.pdf}} \\[1ex]
+				\textbf{\two@digits{\insertsubsectionnumber}
+				\ \insertsubsection}
+			\end{center}
+		};
+	\end{tikzpicture}
+}
+
+\defbeamertemplate{subsubsection~page}{inria~RF}{
+	% \vspace*\fullpageinnervmargin
+	% \hspace*{-\fullpageinnerhmargin}
+	\begin{tikzpicture}[
+		title/.style={
+			draw=none, text=InriaDarkgray,
+			anchor=center, align=center,
+			text~width={\dimexpr\paperwidth-.1\paperwidth},
+			inner~sep=0pt, outer~sep=0pt
+		},
+	]
+		\useasboundingbox (0,0) rectangle (\paperwidth,\paperheight);
+		\node [title] at (\textwidth/2,.07\paperheight+\textheight/2) {
+			\begin{center}
+				\textbf{\Large
+				\two@digits{\insertsectionnumber} \\[1ex]
+				\insertsection} \\[1ex]
+				{\includegraphics[width=6em]{\PathSOinria/logos/Filet-7pt.pdf}}\\[1ex]
+				\textbf{\two@digits{\insertsubsectionnumber}
+				\ \insertsubsection} \\[1ex]
+				{\insertsubsubsection}
+			\end{center}
+		};
+	\end{tikzpicture}
+}
+
+\defbeamertemplate{part~frame}{inria~RF}{
+	% \setbeamertemplate{background~canvas}[section/inria~old]
+	% \setbeamertemplate{sidebar~canvas~right}[gotham~filigrane]
+	\setbeamertemplate{sidebar~canvas~right}[empty]
+	\setbeamertemplate{footline}[empty]
+	\setbeamertemplate{logo}[empty]
+	\setbeamertemplate{part~page}[inria~RF]
+	% \usebeamertemplate*{part~page}% activated automatically
+}
+
+\defbeamertemplate{section~frame}{inria~RF}{
+	% \setbeamertemplate{part~page}[inria~RF]
+	\usebeamertemplate{part~frame}
+	\setbeamertemplate{section~page}[inria~RF]
+	% \usebeamertemplate*{section~page}% activated automatically
+}
+
+\defbeamertemplate{subsection~frame}{inria~RF}{
+	% \setbeamertemplate{part~page}[inria~RF]
+	\usebeamertemplate{part~frame}
+	\setbeamertemplate{subsection~page}[inria~RF]
+	% \usebeamertemplate*{subsection~page}% activated automatically
+}
+
+\defbeamertemplate{subsubsection~frame}{inria~RF}{
+	% \setbeamertemplate{part~page}[inria~RF]
+	\usebeamertemplate{part~frame}
+	\setbeamertemplate{subsubsection~page}[inria~RF]
+	% \usebeamertemplate*{subsubsection~page}% activated automatically
+}
+
+
+% %% TOC Section %%%
+% %%%%%%%%%%%%%%%%%%
+
+\defbeamertemplate{toc~part~frame}{inria~old}{
+	\setbeamertemplate{background~canvas}[toc/inria~old]
+	\setbeamertemplate{sidebar~canvas~right}[empty]
+	\setbeamertemplate{footline}[empty]
+	\setbeamertemplate{logo}[empty]
+	
+	\setbeamercolor{frametitleSection}{bg=InriaRed}
+	\setbeamercolor{frametitle}{use=standin, fg=standin.fg, bg=}
+	\setbeamertemplate{frametitle}[toc/inria~old]
+	
+	\addtolength{\leftskip}{12em}
+	% \setbeamertemplate{part~in~toc}[inria~old]
+	\setbeamertemplate{section~in~toc}[inria~old]
+	\setbeamertemplate{subsection~in~toc}[inria~old]
+	\setbeamertemplate{subsubsection~in~toc}[inria~old]
+	\setbeamercolor{section~in~toc}{fg=InriaRed}
+	\setbeamercolor{subsection~in~toc}{fg=InriaRed}
+	\setbeamercolor{subsubsection~in~toc}{fg=InriaRed}
+	% \setbeamercolor{section~in~toc~shaded}{fg=gray}
+	% \setbeamercolor{subsection~in~toc~shaded}{fg=gray}
+	% \setbeamercolor{subsubsection~in~toc~shaded}{fg=gray}
+}
+
+\defbeamertemplate{toc~section~frame}{inria~old}{
+	\usebeamertemplate{toc~part~frame}
+}
+
+\defbeamertemplate{toc~subsection~frame}{inria~old}{
+	\usebeamertemplate{toc~part~frame}
+}
+
+\defbeamertemplate{toc~part~frame}{inria~RF}{
+	% \setbeamertemplate{background~canvas}[toc/inria~RF]
+	\setbeamertemplate{sidebar~canvas~right}[empty]
+	\setbeamertemplate{footline}[empty]
+	\setbeamertemplate{logo}[empty]
+	
+	\addtolength{\leftskip}{1cm}
+	% \setbeamertemplate{part~in~toc}[inria~RF]
+	\setbeamertemplate{section~in~toc}[inria~RF]
+	\setbeamertemplate{subsection~in~toc}[inria~RF]
+	\setbeamertemplate{subsubsection~in~toc}[inria~RF]
+}
+
+\defbeamertemplate*{toc~section~frame}{inria~RF}{
+	\usebeamertemplate{toc~part~frame}
+}
+
+\defbeamertemplate*{toc~subsection~frame}{inria~RF}{
+	\usebeamertemplate{toc~part~frame}
+}
 
 %\mode<all>
 
 %%
-%% End of file `beamerinnerthemeuge.sty'.
+%% End of file `beamerinnerthemeinria.sty'.

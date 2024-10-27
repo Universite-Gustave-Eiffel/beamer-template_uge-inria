@@ -1,0 +1,1981 @@
+%%
+%% This is file `beamerinnerthemegotham.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% gotham.dtx  (with options: `inner')
+%% 
+%% Copyright (C) 2023-20** by Romain NOËL <romainoel@free.fr>
+%% 
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%% http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%% 
+%% This work has the LPPL maintenance status `maintained'.
+%% 
+%% The Current Maintainer of this work is Romain NOËL.
+%% Contributors: Romain NOËL (2023-20**)
+%% 
+\ProvidesExplPackage{beamerinnerthemegotham}{2024-10-15}{1.1.1.a}{gotham inner theme}
+\RequirePackage{expl3}
+\RequirePackage{xparse}
+\RequirePackage{calc}
+\RequirePackage{tikz}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%   INNER     %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%  Titlepage  %%%
+%%%%%%%%%%%%%%%%%%%
+\@ifundefined{\string\color@colorProgBar}{
+\providebool{darkBG} \boolfalse{darkBG}
+\providebool{transparentBG} \booltrue{transparentBG}
+\colorlet{colorBG}{white}
+\colorlet{colorFG}{black}
+\colorlet{colorFrametitle}{purple}
+\colorlet{colorStandout}{purple}
+\colorlet{colorStandin}{purple}
+\colorlet{colorTitlepage}{purple}
+\colorlet{colorFiligrane}{gray}
+\colorlet{colorBackElement}{gray}
+\colorlet{colorProgBar}{orange}
+\colorlet{colorAlert}{red}
+\colorlet{colorExample}{green}
+\setbeamercolor{progress~bar}{
+use=alerted~text,
+fg=colorProgBar,
+bg=alerted~text.fg!50!black!30
+}
+\setbeamercolor{progress~bar~in~head/foot}{%
+use=progress~bar,
+parent=progress~bar
+}
+\setbeamercolor{progress~bar~in~part~page}{
+use=progress~bar,
+parent=progress~bar
+}
+\setbeamercolor{progress~bar~in~section~page}{
+use=progress~bar,
+parent=progress~bar
+}
+\setbeamercolor{progress~bar~in~splitvert}{
+use=progress~bar,
+parent=progress~bar
+}
+\setbeamercolor{frametitleSection}{use=primary~palette, bg=, fg=primary~palette.bg}
+\setbeamercolor{standout}{use=primary~palette, bg=colorStandout, fg=primary~palette.bg}
+\setbeamercolor{standin}{use=normal~text, bg=colorStandin, fg=normal~text.fg}
+\setbeamercolor{section~in~toc}{use=normal~text, parent=normal~text,}
+\setbeamercolor{subsection~in~toc}{use=normal~text, parent=normal~text,}
+\setbeamercolor{subsubsection~in~toc}{use=normal~text, parent=normal~text,}
+}{
+}
+
+\def\maketitle{
+\ifbeamer@inframe
+\titlepage
+\else
+\frame[plain, noframenumbering]{\titlepage}
+\fi
+}
+\def\titlepage{
+\usebeamertemplate{title~page}
+}
+
+\defbeamertemplate*{title~graphic}{gotham}{
+\vbox{
+\inserttitlegraphic
+}
+\nointerlineskip
+}
+\defbeamertemplate*{title}{gotham}{
+\linespread{1.0}
+\inserttitle
+\par
+\vspace*{0.5em}
+}
+\defbeamertemplate*{subtitle}{gotham}{
+\insertsubtitle
+\par
+\vspace*{0.5em}
+}
+\defbeamertemplate*{author}{gotham}{
+\vspace*{1.em}
+\insertauthor
+\par
+\vspace*{0.25em}
+}
+\defbeamertemplate*{date}{gotham}{
+\insertdate
+\par
+}
+\defbeamertemplate*{institute}{gotham}{
+\vspace*{3mm}
+\insertinstitute
+\par
+}
+
+\dim_new:N \l__gotham_titleseparator_width_dim
+\dim_set:Nn \l__gotham_titleseparator_width_dim {\textwidth}
+\dim_new:N \l__gotham_titleseparator_height_dim
+\dim_set:Nn \l__gotham_titleseparator_height_dim {2pt}
+\dim_new:N \l__gotham_title_width_dim
+\dim_new:N \l__gotham_subtitle_width_dim
+\dim_new:N \l__gotham_title_max_width_dim
+
+\defbeamertemplate*{title~separator}{gotham}{
+\begin{tikzpicture}
+\fill[fg] (0,0) rectangle
+(\dim_use:N \l__gotham_titleseparator_width_dim,
+\dim_use:N \l__gotham_titleseparator_height_dim);
+\end{tikzpicture}
+\par
+}
+
+%%%%
+\providecommand{\gothamtitlepagelogo}{}
+
+%%%%%
+\providecommand{\gothamtitlepagebg}{}
+
+
+
+\defbeamertemplate{title~page}{gotham~normal}{
+\ifx\insertframetitle\@empty\else\vspace*{-3em}\fi
+\begin{picture}(0,0) 
+\put(-30,-125){\noindent
+\fcolorbox{normal~text.bg}{normal~text.bg}{
+\begin{minipage}[b][\paperheight]{\paperwidth}
+\parbox[c][0pt][c]{0pt}{\gothamtitlepagebg}
+\centering
+\vfill
+\ifx\inserttitle\@empty\else
+\parbox{0.9\textwidth}{\centering
+\usebeamertemplate*{title}
+}\\[1.ex]
+\fi
+\ifx\insertsubtitle\@empty\else
+\parbox{0.9\textwidth}{\centering
+\usebeamertemplate*{subtitle}
+}\\[2.ex]
+\fi
+\usebeamertemplate*{title~separator}
+\expandafter\ifblank\expandafter{\beamer@andstripped}{
+\vspace*{1.em}
+}{
+\usebeamertemplate*{author}
+}
+\ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
+\ifx\insertinstitute\@empty\else{\parbox{0.9\textwidth}{\raggedright\usebeamertemplate*{institute}} }\fi
+\vfill
+\vbox{}
+\end{minipage}
+}
+}
+
+\put(234,-120){
+\gothamtitlepagelogo
+}
+
+\put(-27,-123){
+\noindent\vbox{
+\begin{minipage}[b][0.96\paperheight]{0.899\textwidth}
+\ifx\inserttitlegraphic\@empty\else\usebeamertemplate*{title~graphic}\fi
+\end{minipage}
+}
+}
+\end{picture}
+}
+
+\defbeamertemplate{title~page}{gotham~reversed}{
+\begin{picture}(0,0)
+\put(-28,-128){\gothamtitlepagebg}
+
+\put(-4,-125){\noindent
+\ifbool{darkBG}{
+\setbeamercolor{normal~text}{fg=colorFG, }
+\fcolorbox{colorPale}{colorPale}% reversed
+}{
+\setbeamercolor{normal~text}{fg=colorBG, }
+\fcolorbox{colorTitlepage}{colorTitlepage}% reversed
+}% end if
+{
+\begin{minipage}[b][\paperheight]{\textwidth}
+\centering
+\vfill
+\ifx\inserttitle\@empty\else\usebeamertemplate*{title}\fi
+\ifx\insertsubtitle\@empty\else\usebeamertemplate*{subtitle}\fi
+\usebeamertemplate*{title~separator}
+\expandafter\ifblank\expandafter{\beamer@andstripped}{
+\vspace*{1.em}
+}{
+\usebeamertemplate*{author}
+}
+\ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
+\ifx\insertinstitute\@empty\else{\parbox{0.9\textwidth}{\raggedright\usebeamertemplate*{institute}} }\fi
+\vfill
+\vbox{}
+\end{minipage}
+}
+}
+
+\put(234,-120){
+\gothamtitlepagelogo
+}
+
+\put(-27,-123){
+\noindent\vbox{
+\begin{minipage}[b][0.96\paperheight]{0.899\textwidth}
+\ifx\inserttitlegraphic\@empty\else\usebeamertemplate*{title~graphic}\fi
+\end{minipage}
+}
+}
+\end{picture}
+}
+
+\defbeamertemplate{title~page}{gotham~dividedpic}{
+\long\def\tmpEmpty{}
+\def\titlecontent{\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle}
+\def\subtitlecontent{\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle}
+\settowidth\l__gotham_title_width_dim\titlecontent
+\settowidth\l__gotham_subtitle_width_dim\subtitlecontent
+\setlength\l__gotham_title_max_width_dim{\ifdim\l__gotham_title_width_dim>\l__gotham_subtitle_width_dim\l__gotham_title_width_dim\else\l__gotham_subtitle_width_dim\fi}
+\begin{minipage}{.55\textwidth}
+\raggedright
+\titlecontent\\
+\subtitlecontent\\
+\textcolor{colorProgBar}{\rule{\ifdim\l__gotham_title_max_width_dim<.55\textwidth\l__gotham_title_max_width_dim\else.55\textwidth\fi}{\dim_use:N \l__gotham_titleseparator_height_dim}}\\[2em]
+\usebeamerfont{author}\usebeamercolor[fg]{author}
+\insertauthor\\
+\expandafter\ifblank\expandafter{\beamer@andstripped}{
+\vspace*{1.em}
+}{ 
+\usebeamerfont{author}\usebeamercolor[fg]{author}
+\insertshortauthor
+\vspace{2em}
+}
+\ifx\insertinstitute\@empty\else{
+\usebeamertemplate*{institute}\vspace{2em}
+}\fi
+\insertdate
+\end{minipage}
+
+\begin{tikzpicture}[remember~picture, overlay]
+\clip (current~page.south~east)
+-- (current~page.north~east)
+-- ++(-5.1, 0)
+-- ++(-3, -\paperheight)
+-- cycle;
+
+\ifx\gothamtitlepagebg\tmpEmpty
+\fill[
+right~color=colorTitlepage!100,%\ifbool{darkBG}{colorPale!100}{colorDark!100},
+]
+(current~page.south~east)
+rectangle
+++(\dimexpr-0.55\paperwidth, \dimexpr\paperheight+1cm);
+\else
+\node[
+anchor=south~east,
+inner~sep=0,
+outer~sep=0
+] at (current~page.south~east) {
+\gothamtitlepagebg
+};
+\fi
+\end{tikzpicture}
+}
+
+\defbeamertemplate{title~page}{gotham~splitvert}{
+\ifx\beamer@frametitle\@empty
+\vspace*{-0.5\paperheight}
+\else %}{
+\vspace*{-0.63\paperheight}
+\fi %}
+{
+\usebeamercolor{frametitle}\colorlet{gotham@@tempColor}{bg}%
+\begin{tikzpicture}[overlay, remember~picture]
+\fill[color=gotham@@tempColor] (current~page.north~west) rectangle ([shift = {(0, -0.45\paperheight)}] current~page.north~east);
+\end{tikzpicture}
+}
+
+\begin{minipage}[b][0.5\paperheight]{\textwidth}
+\vbox{}
+\vfill
+{
+\usebeamerfont{title}
+\usebeamercolor[fg]{frametitle}
+\inserttitle
+}
+\ifx\insertsubtitle\@empty\else
+\\[1ex]
+{
+\usebeamerfont{subtitle}
+\usebeamercolor[fg]{frametitle}
+\insertsubtitle
+}
+\fi
+\vspace{1.\baselineskip}
+\end{minipage}
+
+\ifx\inserttitlegraphic\@empty\else
+\newline
+\vspace*{-1.65\baselineskip}
+{\parbox[c][0pt][c]{\textwidth}{
+\raggedleft
+\inserttitlegraphic
+}} 
+\fi
+
+\expandafter\ifblank\expandafter{\beamer@andstripped}{
+\vspace*{1.em}
+}{
+\newline
+\begin{minipage}[t]{\textwidth}
+\vspace*{-0.65\baselineskip}
+\usebeamertemplate*{author}
+\end{minipage}
+}
+
+\ifx\insertinstitute\@empty\else
+\newline
+\vspace*{-1.65\baselineskip}
+\begin{minipage}[t]{\textwidth}
+\usebeamertemplate*{institute}
+\end{minipage}
+\fi
+
+\ifx\insertdate\@empty\else
+\newline
+\begin{minipage}[t]{\textwidth}
+\vspace*{2.65\baselineskip}
+\usebeamertemplate*{date}
+\end{minipage}
+\vspace*{-3.15\baselineskip}
+\fi
+}
+
+%%%%%%
+\cs_if_exist:NTF \__gotham_set_template:nn {}{
+
+\cs_new_protected:Nn \__gotham_set_template:nn
+{
+\cs_if_exist:cTF {beamer@@tmpop@#1@#2} {
+\setbeamertemplate{#1}[#2]
+}{
+\PackageError{beamerinnerthemegotham}
+{The~beamer~template~named~'#1'~with~the~option~'#2'~does~not~exist}
+{helping~message unknown setbeamertemplate option}
+} 
+}
+}
+
+%%%%
+\keys_define:nn { gotham / inner }
+{
+title~page .usage:n = { general },
+title~page .default:n = { gotham~normal },
+title~page .code:n = { \__gotham_set_template:nn{title~page}{#1} },
+}
+
+%% Backgrounds %%%
+%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%
+\prop_if_exist:NTF \l__gotham_template_name_prop
+{}{
+\prop_new:N \l__gotham_template_name_prop
+}
+
+%%%%%%
+\defbeamertemplate{background~canvas}{empty}{% empty background style has a color.
+\hspace*{28pt}
+\begin{beamercolorbox}[wd=\paperwidth,
+      ht=\paperheight,
+   ]{background}
+      % nothing to write, only a background color
+   \end{beamercolorbox}
+}%
+\defbeamertemplate{background}{empty}{}%
+
+\defbeamertemplate{background}{watermark/gotham~draft}{
+\begin{tikzpicture}[overlay,remember~picture]
+\node[color=red, opacity=0.3, scale=5, rotate=45] at ([shift={(0,0)}]current~page.center) {DRAFT};
+\end{tikzpicture}
+}
+\prop_put:Nnn \l__gotham_template_name_prop {background/watermark} {gotham~draft}
+
+\seq_if_exist:NTF \l__gotham_frameoption_tmp_seq {}{
+\seq_new:N \l__gotham_frameoption_tmp_seq
+}
+
+\cs_if_exist:NTF \__gotham_add_beamerframe_key:n {}{
+
+\cs_new_protected:Nn \__gotham_add_beamerframe_key:n {
+\define@key{beamerframe}{ #1 }[true]{
+\begin{#1env}
+\seq_put_left:Nn \l__gotham_frameoption_tmp_seq { \end{#1env} }
+}
+}
+
+\apptocmd{\beamer@reseteecodes}{
+\seq_use:Nn \l__gotham_frameoption_tmp_seq {}
+\seq_clear:N \l__gotham_frameoption_tmp_seq
+}{}{}
+}
+
+%%%%%%
+
+\newenvironment{noBGCenv}{
+\setbeamertemplate{background~canvas}[empty]
+}{}
+\__gotham_add_beamerframe_key:n {noBGC}
+
+%%%%%%
+\bool_new:N \l_gotham_defaultWatermark
+\bool_set_false:N \l_gotham_defaultWatermark
+\BeforeBeginEnvironment{frame}{
+\bool_if:NTF \l_gotham_defaultWatermark {
+\setbeamertemplate{background}[watermark/\prop_item:Nn \l__gotham_template_name_prop {background/watermark}]
+}{% false
+\setbeamertemplate{background}[empty]
+}
+}
+
+%%%%%%
+\newenvironment{watermarkenv}{
+\setbeamertemplate{background}[
+watermark/\prop_item:Nn \l__gotham_template_name_prop {background/watermark}
+]
+}{}
+\__gotham_add_beamerframe_key:n {watermark}
+
+%%%%%%
+\newenvironment{nowatermarkenv}{
+\setbeamertemplate{background}[empty]
+}{}
+\__gotham_add_beamerframe_key:n {nowatermark}
+
+\seq_if_exist:NTF \l__gotham_tmpa_seq
+{}{
+\seq_new:N \l__gotham_tmpa_seq
+}
+\tl_if_exist:NTF \l__gotham_tmpa_tl
+{}{
+\tl_new:N \l__gotham_tmpa_tl
+}
+\tl_if_exist:NTF \l__gotham_tmpb_tl
+{}{
+\tl_new:N \l__gotham_tmpb_tl
+}
+
+\cs_if_exist:NTF \__gotham_set_prop_template:nn {}{
+\cs_new_protected:Nn \__gotham_set_prop_template:nn
+{
+\tl_if_in:nnTF { #1 } { / }
+{
+\seq_set_split:Nnn \l__gotham_tmpa_seq { / } { #1 }
+\tl_set:Nn \l__gotham_tmpa_tl { \seq_item:Nn \l__gotham_tmpa_seq { 1 } }
+\tl_set:Nn \l__gotham_tmpb_tl { \seq_item:Nn \l__gotham_tmpa_seq { 2 } }
+\cs_if_exist:cTF {beamer@@tmpop@\exp_not:V \l__gotham_tmpa_tl @\exp_not:V \l__gotham_tmpb_tl /#2} {
+\prop_put:Nnn \l__gotham_template_name_prop {#1} {#2}
+}{
+\PackageError{beamerthemegotham}
+{The~beamer~template~named~'\l__gotham_tmpa_tl'~with~the~option~'\l__gotham_tmpb_tl/#2'~does~not~exist}
+{helping~message}
+}
+}{% false -> error
+\PackageError{beamerthemegotham}
+{%
+When~using~'\c_backslash_str\cs_to_str:N \__gotham_set_prop_template'~the~first~argument~should~contain~a~'/'~to~respect~the~naming~convention~used~(Template/what/Who~name),~but~you~gave~'#1'.~
+As~example:~if~'\c_backslash_str defbeamertemplate{background}{watermark/gotham~draft}'...,~then~use~'\c_backslash_str\cs_to_str:N \__gotham_set_prop_template{background/watermark}{gotham~draft}'
+}{helping~message}
+}
+}
+}
+
+%%%%
+\keys_define:nn { gotham / inner }{
+watermark~template .usage:n = { general },
+watermark~template .default:n = { gotham~draft },
+watermark~template .code:n = { \__gotham_set_prop_template:nn{background/watermark}{#1} },
+}
+\keys_define:nn { gotham / inner }{
+watermark~default .choice:,
+watermark~default .usage:n = { general },
+watermark~default .default:n = { false },
+
+watermark~default / true .code:n = { \bool_set_true:N \l_gotham_defaultWatermark },
+watermark~default / on .code:n = { \bool_set_true:N \l_gotham_defaultWatermark },
+watermark~default / enable .code:n = { \bool_set_true:N \l_gotham_defaultWatermark },
+
+watermark~default / false .code:n = { \bool_set_false:N \l_gotham_defaultWatermark },
+watermark~default / off .code:n = { \bool_set_false:N \l_gotham_defaultWatermark },
+watermark~default / disable .code:n = { \bool_set_false:N \l_gotham_defaultWatermark },
+
+watermark~default / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'#1'~is~unknown~for~the~(known)~option~'watermark~default',~so~being~ignored. }{helping~message: watermark~default / unknown} },
+}
+
+%%%%  Stand IN/OUT  %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%
+\define@key{beamerframe}{c}[true]{
+\beamer@frametopskip=0pt~plus~1fill\relax
+\beamer@framebottomskip=0pt~plus~1fill\relax
+\beamer@frametopskipautobreak=0pt~plus~.4\paperheight\relax
+\beamer@framebottomskipautobreak=0pt~plus~.6\paperheight\relax
+\def\beamer@initfirstlineunskip{}
+}
+
+\defbeamertemplate{background~canvas}{standout/gotham}{
+\ifbeamercolorempty[bg]{standout}{
+}{
+\usebeamercolor[bg]{standout}\color{bg}
+\vrule~width\paperwidth~height\paperheight
+}
+}
+\prop_put:Nnn \l__gotham_template_name_prop {background~canvas/standout} {gotham}
+
+\defbeamertemplate*{standout}{gotham}{
+
+\setbeamertemplate{background~canvas}[standout/\prop_item:Nn \l__gotham_template_name_prop {background~canvas/standout}]
+\usebeamerfont{standout}
+\ifbeamercolorempty[bg]{primary~palette}{
+\setbeamercolor{background~canvas}{
+use=primary~palette,
+bg=primary~palette.fg
+}
+}{
+\setbeamercolor{background~canvas}{
+use=primary~palette,
+bg=primary~palette.bg
+}
+}
+\setbeamercolor{local~structure}{
+fg=primary~palette.bg
+}
+\usebeamercolor[fg]{primary~palette}
+}
+
+%%%%%%
+\newenvironment{standoutenv}{
+\usebeamertemplate{standout}
+}{}
+\__gotham_add_beamerframe_key:n {standout}
+
+\defbeamertemplate{background~canvas}{standin/gotham}{
+\ifbeamercolorempty[bg]{standin}{
+}{
+\ifbool{transparentBG}{
+}{
+\usebeamercolor[bg]{standin}\color{bg}
+\vrule~width\paperwidth~height\paperheight
+}
+}
+}
+\prop_put:Nnn \l__gotham_template_name_prop {background~canvas/standin} {gotham}
+
+\defbeamertemplate*{standin}{gotham}{
+\setbeamertemplate{background~canvas}[standin/\prop_item:Nn \l__gotham_template_name_prop {background~canvas/standin}]
+\usebeamerfont{standin}
+\setbeamercolor{frametitle}{
+use=normal~text,
+bg=normal~text.bg,
+fg=normal~text.fg
+}
+}
+
+%%%%%%
+\newenvironment{standinenv}{
+\usebeamertemplate{standin}
+}{}
+\__gotham_add_beamerframe_key:n {standin}
+
+%%%%
+\keys_define:nn { gotham / inner }
+{
+standout~BG~template .usage:n = { general },
+standout~BG~template .default:n = { gotham },
+standout~BG~template .code:n = {
+\__gotham_set_prop_template:nn{background~canvas/standout}{#1}
+},
+}
+\keys_define:nn { gotham / inner }
+{
+standin~BG~template .usage:n = { general },
+standin~BG~template .default:n = { gotham },
+standin~BG~template .code:n = {
+\__gotham_set_prop_template:nn{background~canvas/standin}{#1}
+},
+}
+\keys_define:nn { gotham / inner }
+{
+standout~template .usage:n = { general },
+standout~template .default:n = { gotham },
+standout~template .code:n = {
+\__gotham_set_template:nn{standout}{#1}
+},
+}
+\keys_define:nn { gotham / inner }
+{
+standin~template .usage:n = { general },
+standin~template .default:n = { gotham },
+standin~template .code:n = {
+\__gotham_set_template:nn{standin}{#1}
+},
+}
+
+%%%%  Sections  %%%%
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%
+\bool_new:N \l_gotham_partframe
+\bool_set_false:N \l_gotham_partframe
+\define@key{beamerframe}{part}[true]{
+\bool_set_true:N \l_gotham_partframe
+\begingroup
+\usebeamertemplate{part~frame}
+}
+\apptocmd{\beamer@reseteecodes}{
+\bool_if:NTF \l_gotham_partframe {
+\endgroup
+\bool_set_false:N \l_gotham_partframe
+}{}
+}{}{}
+
+%%%%%%
+\bool_new:N \l_gotham_sectionframe
+\bool_set_false:N \l_gotham_sectionframe
+\define@key{beamerframe}{section}[true]{
+\bool_set_true:N \l_gotham_sectionframe
+\begingroup
+\usebeamertemplate{section~frame}
+}
+\apptocmd{\beamer@reseteecodes}{
+\bool_if:NTF \l_gotham_sectionframe {
+\endgroup
+\bool_set_false:N \l_gotham_sectionframe
+}{}
+}{}{}
+
+%%%%%%
+\bool_new:N \l_gotham_subsectionframe
+\bool_set_false:N \l_gotham_subsectionframe
+\define@key{beamerframe}{subsec}[true]{
+\bool_set_true:N \l_gotham_subsectionframe
+\begingroup
+\usebeamertemplate{subsection~frame}
+}
+\apptocmd{\beamer@reseteecodes}{
+\bool_if:NTF \l_gotham_subsectionframe {
+\endgroup
+\bool_set_false:N \l_gotham_subsectionframe
+}{}
+}{}{}
+
+%%%%%%
+\bool_new:N \l_gotham_subsubsectionframe
+\bool_set_false:N \l_gotham_subsubsectionframe
+\define@key{beamerframe}{subsubsec}[true]{
+\bool_set_true:N \l_gotham_subsubsectionframe
+\begingroup
+\usebeamertemplate{subsubsection~frame}
+}
+\apptocmd{\beamer@reseteecodes}{
+\bool_if:NTF \l_gotham_subsubsectionframe {
+\endgroup
+\bool_set_false:N \l_gotham_subsubsectionframe
+}{}
+}{}{}
+
+%%%%%%
+\providebool{partContent}
+\booltrue{partContent}
+\providecommand{\partContentName}{Part~content}
+\providebool{sectionContent}
+\booltrue{sectionContent}
+\providecommand{\secContentName}{Section~content}
+\providebool{subsectionContent}
+\booltrue{subsectionContent}
+\providecommand{\subsecContentName}{Subsection~content}
+
+\def\partname{\translate{Part}}
+\defbeamertemplate*{part~title}{gotham}{
+\usebeamercolor[fg]{part~title}
+\usebeamerfont{part~title}
+\partname \ \insertromanpartnumber
+\\[1.75ex]
+\insertpart
+}
+\defbeamertemplate*{section~title}{gotham}{
+\usebeamercolor[fg]{section~title}
+\usebeamerfont{section~title}
+\insertsectionnumber.~
+\insertsectionhead
+}
+\defbeamertemplate*{subsection~title}{gotham}{
+\usebeamercolor[fg]{subsection~title}
+\usebeamerfont{subsection~title}
+\insertsectionnumber.\insertsubsectionnumber.~
+\insertsubsectionhead
+}
+\def\subsubsectionname{\translate{Subsubsection}}
+\def\insertsubsubsectionnumber{\arabic{subsubsection}}
+\def\subsubsectionpage{\usebeamertemplate*{subsubsection~page}}
+\defbeamertemplate*{subsubsection~title}{gotham}{
+\usebeamercolor[fg]{subsubsection~title}
+\usebeamerfont{subsubsection~title}
+\insertsectionnumber.\insertsubsectionnumber.\insertsubsubsectionnumber.~
+\insertsubsubsectionhead
+}
+
+\cs_new_protected:Nn \__gotham_inner_disable_partpage:
+{
+\AtBeginPart{
+}
+}
+
+\cs_new_protected:Nn \__gotham_inner_enable_partpage:
+{
+\AtBeginPart{
+\ifbeamer@inframe
+\partpage
+\else
+\frame[c, noframenumbering, part]{\partpage}
+\fi
+
+\ifbool{partContent}{
+\begin{frame}[noframenumbering, tocpart]
+\frametitle{\partContentName}
+\tableofcontents[part=\thepart]
+\end{frame}
+}{
+}
+}
+}
+
+\cs_new_protected:Nn \__gotham_inner_disable_sectionpage:
+{
+\AtBeginSection{
+}
+}
+
+\cs_new_protected:Nn \__gotham_inner_enable_sectionpage:
+{
+\AtBeginSection{
+\ifbeamer@inframe
+\sectionpage
+\else
+\frame[c, noframenumbering, section]{\sectionpage}
+\fi
+
+\ifbool{sectionContent}{
+\begin{frame}[noframenumbering, tocsec]
+\frametitle{\secContentName}
+{\tableofcontents[currentsection, currentsubsection,
+hideothersubsections,
+sectionstyle=show/shaded,
+]
+}
+\end{frame}
+}{
+}
+}
+}
+
+\cs_new_protected:Nn \__gotham_inner_disable_subsectionpage:
+{
+  \AtBeginSubsection{
+ % intentionally empty
+  }
+}
+
+\cs_new_protected:Nn \__gotham_inner_enable_subsectionpage:
+{
+\AtBeginSubsection{
+\ifbeamer@inframe
+\subsectionpage
+\else
+\frame[c, noframenumbering, subsec]{\subsectionpage}
+\fi
+
+\ifbool{subsectionContent}{
+\begin{frame}[noframenumbering, tocsubsec]
+\frametitle{\subsecContentName}
+{\tableofcontents[currentsection, currentsubsection,
+hideothersubsections,
+sectionstyle=show/shaded,
+subsectionstyle=show/shaded/hide,
+subsubsectionstyle=show/show/hide,
+]
+}
+\end{frame}
+}{
+}
+}
+}
+
+\cs_new_protected:Nn \__gotham_inner_disable_subsubsectionpage:
+{
+  \AtBeginSubsubsection{
+ % intentionally empty
+  }
+}
+
+\cs_new_protected:Nn \__gotham_inner_enable_subsubsectionpage:
+{
+\AtBeginSubsubsection{
+\ifbeamer@inframe
+\subsubsectionpage
+\else
+\frame[c, noframenumbering, subsubsec]{\subsubsectionpage}
+\fi
+}
+}
+
+%%%%%%
+\newlength{\gotham@progressonsectionpage}
+\newlength{\gotham@progressonsectionpage@linewidth}
+\setlength{\gotham@progressonsectionpage@linewidth}{3pt}
+
+\defbeamertemplate{progress~bar~in~section~page}{empty}{
+\vspace{\gotham@progressonsectionpage@linewidth+1ex}
+}
+
+\def\inserttotalframenumber{100}
+\defbeamertemplate{progress~bar~in~section~page}{display}{
+\setlength{\gotham@progressonsectionpage}{
+\textwidth * \ratio{\insertframenumber~pt}{\inserttotalframenumber~pt}
+}
+\begin{tikzpicture}
+\fill[bg] (0,0) rectangle (\textwidth, \gotham@progressonsectionpage@linewidth);
+\fill[fg] (0,0) rectangle (\gotham@progressonsectionpage, \gotham@progressonsectionpage@linewidth);
+\end{tikzpicture}
+}
+
+%%%%%%
+\newlength{\sectionhoffset}
+\setlength{\sectionhoffset}{0pt}
+
+\defbeamertemplate{part~page}{progressbar/simple}{
+\centering
+\hspace*{\sectionhoffset}
+\begin{minipage}{22em}
+\centering
+\usebeamertemplate*{part~title}\\[-1ex]
+\usebeamertemplate*{progress~bar~in~section~page}
+\par
+\end{minipage}
+\par
+\vspace{\baselineskip}
+}
+\defbeamertemplate{section~page}{progressbar/simple}{
+\centering
+\hspace*{\sectionhoffset}
+\begin{minipage}{22em}
+\raggedright
+\usebeamertemplate*{section~title}\\[-1ex]
+\usebeamertemplate*{progress~bar~in~section~page}
+\par
+\end{minipage}
+\par
+\vspace{\baselineskip}
+}
+\defbeamertemplate{subsection~page}{progressbar/simple}{
+\centering
+\hspace*{\sectionhoffset}
+\begin{minipage}{22em}
+\raggedright
+\usebeamertemplate*{section~title}\\[-1ex]
+\usebeamertemplate*{progress~bar~in~section~page}
+\par
+\usebeamertemplate*{subsection~title}
+\end{minipage}
+\par
+\vspace{\baselineskip}
+}
+\defbeamertemplate{subsubsection~page}{progressbar/simple}{
+\centering
+\hspace*{\sectionhoffset}
+\begin{minipage}{22em}
+\raggedright
+\usebeamertemplate*{section~title}\\[-1ex]
+\usebeamertemplate*{progress~bar~in~section~page}
+\par
+\usebeamertemplate*{subsection~title}
+\par
+\usebeamertemplate*{subsubsection~title}
+\end{minipage}
+\par
+\vspace{\baselineskip}
+}
+
+\defbeamertemplate{background~canvas}{part/gotham}{
+\ifbeamercolorempty[bg]{normal~text}{}{\color{bg}\vrule width\paperwidth height\paperheight}
+}
+\defbeamertemplate{background~canvas}{section/gotham}{
+\setbeamertemplate{background~canvas}[part/gotham]
+\usebeamertemplate{background~canvas}
+}
+\defbeamertemplate{background~canvas}{subsection/gotham}{
+\setbeamertemplate{background~canvas}[part/gotham]
+\usebeamertemplate{background~canvas}
+}
+\defbeamertemplate{background~canvas}{subsubsection/gotham}{
+\setbeamertemplate{background~canvas}[part/gotham]
+\usebeamertemplate{background~canvas}
+}
+
+\defbeamertemplate{part~frame}{gotham~simple}{
+\setbeamertemplate{background~canvas}[part/gotham]
+\setbeamercolor{frametitle}{
+use={frametitleSection, normal~text},
+bg=frametitleSection.fg,
+fg=normal~text.fg
+}
+\setbeamertemplate{progress~bar~in~section~page}[empty]
+\setbeamertemplate{part~page}[progressbar/simple]
+   % \usebeamertemplate*{part~page}% activated automatically 
+}
+
+\defbeamertemplate{section~frame}{gotham~simple}{
+\setbeamertemplate{background~canvas}[section/gotham]
+\setbeamercolor{frametitle}{
+use={frametitleSection, normal~text},
+bg=frametitleSection.fg,
+fg=normal~text.fg
+}
+\setbeamertemplate{progress~bar~in~section~page}[empty]
+\setbeamertemplate{section~page}[progressbar/simple]
+   % \usebeamertemplate*{section~page}% activated automatically
+}
+
+\defbeamertemplate{subsection~frame}{gotham~simple}{
+\setbeamertemplate{background~canvas}[subsection/gotham]
+\setbeamercolor{frametitle}{
+use={frametitleSection, normal~text},
+bg=frametitleSection.fg,
+fg=normal~text.fg
+}
+\setbeamertemplate{progress~bar~in~section~page}[empty]
+\setbeamertemplate{subsection~page}[progressbar/simple]
+   % \usebeamertemplate*{subsection~page}% activated automatically
+}
+
+\defbeamertemplate{subsubsection~frame}{gotham~simple}{
+\setbeamertemplate{background~canvas}[subsubsection/gotham]
+\setbeamercolor{frametitle}{
+use={frametitleSection, normal~text},
+bg=frametitleSection.fg,
+fg=normal~text.fg
+}
+\setbeamertemplate{progress~bar~in~section~page}[empty]
+\setbeamertemplate{subsubsection~page}[progressbar/simple]
+   % \usebeamertemplate*{subsubsection~page}% activated automatically
+}
+
+\defbeamertemplate{part~frame}{gotham~progressbar}{
+\setbeamertemplate{background~canvas}[part/gotham]
+\setbeamercolor{frametitle}{
+use={frametitleSection, normal~text},
+bg=frametitleSection.fg,
+fg=normal~text.fg
+}
+\setbeamertemplate{progress~bar~in~section~page}[display]
+\setbeamertemplate{part~page}[progressbar/simple]
+   % \usebeamertemplate*{part~page}% activated automatically 
+}
+
+\defbeamertemplate{section~frame}{gotham~progressbar}{
+\setbeamertemplate{background~canvas}[section/gotham]
+\setbeamercolor{frametitle}{
+use={frametitleSection, normal~text},
+bg=frametitleSection.fg,
+fg=normal~text.fg
+}
+\setbeamertemplate{progress~bar~in~section~page}[display]
+\setbeamertemplate{section~page}[progressbar/simple]
+   % \usebeamertemplate*{section~page}% activated automatically
+}
+
+\defbeamertemplate{subsection~frame}{gotham~progressbar}{
+\setbeamertemplate{background~canvas}[subsection/gotham]
+\setbeamercolor{frametitle}{
+use={frametitleSection, normal~text},
+bg=frametitleSection.fg,
+fg=normal~text.fg
+}
+\setbeamertemplate{progress~bar~in~section~page}[display]
+\setbeamertemplate{subsection~page}[progressbar/simple]
+   % \usebeamertemplate*{subsection~page}% activated automatically
+}
+
+\defbeamertemplate{subsubsection~frame}{gotham~progressbar}{
+\setbeamertemplate{background~canvas}[subsubsection/gotham]
+\setbeamercolor{frametitle}{
+use={frametitleSection, normal~text},
+bg=frametitleSection.fg,
+fg=normal~text.fg
+}
+\setbeamertemplate{progress~bar~in~section~page}[display]
+\setbeamertemplate{subsubsection~page}[progressbar/simple]
+   % \usebeamertemplate*{subsubsection~page}% activated automatically
+}
+
+\defbeamertemplate{progress~bar~in~splitvert}{empty}{
+\vspace{-0.5ex}
+}
+
+\defbeamertemplate*{progress~bar~in~splitvert}{display}{
+\setlength{\gotham@progressonsectionpage}{
+\paperwidth * \ratio{\insertframenumber pt}{\inserttotalframenumber pt}
+}
+\begin{tikzpicture}
+\fill[bg] (0,0) rectangle (\paperwidth, \gotham@progressonsectionpage@linewidth);
+\fill[fg] (0,0) rectangle (\gotham@progressonsectionpage, \gotham@progressonsectionpage@linewidth);
+\end{tikzpicture}
+}
+
+\defbeamertemplate{part~page}{gotham~splitvert~progressbar/simple}{
+\ifx\beamer@frametitle\@empty
+\vspace*{-0.05\paperheight}
+\else %}{
+\vspace*{-0.165\paperheight}
+\fi %}
+{
+\usebeamercolor{frametitle}\colorlet{gotham@@tempColor}{bg}
+\begin{tikzpicture}[overlay, remember~picture]
+\fill[color=gotham@@tempColor] (current~page.north~west) rectangle ([shift = {(0, -0.45\paperheight)}] current~page.north~east);
+\end{tikzpicture}
+}
+
+\begin{minipage}[b][0.45\paperheight]{\textwidth}
+\centering
+\usebeamertemplate*{part~title}
+\end{minipage}
+\\[-0.1\baselineskip]
+\hspace*{-1.0cm}\noindent
+\usebeamertemplate*{progress~bar~in~splitvert}
+
+\newline
+\begin{minipage}[t][0.5\paperheight]{\textwidth}
+\end{minipage}
+}
+\defbeamertemplate{part~frame}{gotham~splitvert~progressbar}{
+\setbeamertemplate{background~canvas}[part/gotham]
+\setbeamercolor{part~title}{use=frametitle, fg=frametitle.fg}
+\setbeamertemplate{progress~bar~in~splitvert}[display]
+\setbeamertemplate{part~page}[gotham~splitvert~progressbar/simple]
+   % \usebeamertemplate*{part~page}% activated automatically
+}
+\defbeamertemplate{part~frame}{gotham~splitvert~simple}{
+\setbeamertemplate{background~canvas}[part/gotham]
+\setbeamercolor{part~title}{use=frametitle, fg=frametitle.fg}
+\setbeamertemplate{progress~bar~in~splitvert}[empty]
+\setbeamertemplate{part~page}[gotham~splitvert~progressbar/simple]
+   % \usebeamertemplate*{part~page}% activated automatically
+}
+
+\defbeamertemplate{section~page}{gotham~splitvert~progressbar/simple}{
+\ifx\beamer@frametitle\@empty
+\vspace*{-0.05\paperheight}
+\else %}{
+\vspace*{-0.165\paperheight}
+\fi %}
+{
+\usebeamercolor{frametitle}\colorlet{gotham@@tempColor}{bg}
+\begin{tikzpicture}[overlay, remember~picture]
+\fill[color=gotham@@tempColor] (current~page.north~west) rectangle ([shift = {(0, -0.45\paperheight)}] current~page.north~east);
+\end{tikzpicture}
+}
+
+\hspace*{\sectionhoffset}
+\begin{minipage}[b][0.45\paperheight]{\textwidth}
+\usebeamertemplate*{section~title}
+\end{minipage}
+\\[-0.1\baselineskip]
+\hspace*{-1.0cm}\noindent
+\usebeamertemplate*{progress~bar~in~splitvert}
+
+\newline
+\hspace*{\sectionhoffset}
+\begin{minipage}[t][0.5\paperheight]{\textwidth}
+\usebeamerfont{subsection~title}
+\usebeamercolor[bg]{frametitle}
+\end{minipage}
+}
+\defbeamertemplate{section~frame}{gotham~splitvert~progressbar}{
+\setbeamertemplate{background~canvas}[section/gotham]
+\setlength{\sectionhoffset}{1cm}
+\setbeamercolor{section~title}{use=frametitle, fg=frametitle.fg}
+\setbeamertemplate{progress~bar~in~splitvert}[display]
+\setbeamertemplate{section~page}[gotham~splitvert~progressbar/simple]
+   % \usebeamertemplate*{section~page}% activated automatically
+}
+\defbeamertemplate{section~frame}{gotham~splitvert~simple}{
+\setbeamertemplate{background~canvas}[section/gotham]
+\setlength{\sectionhoffset}{1cm}
+\setbeamercolor{section~title}{use=frametitle, fg=frametitle.fg}
+\setbeamertemplate{progress~bar~in~splitvert}[empty]
+\setbeamertemplate{section~page}[gotham~splitvert~progressbar/simple]
+   % \usebeamertemplate*{section~page}% activated automatically
+}
+
+\defbeamertemplate{subsection~page}{gotham~splitvert~progressbar/simple}{
+\ifx\beamer@frametitle\@empty
+\vspace*{-0.05\paperheight}
+\else %}{
+\vspace*{-0.165\paperheight}
+\fi %}
+{
+\usebeamercolor{frametitle}\colorlet{gotham@@tempColor}{bg}
+\begin{tikzpicture}[overlay, remember~picture]
+\fill[color=gotham@@tempColor] (current~page.north~west) rectangle ([shift = {(0, -0.45\paperheight)}] current~page.north~east);
+\end{tikzpicture}
+}
+
+\hspace*{\sectionhoffset}
+\begin{minipage}[b][0.45\paperheight]{\textwidth}
+\usebeamertemplate*{section~title}
+\end{minipage}
+\\[-0.1\baselineskip]
+\hspace*{-1.0cm}\noindent
+\usebeamertemplate*{progress~bar~in~splitvert}
+
+\newline
+\hspace*{\sectionhoffset}
+\begin{minipage}[t][0.5\paperheight]{\textwidth}
+\usebeamerfont{subsection~title}
+\usebeamercolor[bg]{frametitle}
+\usebeamertemplate*{subsection~title}
+\end{minipage}
+}
+\defbeamertemplate{subsection~frame}{gotham~splitvert~progressbar}{
+\setbeamertemplate{background~canvas}[subsection/gotham]
+\setlength{\sectionhoffset}{1cm}
+\setbeamercolor{section~title}{use=frametitle, fg=frametitle.fg}
+\setbeamercolor{subsection~title}{use=frametitle, fg=frametitle.bg}
+\setbeamertemplate{progress~bar~in~splitvert}[display]
+\setbeamertemplate{subsection~page}[gotham~splitvert~progressbar/simple]
+   % \usebeamertemplate*{subsection~page}% activated automatically
+}
+\defbeamertemplate{subsection~frame}{gotham~splitvert~simple}{
+\setbeamertemplate{background~canvas}[subsection/gotham]
+\setlength{\sectionhoffset}{1cm}
+\setbeamercolor{section~title}{use=frametitle, fg=frametitle.fg}
+\setbeamercolor{subsection~title}{use=frametitle, fg=frametitle.bg}
+\setbeamertemplate{progress~bar~in~splitvert}[empty]
+\setbeamertemplate{subsection~page}[gotham~splitvert~progressbar/simple]
+   % \usebeamertemplate*{subsection~page}% activated automatically
+}
+
+\defbeamertemplate{subsubsection~page}{gotham~splitvert~progressbar/simple}{
+\ifx\beamer@frametitle\@empty
+\vspace*{-0.05\paperheight}
+\else %}{
+\vspace*{-0.165\paperheight}
+\fi %}
+{
+\usebeamercolor{frametitle}\colorlet{gotham@@tempColor}{bg}
+\begin{tikzpicture}[overlay, remember~picture]
+\fill[color=gotham@@tempColor] (current~page.north~west) rectangle ([shift = {(0, -0.45\paperheight)}] current~page.north~east);
+\end{tikzpicture}
+}
+
+\hspace*{\sectionhoffset}
+\begin{minipage}[b][0.45\paperheight]{\textwidth}
+\usebeamertemplate*{section~title}
+\end{minipage}
+\\[-0.1\baselineskip]
+\hspace*{-1.0cm}\noindent
+\usebeamertemplate*{progress~bar~in~splitvert}
+
+\newline
+\hspace*{\sectionhoffset}
+\begin{minipage}[t][0.5\paperheight]{\textwidth}
+\usebeamerfont{subsubsection~title}
+\usebeamercolor[bg]{frametitle}
+\usebeamertemplate*{subsection~title}
+\par
+\usebeamertemplate*{subsubsection~title}
+\end{minipage}
+}
+\defbeamertemplate{subsubsection~frame}{gotham~splitvert~progressbar}{
+\setbeamertemplate{background~canvas}[subsubsection/gotham]
+\setlength{\sectionhoffset}{1cm}
+\setbeamercolor{section~title}{use=frametitle, fg=frametitle.fg}
+\setbeamercolor{subsection~title}{use=frametitle, fg=frametitle.bg}
+\setbeamercolor{subsubsection~title}{use=frametitle, fg=frametitle.bg}
+\setbeamertemplate{progress~bar~in~splitvert}[display]
+\setbeamertemplate{subsubsection~page}[gotham~splitvert~progressbar/simple]
+   % \usebeamertemplate*{subsubsection~page}% activated automatically
+}
+\defbeamertemplate{subsubsection~frame}{gotham~splitvert~simple}{
+\setbeamertemplate{background~canvas}[subsubsection/gotham]
+\setlength{\sectionhoffset}{1cm}
+\setbeamercolor{section~title}{use=frametitle, fg=frametitle.fg}
+\setbeamercolor{subsection~title}{use=frametitle, fg=frametitle.bg}
+\setbeamercolor{subsubsection~title}{use=frametitle, fg=frametitle.bg}
+\setbeamertemplate{progress~bar~in~splitvert}[empty]
+\setbeamertemplate{subsubsection~page}[gotham~splitvert~progressbar/simple]
+   % \usebeamertemplate*{subsubsection~page}% activated automatically
+}
+
+
+\defbeamertemplate{part~page}{gotham~progressvert}{
+\ifx\beamer@frametitle\@empty
+\vspace*{-0.05\paperheight}
+\else %}{
+\vspace*{-0.165\paperheight}
+\fi %}
+\setlength{\gotham@progressonsectionpage}{
+\paperheight * \ratio{\insertframenumber pt}{\inserttotalframenumber pt}
+}
+{
+\usebeamercolor{frametitle}\colorlet{gotham@@tempColor}{bg}
+\colorlet{gotham@@tempColorB}{fg}
+\begin{tikzpicture}[overlay, remember~picture]
+\fill[color=gotham@@tempColor]
+([shift={(0,0)}] current~page.north~west) --
+([shift={(0,-\gotham@progressonsectionpage)}] current~page.north~west) --
+([shift={(0,-\gotham@progressonsectionpage)}] current~page.north~east) --
+([shift={(0,0)}] current~page.north~east)
+--cycle;
+\node[color=gotham@@tempColorB, align=left, text~width=0.8\textwidth] at ([shift={(\sectionhoffset,0)}] current~page.center) {
+{\usebeamerfont{part~title}
+\partname \ \insertromanpartnumber
+\\[1.75ex]
+\insertpart
+}
+};
+
+\clip
+([shift={(0,0)}] current~page.south~west) --
+([shift={(0,\paperheight-\gotham@progressonsectionpage)}] current~page.south~west) --
+([shift={(0,\paperheight-\gotham@progressonsectionpage)}] current~page.south~east) --
+([shift={(0,0)}] current~page.south~east)
+--cycle;
+
+\fill[color=gotham@@tempColorB]
+([shift={(0,0)}]current~page.south~west) --
+([shift={(0,\paperheight-\gotham@progressonsectionpage)}] current~page.south~west) --
+([shift={(0,\paperheight-\gotham@progressonsectionpage)}] current~page.south~east) --
+([shift={(0,0)}] current~page.south~east)
+--cycle;
+\node[color=gotham@@tempColor, align=left, text~width=0.8\textwidth] at ([shift={(\sectionhoffset,0)}] current~page.center) {
+{\usebeamerfont{part~title}
+\partname \ \insertromanpartnumber
+\\
+\insertpart
+}
+};
+\end{tikzpicture}
+}
+}
+\defbeamertemplate{part~frame}{gotham~progressvert}{
+\setbeamertemplate{background~canvas}[part/gotham]
+\setlength{\sectionhoffset}{1cm}
+\setbeamertemplate{part~page}[gotham~progressvert]
+   % \usebeamertemplate*{section~page}% activated automatically
+}
+
+\defbeamertemplate{section~page}{gotham~progressvert}{
+\ifx\beamer@frametitle\@empty
+\vspace*{-0.05\paperheight}
+\else %}{
+\vspace*{-0.165\paperheight}
+\fi %}
+\setlength{\gotham@progressonsectionpage}{
+\paperheight * \ratio{\insertframenumber pt}{\inserttotalframenumber pt}
+}
+{
+\usebeamercolor{frametitle}\colorlet{gotham@@tempColor}{bg}
+\colorlet{gotham@@tempColorB}{fg}
+\begin{tikzpicture}[overlay, remember~picture]
+\fill[color=gotham@@tempColor]
+([shift={(0,0)}] current~page.north~west) --
+([shift={(0,-\gotham@progressonsectionpage)}] current~page.north~west) --
+([shift={(0,-\gotham@progressonsectionpage)}] current~page.north~east) --
+([shift={(0,0)}] current~page.north~east)
+--cycle;
+\node[color=gotham@@tempColorB, align=left, text~width=0.8\textwidth] at ([shift={(\sectionhoffset,0)}] current~page.center) {
+{\usebeamerfont{section~title}
+\insertsectionnumber.~
+\insertsectionhead}
+};
+
+\clip
+([shift={(0,0)}] current~page.south~west) --
+([shift={(0,\paperheight-\gotham@progressonsectionpage)}] current~page.south~west) --
+([shift={(0,\paperheight-\gotham@progressonsectionpage)}] current~page.south~east) --
+([shift={(0,0)}] current~page.south~east)
+--cycle;
+
+\fill[color=gotham@@tempColorB]
+([shift={(0,0)}]current~page.south~west) --
+([shift={(0,\paperheight-\gotham@progressonsectionpage)}] current~page.south~west) --
+([shift={(0,\paperheight-\gotham@progressonsectionpage)}] current~page.south~east) --
+([shift={(0,0)}] current~page.south~east)
+--cycle;
+\node[color=gotham@@tempColor, align=left, text~width=0.8\textwidth] at ([shift={(\sectionhoffset,0)}] current~page.center) {
+{\usebeamerfont{section~title}
+\insertsectionnumber.~
+\insertsectionhead}
+};
+\end{tikzpicture}
+}
+}
+\defbeamertemplate{section~frame}{gotham~progressvert}{
+\setbeamertemplate{background~canvas}[section/gotham]
+\setlength{\sectionhoffset}{1cm}
+\setbeamertemplate{section~page}[gotham~progressvert]
+   % \usebeamertemplate*{section~page}% activated automatically
+}
+
+\defbeamertemplate{subsection~page}{gotham~progressvert}{
+\ifx\beamer@frametitle\@empty
+\vspace*{-0.05\paperheight}
+\else %}{
+\vspace*{-0.165\paperheight}
+\fi %}
+\setlength{\gotham@progressonsectionpage}{
+\paperheight * \ratio{\insertframenumber pt}{\inserttotalframenumber pt}
+}
+{
+\usebeamercolor{frametitle}\colorlet{gotham@@tempColor}{bg}
+\colorlet{gotham@@tempColorB}{fg}
+\begin{tikzpicture}[overlay, remember~picture]
+\fill[color=gotham@@tempColor]
+([shift={(0,0)}] current~page.north~west) --
+([shift={(0,-\gotham@progressonsectionpage)}] current~page.north~west) --
+([shift={(0,-\gotham@progressonsectionpage)}] current~page.north~east) --
+([shift={(0,0)}] current~page.north~east)
+--cycle;
+\node[color=gotham@@tempColorB, align=left, text~width=0.8\textwidth] at ([shift={(\sectionhoffset,0)}] current~page.center) {
+{\usebeamerfont{section~title}
+\insertsectionnumber.~
+\insertsectionhead}
+\\
+{\usebeamerfont{subsection~title}
+\insertsectionnumber.\insertsubsectionnumber.~
+\insertsubsectionhead}
+};
+
+\clip
+([shift={(0,0)}] current~page.south~west) --
+([shift={(0,\paperheight-\gotham@progressonsectionpage)}] current~page.south~west) --
+([shift={(0,\paperheight-\gotham@progressonsectionpage)}] current~page.south~east) --
+([shift={(0,0)}] current~page.south~east)
+--cycle;
+
+\fill[color=gotham@@tempColorB]
+([shift={(0,0)}]current~page.south~west) --
+([shift={(0,\paperheight-\gotham@progressonsectionpage)}] current~page.south~west) --
+([shift={(0,\paperheight-\gotham@progressonsectionpage)}] current~page.south~east) --
+([shift={(0,0)}] current~page.south~east)
+--cycle;
+\node[color=gotham@@tempColor, align=left, text~width=0.8\textwidth] at ([shift={(\sectionhoffset,0)}] current~page.center) {
+{\usebeamerfont{section~title}
+\insertsectionnumber.~
+\insertsectionhead}
+\\
+{\usebeamerfont{subsection~title}
+\insertsectionnumber.\insertsubsectionnumber.~
+\insertsubsectionhead}
+};
+\end{tikzpicture}
+}
+}
+\defbeamertemplate{subsection~frame}{gotham~progressvert}{
+\setbeamertemplate{background~canvas}[subsection/gotham]
+\setlength{\sectionhoffset}{1cm}
+\setbeamertemplate{subsection~page}[gotham~progressvert]
+   % \usebeamertemplate*{subsection~page}% activated automatically
+}
+
+\defbeamertemplate{subsubsection~page}{gotham~progressvert}{
+\ifx\beamer@frametitle\@empty
+\vspace*{-0.05\paperheight}
+\else %}{
+\vspace*{-0.165\paperheight}
+\fi %}
+\setlength{\gotham@progressonsectionpage}{
+\paperheight * \ratio{\insertframenumber pt}{\inserttotalframenumber pt}
+}
+{
+\usebeamercolor{frametitle}\colorlet{gotham@@tempColor}{bg}
+\colorlet{gotham@@tempColorB}{fg}
+\begin{tikzpicture}[overlay, remember~picture]
+\fill[color=gotham@@tempColor]
+([shift={(0,0)}] current~page.north~west) --
+([shift={(0,-\gotham@progressonsectionpage)}] current~page.north~west) --
+([shift={(0,-\gotham@progressonsectionpage)}] current~page.north~east) --
+([shift={(0,0)}] current~page.north~east)
+--cycle;
+\node[color=gotham@@tempColorB, align=left, text~width=0.8\textwidth] at ([shift={(\sectionhoffset,0)}] current~page.center) {
+{\usebeamerfont{section~title}
+\insertsectionnumber.~
+\insertsectionhead}
+\\
+{\usebeamerfont{subsection~title}
+\insertsectionnumber.\insertsubsectionnumber.~
+\insertsubsectionhead}
+\\
+{\usebeamerfont{subsubsection~title}
+\insertsectionnumber.\insertsubsectionnumber.\insertsubsubsectionnumber.~
+\insertsubsubsectionhead}
+};
+
+\clip
+([shift={(0,0)}] current~page.south~west) --
+([shift={(0,\paperheight-\gotham@progressonsectionpage)}] current~page.south~west) --
+([shift={(0,\paperheight-\gotham@progressonsectionpage)}] current~page.south~east) --
+([shift={(0,0)}] current~page.south~east)
+--cycle;
+
+\fill[color=gotham@@tempColorB]
+([shift={(0,0)}]current~page.south~west) --
+([shift={(0,\paperheight-\gotham@progressonsectionpage)}] current~page.south~west) --
+([shift={(0,\paperheight-\gotham@progressonsectionpage)}] current~page.south~east) --
+([shift={(0,0)}] current~page.south~east)
+--cycle;
+\node[color=gotham@@tempColor, align=left, text~width=0.8\textwidth] at ([shift={(\sectionhoffset,0)}] current~page.center) {
+{\usebeamerfont{section~title}
+\insertsectionnumber.~
+\insertsectionhead}
+\\
+{\usebeamerfont{subsection~title}
+\insertsectionnumber.\insertsubsectionnumber.~
+\insertsubsectionhead}
+\\
+{\usebeamerfont{subsubsection~title}
+\insertsectionnumber.\insertsubsectionnumber.\insertsubsubsectionnumber.~
+\insertsubsubsectionhead}
+};
+\end{tikzpicture}
+}
+}
+\defbeamertemplate{subsubsection~frame}{gotham~progressvert}{
+\setbeamertemplate{background~canvas}[subsubsection/gotham]
+\setlength{\sectionhoffset}{1cm}
+\setbeamertemplate{subsubsection~page}[gotham~progressvert]
+   % \usebeamertemplate*{subsubsection~page}% activated automatically
+}
+
+%%%%
+\keys_define:nn { gotham / inner }{
+partframe~template .usage:n = { general },
+partframe~template .default:n = { gotham~progressbar },
+partframe~template .code:n = { \__gotham_set_template:nn{part~frame}{#1} }
+}
+\keys_define:nn { gotham / inner }
+{
+partframe~default .choice:,
+partframe~default .usage:n = { general },
+partframe~default .default:n = { true },
+
+partframe~default / true .code:n = { \__gotham_inner_enable_partpage: },
+partframe~default / on .code:n = { \__gotham_inner_enable_partpage: },
+partframe~default / enable .code:n = { \__gotham_inner_enable_partpage: },
+
+partframe~default / false .code:n = { \__gotham_inner_disable_partpage: },
+partframe~default / off .code:n = { \__gotham_inner_disable_partpage: },
+partframe~default / disable .code:n = { \__gotham_inner_disable_partpage: },
+
+partframe~default / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'#1'~is~unknown~for~the~(known)~option~'partframe~default',~so~being~ignored. }{helping~message: partframe~default / unknown} },
+}
+
+\keys_define:nn { gotham / inner }{
+sectionframe~template .usage:n = { general },
+sectionframe~template .default:n = { gotham~progressbar },
+sectionframe~template .code:n = { \__gotham_set_template:nn{section~frame}{#1} }
+}
+\keys_define:nn { gotham / inner }
+{
+sectionframe~default .choice:,
+sectionframe~default .usage:n = { general },
+sectionframe~default .default:n = { true },
+
+sectionframe~default / true .code:n = { \__gotham_inner_enable_sectionpage: },
+sectionframe~default / on .code:n = { \__gotham_inner_enable_sectionpage: },
+sectionframe~default / enable .code:n = { \__gotham_inner_enable_sectionpage: },
+
+sectionframe~default / false .code:n = { \__gotham_inner_disable_sectionpage: },
+sectionframe~default / off .code:n = { \__gotham_inner_disable_sectionpage: },
+sectionframe~default / disable .code:n = { \__gotham_inner_disable_sectionpage: },
+
+sectionframe~default / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'#1'~is~unknown~for~the~(known)~option~'sectionframe~default',~so~being~ignored. }{helping~message: sectionframe~default / unknown} },
+}
+
+\keys_define:nn { gotham / inner }{
+subsectionframe~template .usage:n = { general },
+subsectionframe~template .default:n = { gotham~progressbar },
+subsectionframe~template .code:n = { \__gotham_set_template:nn{subsection~frame}{#1} }
+}
+\keys_define:nn { gotham / inner }
+{
+subsectionframe~default .choice:,
+subsectionframe~default .usage:n = { general },
+subsectionframe~default .default:n = { true },
+
+subsectionframe~default / true .code:n = { \__gotham_inner_enable_subsectionpage: },
+subsectionframe~default / on .code:n = { \__gotham_inner_enable_subsectionpage: },
+subsectionframe~default / enable .code:n = { \__gotham_inner_enable_subsectionpage: },
+
+subsectionframe~default / false .code:n = { \__gotham_inner_disable_subsectionpage: },
+subsectionframe~default / off .code:n = { \__gotham_inner_disable_subsectionpage: },
+subsectionframe~default / disable .code:n = { \__gotham_inner_disable_subsectionpage: },
+
+subsectionframe~default / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'#1'~is~unknown~for~the~(known)~option~'subsectionframe~default',~so~being~ignored. }{helping~message: subsectionframe~default / unknown} },
+}
+
+\keys_define:nn { gotham / inner }{
+subsubsectionframe~template .usage:n = { general },
+subsubsectionframe~template .default:n = { gotham~progressbar },
+subsubsectionframe~template .code:n = { \__gotham_set_template:nn{subsubsection~frame}{#1} }
+}
+\keys_define:nn { gotham / inner }
+{
+subsubsectionframe~default .choice:,
+subsubsectionframe~default .usage:n = { general },
+subsubsectionframe~default .default:n = { true },
+
+subsubsectionframe~default / true .code:n = { \__gotham_inner_enable_subsubsectionpage: },
+subsubsectionframe~default / on .code:n = { \__gotham_inner_enable_subsubsectionpage: },
+subsubsectionframe~default / enable .code:n = { \__gotham_inner_enable_subsubsectionpage: },
+
+subsubsectionframe~default / false .code:n = { \__gotham_inner_disable_subsubsectionpage: },
+subsubsectionframe~default / off .code:n = { \__gotham_inner_disable_subsubsectionpage: },
+subsubsectionframe~default / disable .code:n = { \__gotham_inner_disable_subsubsectionpage: },
+
+subsubsectionframe~default / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'#1'~is~unknown~for~the~(known)~option~'subsubsectionframe~default',~so~being~ignored. }{helping~message: subsubsectionframe~default / unknown} },
+}
+
+%%%% Table of Content %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tikzset{section~number/.style={
+circle,
+fill=colorAlert,
+minimum~size=0.4em,
+text=colorAlert!10,
+inner~sep=1.5pt,
+},
+section/.style={
+draw=none,
+rectangle,
+minimum~height=1em,
+minimum~width=0.8\textwidth,
+text~width=0.8\textwidth,
+text=fg,
+align=left
+},
+subsection~number/.style={
+circle,
+fill=colorBackElement!50,
+inner~sep=0pt,
+minimum~size=0.15cm,
+},
+subsection/.style={
+draw=none,
+rectangle,
+minimum~height=1em,
+minimum~width=0.8\textwidth,
+text~width=0.8\textwidth,
+text=fg!80,
+align=left
+},
+subsubsection~number/.style={
+circle,
+fill=colorBackElement!50,
+inner~sep=0pt,
+minimum~size=0.06cm,
+},
+subsubsection/.style={
+draw=none,
+rectangle,
+minimum~height=1em,
+minimum~width=0.8\textwidth,
+text~width=0.8\textwidth,
+text=fg!80,
+align=left
+},
+}
+
+\defbeamertemplate{section~in~toc}{gotham~bullet}{
+\hspace*{0.4cm}\tikz[baseline=-0.5ex]\node[section~number]{\textbf{\small\inserttocsectionnumber}};
+\ \tikz[baseline=-0.5ex]\node[section]{\usebeamerfont*{toc~title} \inserttocsection};\\[-0.35cm]
+\hspace*{1.13cm}{\usebeamercolor*[fg]{footer} \rule{0.6\paperwidth}{0.2pt}\\\nointerlineskip}
+}
+\defbeamertemplate{subsection~in~toc}{gotham~bullet}{
+\hspace*{0.53cm}\tikz[baseline=-0.5ex]\node[subsection~number]{};
+\hspace*{0.5cm}\tikz[baseline=-0.5ex]\node[subsection]{\usebeamerfont*{toc~subtitle}\inserttocsubsection};\\[-0.2cm]
+}
+\defbeamertemplate{subsubsection~in~toc}{gotham~bullet}{
+\hspace*{0.58cm}\tikz[baseline=-0.5ex]\node[subsubsection~number]{};
+\hspace*{0.69cm}\tikz[baseline=-0.5ex]\node[subsubsection]{\usebeamerfont*{toc~subtitle}\inserttocsubsubsection};\\[-0.2cm]
+}
+\defbeamertemplate{section~in~toc~shaded}{gotham~bullet}{
+\hspace*{0.4cm}\tikz[baseline=-0.5ex]\node[section~number, fill=colorBackElement!40, text=background]{\usebeamerfont*{toc~subtitle}\textbf{\inserttocsectionnumber}};
+\ \tikz[baseline=-0.5ex]\node[section, text=colorExample!20]{\usebeamerfont*{toc~title} \inserttocsection};\\[-0.35cm]
+\hspace*{1.3cm}{\usebeamercolor*[fg]{footer} \rule{0.6\paperwidth}{0.2pt}\\\nointerlineskip}
+}
+\defbeamertemplate{subsection~in~toc~shaded}{gotham~bullet}{
+\hspace*{0.55cm}\tikz[baseline=-0.5ex]\node[subsection~number,fill=colorBackElement!20]{};
+\hspace*{0.5cm}\tikz[baseline=-0.5ex]\node[subsection, text=colorBackElement!20]{};\\[-0.2cm]
+}
+\defbeamertemplate{subsubsection~in~toc~shaded}{gotham~bullet}{
+\hspace*{0.58cm}\tikz[baseline=-0.5ex]\node[subsubsection~number,fill=colorBackElement!20]{};
+\hspace*{0.69cm}\tikz[baseline=-0.5ex]\node[subsubsection,text=colorBackElement!20]{\usebeamerfont*{toc~subtitle}\inserttocsubsubsection};\\[-0.2cm]
+}
+
+\defbeamertemplate{part~in~toc}{gotham~simple}{
+{{\inserttocpartnumber}.}~\inserttocpart
+\\
+}
+\defbeamertemplate{section~in~toc}{gotham~simple}{
+{{\inserttocsectionnumber}.}~\inserttocsection
+\\
+}
+\defbeamertemplate{subsection~in~toc}{gotham~simple}{
+\quad{{\inserttocsectionnumber}.\inserttocsubsectionnumber.}~\inserttocsubsection
+\\
+}
+\defbeamertemplate{subsubsection~in~toc}{gotham~simple}{
+\qquad{{\inserttocsectionnumber}.\inserttocsubsectionnumber.\inserttocsubsubsectionnumber.}~\inserttocsubsubsection
+\\
+}
+
+\defbeamertemplate{background~canvas}{toc/gotham~simple}{
+\ifbeamercolorempty[bg]{standin}{}{
+\color{bg}\vrule width\paperwidth height\paperheight
+}
+}
+\defbeamertemplate{toc~page}{gotham~simple}{
+\setbeamertemplate{part~in~toc}[gotham~simple]
+\setbeamertemplate{section~in~toc}[gotham~simple]
+\setbeamertemplate{subsection~in~toc}[gotham~simple]
+\setbeamertemplate{subsubsection~in~toc}[gotham~simple]
+\setbeamertemplate{background~canvas}[toc/gotham~simple]
+}
+\defbeamertemplate{toc~page}{gotham~bullet}{
+\setbeamertemplate{part~in~toc}[gotham~bullet]
+\setbeamertemplate{section~in~toc}[gotham~bullet]
+\setbeamertemplate{subsection~in~toc}[gotham~bullet]
+\setbeamertemplate{subsubsection~in~toc}[gotham~bullet]
+\setbeamertemplate{background~canvas}[toc/gotham~simple]
+}
+
+%%%%%%
+\newenvironment{tocenv}{
+\usebeamertemplate{toc~page}
+}{}
+\__gotham_add_beamerframe_key:n {toc}
+
+\defbeamertemplate{background~canvas}{toc~part~gotham}{
+\ifbeamercolorempty[bg]{normal~text}{}{\color{bg}\vrule width\paperwidth height\paperheight}
+}
+\defbeamertemplate{background~canvas}{toc~section~gotham}{
+\ifbeamercolorempty[bg]{normal~text}{}{\color{bg}\vrule width\paperwidth height\paperheight}
+}
+\defbeamertemplate{background~canvas}{toc~subsection~gotham}{
+\ifbeamercolorempty[bg]{normal~text}{}{\color{bg}\vrule width\paperwidth height\paperheight}
+}
+
+\defbeamertemplate{toc~part~frame}{gotham~simple}{
+\setbeamertemplate{part~in~toc}[gotham~simple]
+\setbeamertemplate{section~in~toc}[gotham~simple]
+\setbeamertemplate{subsection~in~toc}[gotham~simple]
+\setbeamertemplate{subsubsection~in~toc}[gotham~simple]
+\setbeamertemplate{background~canvas}[toc~part~gotham]
+\setbeamertemplate{frametitle}[toc~gotham]
+}
+\defbeamertemplate{toc~section~frame}{gotham~simple}{
+\setbeamertemplate{part~in~toc}[gotham~simple]
+\setbeamertemplate{section~in~toc}[gotham~simple]
+\setbeamertemplate{subsection~in~toc}[gotham~simple]
+\setbeamertemplate{subsubsection~in~toc}[gotham~simple]
+\setbeamertemplate{background~canvas}[toc~section~gotham]
+\setbeamertemplate{frametitle}[toc~gotham]%
+}
+\defbeamertemplate{toc~subsection~frame}{gotham~simple}{
+\setbeamertemplate{part~in~toc}[gotham~simple]
+\setbeamertemplate{section~in~toc}[gotham~simple]
+\setbeamertemplate{subsection~in~toc}[gotham~simple]
+\setbeamertemplate{subsubsection~in~toc}[gotham~simple]
+\setbeamertemplate{background~canvas}[toc~subsection~gotham]
+\setbeamertemplate{frametitle}[toc~gotham]
+}
+
+\defbeamertemplate{toc~part~frame}{gotham~bullet}{
+\setbeamertemplate{part~in~toc}[gotham~bullet]
+\setbeamertemplate{section~in~toc}[gotham~bullet]
+\setbeamertemplate{subsection~in~toc}[gotham~bullet]
+\setbeamertemplate{subsubsection~in~toc}[gotham~bullet]
+\setbeamertemplate{background~canvas}[toc~part~gotham]
+\setbeamertemplate{frametitle}[toc~gotham]
+}
+\defbeamertemplate{toc~section~frame}{gotham~bullet}{
+\setbeamertemplate{part~in~toc}[gotham~bullet]
+\setbeamertemplate{section~in~toc}[gotham~bullet]
+\setbeamertemplate{subsection~in~toc}[gotham~bullet]
+\setbeamertemplate{subsubsection~in~toc}[gotham~bullet]
+\setbeamertemplate{background~canvas}[toc~section~gotham]
+\setbeamertemplate{frametitle}[toc~gotham]%
+}
+\defbeamertemplate{toc~subsection~frame}{gotham~bullet}{
+\setbeamertemplate{part~in~toc}[gotham~bullet]
+\setbeamertemplate{section~in~toc}[gotham~bullet]
+\setbeamertemplate{subsection~in~toc}[gotham~bullet]
+\setbeamertemplate{subsubsection~in~toc}[gotham~bullet]
+\setbeamertemplate{background~canvas}[toc~subsection~gotham]
+\setbeamertemplate{frametitle}[toc~gotham]
+}
+
+%%%%%%
+\bool_new:N \l_gotham_tocpartframe
+\bool_set_false:N \l_gotham_tocpartframe
+\define@key{beamerframe}{tocpart}[true]{
+\bool_set_true:N \l_gotham_tocpartframe
+\begingroup
+\usebeamertemplate{toc~part~frame}
+}
+\apptocmd{\beamer@reseteecodes}{
+\bool_if:NTF \l_gotham_tocpartframe {
+\endgroup
+\bool_set_false:N \l_gotham_tocpartframe
+}{}
+}{}{}
+
+%%%%%%
+\bool_new:N \l_gotham_tocsectionframe
+\bool_set_false:N \l_gotham_tocsectionframe
+\define@key{beamerframe}{tocsec}[true]{
+\bool_set_true:N \l_gotham_tocsectionframe
+\begingroup
+\usebeamertemplate{toc~section~frame}
+}
+\apptocmd{\beamer@reseteecodes}{
+\bool_if:NTF \l_gotham_tocsectionframe {
+\endgroup
+\bool_set_false:N \l_gotham_tocsectionframe
+}{}
+}{}{}
+
+%%%%%%
+\bool_new:N \l_gotham_tocsubsectionframe
+\bool_set_false:N \l_gotham_tocsubsectionframe
+\define@key{beamerframe}{tocsubsec}[true]{
+\bool_set_true:N \l_gotham_tocsubsectionframe
+\begingroup
+\usebeamertemplate{toc~subsection~frame}
+}
+\apptocmd{\beamer@reseteecodes}{
+\bool_if:NTF \l_gotham_tocsubsectionframe {
+\endgroup
+\bool_set_false:N \l_gotham_tocsubsectionframe
+}{}
+}{}{}
+
+%%%%%%
+\bool_new:N \l_gotham_tocsubsubsectionframe
+\bool_set_false:N \l_gotham_tocsubsubsectionframe
+\define@key{beamerframe}{tocsubsubsec}[true]{
+\bool_set_true:N \l_gotham_tocsubsubsectionframe
+\begingroup
+\usebeamertemplate{toc~subsubsection~frame}
+}
+\apptocmd{\beamer@reseteecodes}{
+\bool_if:NTF \l_gotham_tocsubsubsectionframe {
+\endgroup
+\bool_set_false:N \l_gotham_tocsubsubsectionframe
+}{}
+}{}{}
+
+%%%%
+\keys_define:nn { gotham / inner }
+{
+tocframe~template .usage:n = { general },
+tocframe~template .default:n = { gotham~bullet },
+tocframe~template .code:n = { \__gotham_set_template:nn{toc~page}{#1} }
+}
+
+\keys_define:nn { gotham / inner }{
+parttocframe~template .usage:n = { general },
+parttocframe~template .default:n = { gotham~simple },
+parttocframe~template .code:n = { \__gotham_set_template:nn{toc~part~frame}{#1} }
+}
+\keys_define:nn { gotham / inner }
+{
+parttocframe~default .choice:,
+parttocframe~default .usage:n = { general },
+parttocframe~default .default:n = { true },
+
+parttocframe~default / true .code:n = { \booltrue{partContent} },
+parttocframe~default / on .code:n = { \booltrue{partContent} },
+parttocframe~default / enable .code:n = { \booltrue{partContent} },
+
+parttocframe~default / false .code:n = { \boolfalse{partContent} },
+parttocframe~default / off .code:n = { \boolfalse{partContent} },
+parttocframe~default / disable .code:n = { \boolfalse{partContent} },
+
+parttocframe~default / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'#1'~is~unknown~for~the~(known)~option~'parttocframe~default',~so~being~ignored. }{helping~message: parttocframe~default / unknown} },
+}
+
+\keys_define:nn { gotham / inner }{
+sectiontocframe~template .usage:n = { general },
+sectiontocframe~template .default:n = { gotham~simple },
+sectiontocframe~template .code:n = { \__gotham_set_template:nn{toc~section~frame}{#1} }
+}
+\keys_define:nn { gotham / inner }
+{
+sectiontocframe~default .choice:,
+sectiontocframe~default .usage:n = { general },
+sectiontocframe~default .default:n = { true },
+
+sectiontocframe~default / true .code:n = { \booltrue{sectionContent} },
+sectiontocframe~default / on .code:n = { \booltrue{sectionContent} },
+sectiontocframe~default / enable .code:n = { \booltrue{sectionContent} },
+
+sectiontocframe~default / false .code:n = { \boolfalse{sectionContent} },
+sectiontocframe~default / off .code:n = { \boolfalse{sectionContent} },
+sectiontocframe~default / disable .code:n = { \boolfalse{sectionContent} },
+
+sectiontocframe~default / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'#1'~is~unknown~for~the~(known)~option~'sectiontocframe~default',~so~being~ignored. }{helping~message: sectiontocframe~default / unknown} },
+}
+
+\keys_define:nn { gotham / inner }{
+subsectiontocframe~template .usage:n = { general },
+subsectiontocframe~template .default:n = { gotham~simple },
+subsectiontocframe~template .code:n = { \__gotham_set_template:nn{toc~subsection~frame}{#1} }
+}
+\keys_define:nn { gotham / inner }
+{
+subsectiontocframe~default .choice:,
+subsectiontocframe~default .usage:n = { general },
+subsectiontocframe~default .default:n = { true },
+
+subsectiontocframe~default / true .code:n = { \booltrue{subsectionContent} },
+subsectiontocframe~default / on .code:n = { \booltrue{subsectionContent} },
+subsectiontocframe~default / enable .code:n = { \booltrue{subsectionContent} },
+
+subsectiontocframe~default / false .code:n = { \boolfalse{subsectionContent} },
+subsectiontocframe~default / off .code:n = { \boolfalse{subsectionContent} },
+subsectiontocframe~default / disable .code:n = { \boolfalse{subsectionContent} },
+
+subsectiontocframe~default / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'#1'~is~unknown~for~the~(known)~option~'subsectiontocframe~default',~so~being~ignored. }{helping~message: subsectiontocframe~default / unknown} },
+}
+
+%% Environments styles %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newlength{\gotham@blocksep}
+\newlength{\gotham@blockadjust}
+\setlength{\gotham@blocksep}{0.75ex}
+\setlength{\gotham@blockadjust}{0.25ex}
+\providecommand{\gotham@strut}{
+\vphantom{ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz (/)}
+}
+
+\newlength{\gotham@parskip}
+\setlength{\gotham@parskip}{0.5em}
+\setlength{\parskip}{\gotham@parskip}
+\linespread{1.15}
+
+\providecommand{\gotham@block}[1]{
+\par\vskip\medskipamount
+\setlength{\parskip}{0pt}
+
+\ifbeamercolorempty[bg]{block~title#1}{%
+\begin{beamercolorbox}[rightskip=0pt~plus~4em]{block~title#1}
+}{
+\ifbeamercolorempty[bg]{block~title}{
+\begin{beamercolorbox}[rightskip=0pt~plus~4em]{block~title#1}
+}
+{
+\begin{beamercolorbox}[
+sep=\dimexpr\gotham@blocksep-\gotham@blockadjust\relax,
+leftskip=\gotham@blockadjust,
+rightskip=\dimexpr\gotham@blockadjust~plus~4em\relax,
+]{block~title#1}
+}
+}
+\usebeamerfont*{block~title#1}
+\gotham@strut
+\insertblocktitle
+\gotham@strut
+\end{beamercolorbox}
+\nointerlineskip
+\ifbeamercolorempty[bg]{block~body#1}{
+\begin{beamercolorbox}[vmode]{block~body#1}
+}{
+\ifbeamercolorempty[bg]{block~body}{
+\begin{beamercolorbox}[vmode]{block~body#1}
+}{
+\begin{beamercolorbox}[sep=\gotham@blocksep, vmode]{block~body#1}
+\vspace{-\gotham@parskip}
+}
+}
+\usebeamerfont{block~body#1}
+\setlength{\parskip}{\gotham@parskip}
+}
+
+%%%%
+
+%%%%
+\defbeamertemplate*{itemize~item}{gotham}{%\textbullet}
+\Large
+\setbeamertemplate{itemize~item}[circle]
+\usebeamertemplate{itemize~item}
+}
+\defbeamertemplate*{itemize~subitem}{gotham}{%$\blacktriangleright$
+\scriptsize
+\setbeamertemplate{itemize~subitem}[triangle]
+\usebeamertemplate{itemize~subitem}
+}
+\defbeamertemplate*{itemize~subsubitem}{gotham}{%square or -
+\Tiny
+$\blacksquare$ % \textbf{-}
+}
+
+%% TRY: enumitem package, enumitem and beamer are incompatible.
+%% I tried to redefine everything to make them compatible, but it breaks the [alert] environment... So, I gave up.
+
+
+%%%%%%
+\defbeamertemplate*{caption~label~separator}{gotham}{:~}
+\setbeamertemplate{caption}[numbered]
+\defbeamertemplate*{footnote}{gotham}{
+\parindent~0em\noindent
+\raggedright
+\usebeamercolor{footnote}\hbox~to~0.8em{\hfil\insertfootnotemark}\insertfootnotetext\par
+}
+
+\keys_set:nn { gotham / inner } {
+title~page,
+watermark~template, watermark~default,
+standout~template, standin~template,
+partframe~template, partframe~default,
+sectionframe~template, sectionframe~default,
+subsectionframe~template, subsectionframe~default,
+subsubsectionframe~template, subsubsectionframe~default,
+tocframe~template,
+parttocframe~template, parttocframe~default,
+sectiontocframe~template, sectiontocframe~default,
+subsectiontocframe~template, subsectiontocframe~default,
+}
+
+\ProcessKeyOptions[ gotham / inner ]
+
+%% 
+%% Adapted from classic "A model .dtx file" by Joseph Wright
+%% https://www.texdev.net/2009/10/06/a-model-dtx-file/
+%%
+%% End of file `beamerinnerthemegotham.sty'.

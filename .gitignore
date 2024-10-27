@@ -24,3 +24,4 @@
 *.thm
 *MyProgressBar.sty
 *Demo_metroUGE_persoPB.*
+**/build/*

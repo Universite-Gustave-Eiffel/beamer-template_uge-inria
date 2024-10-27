@@ -22,15 +22,19 @@
 
 %%%%---- SPACING & JUSTIFICATION ---------------%%%%
 %%%%---- LAYOUT & MARGINS ----------------------%%%%
+	\usepackage{changepage}
+   \usepackage{appendixnumberbeamer} % Manage frame numbering in appendixes in beamer
+
+
 %%%%---- FOOT PAGE & HEAD ----------------------%%%%
 %%%%---- TABLE of CONTENT & FIGURES ------------%%%%
 %%%%---- PARTS & CHAPTERS ----------------------%%%%
 %%%%---- WATERMARKS ----------------------------%%%%
 %%%%---- COVER PAGE ----------------------------%%%%
 %%%%---- IMAGES --------------------------------%%%%
-	%\usepackage{placeins} 	% provide FloatBarrier
+	%\usepackage{placeins} % provide FloatBarrier
 	%\usepackage[absolute,overlay]{textpos} % for positioning text or floats at absolute coords.
-	\usepackage{subcaption} 	% multiple figures 
+	\usepackage{subcaption} % multiple figures 
 		%\renewcommand{\thesubfigure}{{\normalfont\alph{subfigure}}} %
 
 %%%%---- DRAWING & GRAPHS ----------------------%%%%
@@ -59,14 +63,17 @@
 	\usepackage{mleftright} % better left and right bracket management
 	\usepackage{derivative} % standard and customable derivative operators
 	\usepackage{siunitx} % International System units
-	% \usepackage{tensors} % work in progress ^^
+	% \usepackage{tensorsop} % work in progress ^^
+	\usepackage{amsthm, thmtools} % replacement of ntheorem
+		\declaretheorem{theorem}
+		% Define a theorem style that uses Beamer's 'block' environment
+		\renewenvironment{theorem}[1][]{%
+			\refstepcounter{theorem}% Increment the theorem counter
+			\begin{block}{\thmname{Theorem}~\thmnumber{\thetheorem}\if\relax\detokenize{#1}\relax\else~(#1)\fi:}%
+		}{%
+			\end{block}%
+		}
 	% \usepackage{empheq} % emphasize equations
-	\usepackage[amsthm, amsmath, thmmarks, hyperref]{ntheorem}%[standard]
-		\newtheorem{proposition}{Proposition}
-		\newtheorem{defs}{Definition}
-		\newtheorem{theorem}{Theorem}
-		% \newtheorem{proof}{Proof}
-	% \usepackage[ntheorem]{empheq} 	% emphasize equations
 
 
 %%%%---- THEOREMS ------------------------------%%%%
@@ -250,23 +257,24 @@
 		\fi
 		% for windows
 		\ifx\OSvar\OSwindows
-			\usepackage{media9}
+			\usepackage{embedvideo}
+			% \usepackage{media9}
 			
-			\renewcommand{\includeVideo}[3][]{%
-				\includemedia[% % Windows AcrobatReader >9.1
-					%	activate=pagevisible,%
-					%   activate=onclick, %this is default
-					%	deactivate=pageclose,%
-					addresource=#2,%
-					flashvars={%
-						src=#2 % same path as in addresource!
-						%	&autoPlay=true % default: false; if =true, automatically starts playback after activation (see option ‘activation)’
-						%	&loop=true % if loop=true, media is played in a loop
-						%	&controlBarAutoHideTimeout=0 %  time span before auto-hide
-					},%
-					#1% some options like size%
-				]{#3}{StrobeMediaPlayback.swf}% %{SlideShow.swf} %{APlayer.swf} %{StrobeMediaPlayback.swf} %{VPlayer.swf}
-			}% end of the new command
+			% \renewcommand{\includeVideo}[3][]{%
+			% 	\includemedia[% % Windows AcrobatReader >9.1
+			% 		%	activate=pagevisible,%
+			% 		%   activate=onclick, %this is default
+			% 		%	deactivate=pageclose,%
+			% 		addresource=#2,%
+			% 		flashvars={%
+			% 			src=#2 % same path as in addresource!
+			% 			%	&autoPlay=true % default: false; if =true, automatically starts playback after activation (see option ‘activation)’
+			% 			%	&loop=true % if loop=true, media is played in a loop
+			% 			%	&controlBarAutoHideTimeout=0 %  time span before auto-hide
+			% 		},%
+			% 		#1% some options like size%
+			% 	]{#3}{StrobeMediaPlayback.swf}% %{SlideShow.swf} %{APlayer.swf} %{StrobeMediaPlayback.swf} %{VPlayer.swf}
+			% }% end of the new command
 		\fi
 		
 
