@@ -143,7 +143,7 @@
 % %% Standout %%%
 % %%%%%%%%%%%%%%%
 
-\defbeamertemplate{standout}{inria}{
+\defbeamertemplate{standout}{inria~old}{
 	% \setkeys{beamerframe}{c}
 	% \setkeys{beamerframe}{noframenumbering}
 	% \centering
@@ -168,6 +168,55 @@
 	\setbeamercolor{local~structure}{fg=primary~palette.bg}
 	\usebeamercolor[fg]{primary~palette}
 	\setbeamercolor{frametitle}{use=primary~palette, fg=primary~palette.fg}
+}
+
+\defbeamertemplate{background~canvas}{standout/inria~RF}{
+	% copied from beamer default
+	\ifbeamercolorempty[bg]{normal~text}{}{\color{bg}\vrule width\paperwidth height\paperheight}
+	\tikz[overlay, remember~picture]{
+		\node [align=left, color=fg] at (current~page.center){
+			\textit{\Large\ Merci.}\\[1ex]
+			\includegraphics[width=6em]{\PathSOinria/logos/Filet-7pt.pdf}
+		};
+	}
+}
+
+\defbeamertemplate{background}{standout/inria~RF}{
+	% \vfill
+	% \begin{minipage}{22em}
+	% 	\centering
+	% 	\textit{Merci.}
+	% 	\\
+	
+		% \includegraphics[width=6em]{\PathSOinria/logos/Filet-7pt.pdf}
+	% \end{minipage}
+}
+
+\defbeamertemplate{standout}{inria~RF}{
+	% \setkeys{beamerframe}{c}
+	% \setkeys{beamerframe}{noframenumbering}
+	% \centering
+
+	\setbeamertemplate{background~canvas}[standout/inria~RF]
+	% \usebeamertemplate{background~canvas}%[standout/gotham]
+	\usebeamerfont{standout}
+	% if the background color is switched, then change foreground (font) color.
+	% \ifbeamercolorempty[bg]{primary~palette}{
+	% 	%true : empty background (transparent)
+	% 	\setbeamercolor{background~canvas}{
+	% 		use=primary~palette,
+	% 		bg=primary~palette.fg 
+	% 	}
+	% }{
+	% 	%false : background not empty (dark or light)
+	% 	\setbeamercolor{background~canvas}{
+	% 		use=primary~palette,
+	% 		bg=primary~palette.bg
+	% 	}
+	% }
+	% \setbeamercolor{local~structure}{fg=primary~palette.bg}
+	% \usebeamercolor[fg]{primary~palette}
+	% \setbeamercolor{frametitle}{use=primary~palette, fg=primary~palette.fg}
 }
 
 

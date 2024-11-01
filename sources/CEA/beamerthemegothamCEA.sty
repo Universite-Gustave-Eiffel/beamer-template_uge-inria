@@ -1,0 +1,63 @@
+%======================================================================
+%
+% Created by Romain NOËL
+% GothamCEA 1.0.0.a
+% 2024-10-01
+% CEA corporate design
+% Based on LaTeX CEA template 
+%
+%======================================================================
+\ProvidesExplPackage{beamerthemegothamCEA}{2024-10-15}{1.0.0.a}{CEA theme}
+
+% Theme settings
+\providecommand{\PathSOCEA}{\PathSO/CEA/}
+
+
+%\mode<presentation>
+
+\usefonttheme{CEA}
+\usecolortheme{CEA}
+\useinnertheme{CEA}
+\useoutertheme{CEA}
+
+\ProcessKeyOptions[ gotham / font ]
+\ProcessKeyOptions[ gotham / color ]
+\ProcessKeyOptions[ gotham / inner ]
+\ProcessKeyOptions[ gotham / outer ]
+
+\NewDocumentCommand \CEASet { m }{
+	\str_case:enF { #1 }
+	{
+		{official} {
+			\gothamset{
+			% FONT
+				% xx=,
+			% COLOR
+				colorset= CEA,
+			% INNER
+				title~page= CEA~official,
+				% standin~BG~template= CEA,
+				standout~template= CEA~official,
+				partframe~template= CEA~official,
+				sectionframe~template= CEA~official,
+				subsectionframe~template= CEA~official,
+				subsubsectionframe~template= CEA~official,
+				tocframe~template= CEA~official,
+				% parttocframe~default= off,
+				parttocframe~template= CEA~official,
+				sectiontocframe~template= CEA~official,
+				subsectiontocframe~template= CEA~official,
+			% OUTER
+				% sidebar~canvas~right~template=,
+				frametitle~template= CEA~official,
+				footer~template= CEA~official,	
+				edging~default= on,	
+			}
+		}
+	}
+	{\msg_warning:nn { gothamCEA } { CEASet~unknown~input~set.} }
+}
+
+%\mode<all>
+
+%% End of file `beamerthemegothamCEA.sty'.

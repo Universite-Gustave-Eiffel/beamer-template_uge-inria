@@ -11,7 +11,7 @@
 % === colors ==========================================================
 % \RequirePackage{xcolor}     % color package; load before tocstyle
 
-\definecolor{CEAblue}{RGB}{47,42,133} % CEA1: blue-ish
+\definecolor{ceaRed}{RGB}{229,0,25}
 \definecolor{CEAundef}{RGB}{133,42,133} % 
 
 
@@ -19,10 +19,10 @@
 	%%% apply changes in the color set
 	% \colorlet{colorPale}{gPaleYell} % BG in light/normal mode
 	% \colorlet{colorDark}{gDarkBlack} % FG in light/normal mode
-	\colorlet{colorA}{CEAblue} % frametitle, standin.out,
+	\colorlet{colorA}{ceaRed} % frametitle, standin.out,
 	\colorlet{colorAreversed}{CEAundef} % frametitle, standin.out,
 	% \colorlet{colorB}{gMidGrey} % gray BG: progress bar, blocks
-	\colorlet{colorC}{CEAblue} % progress bar
+	\colorlet{colorC}{ceaRed} % progress bar
 	% \colorlet{colorD}{gLightOrange} % alert
 	% \colorlet{colorE}{gLightGreen} % example
 
@@ -39,15 +39,24 @@
 	% \colorlet{colorAlert}{colorD}
 	% \colorlet{colorExample}{colorE}
 
-	% \renewcommand{\gothamHookPostColorBGSet}{
-	% 	\ifbool{darkBG}{% Dark true
-	% 		\colorlet{colorStandout}{colorA/reserved}
-	% 		\setbeamercolor{frametitle}{use=primary~palette, parent=primary~palette}
-	% 	}{% Light true
-	% 		\colorlet{colorStandout}{colorA/reserved}
-	% 		\setbeamercolor{frametitle}{use=primary~palette, parent=primary~palette}
-	% 	}
-	% }
+	%%% Settings
+   \setbeamercolor{itemize~item}{fg=ceaRed}
+   \setbeamercolor{itemize~subitem}{fg=ceaRed}
+   \setbeamercolor{itemize~subsubitem}{fg=ceaRed}
+   \setbeamercolor{enumerate~item}{fg=ceaRed}
+   \setbeamercolor{enumerate~subitem}{fg=ceaRed}
+   \setbeamercolor{enumerate~subsubitem}{fg=ceaRed} 
+	\setbeamercolor{item~projected}{fg=colorPale, bg=ceaRed}
+	\setbeamercolor{subitem~projected}{bg=colorPale, fg=colorDark}
+	\setbeamercolor{subsubitem~projected}{bg=colorPale, fg=colorDark}
+
+	\renewcommand{\gothamHookPostColorBGSet}{
+		\setbeamercolor{frametitle}{fg=ceaRed, bg=}
+		\colorlet{colorStandout}{gDarkGrey}
+		\setbeamercolor{standout}{bg=colorStandout, fg=colorDark}
+		% \colorlet{colorStandout}{InriaDarkgray}
+		% \setbeamercolor{standout}{bg=colorStandout, fg=colorPale}
+	}
 }
 
 \keys_define:nn { gotham / color }

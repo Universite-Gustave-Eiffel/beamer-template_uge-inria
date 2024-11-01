@@ -491,6 +491,8 @@ frametitle~continuation~template .code:n = {
 \setlength{\gothamFootlineHeight}{1.5ex}
 \newlength{\gothamFootlineDepth}
 \setlength{\gothamFootlineDepth}{0.1ex}
+\newlength{\gothamFootlineRightOffset}
+\setlength{\gothamFootlineRightOffset}{1ex} 
 
 \defbeamertemplate*{footline}{default/gotham}{
 \vspace*{\gothamFootlineOffset}
@@ -509,7 +511,8 @@ dp={\gothamFootlineDepth},
 \usebeamertemplate*{frame~footer}
 }
 \hspace{\gothamRightFooterPadding}
-{\usebeamertemplate{page~number~in~head/foot}}~
+{\usebeamertemplate{page~number~in~head/foot}}
+\hspace*{\gothamFootlineRightOffset}
 \end{beamercolorbox}
 }
 \prop_put:Nnn \l__gotham_template_name_prop {footline/default} {gotham}
@@ -630,7 +633,7 @@ rotateFooter~default / unknown .code:n = { \PackageWarning{ gotham } { The~choic
 \hfill \
 \hfill \
 \bool_if:NTF \l_gotham_RotateFooter { 
-\settowidth{\hlenRightRotFooter}{\hspace{\gothamRightFooterPadding}\usebeamertemplate{page~number~in~head/foot}}
+\settowidth{\hlenRightRotFooter}{\hspace{\gothamRightFooterPadding}\usebeamertemplate{page~number~in~head/foot}\hspace*{\gothamFootlineRightOffset}}
 \addtolength{\hlenRightRotFooter}{\gothamHposRightRotFooter}
 \begin{picture}(0,0)(0,0)
 \put(\hlenRightRotFooter,\gothamVposRightRotFooter){\rotatebox{90}{\insertshortauthor}}
