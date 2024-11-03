@@ -1,0 +1,139 @@
+%% -------------------------------------------------------------------
+%% Copyright 2024 Romain NOËL
+%%
+%% Based on the UGE theme presentation ppt and graphical charter
+%% -------------------------------------------------------------------
+
+\ProvidesExplPackage{beamerouterthemegothamUGE}{2024-10-15}{1.0.0.a}{UGE outer theme}
+
+%\mode<presentation>
+
+%%%
+%%% === The Frametitle, sidebars and footer. =============================================
+
+% command to insert institute logo on 'standard' frame
+% \pgfdeclareimage[option]{label}{file}%
+\ifbool{darkBG}{% Dark true
+	\pgfdeclareimage[width=23.5mm]{UGElogo}{\PathSOuge/logos/UGE-logo.pdf}
+}{% Light
+	\pgfdeclareimage[width=23.5mm]{UGElogo}{\PathSOuge/logos/UGE-logo_white.pdf}
+}%
+
+
+%% Header & Frame title %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% frametile logo
+\renewcommand{\gothamInstituteLogoSquare}[1][4ex]{
+	% \includegraphics[height=#1]{gotham-logo.pdf}
+	\pgfuseimage{UGElogo}
+}
+
+% \defbeamertemplate{frametitle}{default/gotham~subsameline}{
+% 	\nointerlineskip
+% 	\begin{beamercolorbox}[
+% 			wd=\paperwidth,
+% 			sep=0pt,
+% 			leftskip=\gotham@frametitle@leftpadding,
+% 			rightskip=\gotham@frametitle@rightpadding,
+% 		]{frametitle}
+% 		\gotham@frametitlestrut@start
+% 		\insertframetitle
+% 		\ifx\insertframesubtitle\@empty
+% 			%% if subtitle to the frame is empty
+% 		\else
+% 			%% if not empty: add subtitle
+% 			{\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\gothamFrameSubtitleSep \insertframesubtitle}
+% 			\vspace*{\gothamFramesubtitleStrutend}
+% 		\fi
+% 		\nolinebreak
+% 		%% Add logo
+% 		\hfill{
+% 			\setbeamertemplate{instituteLogo}[default/\prop_item:Nn \l__gotham_template_name_prop {instituteLogo/default}]
+% 			\usebeamertemplate{instituteLogo}
+% 		}
+% 		\gotham@frametitlestrut@end
+% 	\end{beamercolorbox}
+% }
+
+
+%% Sidebars %%%
+%%%%%%%%%%%%%%%
+
+% sidebar lengths
+\setlength{\sidebarRightHOffset}{-8.4mm}
+
+\ifnum\insertaspectratio=169 % 16:9
+	\pgfdeclareimage[width=8.3mm]{UGEfiligrane}{\PathSOuge/logos/pattern-frame.pdf}
+\else
+\ifnum\insertaspectratio=43 % 4:3
+	\pgfdeclareimage[width=8.3mm]{UGEfiligrane}{\PathSOuge/logos/pattern-frame43.pdf}
+\fi% end 4:3
+\fi% end 19:9
+
+% Command to add filigrane/edging in sidebar
+\renewcommand{\gothamRightFiligrane}{
+	\pgfuseimage{UGEfiligrane}
+}
+
+
+%% Footer %%%
+%%%%%%%%%%%%%
+
+% \defbeamertemplate{frame~footer}{default/gotham}{
+% 	% add a ruler but wihtout affecting the dimensions of the footline
+% 	\vbox to 0pt{
+% 		% Vertical stretch to ensure proper spacing
+% 		\vss 
+% 		\hbox to 0pt{
+% 			\hspace*{\gothamFootlineRuleLeftPadding}
+% 			\usebeamercolor{frametitle}
+% 			\color{frametitle.bg}
+% 			\rule{\gothamFootlineRuleLength}{\gothamFootlineRuleHeight}
+% 			\vspace*{
+% 				\dimexpr \gothamFootlineHeight -0.25em\relax
+% 			}
+% 			% Horizontal stretch to ensure proper spacing
+% 			\hss 
+% 		}
+% 	}
+% 	\hspace{\gothamLeftFooterPadding}
+% 	\settowidth{\hlenLeftRotFooter}{\hspace{-\gothamLeftFooterPadding}}
+% 	\addtolength{\hlenLeftRotFooter}{\gothamHposLeftRotFooter}
+% 	% \ifbool{rotateFooter}{
+% 	\bool_if:NTF \l_gotham_RotateFooter {
+% 		% rotateFooter true
+% 		\begin{picture}(0,0)(0,0)
+% 			\put(\hlenLeftRotFooter,\gothamVposLeftRotFooter){\rotatebox{90}{\insertshortdate}}
+% 		\end{picture}
+% 	}{
+% 		% rotateFooter false
+% 		\insertshortdate
+% 	}
+% 	\hfill \
+% 	\hfill \ \insertshorttitle 
+% 	% make sure that the vertical space is constant: strut.
+% 	\gotham@strut
+% 	\hfill \ 
+% 	\hfill \
+% 	% \ifbool{rotateFooter}{
+% 	\bool_if:NTF \l_gotham_RotateFooter {	
+% 		% rotateFooter true
+% 		\settowidth{\hlenRightRotFooter}{\hspace{\gothamRightFooterPadding}\usebeamertemplate{page~number~in~head/foot}}
+% 		\addtolength{\hlenRightRotFooter}{\gothamHposRightRotFooter}
+% 		\begin{picture}(0,0)(0,0)
+% 			\put(\hlenRightRotFooter,\gothamVposRightRotFooter){\rotatebox{90}{\insertshortauthor}}
+% 		\end{picture}
+% 	}{
+% 		% rotateFooter false
+% 		\insertshortauthor 
+% 		%\hspace{-7em}
+% 	}
+% 	% decrease space between progress bar and footer
+% 	\vspace*{\gothamFooterHOffset}
+% }
+
+%\mode<all>
+
+%%
+%% End of file `beamerouterthemeuge.sty'.

@@ -1,0 +1,60 @@
+%% --------------------------------------------------------------------
+%% Copyright 2024 Romain NOËL
+%%
+%% Based on the Univ. Eiffel theme presentation ppt and graphical charter
+%% --------------------------------------------------------------------
+
+\ProvidesExplPackage{beamercolorthemegothamUGE}{2024-10-15}{1.1.1.a}{UGE color theme}
+%\mode<presentation>
+
+%%% UGE colors
+% === colors ==========================================================
+% \RequirePackage{xcolor}     % color package; load before tocstyle
+
+\definecolor{UGEblue}{RGB}{47,42,133} % UGE1: blue-ish
+\definecolor{UGEundef}{RGB}{133,42,133} % 
+
+
+\cs_new_protected:Nn \__gotham_color_set_style_ugeA:{
+	%%% apply changes in the color set
+	% \colorlet{colorPale}{gPaleYell} % BG in light/normal mode
+	% \colorlet{colorDark}{gDarkBlack} % FG in light/normal mode
+	\colorlet{colorA}{UGEblue} % frametitle, standin.out,
+	\colorlet{colorAreversed}{UGEundef} % frametitle, standin.out,
+	% \colorlet{colorB}{gMidGrey} % gray BG: progress bar, blocks
+	\colorlet{colorC}{UGEblue} % progress bar
+	% \colorlet{colorD}{gLightOrange} % alert
+	% \colorlet{colorE}{gLightGreen} % example
+
+	%%% reload modified
+	% \colorlet{colorFG}{colorDark}
+	% \colorlet{colorBG}{colorPale}
+	% %%\colorlet{colorStandin}{colorBG/FG}% light/dark BG color overset
+	% %%\colorlet{colorStandout}{colorA/reserved}% light/dark BG color overset
+	% %%\colorlet{colorFrametitle}{colorA/reserved}% light/dark BG color overset
+	% %%\colorlet{colorTitlepage}{colorA/reserved}% light/dark BG color overset
+	% \colorlet{colorFiligrane}{colorB}
+	% \colorlet{colorBackElement}{colorB}
+	\colorlet{colorProgBar}{colorC}
+	% \colorlet{colorAlert}{colorD}
+	% \colorlet{colorExample}{colorE}
+
+	% \renewcommand{\gothamHookPostColorBGSet}{
+	% 	\ifbool{darkBG}{% Dark true
+	% 		\colorlet{colorStandout}{colorA/reserved}
+	% 		\setbeamercolor{frametitle}{use=primary~palette, parent=primary~palette}
+	% 	}{% Light true
+	% 		\colorlet{colorStandout}{colorA/reserved}
+	% 		\setbeamercolor{frametitle}{use=primary~palette, parent=primary~palette}
+	% 	}
+	% }
+}
+
+\keys_define:nn { gotham / color }
+{
+	colorset / uge .code:n = { \__gotham_color_set_style_ugeA: },
+}
+
+%\mode<all>
+
+%% End of file `beamercolorthemeuge.sty'.

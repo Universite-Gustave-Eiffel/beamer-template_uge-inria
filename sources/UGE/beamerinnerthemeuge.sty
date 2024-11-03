@@ -1,0 +1,357 @@
+%% -------------------------------------------------------------------
+%% Copyright 2024 Romain NOËL
+%%
+%% Based on the UGE theme presentation ppt and graphical charter
+%% -------------------------------------------------------------------
+
+\ProvidesExplPackage{beamerinnerthemegothamUGE}{2024-10-15}{1.0.0.a}{UGE inner theme}
+
+%\mode<presentation>
+
+%%%
+%%%	Title, Standout, TOC, section pages, TOC-sections.
+%%%===================================================================
+
+%% Title %%%
+%%%%%%%%%%%%
+
+% The command to insert the institute logo on title page
+\newcommand{\UGEtitlelogo}{
+	\ifbool{darkBG}{% Dark true 
+		\ifnum\insertaspectratio=169 % 16:9
+			\includegraphics[height=0.08\paperheight]{\PathSOuge/logos/UGE-logo.pdf}
+		\else
+		\ifnum\insertaspectratio=43 % 4:3
+			\includegraphics[height=0.065\paperheight]{\PathSOuge/logos/UGE-logo.pdf}
+		\fi% end 4:3
+		\fi% end 19:9
+	}{% Light
+		\ifnum\insertaspectratio=169 % 16:9
+			\includegraphics[height=0.08\paperheight]{\PathSOuge/logos/UGE-logo_white.pdf}
+		\else
+		\ifnum\insertaspectratio=43 % 4:3
+			\includegraphics[height=0.065\paperheight]{\PathSOuge/logos/UGE-logo_white.pdf}
+		\fi% end 4:3
+		\fi% end 19:9
+	}
+}
+
+% The command to insert the background title page
+\newcommand{\UGEtitlepage}{
+	\ifbool{darkBG}{% Dark true 
+		\ifnum\insertaspectratio=169 % 16:9
+			\includegraphics[width=\paperwidth, height=\paperheight]{\PathSOuge/logos/pattern-titlepage-reverse.pdf}
+		\else
+		\ifnum\insertaspectratio=43 % 4:3
+			\includegraphics[width=\paperwidth, height=\paperheight]{\PathSOuge/logos/pattern-titlepage-reverse-43.pdf}
+		\fi% end 4:3
+		\fi% end 19:9	
+	}{% Light
+		\ifnum\insertaspectratio=169 % 16:9
+			\includegraphics[width=\paperwidth, height=\paperheight]{\PathSOuge/logos/pattern-titlepage.pdf}
+		\else
+		\ifnum\insertaspectratio=43 % 4:3
+			\includegraphics[width=\paperwidth, height=\paperheight]{\PathSOuge/logos/pattern-titlepage43.pdf}
+		\fi% end 4:3
+		\fi% end 19:9
+	}
+}
+
+% The title page template
+\defbeamertemplate{title~page}{uge~unofficial}{ 
+	\dim_set:Nn \l__gotham_titleseparator_width_dim {0.85\textwidth}
+	\setbeamercolor{progress~bar}{fg=normal~text.bg}
+	\ifnum\insertaspectratio=169 % 16:9
+		\begin{picture}(0,0)
+			% The background picture
+			\put(-28,-128){\UGEtitlepage}
+			
+			% The text: title, author, institute, etc.
+			\put(-30,-125){\noindent
+				\ifbool{darkBG}{% Dark true 
+					\fcolorbox{colorPale}{colorPale}%{
+				}{% Light
+					\fcolorbox{colorA}{colorA}%{
+				}% end if
+				{% begin third argument fcolorobx
+					%\fcolorbox{normal~text.fg}{normal~text.fg}{
+					\begin{minipage}[b][\paperheight]{0.907\textwidth}
+						\ifbool{darkBG}{ % Dark true 
+							\setbeamercolor{normal~text}{fg=colorA, }
+						}{% Light
+							\setbeamercolor{normal~text}{fg=colorPale, }
+						}
+						\centering
+						\vfill
+						\ifx\inserttitle\@empty\else\quad\usebeamertemplate*{title}\fi
+						\ifx\insertsubtitle\@empty\else\quad\usebeamertemplate*{subtitle}\fi
+						\usebeamertemplate*{title~separator}
+						\ifx\beamer@shortauthor\@empty\else\usebeamertemplate*{author}\fi
+						\ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
+						\ifx\insertinstitute\@empty\else{\parbox{0.9\textwidth}{\raggedright\usebeamertemplate*{institute}} }\fi
+						\vfill
+						\vbox{}
+					\end{minipage}
+				}
+			}
+			
+			% the institute logo on title page
+			\put(234,-120){
+				\UGEtitlelogo
+			}
+			
+			% the extra logos on title page (\inserttitlegraphic)
+			\put(-27,-123){
+				\noindent\vbox{
+					\begin{minipage}[b][0.96\paperheight]{0.899\textwidth}
+					\ifx\inserttitlegraphic\@empty\else\usebeamertemplate*{title~graphic}\fi
+					\end{minipage}
+				}
+			}
+		\end{picture}
+	\else
+	\ifnum\insertaspectratio=43 % 4:3
+		\begin{picture}(0,0)
+			% The background picture
+			\put(-29.25,-136){\UGEtitlepage}
+			
+			% The text: title, author, institute, etc.
+			\put(-28.75,-136){\noindent
+				\ifbool{darkBG}{% Dark true 
+					\fcolorbox{colorPale}{colorPale}%{
+				}{% Light
+					\fcolorbox{colorA}{colorA}%{
+				}
+				{% begin third argument fcolorobx
+					%\fcolorbox{normal~text.fg}{normal~text.fg}{
+					\begin{minipage}[b][\paperheight]{0.9\textwidth}
+						\ifbool{darkBG}{ % Dark true 
+							\setbeamercolor{normal~text}{fg=colorA, }
+						}{% Light
+							\setbeamercolor{normal~text}{fg=colorPale, }
+						}
+						\centering
+						\vfill
+						\ifx\inserttitle\@empty\else\quad\usebeamertemplate*{title}\fi
+						\ifx\insertsubtitle\@empty\else\quad\usebeamertemplate*{subtitle}\fi
+						\usebeamertemplate*{title~separator}
+						\ifx\beamer@shortauthor\@empty\else\usebeamertemplate*{author}\fi
+						\ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
+						\ifx\insertinstitute\@empty\else{\parbox{0.9\textwidth}{\raggedright\usebeamertemplate*{institute}} }\fi
+						\vfill
+						\vbox{}
+					\end{minipage}
+				}
+			}
+			
+			% the institute logo on title page
+			\put(164,-130){
+				\UGEtitlelogo
+			}
+			
+			% the extra logos on title page (\inserttitlegraphic)
+			\put(-25,-130){
+				\noindent\vbox{
+					\begin{minipage}[b][0.96\paperheight]{0.899\textwidth}
+						\ifx\inserttitlegraphic\@empty\else\usebeamertemplate*{title~graphic}\fi
+					\end{minipage}
+				}
+			}
+		\end{picture}
+	\fi% end 4:3
+	\fi% end 19:9
+}
+
+\defbeamertemplate{title~page}{uge~official}{
+	\tikz[overlay,remember~picture]{
+		\node (box) at ([shift={(0,0)}]current~page.center) {\includegraphics[height=\paperheight]{\PathSOuge/logos/page1_4K.jpg}};
+		\node (box) at ([shift={(0,0)}]current~page.south) {
+			\inserttitlegraphic
+		};
+	}
+	\vspace{5pt}
+	\hspace*{-25pt}
+	% \fbox{
+	\begin{minipage}[b][100pt][c]{90pt}
+		\scriptsize\textcolor{colorTitlepage}{\insertdate}\\[3pt]
+		\noindent\scriptsize\textcolor{colorTitlepage}{\small\insertauthor}\\[3pt]
+		\noindent\scriptsize\textcolor{colorTitlepage}{\small\insertinstitute}
+	\end{minipage}
+	% }
+	\\[-5pt]
+
+	\hspace*{-20pt}
+	% \fbox{
+	\begin{minipage}[b][90pt][c]{320pt}
+		\centering
+		\Large{\bfseries\textcolor{colorPale}{\inserttitle}}\\[3pt]
+		\large\textcolor{colorPale}{\insertsubtitle}
+	\end{minipage}
+	% }
+	\vspace{40pt}
+} 
+
+
+% %% Standout %%%
+% %%%%%%%%%%%%%%%
+
+\defbeamertemplate{background~canvas}{standin/uge}{
+	\pgfuseimage{UGEStandInBG}
+}
+
+\defbeamertemplate{background~canvas}{standout/uge~unofficial}{
+	\pgfuseimage{UGEStandOutBG}
+}
+
+\pgfdeclareimage[height=\paperheight]{UGEoutOfficial}{\PathSOuge/logos/page4_4K.jpg}
+\defbeamertemplate{background~canvas}{standout/uge~official}{
+	\pgfuseimage{UGEoutOfficial}
+}
+
+\defbeamertemplate{standout}{uge~official}{
+	\setbeamertemplate{background~canvas}[standout/uge~official]
+	% \usebeamertemplate{background~canvas}%[standout/gotham]
+	\usebeamerfont{standout}
+	% if the background color is switched, then change foreground (font) color.
+	\ifbeamercolorempty[bg]{primary~palette}{
+		%true : empty background (transparent)
+		\setbeamercolor{background~canvas}{
+			use=primary~palette,
+			bg=primary~palette.fg 
+		}
+	}{
+		%false : background not empty (dark or light)
+		\setbeamercolor{background~canvas}{
+			use=primary~palette,
+			bg=primary~palette.bg
+		}
+	}
+	\setbeamercolor{local~structure}{fg=primary~palette.bg}
+	\usebeamercolor[fg]{primary~palette}
+	\setlength{\leftskip}{3.75cm}
+}
+
+
+% %% TOC %%%
+% %%%%%%%%%%
+
+\pgfdeclareimage[height=\paperheight]{UGEtocOfficial}{\PathSOuge/logos/page2_4K.jpg}
+\defbeamertemplate{background~canvas}{toc/uge~official}{
+	\tikz[overlay,remember~picture]{
+		\node (box) at ([shift={(0,0)}]current~page.center) {\pgfuseimage{UGEtocOfficial}};
+	}
+}
+
+\defbeamertemplate{toc~page}{uge~official}{
+	\setbeamercolor{frametitle}{use=standin, fg=standin.fg, bg=}
+
+	\addtolength{\leftskip}{3cm}
+	\setbeamercolor{section~in~toc}{use=standout, fg=standout.fg}
+	\setbeamercolor{subsection~in~toc}{use=standout, fg=standout.fg}
+	\setbeamercolor{subsubsection~in~toc}{use=standout, fg=standout.fg}
+	\setbeamertemplate{part~in~toc}[gotham~simple]
+	\setbeamertemplate{section~in~toc}[gotham~simple]
+	\setbeamertemplate{subsection~in~toc}[gotham~simple]
+	\setbeamertemplate{subsubsection~in~toc}[gotham~simple]
+
+	\setbeamertemplate{background~canvas}[toc/uge~official]
+}
+
+\defbeamertemplate{toc~page}{uge~unofficial}{
+	\setbeamertemplate{part~in~toc}[gotham~simple]
+	\setbeamertemplate{section~in~toc}[gotham~simple]
+	\setbeamertemplate{subsection~in~toc}[gotham~simple]
+	\setbeamertemplate{subsubsection~in~toc}[gotham~simple]
+	\setbeamertemplate{background~canvas}[toc/gotham~simple]
+}
+
+
+% %% Section %%%
+% %%%%%%%%%%%%%%
+
+\ifbool{darkBG}{% Dark true
+	\ifnum\insertaspectratio=169 % 16:9
+		\pgfdeclareimage[height=\paperheight]{UGEStandInBG}{\PathSOuge/logos/pattern-standout.pdf}
+		\pgfdeclareimage[height=\paperheight]{UGEStandOutBG}{\PathSOuge/logos/pattern-section.pdf}
+	\else
+	\ifnum\insertaspectratio=43 % 4:3
+		\pgfdeclareimage[height=\paperheight]{UGEStandInBG}{\PathSOuge/logos/pattern-standout43.pdf}
+		\pgfdeclareimage[height=\paperheight]{UGEStandOutBG}{\PathSOuge/logos/pattern-section43.pdf}
+	\fi% end 4:3
+	\fi% end 19:9
+}{% Light
+	\ifnum\insertaspectratio=169 % 16:9
+		\pgfdeclareimage[height=\paperheight]{UGEStandInBG}{\PathSOuge/logos/pattern-section.pdf}
+		\pgfdeclareimage[height=\paperheight]{UGEStandOutBG}{\PathSOuge/logos/pattern-standout.pdf}
+	\else
+	\ifnum\insertaspectratio=43 % 4:3
+		\pgfdeclareimage[height=\paperheight]{UGEStandInBG}{\PathSOuge/logos/pattern-section43.pdf}
+		\pgfdeclareimage[height=\paperheight]{UGEStandOutBG}{\PathSOuge/logos/pattern-standout43.pdf}
+	\fi% end 4:3
+	\fi% end 19:9
+}
+
+% \defbeamertemplate{background~canvas}{section/uge}{
+% 	\pgfuseimage{UGEStandInBG}
+% }
+
+\defbeamertemplate{background}{section/uge}{
+	\pgfuseimage{UGEStandInBG}
+}
+
+\defbeamertemplate{part~frame}{uge}{
+	\setbeamertemplate{background}[section/uge]
+	% \setbeamertemplate{sidebar~canvas~right}[gotham~filigrane]
+	\setbeamertemplate{sidebar~canvas~right}[default/empty]
+	\setbeamertemplate{footline}[empty]
+	\setbeamertemplate{logo}[empty]
+	\setbeamertemplate{progress~bar~in~section~page}[display]
+	\setbeamertemplate{part~page}[progressbar/simple]
+	% \usebeamertemplate*{section~page}% activated automatically
+}
+
+\defbeamertemplate{section~frame}{uge}{
+	\setbeamertemplate{background}[section/uge]
+	% \setbeamertemplate{sidebar~canvas~right}[gotham~filigrane]
+	\setbeamertemplate{sidebar~canvas~right}[default/empty]
+	\setbeamertemplate{footline}[empty]
+	\setbeamertemplate{logo}[empty]
+	\setbeamertemplate{progress~bar~in~section~page}[display]
+	\setbeamertemplate{section~page}[progressbar/simple]
+	% \usebeamertemplate*{section~page}% activated automatically
+}
+
+\defbeamertemplate{subsection~frame}{uge}{
+	\setbeamertemplate{background}[section/uge]
+	% \setbeamertemplate{sidebar~canvas~right}[gotham~filigrane]
+	\setbeamertemplate{sidebar~canvas~right}[default/empty]
+	\setbeamertemplate{footline}[empty]
+	\setbeamertemplate{logo}[empty]
+	\setbeamertemplate{progress~bar~in~section~page}[display]
+	\setbeamertemplate{subsection~page}[progressbar/simple]
+	% \usebeamertemplate*{section~page}% activated automatically
+}
+
+\defbeamertemplate{subsubsection~frame}{uge}{
+	\setbeamertemplate{background}[section/uge]
+	% \setbeamertemplate{sidebar~canvas~right}[gotham~filigrane]
+	\setbeamertemplate{sidebar~canvas~right}[default/empty]
+	\setbeamertemplate{footline}[empty]
+	\setbeamertemplate{logo}[empty]
+	\setbeamertemplate{progress~bar~in~section~page}[display]
+	\setbeamertemplate{subsubsection~page}[progressbar/simple]
+	% \usebeamertemplate*{section~page}% activated automatically
+}
+
+% %% TOC Sections %%%
+% %%%%%%%%%%%%%%%%%%%
+
+% \defbeamertemplate*{toc~section~frame}{uge~official}{
+% 	\usebeamertemplate{toc~part~frame}
+% }
+
+
+%\mode<all>
+
+%%
+%% End of file `beamerinnerthemeuge.sty'.

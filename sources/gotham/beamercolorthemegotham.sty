@@ -1,0 +1,337 @@
+%%
+%% This is file `beamercolorthemegotham.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% gotham.dtx  (with options: `color')
+%% 
+%% Copyright (C) 2023-20** by Romain NOËL <romainoel@free.fr>
+%% 
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%% http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%% 
+%% This work has the LPPL maintenance status `maintained'.
+%% 
+%% The Current Maintainer of this work is Romain NOËL.
+%% Contributors: Romain NOËL (2023-20**)
+%% 
+\ProvidesExplPackage{beamercolorthemegotham}{2024-10-15}{1.1.1.a}{Gotham color theme}
+\RequirePackage{expl3}
+\RequirePackage{xparse}
+\RequirePackage{xcolor}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%   COLOR     %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor[named]{gLightOrange}{HTML}{EB811B}
+\definecolor[named]{gLightGreen}{HTML}{14B03D}
+\definecolor[named]{gDeepBlue}{RGB}{42, 42, 255}
+\definecolor[named]{gDeepYellOr}{RGB}{255, 204, 0}
+\definecolor[named]{gAnthracite}{HTML}{2d3e50}
+\definecolor[named]{gLightTeal}{RGB}{172, 195, 210}
+\definecolor[named]{gPaleYell}{RGB}{255, 255, 240}
+\definecolor[named]{gDarkBlack}{gray}{0.1}
+\definecolor[named]{gDarkGrey}{gray}{0.25}
+\definecolor[named]{gMidGrey}{gray}{0.5}
+\definecolor[named]{gLightGrey}{gray}{0.9}
+
+%%%%%%
+\@ifundefined{\string\color@colorAreversed}{
+\colorlet{colorPale}{gPaleYell} % BG in light/normal mode
+\colorlet{colorDark}{gDarkBlack} % FG in light/normal mode
+\colorlet{colorA}{gAnthracite} % frametitle, standin.out,
+\colorlet{colorAreversed}{gLightTeal} % frametitle, standin.in,
+\colorlet{colorB}{gMidGrey} % gray BG : progress bar, blocks
+\colorlet{colorC}{gDeepYellOr} % progress bar
+\colorlet{colorD}{gLightOrange} % alert
+\colorlet{colorE}{gLightGreen} % example
+}{
+}
+\providecommand{\gothamHookPostColorBGSet}{}
+
+\cs_new_protected:Nn \__gotham_color_set_style_anthracite:{
+\colorlet{colorPale}{gPaleYell} % BG in light/normal mode
+\colorlet{colorDark}{gDarkBlack} % FG in light/normal mode
+\colorlet{colorA}{gAnthracite} % frametitle, standin.out,
+\colorlet{colorAreversed}{gLightTeal} % frametitle, standin.in,
+\colorlet{colorB}{gMidGrey} % gray BG : progress bar, blocks
+\colorlet{colorC}{gDeepYellOr} % progress bar
+\colorlet{colorD}{gLightOrange} % alert
+\colorlet{colorE}{gLightGreen} % example
+}
+
+\cs_new_protected:Nn \__gotham_color_set_style_red:{
+\colorlet{colorPale}{gPaleYell} % BG in light/normal mode
+\colorlet{colorDark}{gDarkBlack} % FG in light/normal mode
+\colorlet{colorA}{red} % frametitle, standin.out,
+\colorlet{colorAreversed}{gLightTeal} % frametitle, standin.in,
+\colorlet{colorB}{gMidGrey} % gray BG : progress bar, blocks
+\colorlet{colorC}{gDeepYellOr} % progress bar
+\colorlet{colorD}{gLightOrange} % alert
+\colorlet{colorE}{gLightGreen} % example
+}
+
+%%%%%%
+\colorlet{colorFG}{colorDark}
+\colorlet{colorBG}{colorPale}
+\colorlet{colorStandin}{colorPale}
+\colorlet{colorStandout}{colorA}
+\colorlet{colorFrametitle}{colorA}
+\colorlet{colorTitlepage}{colorA}
+\colorlet{colorFiligrane}{colorB}
+\colorlet{colorBackElement}{colorB}
+\colorlet{colorProgBar}{colorC}
+\colorlet{colorAlert}{colorD}
+\colorlet{colorExample}{colorE}
+
+\providebool{darkBG}
+\boolfalse{darkBG}
+\providebool{transparentBG}
+\booltrue{transparentBG}
+
+\cs_new_protected:Nn \__gotham_color_set_darkBG:{
+\setbeamercolor{normal~text}{%
+fg=colorBG,
+bg=colorFG,
+}%
+\usebeamercolor[fg]{normal~text}%
+\booltrue{darkBG}%
+\boolfalse{transparentBG}
+\colorlet{colorFrametitle}{colorAreversed}
+\colorlet{colorStandout}{colorAreversed}
+\colorlet{colorStandin}{colorFG}
+\colorlet{colorTitlepage}{colorAreversed}
+%%% dark
+\setbeamercolor{primary~palette}{% reversed color compared to normal text
+use=normal~text,
+fg=normal~text.bg,
+bg=normal~text.fg
+}
+\gothamHookPostColorBGSet{}
+}
+
+\cs_new_protected:Nn \__gotham_color_set_lightBG:{
+\setbeamercolor{normal~text}{
+fg=colorFG,
+bg=colorBG
+}
+\usebeamercolor[fg]{normal~text}
+\boolfalse{darkBG}
+\boolfalse{transparentBG}
+\colorlet{colorFrametitle}{colorA}
+\colorlet{colorStandout}{colorA}
+\colorlet{colorStandin}{colorBG}
+\colorlet{colorTitlepage}{colorA}
+%%% light
+\setbeamercolor{primary~palette}{
+use=normal~text,
+fg=normal~text.bg,
+bg=normal~text.fg
+}
+\gothamHookPostColorBGSet{}
+}
+
+\cs_new_protected:Nn \__gotham_color_set_transparentBG:{
+\setbeamercolor{normal~text}{
+fg=colorFG,
+bg=,
+}
+\usebeamercolor[fg]{normal~text}
+\boolfalse{darkBG}
+\booltrue{transparentBG}
+\colorlet{colorFrametitle}{colorA}
+\colorlet{colorStandout}{colorA}
+{\usebeamercolor[bg]{normal~text}\colorlet{colorStandin}{bg}}% this is not working because the colorlet is not kept outside of the {} environment...
+\colorlet{colorStandin}{colorBG} % since the two previous lines are not working, let define it like light-bg
+\colorlet{colorTitlepage}{colorA}
+%%% like light background.
+\setbeamercolor{primary~palette}{
+use=normal~text,
+fg=colorBG,
+bg=normal~text.fg
+}
+\gothamHookPostColorBGSet{}
+}
+
+\cs_new_protected:Nn \__gotham_color_set_transparent_block:{
+\setbeamercolor{block~title}{
+use=normal~text,
+fg=normal~text.fg,
+bg=
+}
+\setbeamercolor{block~body}{
+bg=
+}
+\setbeamercolor{alerted~text}{
+fg=colorAlert
+}
+\setbeamercolor{example~text}{
+fg=colorExample
+}
+\setbeamercolor{block~title~example}{
+use={block~title, example~text},
+bg=block~title.bg,
+fg=example~text.fg
+}
+\setbeamercolor{block~title~alerted}{
+use={block~title, alerted~text},
+bg=block~title.bg,
+fg=alerted~text.fg
+}
+}
+
+\cs_new_protected:Nn \__gotham_color_set_fill_block:{
+\setbeamercolor{block~title}{
+fg=colorBackElement!10!normal~text.fg,
+bg=colorBackElement!135!fg
+}
+\setbeamercolor{block~body}{
+use={block~title, normal~text},
+bg=block~title.bg!50!normal~text.bg
+}
+\setbeamercolor{alerted~text}{
+fg=colorAlert
+}
+\setbeamercolor{example~text}{
+fg=colorExample
+}
+\setbeamercolor{block~title~example}{
+use={block~title, example~text},
+bg=block~title.bg,
+fg=example~text.fg
+}
+\setbeamercolor{block~title~alerted}{
+use={block~title, alerted~text},
+bg=block~title.bg,
+fg=alerted~text.fg
+}
+}%    \end{macrocode}
+
+\cs_new_protected:Nn \__gotham_color_set_native_block:{
+\setbeamercolor{block~title}{
+fg=colorPale,
+bg=colorBackElement!90!fg
+}
+\setbeamercolor{block~body}{
+use={block~title, normal~text},
+bg=block~title.bg!50!normal~text.bg
+}
+\setbeamercolor{alerted~text}{
+fg=colorAlert
+}
+\setbeamercolor{alertedBlock~text}{
+fg=colorPale
+}
+\setbeamercolor{example~text}{
+fg=colorPale
+}
+\setbeamercolor{block~title~alerted}{
+use={block~title, alertedBlock~text},
+bg=colorAlert,
+fg=alertedBlock~text.fg
+}
+\setbeamercolor{block~title~example}{
+use={block~title, example~text},
+bg=colorExample,
+fg=example~text.fg
+}
+}
+
+\setbeamercolor{structure}{use=normal~text, fg=normal~text.fg}
+\setbeamercolor{progress~bar}{
+use=alerted~text,
+fg=colorProgBar,
+bg=alerted~text.fg!50!black!30
+}
+
+\setbeamercolor{titlelike}{use=normal~text, parent=normal~text}
+\setbeamercolor{author}{use=normal~text, parent=normal~text}
+\setbeamercolor{date}{use=normal~text, parent=normal~text}
+\setbeamercolor{institute}{use=normal~text, parent=normal~text}
+\setbeamercolor{frametitle}{
+use=primary~palette,
+parent=primary~palette,
+bg=colorFrametitle
+}
+\setbeamercolor{title~separator}{
+use=progress~bar,
+parent=progress~bar
+}
+\setbeamercolor{progress~bar~in~head/foot}{%
+use=progress~bar,
+parent=progress~bar
+}
+\setbeamercolor{progress~bar~in~part~page}{
+use=progress~bar,
+parent=progress~bar
+}
+\setbeamercolor{progress~bar~in~section~page}{
+use=progress~bar,
+parent=progress~bar
+}
+\setbeamercolor{progress~bar~in~splitvert}{
+use=progress~bar,
+parent=progress~bar
+}
+\setbeamercolor{block~body~alerted}{use=block~body, parent=block~body}
+\setbeamercolor{block~body~example}{use=block~body, parent=block~body}
+\setbeamercolor{footnote}{fg=normal~text.fg!90}
+\setbeamercolor{footnote~mark}{fg=.}
+
+\setbeamercolor{frametitleSection}{use=structure,fg=structure.bg}
+
+\setbeamercolor{standout}{use=primary~palette, bg=colorStandout, fg=primary~palette.bg}
+\setbeamercolor{standin}{use=normal~text, bg=colorStandin, fg=normal~text.fg}
+
+\setbeamercolor{section~in~toc}{use=normal~text, parent=normal~text,}
+\setbeamercolor{subsection~in~toc}{use=normal~text, parent=normal~text,}
+\setbeamercolor{subsubsection~in~toc}{use=normal~text, parent=normal~text,}
+\setbeamercolor{footlineRule}{use=normal~text, parent=normal~text,}
+
+%%%%
+\keys_define:nn { gotham / color }
+{
+block .choice:, 
+block .usage:n = { general },
+block .default:n = { native },
+block / native .code:n = { \__gotham_color_set_native_block: },
+block / transparent .code:n = { \__gotham_color_set_transparent_block: },
+block / fill .code:n = { \__gotham_color_set_fill_block: },
+block / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'\l_keys_value_tl'~is~unknown~for~the~(known)~option~'\l_keys_key_tl',~so~being~ignored. }{helping~message: block / unknown} },
+}
+
+\keys_define:nn { gotham / color }
+{
+background .choice:,
+background .usage:n = { general },
+background .default:n = { transparent },
+background / transparent .code:n = { \__gotham_color_set_transparentBG: },
+background / light .code:n = { \__gotham_color_set_lightBG: },
+background / dark .code:n = { \__gotham_color_set_darkBG: },
+background / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'\l_keys_value_tl'~is~unknown~for~the~(known)~option~'\l_keys_key_tl',~so~being~ignored. }{helping~message: background / unknown} },
+}
+
+\keys_define:nn { gotham / color }
+{
+colorset .choice:,
+colorset .usage:n = { general },
+colorset .default:n = { anthracite },
+colorset / anthracite .code:n = { \__gotham_color_set_style_anthracite: },
+colorset / red .code:n = { \__gotham_color_set_style_red: },
+colorset / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'\l_keys_value_tl'~is~unknown~for~the~(known)~option~'\l_keys_key_tl',~so~being~ignored. }{helping~message: colorset / unknown} },
+}
+
+\keys_set:nn { gotham / color } { background, block, colorset }
+
+\ProcessKeyOptions[ gotham / color ]
+\mode<all>
+%% 
+%% Adapted from classic "A model .dtx file" by Joseph Wright
+%% https://www.texdev.net/2009/10/06/a-model-dtx-file/
+%%
+%% End of file `beamercolorthemegotham.sty'.

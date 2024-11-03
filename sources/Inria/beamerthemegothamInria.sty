@@ -1,0 +1,137 @@
+%======================================================================
+%
+% Created by Romain NOËL
+% GothamInria 1.0.0.&
+% 2024-10-01
+% Inria corporate design
+% Based on LaTeX Inria template 
+%
+%======================================================================
+\ProvidesExplPackage{beamerthemegothamInria}{2024-10-15}{1.0.0.a}{inria theme}
+
+% Theme settings
+% \providecommand{\PathSOuge}{\PathSO/UGE/}
+\providecommand{\PathSOinria}{\PathSO/Inria/}
+
+%\mode<presentation>
+
+\usefonttheme{inria}
+\usecolortheme{inria}
+\useinnertheme{inria}
+\useoutertheme{inria}
+
+\ProcessKeyOptions[ gotham / font ]
+\ProcessKeyOptions[ gotham / color ]
+\ProcessKeyOptions[ gotham / inner ]
+\ProcessKeyOptions[ gotham / outer ]
+
+\NewDocumentCommand \InriaSet { m }{
+	\str_case:enF { #1 }
+	{
+		{old1} {
+			\gothamset{
+			% FONT
+				% xx=,
+			% COLOR
+				colorset= inria,
+			% INNER
+				title~page= inria~old,
+				% standin~template= inria,
+				standout~template= inria~old,
+				partframe~template= inria~old,
+				sectionframe~template= inria~old,
+				subsectionframe~template= inria~old,
+				subsubsectionframe~template= inria~old,
+				tocframe~template= inria~old,
+				parttocframe~template= inria~old,
+				sectiontocframe~template= inria~old,
+				subsectiontocframe~template= inria~old,
+			% OUTER
+				frametitle~template= inria~oldA,
+				% footer~template=,	
+				% sidebar~canvas~right~template=,
+				% edging~default= on,	
+			}
+		}
+		{old2} {
+			\gothamset{
+			% FONT
+				% xx=,
+			% COLOR
+				colorset= inria,
+			% INNER
+				title~page= inria~old,
+				% standin~template= inria,
+				standout~template= inria~old,
+				partframe~template= inria~old,
+				sectionframe~template= inria~old,
+				subsectionframe~template= inria~old,
+				subsubsectionframe~template= inria~old,
+				tocframe~template= inria~old,
+				parttocframe~template= inria~old,
+				sectiontocframe~template= inria~old,
+				subsectiontocframe~template= inria~old,
+			% OUTER
+				frametitle~template= inria~oldB,
+				% footer~template=,	
+				% sidebar~canvas~right~template=,
+				edging~default= on,	
+			}
+		}
+		{old3} {
+			\gothamset{
+			% FONT
+				% xx=,
+			% COLOR
+				colorset= inria,
+			% INNER
+				title~page= inria~old,
+				% standin~template= inria,
+				standout~template= inria~old,
+				partframe~template= inria~old,
+				sectionframe~template= inria~old,
+				subsectionframe~template= inria~old,
+				subsubsectionframe~template= inria~old,
+				tocframe~template= inria~old,
+				parttocframe~template= inria~old,
+				sectiontocframe~template= inria~old,
+				subsectiontocframe~template= inria~old,
+			% OUTER
+				frametitle~template= inria~oldC,
+				% footer~template=,	
+				% sidebar~canvas~right~template=,
+				edging~default= on,	
+			}
+		}
+		{RF} {
+			\gothamset{
+			% FONT
+				% xx=,
+			% COLOR
+				colorset= inria,
+			% INNER
+				title~page= inria~RF,
+				% standin~template= uge,
+				standout~template= inria~RF,
+				partframe~template= inria~RF,
+				sectionframe~template= inria~RF,
+				subsectionframe~template= inria~RF,
+				subsubsectionframe~template= inria~RF,
+				tocframe~template= inria~RF,
+				parttocframe~template= inria~RF,
+				sectiontocframe~template= inria~RF,
+				subsectiontocframe~template= inria~RF,
+			% OUTER
+				% sidebar~canvas~right~template=,
+				frametitle~template= inria~RF,
+				% footer~template=,	
+				% edging~default= on,	
+			}
+		}
+	}
+	{\msg_warning:nn { gothamInria } { InriaSet~unknown~input~set.} }
+}
+
+%\mode<all>
+
+% EOF

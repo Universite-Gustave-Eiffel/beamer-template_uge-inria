@@ -3,10 +3,12 @@
 *.aux
 *.fdb_latexmk
 *.fls
+*.hd
+*.idx
 *.log
 *.nav
 *.out
- /*.pdf
+*.pdf
 *.snm
 *.gz
 *.toc
@@ -17,7 +19,9 @@
 *.bcf
 *.blg
 *.glg
+*.glo
 *.run.xml
 *.thm
 *MyProgressBar.sty
 *Demo_metroUGE_persoPB.*
+**/build/*

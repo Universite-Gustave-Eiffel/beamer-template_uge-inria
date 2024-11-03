@@ -1,0 +1,69 @@
+%% --------------------------------------------------------------------
+%% Copyright 2024 Romain NOËL
+%%
+%% Based on the CEA theme presentation ppt and graphical charter
+%% --------------------------------------------------------------------
+
+\ProvidesExplPackage{beamercolorthemegothamCEA}{2024-10-15}{1.1.1.a}{CEA color theme}
+%\mode<presentation>
+
+%%% CEA colors
+% === colors ==========================================================
+% \RequirePackage{xcolor}     % color package; load before tocstyle
+
+\definecolor{ceaRed}{RGB}{229,0,25}
+\definecolor{CEAundef}{RGB}{133,42,133} % 
+
+
+\cs_new_protected:Nn \__gotham_color_set_style_CEA:{
+	%%% apply changes in the color set
+	% \colorlet{colorPale}{gPaleYell} % BG in light/normal mode
+	% \colorlet{colorDark}{gDarkBlack} % FG in light/normal mode
+	\colorlet{colorA}{ceaRed} % frametitle, standin.out,
+	\colorlet{colorAreversed}{CEAundef} % frametitle, standin.out,
+	% \colorlet{colorB}{gMidGrey} % gray BG: progress bar, blocks
+	\colorlet{colorC}{ceaRed} % progress bar
+	% \colorlet{colorD}{gLightOrange} % alert
+	% \colorlet{colorE}{gLightGreen} % example
+
+	%%% reload modified
+	% \colorlet{colorFG}{colorDark}
+	% \colorlet{colorBG}{colorPale}
+	% %%\colorlet{colorStandin}{colorBG/FG}% light/dark BG color overset
+	% %%\colorlet{colorStandout}{colorA/reserved}% light/dark BG color overset
+	% %%\colorlet{colorFrametitle}{colorA/reserved}% light/dark BG color overset
+	% %%\colorlet{colorTitlepage}{colorA/reserved}% light/dark BG color overset
+	% \colorlet{colorFiligrane}{colorB}
+	% \colorlet{colorBackElement}{colorB}
+	\colorlet{colorProgBar}{colorC}
+	% \colorlet{colorAlert}{colorD}
+	% \colorlet{colorExample}{colorE}
+
+	%%% Settings
+   \setbeamercolor{itemize~item}{fg=ceaRed}
+   \setbeamercolor{itemize~subitem}{fg=ceaRed}
+   \setbeamercolor{itemize~subsubitem}{fg=ceaRed}
+   \setbeamercolor{enumerate~item}{fg=ceaRed}
+   \setbeamercolor{enumerate~subitem}{fg=ceaRed}
+   \setbeamercolor{enumerate~subsubitem}{fg=ceaRed} 
+	\setbeamercolor{item~projected}{fg=colorPale, bg=ceaRed}
+	\setbeamercolor{subitem~projected}{bg=colorPale, fg=colorDark}
+	\setbeamercolor{subsubitem~projected}{bg=colorPale, fg=colorDark}
+
+	\renewcommand{\gothamHookPostColorBGSet}{
+		\setbeamercolor{frametitle}{fg=ceaRed, bg=}
+		\colorlet{colorStandout}{gDarkGrey}
+		\setbeamercolor{standout}{bg=colorStandout, fg=colorDark}
+		% \colorlet{colorStandout}{InriaDarkgray}
+		% \setbeamercolor{standout}{bg=colorStandout, fg=colorPale}
+	}
+}
+
+\keys_define:nn { gotham / color }
+{
+	colorset / CEA .code:n = { \__gotham_color_set_style_CEA: },
+}
+
+%\mode<all>
+
+%% End of file `beamercolorthemeCEA.sty'.

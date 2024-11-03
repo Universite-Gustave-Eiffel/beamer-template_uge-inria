@@ -1,0 +1,270 @@
+%% -------------------------------------------------------------------
+%% Copyright 2024 Romain NOËL
+%%
+%% Based on the CEA theme presentation ppt and graphical charter
+%% -------------------------------------------------------------------
+
+\ProvidesExplPackage{beamerinnerthemegothamCEA}{2024-10-15}{1.0.0.a}{CEA inner theme}
+
+%\mode<presentation>
+
+%%%
+%%%	Title, Standout, TOC, section pages, TOC-sections.
+%%%===================================================================
+
+%% Title %%%
+%%%%%%%%%%%%
+
+% The command to insert the institute logo on title page
+\newcommand{\CEAtitlelogo}{
+	\ifbool{darkBG}{% Dark true 
+		\ifnum\insertaspectratio=169 % 16:9
+			\includegraphics[height=0.08\paperheight]{\PathSOCEA/logos/CEA-logo.pdf}
+		\else
+		\ifnum\insertaspectratio=43 % 4:3
+			\includegraphics[height=0.065\paperheight]{\PathSOCEA/logos/CEA-logo.pdf}
+		\fi% end 4:3
+		\fi% end 19:9
+	}{% Light
+		\ifnum\insertaspectratio=169 % 16:9
+			\includegraphics[height=0.08\paperheight]{\PathSOCEA/logos/CEA-logo_white.pdf}
+		\else
+		\ifnum\insertaspectratio=43 % 4:3
+			\includegraphics[height=0.065\paperheight]{\PathSOCEA/logos/CEA-logo_white.pdf}
+		\fi% end 4:3
+		\fi% end 19:9
+	}
+}
+
+% The command to insert the background title page
+\newcommand{\CEAtitlepage}{
+	\ifbool{darkBG}{% Dark true 
+		\ifnum\insertaspectratio=169 % 16:9
+			\includegraphics[width=\paperwidth, height=\paperheight]{\PathSOCEA/logos/pattern-titlepage-reverse.pdf}
+		\else
+		\ifnum\insertaspectratio=43 % 4:3
+			\includegraphics[width=\paperwidth, height=\paperheight]{\PathSOCEA/logos/pattern-titlepage-reverse-43.pdf}
+		\fi% end 4:3
+		\fi% end 19:9	
+	}{% Light
+		\ifnum\insertaspectratio=169 % 16:9
+			\includegraphics[width=\paperwidth, height=\paperheight]{\PathSOCEA/logos/pattern-titlepage.pdf}
+		\else
+		\ifnum\insertaspectratio=43 % 4:3
+			\includegraphics[width=\paperwidth, height=\paperheight]{\PathSOCEA/logos/pattern-titlepage43.pdf}
+		\fi% end 4:3
+		\fi% end 19:9
+	}
+}
+
+% The title page template
+\defbeamertemplate{title~page}{CEA~official}{ 
+	\begin{tikzpicture}[overlay,remember~picture]
+		\useasboundingbox (0,0) rectangle (\paperwidth,\paperheight);
+
+		\node (cornerPattern) at ([shift={(-50pt,-25pt)}]current~page.north~east) {
+			\includegraphics[width=0.28\paperwidth]{\PathSOCEA/logos/TopCorner_red.png}
+		};
+
+		% % add CEA logo
+		\node[anchor=south~west, inner~sep=0pt] (logo) at
+			([shift={(22pt,44pt)}]current~page.west)
+		{
+			\includegraphics[height=0.26\paperheight]{\PathSOCEA/logos/ISAS_redred.png}
+		};
+
+		% \ifx\inserttitlegraphic\@empty\else
+		\node [align=left] at (current~page.south~west){
+			\ifx\inserttitlegraphic\@empty\else\inserttitlegraphic\fi
+		};
+		% \fi
+	\end{tikzpicture}
+	
+	\vskip 0.375\paperheight	
+	\begin{beamercolorbox}[
+		wd=\paperwidth, sep=0pt, leftskip={0.06\paperwidth}, 
+		rightskip={0.06\paperwidth}
+	]{title~page~header}
+		\usebeamerfont{title}\inserttitle\par
+		\ifx\insertsubtitle\@empty
+		\else
+			\vskip 0.3em
+			\usebeamerfont{subtitle}\insertsubtitle\par
+		\fi
+	\end{beamercolorbox}
+	
+	\vskip 2pt
+	\begin{beamercolorbox}[
+		wd=\paperwidth, sep=0pt, leftskip=0.06\paperwidth
+	]{date}
+		\centering
+		\usebeamerfont{date}\insertdate\par
+	\end{beamercolorbox}
+	
+	\vskip 10pt
+	\begin{beamercolorbox}[
+		wd=\paperwidth, sep=0pt, leftskip=0.06\paperwidth
+	]{author}
+		\usebeamerfont{author}\insertauthor\par
+		\ifx\insertinstitute\@empty
+		\else
+			\vskip 2pt
+			\usebeamerfont{institute}\insertinstitute\par
+		\fi
+	\end{beamercolorbox}
+	\vfill
+}
+
+
+% %% Standout %%%
+% %%%%%%%%%%%%%%%
+
+% \pgfdeclareimage[height=\paperheight]{CEAoutOfficial}{\PathSOCEA/logos/page4_4K.jpg}
+% \defbeamertemplate{background~canvas}{standout/CEA~official}{
+% 	\pgfuseimage{CEAoutOfficial}
+% }
+
+\defbeamertemplate{standout}{CEA~official}{
+	% \setbeamertemplate{background~canvas}[standout/CEA~official]
+	% \usebeamertemplate{background~canvas}%[standout/gotham]
+	\usebeamerfont{standout}
+	% if the background color is switched, then change foreground (font) color.
+	% \ifbeamercolorempty[bg]{primary~palette}{
+	% 	%true : empty background (transparent)
+	% 	\setbeamercolor{background~canvas}{
+	% 		use=primary~palette,
+	% 		bg=primary~palette.fg 
+	% 	}
+	% }{
+	% 	%false : background not empty (dark or light)
+	% 	\setbeamercolor{background~canvas}{
+	% 		use=primary~palette,
+	% 		bg=primary~palette.bg
+	% 	}
+	% }
+	% \setbeamercolor{local~structure}{fg=primary~palette.bg}
+	% \usebeamercolor[fg]{primary~palette}
+
+	\renewcommand{\gothamRightFiligrane}{
+		\begin{tikzpicture}[overlay,remember~picture]
+			\useasboundingbox (0,0) rectangle (\paperwidth,\paperheight);
+	
+			\node (cornerPattern) at ([shift={(-50pt,-25pt)}]current~page.north~east) {
+				\includegraphics[width=0.28\paperwidth]{\PathSOCEA/logos/TopCorner_red.png}
+			};
+		\end{tikzpicture}
+	}
+}
+
+
+% %% TOC %%%
+% %%%%%%%%%%
+
+\pgfdeclareimage[height=\paperheight]{CEAtocOfficial}{\PathSOCEA/logos/RHS_red.png}
+
+\defbeamertemplate{part~in~toc}{CEA~official}{
+	{\color{ceaRed}{{\inserttocpartnumber}}.}~\inserttocpart
+	\\
+}
+\defbeamertemplate{section~in~toc}{CEA~official}{
+	{\color{ceaRed}{{\inserttocsectionnumber}}.}~\inserttocsection
+	\\
+}
+\defbeamertemplate{subsection~in~toc}{CEA~official}{
+	\quad{\color{ceaRed}{{\inserttocsectionnumber}}.\inserttocsubsectionnumber.}~\inserttocsubsection
+	\\
+}
+\defbeamertemplate{subsubsection~in~toc}{CEA~official}{
+	\qquad{\color{ceaRed}{{\inserttocsectionnumber}}.\inserttocsubsectionnumber.\inserttocsubsubsectionnumber.}~\inserttocsubsubsection
+	\\
+}
+
+\defbeamertemplate{toc~page}{CEA~official}{
+	% \setbeamercolor{frametitle}{use=standin, fg=standin.fg, bg=}
+	% \addtolength{\leftskip}{3cm}
+	\setbeamertemplate{part~in~toc}[CEA~official]
+	\setbeamertemplate{section~in~toc}[CEA~official]
+	\setbeamertemplate{subsection~in~toc}[CEA~official]
+	\setbeamertemplate{subsubsection~in~toc}[CEA~official]
+	% \setbeamertemplate{background}[toc/CEA~official]
+	\renewcommand{\gothamRightFiligrane}{
+		\tikz[overlay,remember~picture]{
+			\node (rigthPattern) at ([shift={(-14pt,0)}]current~page.east) {\pgfuseimage{CEAtocOfficial}};
+		}
+	}
+}
+
+
+% %% Section %%%
+% %%%%%%%%%%%%%%
+
+\defbeamertemplate{part~frame}{CEA~official}{
+	% \setbeamertemplate{background}[section/CEA~official]
+	\renewcommand{\gothamRightFiligrane}{
+		\tikz[overlay,remember~picture]{
+			\node (rigthPattern) at ([shift={(-14pt,0)}]current~page.east) {\pgfuseimage{CEAtocOfficial}};
+		}
+	}
+	% \setbeamertemplate{sidebar~canvas~right}[gotham~filigrane]
+	\setbeamertemplate{footline}[empty]
+	\setbeamertemplate{logo}[empty]
+	\setbeamertemplate{progress~bar~in~section~page}[display]
+	\setbeamertemplate{part~page}[progressbar/simple]
+	% \usebeamertemplate*{section~page}% activated automatically
+}
+
+\defbeamertemplate{section~frame}{CEA~official}{
+	\setbeamertemplate{part~frame}[CEA~official]
+	\usebeamertemplate{part~frame}
+	\setbeamertemplate{section~page}[progressbar/simple]
+	% \usebeamertemplate*{section~page}% activated automatically
+}
+
+\defbeamertemplate{subsection~frame}{CEA~official}{
+	\setbeamertemplate{part~frame}[CEA~official]
+	\usebeamertemplate{part~frame}
+	\setbeamertemplate{subsection~page}[progressbar/simple]
+	% \usebeamertemplate*{section~page}% activated automatically
+}
+
+\defbeamertemplate{subsubsection~frame}{CEA~official}{
+	\setbeamertemplate{part~frame}[CEA~official]
+	\usebeamertemplate{part~frame}
+	\setbeamertemplate{subsubsection~page}[progressbar/simple]
+	% \usebeamertemplate*{section~page}% activated automatically
+}
+
+
+% %% TOC Sections %%%
+% %%%%%%%%%%%%%%%%%%%
+
+\defbeamertemplate{toc~part~frame}{CEA~official}{
+	% \setbeamercolor{frametitle}{use=standin, fg=standin.fg, bg=}
+	% \addtolength{\leftskip}{3cm}
+	\setbeamertemplate{part~in~toc}[CEA~official]
+	\setbeamertemplate{section~in~toc}[CEA~official]
+	\setbeamertemplate{subsection~in~toc}[CEA~official]
+	\setbeamertemplate{subsubsection~in~toc}[CEA~official]
+	% \setbeamertemplate{background}[toc/CEA~official]
+	\renewcommand{\gothamRightFiligrane}{
+		\tikz[overlay,remember~picture]{
+			\node (rigthPattern) at ([shift={(-14pt,0)}]current~page.east) {\pgfuseimage{CEAtocOfficial}};
+		}
+	}
+}
+
+\defbeamertemplate{toc~section~frame}{CEA~official}{
+	\setbeamertemplate{toc~part~frame}[CEA~official]
+	\usebeamertemplate{toc~part~frame}
+}
+
+\defbeamertemplate{toc~subsection~frame}{CEA~official}{
+	\setbeamertemplate{toc~part~frame}[CEA~official]
+	\usebeamertemplate{toc~part~frame}
+}
+
+
+%\mode<all>
+
+%%
+%% End of file `beamerinnerthemeCEA.sty'.

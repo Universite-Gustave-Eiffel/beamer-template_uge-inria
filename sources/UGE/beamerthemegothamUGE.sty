@@ -1,0 +1,83 @@
+%======================================================================
+%
+% Created by Romain NOËL
+% GothamUGE 1.0.0.&
+% 2024-10-01
+% UGE corporate design
+% Based on LaTeX UGE template 
+%
+%======================================================================
+\ProvidesExplPackage{beamerthemegothamUGE}{2024-10-15}{1.0.0.a}{UGE theme}
+
+% Theme settings
+\providecommand{\PathSOuge}{\PathSO/UGE/}
+\providecommand{\PathSOinria}{\PathSO/Inria/}
+
+%\mode<presentation>
+
+\usefonttheme{uge}
+\usecolortheme{uge}
+\useinnertheme{uge}
+\useoutertheme{uge}
+
+\ProcessKeyOptions[ gotham / font ]
+\ProcessKeyOptions[ gotham / color ]
+\ProcessKeyOptions[ gotham / inner ]
+\ProcessKeyOptions[ gotham / outer ]
+
+\NewDocumentCommand \UgeSet { m }{
+	\str_case:enF { #1 }
+	{
+		{official} {
+			\gothamset{
+			% FONT
+				% xx=,
+			% COLOR
+				colorset= uge,
+			% INNER
+				title~page= uge~official,
+				standin~BG~template= uge,
+				standout~template= uge~official,
+				partframe~template= uge,
+				sectionframe~template= uge,
+				subsectionframe~template= uge,
+				subsubsectionframe~template= uge,
+				tocframe~template= uge~official,
+				parttocframe~default= off,
+			% OUTER
+				% sidebar~canvas~right~template=,
+				% frametitle~template=,
+				% footer~template=,	
+				edging~default= on,	
+			}
+		}
+		{unofficial} {
+			\gothamset{
+			% FONT
+				% xx=,
+			% COLOR
+				colorset= uge,
+			% INNER
+				title~page= uge~unofficial,
+				standin~BG~template= uge,
+				standout~BG~template= uge~unofficial,
+				partframe~template= uge,
+				sectionframe~template= uge,
+				subsectionframe~template= uge,
+				subsubsectionframe~template= uge,
+				tocframe~template= uge~unofficial,
+				parttocframe~default= off,
+			% OUTER
+				% sidebar~canvas~right~template=,
+				% frametitle~template=,
+				% footer~template=,	
+				edging~default= on,	
+			}
+		}
+	}
+	{\msg_warning:nn { gothamUGE } { UgeSet~unknown~input~set.} }
+}
+
+%\mode<all>
+
+% EOF

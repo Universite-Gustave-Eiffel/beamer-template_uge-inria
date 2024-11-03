@@ -1,0 +1,160 @@
+% !TEX TS-program = pdflatex
+% !TeX encoding = UTF-8
+% !TeX spellcheck = en_GB
+%======================================================================
+%==  template for LaTeX presentation  =================================
+%======================================================================
+\providecommand{\lang}{english} 	% english, french
+\providecommand{\PathP}{../gotham-example/} 	% Path to Parts folders
+\providecommand{\PathR}{../../resources/} 	% Path to Resources folders
+\providecommand{\PathSO}{../../sources/} 	% Path to Sources folders
+\providecommand{\PathS}{../../supplies/} 	% Path to Supplies folders
+\providecommand{\BuildTrigger}{buildnew} 	% Trigger to build or not standalone parts.
+
+\makeatletter
+	\def\input@path{{\PathSO}{\PathSO/gotham}{\PathSO/UGE}{\PathSO/Inria}{\PathSO/CEA}} % to be able to find package in resource folders.
+	\ifx\c@levelstanda\undefined 	% to create a newcounter if it doesn't exists.
+		\newcounter{levelstanda}
+	\else
+		{}% it already exist
+	\fi
+\makeatother
+
+
+\documentclass[notheorems, noamsthm, aspectratio=43, 10pt]{beamer}
+	% use this instead for 16:9 aspect ratio: [aspectratio=169]
+	% supported aspect ratios  1610  169 149 54 43 (default) 32
+	%
+	% The option "handout, " allows to the print the hidden slides made by <handout:1|beamer:0>[noframenumbering].
+	%
+	% the option "notes=only, " to print only the notes !
+	\usepackage[orthodox]{nag}	% Help to prevent buggus with warnings
+
+   \usepackage[utf8]{inputenc}
+	\usepackage[T1]{fontenc}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%        LOADING MY PACKAGES
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+	\newcommand{\Pathbasebib}{\PathR/Presentation.bib}
+	\newcommand{\PathSymbolsEntries}{\PathR/UsersSymbolsAcronyms}%.bib
+	\def\OSvar{linux} % windows, mac, linux
+
+	\input{\PathR/UsersPackagesDefs.tex}
+	\input{\PathR/UsersMathsCommands.tex}
+
+	\usetheme{gotham}
+		% Apply Gotham settings.
+		\gothamset{
+			format title=titlecase,%
+			format subtitle=titlecase,%
+			format frametitle=titlecase,%
+			sectiontocframe default= on, %off
+			subsectiontocframe default= on, %off
+			numbering= totalframenumber, %none, totalframenumber
+			progressbar position= foot, %none, head, frametitle, foot
+			background= dark, %dark, %light, %
+		}
+		
+	% Your institution style
+	\usetheme{gothamUGE}
+		\UgeSet{unofficial}% apply specific gotham set for unofficial uge
+	% \usetheme{gothamInria}
+	% \usetheme{gothamCEA}
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+%	PRESENTATION INFORMATION
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+	\title[]{Univ-Eiffel Template}
+	\subtitle{A modern beamer theme based on Gotham}
+	\date[]{\today}
+	\author[romain.noel@univ-eiffel.fr]{
+		Romain NOËL\inst{1}\inst{2}
+		\and John DOE\inst{3}
+	}
+	\institute[Univ. Eiffel]{
+		\inst{1} Université Gustave Eiffel 
+		\and \inst{2} Inria
+		\and \inst{3} An Awesome Company
+	}
+	\titlegraphic{
+		\hspace*{0.52\textwidth}\vspace{1.6mm}%
+		\includegraphics[height=0.08\paperheight]{\PathSO/Inria/logos/inr_logo_rouge.pdf}%
+	}
+
+	\logo{\includegraphics[width=1.5cm]{\PathSO/Inria/logos/inr_logo_rouge.pdf}}
+	\addtobeamertemplate{logo}{\vspace{0.76\paperheight}}{} % Top Right
+	%\addtobeamertemplate{logo}{}{\hspace{0.885\paperwidth}} % Bottom Left
+	%\addtobeamertemplate{logo}{\vspace{0.72\paperheight}}{\hspace{0.885\paperwidth}} % Top Left
+
+
+	\usepackage{ccicons}
+	\newcommand{\themename}{\textbf{\textsc{Gotham}}}
+
+
+\begin{document}
+\stepcounter{levelstanda}
+
+%%%%%%%%%%%%%%%%%%%%%
+%%%  FRONTMATTER  %%%
+%%%%%%%%%%%%%%%%%%%%%
+	% FRAME
+	%\maketitle
+	\begin{frame}[plain,noframenumbering]
+		\titlepage
+		\note{Everything you want}
+	\end{frame}
+
+	% FRAME
+	\begin{frame}[toc]{Outline}
+		\begin{columns}[T,onlytextwidth]
+		\column{0.65\textwidth}
+			\tableofcontents[hideallsubsections]
+		\column{0.275\textwidth}
+			\includegraphics[width=0.99\textwidth]{\PathSO/UGE/logos/EiffelTower.pdf}
+		\end{columns}
+	\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%
+%%%  MAINMATTER  %%%
+%%%%%%%%%%%%%%%%%%%%
+\input{\PathP/section-Beamer.tex}
+
+\input{\PathP/section-Gotham.tex}
+
+\input{\PathP/section-Conclusion.tex}
+
+
+%%%%%%%%%%%%%%%%%%%%
+%%%  BACKMATTER  %%%
+%%%%%%%%%%%%%%%%%%%%
+
+	% FRAME
+	\begin{frame}[noframenumbering, allowframebreaks]{References}
+		\printbibliography[heading=none]
+		% \bibliography{demo}
+		% \bibliographystyle{abbrv}
+	\end{frame}
+
+
+%%  APPENDIX  %%
+%%%%%%%%%%%%%%%%
+\appendix
+% \miniframesoff % to deactive the navigation bar requires ()
+
+	% FRAME
+	\begin{frame}[fragile]{Backup slides}
+		Sometimes, it is useful to add slides at the end of your presentation to refer to during audience questions.
+
+		The best way to do this is to include \verb|\usepackage{appendixnumberbeamer}| in your preamble and call \verb|\appendix| before your backup slides.
+	\end{frame}
+
+\input{\PathP/Section-BeamerExtra.tex}
+
+\input{\PathP/Section-MyPackages.tex}
+
+
+\addtocounter{levelstanda}{-1}
+\end{document}
+% EoF

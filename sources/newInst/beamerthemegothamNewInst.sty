@@ -1,0 +1,83 @@
+%======================================================================
+%
+% Created by Romain NOËL
+% GothamNewInst 1.0.0.a
+% 2024-10-01
+% NewInst corporate design
+% Based on LaTeX NewInst template 
+%
+%======================================================================
+\ProvidesExplPackage{beamerthemegothamNewInst}{2024-10-15}{1.0.0.a}{NewInst theme}
+
+% Theme settings
+\providecommand{\PathSONewInst}{\PathSO/NewInst/}
+
+
+%\mode<presentation>
+
+\usefonttheme{NewInst}
+\usecolortheme{NewInst}
+\useinnertheme{NewInst}
+\useoutertheme{NewInst}
+
+\ProcessKeyOptions[ gotham / font ]
+\ProcessKeyOptions[ gotham / color ]
+\ProcessKeyOptions[ gotham / inner ]
+\ProcessKeyOptions[ gotham / outer ]
+
+\NewDocumentCommand \NewInstSet { m }{
+	\str_case:enF { #1 }
+	{
+		{official} {
+			\gothamset{
+			% FONT
+				% xx=,
+			% COLOR
+				colorset= NewInst,
+			% INNER
+				title~page= NewInst~official,
+				standin~BG~template= NewInst,
+				standout~template= NewInst~official,
+				partframe~template= NewInst,
+				sectionframe~template= NewInst,
+				subsectionframe~template= NewInst,
+				subsubsectionframe~template= NewInst,
+				tocframe~template= NewInst~official,
+				parttocframe~default= off,
+			% OUTER
+				% sidebar~canvas~right~template=,
+				% frametitle~template=,
+				% footer~template=,	
+				edging~default= on,	
+			}
+		}
+		{unofficial} {
+			\gothamset{
+			% FONT
+				% xx=,
+			% COLOR
+				colorset= NewInst,
+			% INNER
+				title~page= NewInst~unofficial,
+				standin~BG~template= NewInst,
+				standout~BG~template= NewInst~unofficial,
+				partframe~template= NewInst,
+				sectionframe~template= NewInst,
+				subsectionframe~template= NewInst,
+				subsubsectionframe~template= NewInst,
+				tocframe~template= NewInst~unofficial,
+				parttocframe~default= off,
+			% OUTER
+				% sidebar~canvas~right~template=,
+				% frametitle~template=,
+				% footer~template=,	
+				edging~default= on,	
+			}
+		}
+	}
+	{\msg_warning:nn { gothamNewInst } { NewInstSet~unknown~input~set.} }
+}
+
+%\mode<all>
+
+%% End of file `beamerthemegothamNewInst.sty'.

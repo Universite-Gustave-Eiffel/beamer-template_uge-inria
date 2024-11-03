@@ -1,0 +1,79 @@
+%%   As a consequence, I recommend to use the Inria Fonts, FREELY available
+%% at https://black-foundry.com/blog/inria-serif-and-inria/ and under an Open Font Licence.
+%%
+\ProvidesExplPackage{beamerfontthemegothamInria}{2024-10-15}{1.1.1.a}{Inria font theme}
+
+%\mode<presentation>
+
+% \RequirePackage{expl3}
+% \RequirePackage{etoolbox}
+% \RequirePackage{ifxetex}
+% \RequirePackage{ifluatex}
+
+% === font ============================================================
+\ifboolexpr{bool~{xetex}~or~bool~{luatex}}{
+   
+   % 
+   \fontspec [Path = \PathSOinria/fonts/,
+      UprightFont = *-Regular,
+      ItalicFont = *-Italic
+   ]{InriaSerif}
+   
+	%
+	% We search for regular, italic, light, light italic,fonts under the default |Fira Sans| names.
+	\iffontsavailable{InriaSerif-Light.otf,
+			InriaSerif-LightItalic.otf,
+			InriaSerif-Regular.otf,
+			InriaSerif-Italic.otf}
+	{
+		\setsansfont[ItalicFont={InriaSerif-LightItalic.otf},
+			BoldFont={InriaSerif-Regular.otf},
+			BoldItalicFont={InriaSerif-Italic.otf}]
+		{InriaSerif-Light.otf}
+	}{
+		% If this fails, the suffix OT --- used by some Linux distributions --- will be tried. 
+		\iffontsavailable{InriaSerif~Light~OT,
+			InriaSerif~LightItalic~OT,
+			InriaSerif~Regular~OT,
+			InriaSerif~Italic~OT}
+		{
+			\setsansfont[ItalicFont={Inria~Sans~LightItalic~OT},
+				BoldFont={Inria~Sans~Regular~OT},
+				BoldItalicFont={Inria~Sans~Italic~OT}]
+			{Fira~Sans~Light~OT}
+		}{
+			% If this also fails, a warning will be displayed and the standard fonts will be used.
+			\msg_warning:nn { gothamInria } { fonts-not-available }%
+		}
+	}
+	%
+	% We search for regular, mono, and mono bold fonts under the default |Fira Mono| names.
+	\iffontsavailable{FiraMono-Medium.otf, FiraMono-Bold.otf}{
+		\setmonofont[BoldFont={FiraMono-Medium.otf}]{FiraMono-Bold.otf}
+	}{
+		% If this fails, the suffix OT --- used by some Linux distributions --- will be tried. 
+		\iffontsavailable{Fira~Mono~Medium~OT, Fira~Mono~Bold~OT}{
+			\setmonofont[BoldFont={Fira~Mono~Medium~OT}]{Fira~Mono~Bold~OT}
+		}{
+			% If this also fails, a warning will be displayed and the standard fonts will be used.
+			\msg_warning:nn { gothamInria } { fonts-not-available } 
+		} 
+	}
+	%
+	% Add a feature for numbers in tables.
+	\AtBeginEnvironment{tabular}{
+		\addfontfeature{Numbers={Monospaced}}
+	}
+}{
+	% If compiled with pdf\LaTeX{}, then apply a dirty patch (that will not do the job but suppress warnings) and raise a warning.
+   \RequirePackage{lmodern} % latin modern font
+   % \RequirePackage[scaled=.95]{helvet} % helvetica as the origin of arial
+   % \RequirePackage[helvet]{sfmath} % for the mathematical enviroments
+   %	\renewcommand{\familydefault}{\sfdefault}
+   \RequirePackage{microtype} % for character protrusion and font expansion
+}
+
+%\linespread{1.12} % enlarge line space
+
+
+%\mode<all>

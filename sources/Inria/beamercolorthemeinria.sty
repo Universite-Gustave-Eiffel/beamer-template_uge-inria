@@ -1,0 +1,67 @@
+%% --------------------------------------------------------------------
+%% Copyright 2020 Romain NOËL
+%%
+%% Based on the Inria theme presentation ppt and graphical charter
+%% --------------------------------------------------------------------
+
+\ProvidesExplPackage{beamercolorthemegothamInria}{2024-10-15}{1.1.1.a}{Inria color theme}
+%\mode<presentation>
+
+%%% Inria colors
+% === colors ==========================================================
+% \RequirePackage{xcolor}     % color package; load before tocstyle
+
+% \definecolor{rouge_inria} {RGB}{230,51,18}
+\definecolor{InriaRed}{HTML}{C9191E}
+\definecolor{InriaUndef}{RGB}{230,51,230}
+\definecolor{InriaDarkgray}{RGB}{56,66,87}% heavy dark gray for normal text
+\definecolor{InriaLightgray}{RGB}{156,166,187}
+
+\cs_new_protected:Nn \__gotham_color_set_style_InriaA:{
+	%%% apply changes in the color set
+	% \colorlet{colorPale}{gPaleYell} % BG in light/normal mode
+	\colorlet{colorDark}{InriaDarkgray} % FG in light/normal mode
+	\colorlet{colorA}{InriaRed} % frametitle, standin.out,
+	\colorlet{colorAreversed}{InriaUndef} % frametitle, standin.out,
+	\colorlet{colorB}{InriaLightgray} % gray BG: progress bar, blocks
+	\colorlet{colorC}{InriaRed} % progress bar
+	% \colorlet{colorD}{gLightOrange} % alert
+	% \colorlet{colorE}{gLightGreen} % example
+
+	%%% reload modified
+	\colorlet{colorFG}{colorDark}
+	% \colorlet{colorBG}{colorPale}
+	% %%\colorlet{colorStandin}{colorPale}	% reloaded internally
+	% %%\colorlet{colorStandout}{colorA}	% reloaded internally
+	% %%\colorlet{colorFrametitle}{colorA}	% reloaded internally
+	% %%\colorlet{colorTitlepage}{colorA}	% reloaded internally
+	\colorlet{colorFiligrane}{colorB}
+	\colorlet{colorBackElement}{colorB}
+	\colorlet{colorProgBar}{colorC}
+	% \colorlet{colorAlert}{colorD}
+	% \colorlet{colorExample}{colorE}
+
+   %%% Settings
+   \setbeamercolor*{itemize~item}{fg=InriaRed}
+   \setbeamercolor*{itemize~subitem}{fg=InriaRed}
+   \setbeamercolor*{itemize~subsubitem}{fg=InriaRed}
+   \setbeamercolor*{enumerate~item}{fg=InriaRed}
+   \setbeamercolor*{enumerate~subitem}{fg=InriaRed}
+   \setbeamercolor*{enumerate~subsubitem}{fg=InriaRed}  
+	
+	\renewcommand{\gothamHookPostColorBGSet}{
+		\setbeamercolor{frametitle}{use=normal~text, parent=normal~text, bg=}
+		% \setbeamercolor{frametitleSection}{use=primary~palette, bg=, fg=primary~palette.bg}
+		\colorlet{colorStandout}{InriaDarkgray}
+		\setbeamercolor{standout}{bg=colorStandout, fg=colorPale}
+	}
+}
+
+\keys_define:nn { gotham / color }
+{
+	colorset / inria .code:n = { \__gotham_color_set_style_InriaA: },
+}
+
+%\mode<all>
+
+%% End of file `beamercolorthemeInria.sty'.

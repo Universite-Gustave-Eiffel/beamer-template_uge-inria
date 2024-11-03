@@ -1,0 +1,291 @@
+%% -------------------------------------------------------------------
+%% Copyright 2024 Romain NOËL
+%%
+%% Based on the inria theme presentation ppt and graphical charter
+%% -------------------------------------------------------------------
+
+\ProvidesExplPackage{beamerouterthemegothaminria}{2024-10-15}{1.0.0.a}{inria outer theme}
+
+%\mode<presentation>
+
+%%%
+%%% === The Frametitle, sidebars and footer. =============================================
+
+% command to insert institute logo on 'standard' frame
+% \pgfdeclareimage[option]{label}{file}%
+\ifbool{darkBG}{% Dark true
+	\pgfdeclareimage[width=2.1cm]{InriaLogo}{\PathSOinria/logos/inr_logo_blanc.pdf}
+}{% Light
+	\pgfdeclareimage[width=2.1cm]{InriaLogo}{\PathSOinria/logos/inr_logo_rouge.pdf}
+}
+
+
+%% Header & Frame title %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \setlength{\gotham@frametitle@leftpadding}{8.2ex}
+\newlength{\inriaFrametitleHeight}
+\setlength{\inriaFrametitleHeight}{0pt}
+\addtolength{\inriaFrametitleHeight}{\gotham@frametitle@toppadding}
+\addtolength{\inriaFrametitleHeight}{1.9ex}
+\addtolength{\inriaFrametitleHeight}{\gotham@frametitle@bottompadding}
+
+
+%% Header color
+% \defbeamertemplate{frametitle}{default/inria~oldA}{
+% 	\nointerlineskip
+% 	\begin{beamercolorbox}[
+% 			wd=\paperwidth,
+% 			sep=0pt,
+% 			leftskip=0pt,
+% 		]{frametitle}
+% 		\gotham@frametitlestrut@start
+% 		\tikz[overlay,remember~picture]{
+% 			\fill[color=InriaRed] (0.0,-0.33) rectangle (1.0,0.9);% horizontal rectangle
+% 			% \filldraw[color=InriaRed]  (0.0,0.9) -- (0.0,-1.9) -- (0.5,-1.9) -- (0.5,-0.33) -- (1.0,-0.33) -- (1.0,0.9);% top left corner
+% 		}
+% 		\nolinebreak
+% 		\gotham@frametitlestrut@end
+% 	\end{beamercolorbox}
+% 	\vspace*{-\inriaFrametitleHeight}%\gotham@frametitlestrut@start}
+% 	\vspace*{-1.9em}\hspace*{\fill}\pgfuseimage{InriaLogo}\hspace{-22pt}\mbox{}% add logo
+% }
+
+
+%% frametile logo
+\renewcommand{\gothamInstituteLogoSquare}[1][4ex]{
+	% \includegraphics[height=#1]{gotham-logo.pdf}
+	\pgfuseimage{InriaLogo}
+}
+
+\defbeamertemplate{frametitle}{default/inria~oldA}{
+	\nointerlineskip
+	\begin{beamercolorbox}[
+			wd=\paperwidth,
+			sep=0pt,
+			leftskip=\gotham@frametitle@leftpadding,
+			rightskip=\gotham@frametitle@rightpadding,
+		]{frametitle}
+		\gotham@frametitlestrut@start
+		\tikz[overlay,remember~picture]{
+			\fill[color=InriaRed] (1.0,-0.3284) rectangle (-0.345,0.65);
+		}
+		\hspace{11.5mm}
+		\insertframetitle
+		\ifx\insertframesubtitle\@empty
+			%% if subtitle to the frame is empty
+		\else
+			%% if not empty: add subtitle
+			{\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\gothamFrameSubtitleSep \insertframesubtitle}
+			\vspace*{\gothamFramesubtitleStrutend}
+		\fi
+		\nolinebreak
+		%% Add logo
+		\hfill{
+			\setbeamertemplate{instituteLogo}[default/\prop_item:Nn \l__gotham_template_name_prop {instituteLogo/default}]
+			\usebeamertemplate{instituteLogo}
+		}
+		\gotham@frametitlestrut@end
+	\end{beamercolorbox}
+}
+
+\defbeamertemplate{frametitle}{default/inria~oldB}{
+	\nointerlineskip
+	\begin{beamercolorbox}[
+			wd=\paperwidth,
+			sep=0pt,
+			leftskip=\gotham@frametitle@leftpadding,
+			rightskip=\gotham@frametitle@rightpadding,
+		]{frametitle}
+		\gotham@frametitlestrut@start
+		\tikz[overlay,remember~picture]{
+			\filldraw[color=InriaRed]  (-0.345,0.65) -- (-0.345,-1.9) -- (0.155,-1.9) -- (0.155,-0.3284) -- (1.0,-0.3284) -- (1.0,0.65);% top left corner
+		}
+		\hspace{11.5mm}
+		\insertframetitle
+		\ifx\insertframesubtitle\@empty
+			%% if subtitle to the frame is empty
+		\else
+			%% if not empty: add subtitle
+			{\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\gothamFrameSubtitleSep \insertframesubtitle}
+			\vspace*{\gothamFramesubtitleStrutend}
+		\fi
+		\nolinebreak
+		%% Add logo
+		\hfill{
+			\setbeamertemplate{instituteLogo}[default/\prop_item:Nn \l__gotham_template_name_prop {instituteLogo/default}]
+			\usebeamertemplate{instituteLogo}
+		}
+		\gotham@frametitlestrut@end
+	\end{beamercolorbox}
+}
+
+\defbeamertemplate{frametitle}{default/inria~oldC}{
+	\nointerlineskip
+	\begin{beamercolorbox}[
+			wd=\paperwidth,
+			sep=0pt,
+			leftskip=\gotham@frametitle@leftpadding,
+			rightskip=\gotham@frametitle@rightpadding,
+		]{frametitle}
+		\gotham@frametitlestrut@start
+		\tikz[overlay,remember~picture]{
+			\filldraw[color=InriaRed]  (-0.345,0.65) -- (-0.345,-3.85) -- (0.155,-3.85) -- (0.155,-0.3284) -- (4.419,-0.3284) -- (4.419,0.65);% top left corner
+		}
+		\hspace{45.5mm}
+		\insertframetitle
+		\ifx\insertframesubtitle\@empty
+			%% if subtitle to the frame is empty
+		\else
+			%% if not empty: add subtitle
+			{\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\gothamFrameSubtitleSep \insertframesubtitle}
+			\vspace*{\gothamFramesubtitleStrutend}
+		\fi
+		\nolinebreak
+		%% Add logo
+		\hfill{
+			\setbeamertemplate{instituteLogo}[default/\prop_item:Nn \l__gotham_template_name_prop {instituteLogo/default}]
+			\usebeamertemplate{instituteLogo}
+		}
+		\gotham@frametitlestrut@end
+	\end{beamercolorbox}
+}
+
+\defbeamertemplate*{frametitle}{default/inria~RF}{%
+	% \nointerlineskip
+	\vspace{2mm}
+	\begin{beamercolorbox}[
+			wd=\paperwidth,
+			sep=0pt,
+			leftskip=\gotham@frametitle@leftpadding,
+			rightskip=\gotham@frametitle@rightpadding,
+		]{frametitle}
+		\gotham@frametitlestrut@start
+		\tikz[overlay,remember~picture]{
+			\node at (0.2, 0.4) 
+			{\includegraphics[width=10pt]{\PathSOinria/logos/coin_degrade.pdf}};% top left corner
+		}
+		\hspace{4.mm}
+		\insertframetitle
+		\ifx\insertframesubtitle\@empty
+			%% if subtitle to the frame is empty
+		\else
+			%% if not empty: add subtitle
+			{\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\gothamFrameSubtitleSep \insertframesubtitle}
+			\vspace*{\gothamFramesubtitleStrutend}
+		\fi
+		\nolinebreak
+		%% Add logo
+		\hfill{
+			\setbeamertemplate{instituteLogo}[default/\prop_item:Nn \l__gotham_template_name_prop {instituteLogo/default}]
+			\usebeamertemplate{instituteLogo}
+		}
+
+		\gotham@frametitlestrut@end
+	\end{beamercolorbox}
+}
+
+
+%% Sidebars %%%
+%%%%%%%%%%%%%%%
+
+% sidebar lengths
+\setlength{\sidebarRightHOffset}{-0.0mm}
+% \addtolength{\sidebarRightHOffset}{}
+
+% Command to add filigrane/edging in sidebar
+\renewcommand{\gothamRightFiligrane}{
+	\ifnum\insertaspectratio=169 % 16:9
+		\tikz[overlay,remember~picture]{
+			\filldraw[color=colorFiligrane] (-15.51,0.0) -- (-15.51,-0.965) -- (-0.5,-0.965) -- (-0.50,-8.475) -- (-15.50,-8.475) -- (-15.50,0.0) -- (-16.0,0.0) -- (-16.0,-9.0) -- (0.0,-9.0) -- (0.0,0.0)
+			;% vertical rectangle (-15.0,0.0) -- (-15.0,-0.965)
+		}
+	\else
+	\ifnum\insertaspectratio=43 % 4:3
+		filigrane 43 TODO
+	\fi% end 4:3
+	\fi% end 19:9
+}
+
+
+%% Footer %%%
+%%%%%%%%%%%%%
+
+% \setlength{\rightFooterPadding}{22.5ex}
+% \setlength{\gothamFootlineRuleLeftPadding}{7mm} 
+% \setlength{\gothamFootlineRuleHeight}{0.0pt}
+\setlength{\gothamFootlineRuleHeight}{0.5pt} % This is nice also but have a cleaner default, I turned it to 0.
+\setlength{\gothamFootlineRuleLength}{\textwidth}
+
+% \defbeamertemplate*{frame footer}{inria~RF}[1][]{
+% 	\vspace*{-1ex}%
+% 	\hspace*{\fill}%
+% 	\smash{% suppresses the height and depth of its argument
+% 		\raisebox{-2.5ex}{%
+% 			\includegraphics[width=2.5cm]{\PathSOinria/logos/inr_logo_grisbleu.pdf}%
+% 		}%
+% 	}%
+% 	\hspace{22pt}%
+% 	\mbox{}%
+% 	\newline
+% 	\setbeamertemplate{frame footer}[gotham]
+% 	\usebeamertemplate{frame footer}
+% }
+
+% \defbeamertemplate{frame~footer}{default/inria~RF}{
+% 	% add a ruler but wihtout affecting the dimensions of the footline
+% 	\vbox to 0pt{
+% 		% Vertical stretch to ensure proper spacing
+% 		\vss 
+% 		\hbox to 0pt{
+% 			\hspace*{\gothamFootlineRuleLeftPadding}
+% 			\usebeamercolor{frametitle}
+% 			\color{frametitle.bg}
+% 			\rule{\gothamFootlineRuleLength}{\gothamFootlineRuleHeight}
+% 			\vspace*{
+% 				\dimexpr \gothamFootlineHeight -0.25em\relax
+% 			}
+% 			% Horizontal stretch to ensure proper spacing
+% 			\hss 
+% 		}
+% 	}
+% 	\hspace{\gothamLeftFooterPadding}
+% 	\settowidth{\hlenLeftRotFooter}{\hspace{-\gothamLeftFooterPadding}}
+% 	\addtolength{\hlenLeftRotFooter}{\gothamHposLeftRotFooter}
+% 	% \ifbool{rotateFooter}{
+% 	\bool_if:NTF \l_gotham_RotateFooter {
+% 		% rotateFooter true
+% 		\begin{picture}(0,0)(0,0)
+% 			\put(\hlenLeftRotFooter,\gothamVposLeftRotFooter){\rotatebox{90}{\insertshortdate}}
+% 		\end{picture}
+% 	}{
+% 		% rotateFooter false
+% 		\insertshortdate
+% 	}
+% 	\hfill \
+% 	\hfill \ \insertshorttitle 
+% 	% make sure that the vertical space is constant: strut.
+% 	\gotham@strut
+% 	\hfill \ 
+% 	\hfill \
+% 	% \ifbool{rotateFooter}{
+% 	\bool_if:NTF \l_gotham_RotateFooter {	
+% 		% rotateFooter true
+% 		\settowidth{\hlenRightRotFooter}{\hspace{\gothamRightFooterPadding}\usebeamertemplate{page~number~in~head/foot}}
+% 		\addtolength{\hlenRightRotFooter}{\gothamHposRightRotFooter}
+% 		\begin{picture}(0,0)(0,0)
+% 			\put(\hlenRightRotFooter,\gothamVposRightRotFooter){\rotatebox{90}{\insertshortauthor}}
+% 		\end{picture}
+% 	}{
+% 		% rotateFooter false
+% 		\insertshortauthor 
+% 		%\hspace{-7em}
+% 	}
+% 	% decrease space between progress bar and footer
+% 	\vspace*{\gothamFooterHOffset}
+% }
+
+%\mode<all>
+
+%%
+%% End of file `beamerouterthemeinria.sty'.

@@ -1,0 +1,103 @@
+\providecommand{\sectionImage}{
+	\begin{center}
+		\includegraphics[width=5cm,draft]{\PathSO/UGE/logos/UGE-logo.pdf}
+	\end{center}
+}
+\addtobeamertemplate{section frame}{}{
+	\addtobeamertemplate{section page}{}{\sectionImage}
+}
+\section{Things good to know about Beamer}
+\renewcommand{\sectionImage}{}
+
+	
+	\begin{frame}[fragile, label=previouSlide]{Section With Pictures}
+		As the following command indicates, it is possible to include pictures under a section title:
+		\begin{verbatim}			
+			\providecommand{\sectionImage}{
+				\begin{center}
+					\includegraphics[width=5cm,draft]{\PathSO/UGE/logos/UGE-logo.pdf}
+				\end{center}
+			}
+			\addtobeamertemplate{section frame}{}{
+				\addtobeamertemplate{section page}{}{\sectionImage}
+			}
+			\section{Things good to know about Beamer}
+			\renewcommand{\sectionImage}{}	
+		\end{verbatim}
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{link to hidden slide}
+		
+		Thanks to Beamer, you can create buttons to just to hidden slides that are in the appendices
+		\begin{verbatim}			
+			\begin{frame}[label=<originalSlide>, noframenumbering]	
+			\hyperlink{<hiddenSlide>}{\beamerbutton{NameOfButton}}
+		\end{verbatim}
+		
+		Don't forget to create a button to come back also!
+		
+		For example :
+		\hyperlink{previouSlide}{\beamerbutton{back to previous slide !}}
+	\end{frame}
+	
+	\begin{frame}<all:1>[fragile]
+		\frametitle{Print extended version}
+		\framesubtitle{1}
+		
+		This slide will always be printed with 
+		\begin{verbatim}			
+			\begin{frame}<handout:1|beamer:1> or \begin{frame}<all:1>
+		\end{verbatim}
+		
+		while the following code will never appears
+		\begin{verbatim}			
+			\begin{frame}<handout:0|beamer:0> or \begin{frame}<all:0>	
+		\end{verbatim}
+	\end{frame}
+	
+	\begin{frame}<handout:0|beamer:1>[fragile]{Print extended version}
+		\framesubtitle{2}
+		
+		This frame will appear with:
+		\vspace*{-2.5em}
+		\begin{verbatim}			
+			\documentclass[]{beamer}
+			\begin{frame}<handout:0|beamer:1>
+		\end{verbatim}
+		
+		BUT the following frame will not appear:
+		\vspace*{-2.5em}
+		\begin{verbatim}			
+			\documentclass[10pt]{beamer} 
+			% requires handout to appear
+			\begin{frame}<handout:1|beamer:0>
+		\end{verbatim}
+		
+		BY opposition with the current would not appear if the HANDOUT mode was on:
+		\vspace*{-1em}
+		\begin{verbatim} 
+			\documentclass[handout]{beamer}
+		\end{verbatim}
+	\end{frame}
+			
+	\begin{frame}<handout:1|beamer:0>[fragile]{Print extended version}
+	\framesubtitle{2}
+		
+		This frame will appear with:
+		\begin{verbatim}			
+			\documentclass[handout]{beamer}
+			\begin{frame}<handout:1|beamer:0>
+		\end{verbatim}
+		
+		BUT the following will not appear
+		\begin{verbatim}			
+			% requires to remove handout to appear
+			\documentclass[handout]{beamer} 
+			\begin{frame}<handout:0|beamer:1>
+		\end{verbatim}
+		
+		BY opposition with \begin{verbatim} \documentclass[]{beamer}
+		\end{verbatim}
+	\end{frame}
+	

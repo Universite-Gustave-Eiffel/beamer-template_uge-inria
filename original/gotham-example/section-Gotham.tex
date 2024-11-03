@@ -1,0 +1,392 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{gotham}
+
+	\usepackage{standalone}
+	\usepackage{tikz}
+	\usepackage{pgfplots}
+	\usepackage{tabularray} % Typeset tabulars and arrays (contains equivalent of longtable, booktabs and dcolumn at least) 
+		\UseTblrLibrary{booktabs} % to load extra commands from booktabs
+	\usepackage{changepage}
+
+	\newcommand{\themename}{\textbf{\textsc{Gotham}}}
+
+
+\begin{document} 
+
+\section{Gotham Theme}
+
+	% FRAME
+	\begin{frame}[fragile]{Gotham}
+	
+		The \themename{} theme is a Beamer theme with a minimal-ish visual style largely inspired by the \href{https://github.com/matze/mtheme}{\textsc{Metropolis} Beamer Theme} by Matthias Vogelgesang (and some other Beamer themes).
+
+		Yet, \themename{} is highly extendable and versatile.
+		\bigskip
+		
+		First, enable the theme by classically loading it:
+		
+		\begin{verbatim}
+			\documentclass{beamer}
+			\usetheme{gotham}
+		\end{verbatim}
+		
+		Then, the all customization can be performed at any moment in the presentation using:
+
+		\begin{verbatim}
+			\gothamset{<option>=...}
+		\end{verbatim}
+	\end{frame}
+
+
+\subsection{Fonts}
+
+	% FRAME	
+	\begin{frame}[fragile]{Gotham title formats}
+		Note, that you have to have Mozilla's \emph{Fira Sans} font and XeTeX or LuaTeX installed to enjoy this wonderful typography.
+
+		\begin{columns}[T,onlytextwidth]
+		\column{0.49\textwidth}
+			\themename{} supports 4 different title formats \verb|\gothamset{format frametitle=}|
+			\begin{itemize}
+				\item regular
+				\item \MakeLowercase{Lower}
+				\item \MakeUppercase{Upper}
+				\item \MakeTitlecase{Title Case}
+			\end{itemize}
+		\column{0.49\textwidth}
+			\themename{} supports 3 different title shape \verb|\gothamset{shape frametitle=...}|:
+			\begin{itemize}
+				\item regular
+				\item \textsc{Small caps}
+				\item \textit{italic}
+			\end{itemize}
+		\end{columns}
+		
+		\vspace{2em}
+		They can either be set at once for every title type or individually.
+	\end{frame}
+
+	{ \gothamset{shape frametitle=smallcaps, format frametitle=titlecase}
+	% FRAME
+	\begin{frame}{Titles: Small caps and titlecase}
+		This frame uses the title format options: \texttt{shape frametitle=smallcaps, format frametitle=titlecase}.
+
+		\begin{alertblock}{Potential Problems}
+			Be aware that not every font supports small caps. 
+			If for example you typeset your presentation with pdfTeX and the Computer Modern Sans Serif font, every text in small caps will be typeset with the Computer Modern Serif font instead.
+			Please refer to the documentation if you consider using it.
+
+			As a rule of thumb: just use it for plaintext-only titles.
+		\end{alertblock}
+	\end{frame}
+	}
+
+	{ \gothamset{format frametitle=upper, shape frametitle=italic}
+	% FRAME
+	\begin{frame}{Titles: Upper and italic}
+		This frame uses the title format options: \texttt{format frametitle=upper, shape frametitle=smallcaps}.
+
+		\begin{alertblock}{Potential problems}
+			As this title format also uses small caps you face the same problems as with the \texttt{smallcaps} title format. 
+			Additionally this format can cause some other problems. 
+			Please refer to the documentation if you consider using it.
+		\end{alertblock}
+	\end{frame}
+	}
+
+	{ \gothamset{format frametitle=lower}
+	% FRAME
+	\begin{frame}{Titles: LOWER and regular}
+		This frame uses the title format options: \texttt{format frametitle=lower, shape frametitle=regular}.
+	\end{frame}
+	}
+
+
+\subsection{Colors}
+
+	{ \gothamset{background=dark}
+	% FRAME
+	\begin{frame}[fragile]{Presentation style via background color}
+		The color mode (a.k.a. background color) can be changed using:
+		\begin{verbatim} \gothamset{background=dark | light | transparent} \end{verbatim}
+	\end{frame}
+	}
+
+	% FRAME	
+	\begin{frame}[fragile]{Blocks}
+		Three different block environments are pre-defined and may be styled with an optional background color.
+		
+		\begin{columns}[T,onlytextwidth]
+		 \column{0.3\textwidth}
+		 	\begin{verbatim}\gothamset{
+				block=native}\end{verbatim}
+
+		   \begin{block}{Default}
+		     Block content.
+		   \end{block}
+		
+		   \begin{alertblock}{Alert}
+		     Block content.
+		   \end{alertblock}
+		
+		   \begin{exampleblock}{Example}
+		     Block content.
+		   \end{exampleblock}
+		
+		 \column{0.3\textwidth}
+		
+		   \gothamset{block=transparent}
+			\begin{verbatim}\gothamset{
+				block=transparent}\end{verbatim}
+		
+		   \begin{block}{Default}
+		     Block content.
+		   \end{block}
+		
+		   \begin{alertblock}{Alert}
+		     Block content.
+		   \end{alertblock}
+		
+		   \begin{exampleblock}{Example}
+		     Block content.
+		   \end{exampleblock}
+
+		\column{0.3\textwidth}
+		
+		   \gothamset{block=fill}
+			\begin{verbatim}\gothamset{
+				block=fill}\end{verbatim}
+		
+		   \begin{block}{Default}
+		     Block content.
+		   \end{block}
+		
+		   \begin{alertblock}{Alert}
+		     Block content.
+		   \end{alertblock}
+		
+		   \begin{exampleblock}{Example}
+		     Block content.
+		   \end{exampleblock}
+		
+		\end{columns}
+	\end{frame}
+
+	% FRAME
+	\begin{frame}[fragile]{Color customization}
+		The colors can be changed using:
+		\begin{verbatim}
+		\colorlet{colorPale}{gPaleYell} % BG in light/normal mode
+		\colorlet{colorDark}{gDarkBlack} % FG in light/normal mode
+		\colorlet{colorA}{gDarkTeal} % frametitle, standin.out,
+		\colorlet{colorAreversed}{gLightTeal} % frametitle, standin.in,
+		\colorlet{colorB}{gMidGrey} % gray BG : progress bar, blocks
+		\colorlet{colorC}{gDeepYellOr} % progress bar
+		\colorlet{colorD}{gLightOrange} % alert
+		\colorlet{colorE}{gLightGreen} % example 
+		\end{verbatim}
+	\end{frame}
+
+
+\subsection{Inner}
+
+	% FRAME
+	\begin{frame}[fragile]{Title page}
+		\themename{} offers the possibility to adapt the title page layout (printed with \verb|\maketitle| or \verb|\titlepage|).
+		This can be achieved using:
+
+		\begin{verbatim}   \defbeamertemplate{title page}{your name}{your defintion}
+			\gothamset{title page= your name}\end{verbatim}
+		
+		\themename{} also predefined several templates such as: 
+		\verb$gotham normal | gotham splitvert | gotham dividedpic$ \verb$| gotham reversed$
+	\end{frame}
+
+	% FRAME
+	\begin{frame}[fragile]{Table of contents}
+		\themename{} come with the possibility to apply different style for your table of contents (ToC) page.
+		You can define your own ToC style as it follows:
+		\begin{verbatim}
+			\defbeamertemplate{toc page}{your name}{your def}
+			\gothamset{tocframe template= your name}
+		\end{verbatim}
+		Then, referring to this template using the frame option \verb|[toc]| in your presentation: 
+		\begin{verbatim}
+			\begin{frame}[toc]{Table of contents}
+				\tableofcontents%[hideallsubsections]
+			\end{frame }\end{verbatim}
+
+		Or using one of the \themename{} predefined template, such as: \verb$gotham simple | gotham bullet$
+	\end{frame}
+
+	% FRAME
+	\begin{frame}[fragile]{Sections}
+		\themename{} provides a multiple options to tune sections (respectively \verb|part|, \verb|section|, \verb|subsection| and \verb|subsubsection|).
+		Thus, using the setting controls:
+		
+		The section command \verb|\section{Elements}| from Beamer will appear very differently.
+		The section page will appear or disappear thanks to: \verb$\gothamset{sectionframe default=<on|off>}$, while its layout (when appearing) is controlled by: 
+		\begin{verbatim}
+			\defbeamertemplate{part|sub|subsub|section frame}
+				{your name}{your def}
+			\gothamset{sectionframe template= your name}\end{verbatim}
+
+		\themename{} predefined template are: \verb$gotham progressbar | gotham simple |$ \verb$gotham splitvert progressbar |$ \verb$gotham splitvert simple | gotham progressvert$
+	\end{frame}
+
+	% FRAME
+	\begin{frame}[fragile]{Sections contents}
+		After the section page, you can (de)activate a page with table of contents in the section using \verb$\gothamset{sectiontocframe default=<on|off>}$, and its layout is controlled by: 
+		\begin{verbatim}
+			\defbeamertemplate{toc subsection frame}{your name}{your def}
+			\gothamset{sectionframe template= your name}
+		\end{verbatim}
+
+		\themename{} predefined template are: \verb$gotham simple | gotham bullet$
+	\end{frame}
+
+	% FRAME
+	\begin{frame}[fragile, watermark]{Watermark}
+
+		With \themename{} you can locally or globally add watermark to your slides by using:
+		\begin{verbatim}  \defbeamertemplate{background}{watermark/your name}{your def}
+		  \gothamset{watermark template= your name}\end{verbatim}
+		
+		Then, this watermark can be turn on locally using \verb|\begin{frame}[watermark]| or globally with \verb|\gothamset{watermark default= on}| .
+ 	\end{frame}
+
+	% FRAME
+	\begin{standinenv}
+	\begin{frame}[fragile]{Standin}
+
+		\themename{} comes with 2 environments/specials layouts named \verb|standin| and \verb|standout|.
+		These specials layouts can be used to emphasize some content or last slide\textellipsis
+
+		This layout can be turn on using \verb|\begin{frame}[standin]| or using the dedicated environment (\verb|\begin{standinenv}\begin{frame}...\end{frame}\end{standinenv}|).
+
+		Note that the background can also be tuned using:
+		\begin{verbatim}  \defbeamertemplate{background canvas}{standin/name}{your def}
+		  \gothamset{standin template= name}\end{verbatim}
+		
+	\end{frame}
+	\end{standinenv}
+
+	% FRAME
+	\begin{frame}[standout, watermark]{Standout}
+		Here is an example of standout (working as standin), that can be combined with a watermark.
+
+		Another difference, apart the obvious color change is the font size and series.
+	\end{frame}
+
+
+\subsection{Outer}
+	
+	{%
+		\setbeamertemplate{frame footer}{My custom footer}
+	% FRAME
+	\begin{frame}[fragile]{Frame footer}
+	   \themename{} defines a custom Beamer template to add a text to the footer. 
+		It can be set via
+	   \begin{verbatim}\setbeamertemplate{frame footer}{My custom footer}\end{verbatim}
+
+		Even after redefining (or not) your frame footer template, you can locally remove it with the frame option \verb|\begin{frame}[nofooter]|.
+	\end{frame}
+	}
+
+	\title[your shorttitle]{Gotham}
+	\date[shortdate]{\today}
+	\author[your shortauthor name]{Romain NOËL}
+	% FRAME
+	\begin{frame}[fragile, rotateFooter]{rotateFooter}
+		The default footer from \themename{}, it displays the \verb|shortdate|, \verb|shorttitle| and \verb|shortauthor|.
+		So by filling these fields in your document setup, you will see them appear in your footer:
+		\begin{verbatim}   \title[your shorttitle]{Your title}
+			\date[shortdate]{\today}
+			\author[your shortauthor name]{John DOE} \end{verbatim}
+
+		Since, we always need some extra space on some frames that would like to overlay a bit the footer, \themename{}'s footer offers also possibility to be put on side locally using \verb|\begin{frame}[rotateFooter]|, or globally with 
+		\begin{verbatim} \gothamset{rotateFooter default=on} \end{verbatim}
+		If it has set globally, it can be deactivated locally with the frame option \verb|\begin{frame}[norotateFooter]|.
+	\end{frame}
+
+	\title[]{Gotham}
+	\date[]{\today}
+	\renewcommand{\gothamRightFiligrane}{%
+		\rotatebox{90}{gotham right filigrane pattern}
+	}
+	% FRAME
+	\begin{frame}[edging, fragile]{Edging}
+		\themename{} has two hook commands, \verb|\gothamRightFiligrane| and \verb|\gothamLeftFiligrane|, that can be redefined to customize what to display in the edgings (a.k.a. filigrane, a.k.a. sidebar).
+		As example, one could do:
+		\begin{verbatim}
+			\renewcommand{\gothamRightFiligrane}{%
+				\rotatebox{90}{gotham right filigrane pattern}
+			}\end{verbatim}
+
+		Then, to set if it should be displayed or not, globally \begin{verbatim} \gothamset{edging default=on} \end{verbatim}
+		or locally with the frame option \verb|\begin{frame}[edging]| or \verb|\begin{frame}[noedging]|.
+	\end{frame}
+
+	% FRAME
+	% \begin{nofootlineenv}
+	\begin{frame}[fragile,noedging,nofooter]{Really wide contents}
+		\begin{adjustwidth}{-2em}{-2em}
+			If you want a really wide content in your frame, you can change the size of your margin (requires \verb|\usepackage{changepage}| in your preamble).
+			You can also suppress the edging (\verb|[noedging]|) and footer (\verb|[nofooter]|) or even more radically footline (\verb|[nofootline]|).
+
+			Here is an example combining them: 
+			\begin{verbatim}
+				\begin{frame}[noedging,nofootline]{extended frame}
+					\begin{adjustwidth}{-2em}{-2em}% 2em extra to the left and 2em for right margin.
+						wide content
+					\end{adjustwidth}
+				\end{frame }
+			\end{verbatim}
+		\end{adjustwidth}
+	\end{frame}
+	% \end{nofootlineenv}
+
+	{%
+	\renewcommand{\gothamInstituteLogoSquare}[1][4ex]{%
+      \includegraphics[height=#1]{gotham-logo.pdf}
+   }
+	\logo{extra LOGO}
+	% FRAME
+	\begin{frame}[fragile]{Frametitle}
+		\framesubtitle{with a subtitle}
+		The frametile template brought by \themename{} is relatively classic: it supports \verb|\subframetitle| and frame continuation (with \verb|[allowframebreaks]|) through templates that can be tuned.
+		Nevertheless, it the frametitle template also includes a hook for your institute logo in the top right corner, leaving the command \verb|\logo{}| free for your extra logos.
+		
+		So, one can have both logos using:
+		\begin{verbatim}
+			\renewcommand{\gothamInstituteLogoSquare}[1][4ex]{
+				\includegraphics[height=#1]{gotham-logo.pdf}
+			}
+			\logo{extra LOGO}
+		\end{verbatim}
+	\end{frame}
+	}
+
+	\author[]{Romain NOËL}
+	{%
+		\gothamset{progressbar position=foot, numbering= totalframenumber}
+	% FRAME
+	\begin{frame}[fragile]{Numbering and progressbar}
+
+		\themename{} theme can numbering your frames in the bottom right corner using different styles. 
+		You can also decide to use a progression bar to indicate how much of your presentation remains.
+
+		The setup of numbering and progression bar can be performed through:
+		\begin{verbatim}
+			\gothamset{numbering= totalframenumber, progressbar position=foot}
+		\end{verbatim}
+
+		Numbering available options are: \verb$none | framenumber | totalframenumber | appendixframenumber | pagenumber | totalpagenumber | circle$
+
+		Progressbar position available options are: \verb$none | head | frametitle | foot | circlehead$
+	\end{frame}
+	}
+
+
+\end{document}
+%EoF
