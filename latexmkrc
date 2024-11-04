@@ -559,12 +559,10 @@ sub mmz_cleanup {
 ###############################################
 
 # # modify $pdflatex to use custom format
-# $pdflatex = 'pdflatex -fmt mwe %B %O %S';
 $pdflatex= 'pdflatex -synctex=1 --shell-escape -file-line-error %O %S';
-# -synctex=1 -interaction=nonstopmode --shell-escape -file-line-error %O
 
 # $aux_dir = 'buildmk'; # change localization of aux files
 # $out_dir = 'outdir'; # change localization of final outputs
 
 
-$clean_ext = "%R.bbl glg glstex %R-1.glstex loc %R.memo.dir/* %R.memo.dir mmz mmz.log soc synctex.gz synctex.gz(busy)";
+$clean_ext = "%R.bbl %R-mset.bib glg glstex %R-1.glstex loc %R.memo.dir/* %R.memo.dir mmz mmz.log soc snm synctex.gz synctex.gz(busy)";

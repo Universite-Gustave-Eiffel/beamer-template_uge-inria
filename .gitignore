@@ -25,3 +25,5 @@
 *MyProgressBar.sty
 *Demo_metroUGE_persoPB.*
 **/build/*
+
+!**/sources/**/*.pdf
