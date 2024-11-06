@@ -85,67 +85,71 @@
 
 %% Footer %%%
 %%%%%%%%%%%%%
-
+\setlength{\gothamFootlineHeight}{2.ex} 
 \setlength{\gothamFootlineRuleHeight}{0.5pt}
-\setlength{\gothamFootlineRightOffset}{10mm}
-
-\defbeamertemplate{frame~footer}{default/CEA~official}{
-	% add a ruler but wihtout affecting the dimensions of the footline
-	\vbox to 0pt{
-		% Vertical stretch to ensure proper spacing
-		\vss 
-		\hbox to 0pt{
-			\hspace*{\gothamFootlineRuleLeftPadding}
-			\usebeamercolor{frametitle}
-			\color{frametitle.bg}
-			\rule{\gothamFootlineRuleLength}{\gothamFootlineRuleHeight}
-			\vspace*{
-				\dimexpr \gothamFootlineHeight -0.25em\relax
-			}
-			% Horizontal stretch to ensure proper spacing
-			\hss 
-		}
-	}
-	%%% Add logo
+\setlength{\gothamFootlineHRightOffset}{10mm}
+\renewcommand{\gothamHookFooter}{
 	\setbeamertemplate{instituteLogo}[default/\prop_item:Nn \l__gotham_template_name_prop {instituteLogo/default}]
 	\usebeamertemplate{instituteLogo}
-	
-	\hspace{\gothamLeftFooterPadding}
-	\settowidth{\hlenLeftRotFooter}{\hspace{-\gothamLeftFooterPadding-3mm}}
-	\addtolength{\hlenLeftRotFooter}{\gothamHposLeftRotFooter}
-	% \ifbool{rotateFooter}{
-	\bool_if:NTF \l_gotham_RotateFooter {
-		% rotateFooter true
-		\begin{picture}(0,0)(0,0)
-			\put(\hlenLeftRotFooter,\gothamVposLeftRotFooter+2mm){\rotatebox{90}{\insertshortdate}}
-		\end{picture}
-	}{
-		% rotateFooter false
-		\insertshortdate
-	}
-	\hfill \
-	\hfill \ \insertshorttitle 
-	% make sure that the vertical space is constant: strut.
-	\gotham@strut
-	\hfill \ 
-	\hfill \
-	
-	% \ifbool{rotateFooter}{
-	\bool_if:NTF \l_gotham_RotateFooter {	
-		% rotateFooter true
-		\settowidth{\hlenRightRotFooter}{\hspace{\gothamRightFooterPadding}\usebeamertemplate{page~number~in~head/foot}\hspace*{\gothamFootlineRightOffset}}
-		\addtolength{\hlenRightRotFooter}{\gothamHposRightRotFooter}
-		\begin{picture}(0,0)(0,0)
-			\put(\hlenRightRotFooter,\gothamVposRightRotFooter){\rotatebox{90}{\insertshortauthor}}
-		\end{picture}
-	}{
-		% rotateFooter false
-		\insertshortauthor 
-		%\hspace{-7em}
-	}
-	% decrease space between progress bar and footer
-	\vspace*{\gothamFooterHOffset}
 }
+
+% \defbeamertemplate{frame~footer}{default/CEA~official}{
+% 	% add a ruler but wihtout affecting the dimensions of the footline
+% 	\vbox to 0pt{
+% 		% Vertical stretch to ensure proper spacing
+% 		\vss 
+% 		\hbox to 0pt{
+% 			\hspace*{\gothamFootlineRuleLeftPadding}
+% 			\usebeamercolor{frametitle}
+% 			\color{frametitle.bg}
+% 			\rule{\gothamFootlineRuleLength}{\gothamFootlineRuleHeight}
+% 			\vspace*{
+% 				\dimexpr \gothamFootlineHeight -0.25em\relax
+% 			}
+% 			% Horizontal stretch to ensure proper spacing
+% 			\hss 
+% 		}
+% 	}
+% 	%%% Add logo
+% 	\setbeamertemplate{instituteLogo}[default/\prop_item:Nn \l__gotham_template_name_prop {instituteLogo/default}]
+% 	\usebeamertemplate{instituteLogo}
+	
+% 	\hspace{\gothamLeftFooterPadding}
+% 	\settowidth{\hlenLeftRotFooter}{\hspace{-\gothamLeftFooterPadding-3mm}}
+% 	\addtolength{\hlenLeftRotFooter}{\gothamHposLeftRotFooter}
+% 	% \ifbool{rotateFooter}{
+% 	\bool_if:NTF \l_gotham_RotateFooter {
+% 		% rotateFooter true
+% 		\begin{picture}(0,0)(0,0)
+% 			\put(\hlenLeftRotFooter,\gothamVposLeftRotFooter+2mm){\rotatebox{90}{\insertshortdate}}
+% 		\end{picture}
+% 	}{
+% 		% rotateFooter false
+% 		\insertshortdate
+% 	}
+% 	\hfill \
+% 	\hfill \ \insertshorttitle 
+% 	% make sure that the vertical space is constant: strut.
+% 	\gotham@strut
+% 	\hfill \ 
+% 	\hfill \
+	
+% 	% \ifbool{rotateFooter}{
+% 	\bool_if:NTF \l_gotham_RotateFooter {	
+% 		% rotateFooter true
+% 		\settowidth{\hlenRightRotFooter}{\hspace{\gothamRightFooterPadding}\usebeamertemplate{page~number~in~head/foot}\hspace*{\gothamFootlineHRightOffset}}
+% 		\addtolength{\hlenRightRotFooter}{\gothamHposRightRotFooter}
+% 		\begin{picture}(0,0)(0,0)
+% 			\put(\hlenRightRotFooter,\gothamVposRightRotFooter){\rotatebox{90}{\insertshortauthor}}
+% 		\end{picture}
+% 	}{
+% 		% rotateFooter false
+% 		\insertshortauthor 
+% 		%\hspace{-7em}
+% 	}
+% 	% decrease space between progress bar and footer
+% 	\vspace*{\gothamFooterHOffset}
+% }
 
 %\mode<all>
 

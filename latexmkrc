@@ -1,4 +1,4 @@
-# # modify $pdflatex to use custom format
+# modify $pdflatex to use custom format
 $pdflatex= 'pdflatex -synctex=1 --shell-escape -file-line-error %O %S';
 
 # $aux_dir = 'buildmk'; # change localization of aux files

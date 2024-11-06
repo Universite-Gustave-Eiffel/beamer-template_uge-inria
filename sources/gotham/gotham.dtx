@@ -23,7 +23,7 @@
 \input expl3-generic \relax
 %</internal>
 %<class>\NeedsTeXFormat{LaTeX3e}
-%<package>\ProvidesExplPackage{beamerthemegotham}{2024-10-15}{1.1.1.a}{A modern, minimal-ish, versatile and extendable yet robust theme for Beamer}
+%<package>\ProvidesExplPackage{beamerthemegotham}{2024-11-11}{1.2.0.a}{A modern, minimal-ish, versatile and extendable yet robust theme for Beamer}
 %<author>Romain NOEL</author>
 %<maintainer>Romain NOEL</maintainer>
 %<url>https://gitlab.com/RomainNOEL/beamertheme-gotham</url>
@@ -39,8 +39,8 @@
 	% \usepackage{gotham}
 	% \usepackage{readprov}
 	% 	\ReadPackageInfos{beamerthemegotham}
-	\edef\GothamVersion{v1.1.1.a} %{\fileversion}
-	\edef\GothamDate{2024-10-15} %{\filedate}
+	\edef\GothamVersion{v1.2.0.a} %{\fileversion}
+	\edef\GothamDate{2024-11-11} %{\filedate}
 
 	\usepackage{parskip}
 	\usepackage{setspace}
@@ -188,7 +188,7 @@
 %\begin{implementation}
 %    \begin{macrocode}
 %<*font>
-\ProvidesExplPackage{beamerfontthemegotham}{2024-10-15}{1.1.1.a}{gotham font theme}
+\ProvidesExplPackage{beamerfontthemegotham}{2024-11-11}{1.2.0.a}{gotham font theme}
 \RequirePackage{expl3}
 \RequirePackage{xparse}
 \RequirePackage{etoolbox}
@@ -378,12 +378,14 @@
 \setbeamerfont{frametitleToc}{size=\LARGE, series=\bfseries}
 \setbeamerfont{frametitleSection}{size*={60}{1}, series=\bfseries}
 
+\setbeamerfont{page~number~in~head/foot}{size=\footnotesize}
+\setbeamerfont{footline}{size=\scriptsize}
+
 \setbeamerfont{block~title}{size=\normalsize, series=\bfseries}
 \setbeamerfont{block~title~alerted}{size=\normalsize, series=\bfseries}
 \setbeamerfont{caption}{size=\small}
 \setbeamerfont{caption~name}{series=\bfseries}
 \setbeamerfont{description~item}{series=\bfseries}
-\setbeamerfont{page~number~in~head/foot}{size=\scriptsize}
 
 \setbeamerfont{bibliography~entry~author}{size=\normalsize, series=\normalfont}
 \setbeamerfont{bibliography~entry~title}{size=\normalsize, series=\bfseries}
@@ -971,7 +973,7 @@
 %\begin{implementation}
 %    \begin{macrocode}
 %<*color>
-\ProvidesExplPackage{beamercolorthemegotham}{2024-10-15}{1.1.1.a}{Gotham color theme}
+\ProvidesExplPackage{beamercolorthemegotham}{2024-11-11}{1.2.0.a}{Gotham color theme}
 \RequirePackage{expl3}
 \RequirePackage{xparse}
 \RequirePackage{xcolor}
@@ -1576,7 +1578,7 @@
 %\begin{implementation}
 %    \begin{macrocode}
 %<*inner>
-\ProvidesExplPackage{beamerinnerthemegotham}{2024-10-15}{1.1.1.a}{gotham inner theme}
+\ProvidesExplPackage{beamerinnerthemegotham}{2024-11-11}{1.2.0.a}{gotham inner theme}
 \RequirePackage{expl3}
 \RequirePackage{xparse}
 \RequirePackage{calc}
@@ -2568,7 +2570,6 @@
 %     \TestFiles{gotham-test-040}
 %    \begin{macrocode}
 \defbeamertemplate*{standout}{gotham}{
-	%
 	% \setkeys{beamerframe}{c}
 	% \setkeys{beamerframe}{noframenumbering}
 	% \centering
@@ -2590,9 +2591,7 @@
 			bg=primary~palette.bg
 		}
 	}
-	\setbeamercolor{local~structure}{
-		fg=primary~palette.bg
-	}
+	\setbeamercolor{local~structure}{fg=primary~palette.bg}
 	\usebeamercolor[fg]{primary~palette}
 }
 %    \end{macrocode}
@@ -4837,7 +4836,7 @@
 %\begin{implementation}
 %    \begin{macrocode}
 %<*outer>
-\ProvidesExplPackage{beamerouterthemegotham}{2024-10-15}{1.1.1.a}{gotham outer theme}
+\ProvidesExplPackage{beamerouterthemegotham}{2024-11-11}{1.2.0.a}{gotham outer theme}
 \RequirePackage{expl3}
 \RequirePackage{xfp}
 \RequirePackage{calc}
@@ -5843,28 +5842,31 @@
 % \end{implementation}
 
 % \begin{documentation}
-%   \begin{variable}{\gothamFootlineOffset, \gothamFootlineHeight, \gothamFootlineDepth}
+%   \begin{variable}{\gothamFootlineVOffset, \gothamFootlineHRightOffset,\gothamFootlineHeight, \gothamFootlineDepth}
 %     Lengths controlling the position of |footline|.
-%     |\gothamFootlineOffset| is controlling space between to bottom of the text (or the footnote) and the footline.
-%     |\gothamFootlineOffset| is by default -0.5ex, to have more space in the frame but if the footer is not really used, the space can be even more optimized using |\setlength{\gothamFootlineOffset}{-2.0ex}|.
+%     |\gothamFootlineVOffset| is controlling vertical space between to bottom of the text (or the footnote) and the footline.
+%     |\gothamFootlineVOffset| is by default -0.5ex, to have more space in the frame but if the footer is not really used, the space can be even more optimized using |\setlength{\gothamFootlineVOffset}{-2.0ex}|.
+%     |\gothamFootlineHRightOffset| is horizontal space between the right corner and the footline.
 %     Obviously, it can be back to "normal" setting it to 0pt.
 %     |\gothamFootlineHeight| and |\gothamFootlineDepth|  are controlling the heigth of the footline and the position of the text within.
 %   \end{variable}
 % \end{documentation}
 %%%%%%
 % \begin{implementation}
-%   \begin{variable}{\gothamFootlineOffset, \gothamFootlineHeight, \gothamFootlineDepth}
+%   \begin{variable}{\gothamFootlineVOffset, \gothamFootlineHeight, \gothamFootlineDepth}
 %     Lengths used in |footline| template.
 %    \begin{macrocode}
 % Footline lengths
 % space between to bottom of the text (or the footnote) and the footline
-\newlength{\gothamFootlineOffset}
-\setlength{\gothamFootlineOffset}{-0.5ex} 
+\newlength{\gothamFootlineVOffset}
+\setlength{\gothamFootlineVOffset}{-0.5ex} 
 
 \newlength{\gothamFootlineHeight}
-\setlength{\gothamFootlineHeight}{1.5ex} 
+\setlength{\gothamFootlineHeight}{1.5ex}
 \newlength{\gothamFootlineDepth}
-\setlength{\gothamFootlineDepth}{0.1ex} 
+\setlength{\gothamFootlineDepth}{0.1ex}
+\newlength{\gothamFootlineHRightOffset}
+\setlength{\gothamFootlineHRightOffset}{\spaceskip}
 %    \end{macrocode}
 %   \end{variable}
 % \end{implementation}
@@ -5877,7 +5879,7 @@
 %    \begin{macrocode}
 \defbeamertemplate*{footline}{default/gotham}{
 	% new line to adjust the footline position.
-	\vspace*{\gothamFootlineOffset}
+	\vspace*{\gothamFootlineVOffset}
 	\begin{beamercolorbox}[
 		wd=\textwidth, 
 		sep=0pt,
@@ -5895,7 +5897,8 @@
 			\usebeamertemplate*{frame~footer}
 		}
 		\hspace{\gothamRightFooterPadding}
-		{\usebeamertemplate{page~number~in~head/foot}}~
+		{\usebeamertemplate{page~number~in~head/foot}}
+		\hspace*{\gothamFootlineHRightOffset}
 	\end{beamercolorbox}
 }
 \prop_put:Nnn \l__gotham_template_name_prop {footline/default} {gotham}
@@ -6147,8 +6150,9 @@
 %     \UnitTested
 %     \TestFiles{gotham-test-048}
 %    \begin{macrocode}
+\providecommand{\gothamHookFooter}{}
 \defbeamertemplate{frame~footer}{default/gotham}{
-	% add a ruler but wihtout affecting the dimensions of the footline
+	%%% Add a ruler but wihtout affecting the dimensions of the footline
 	\vbox to 0pt{
 		% Vertical stretch to ensure proper spacing
 		\vss 
@@ -6166,6 +6170,9 @@
 			\hss 
 		}
 	}
+	%%% Add Hook
+	\gothamHookFooter{}
+	%%% Add short date
 	\hspace{\gothamLeftFooterPadding}
 	\settowidth{\hlenLeftRotFooter}{\hspace{-\gothamLeftFooterPadding}}
 	\addtolength{\hlenLeftRotFooter}{\gothamHposLeftRotFooter}
@@ -6180,15 +6187,16 @@
 		\insertshortdate
 	}
 	\hfill \
+	%%% Add short title
 	\hfill \ \insertshorttitle 
-	% make sure that the vertical space is constant: strut.
-	\gotham@strut
+		% make sure that the vertical space is constant: strut.
+		\gotham@strut
 	\hfill \ 
 	\hfill \
-	% \ifbool{rotateFooter}{
+	%%% Add short author
 	\bool_if:NTF \l_gotham_RotateFooter {	
 		% rotateFooter true
-		\settowidth{\hlenRightRotFooter}{\hspace{\gothamRightFooterPadding}\usebeamertemplate{page~number~in~head/foot}}
+		\settowidth{\hlenRightRotFooter}{\hspace{\gothamRightFooterPadding}\usebeamertemplate{page~number~in~head/foot}\hspace*{\gothamFootlineHRightOffset}}
 		\addtolength{\hlenRightRotFooter}{\gothamHposRightRotFooter}
 		\begin{picture}(0,0)(0,0)
 			\put(\hlenRightRotFooter,\gothamVposRightRotFooter){\rotatebox{90}{\insertshortauthor}}
@@ -6196,9 +6204,8 @@
 	}{
 		% rotateFooter false
 		\insertshortauthor 
-		%\hspace{-7em}
 	}
-	% decrease space between progress bar and footer
+	%%% Decrease space between progress bar and footer
 	\vspace*{\gothamFooterHOffset}
 }
 \prop_put:Nnn \l__gotham_template_name_prop {frame~footer/default} {gotham}
@@ -7377,6 +7384,7 @@
 % 		\TestFiles{gotham-test-051}
 %    \begin{macrocode}
 \tl_new:N \l__gotham_out_tmp_mfnposi_tl
+\tl_new:N \l__gotham_out_tmp_pbar_tl
 \keys_define:nn { gotham / outer }{
 	% mini~frames~nav~position default
 	mini~frames~nav~position .choice:,
@@ -8164,7 +8172,7 @@
 % 		\TestFiles{gotham-test-048}
 %    \begin{macrocode}
 % token list to remember what is the current state
-\tl_new:N \l__gotham_out_tmp_pbar_tl
+% \tl_new:N \l__gotham_out_tmp_pbar_tl
 \keys_define:nn { gotham / outer }{
 	% progressbar~position default
 	progressbar~position .choice:,
