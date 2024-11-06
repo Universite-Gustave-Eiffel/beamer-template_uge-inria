@@ -1336,6 +1336,7 @@ mini~frames~nav~sectioning / unknown .code:n = { \PackageWarning{ gotham } { The
 
 %%%%
 \tl_new:N \l__gotham_out_tmp_mfnposi_tl
+\tl_new:N \l__gotham_out_tmp_pbar_tl
 \keys_define:nn { gotham / outer }{
 mini~frames~nav~position .choice:,
 mini~frames~nav~position .usage:n = { general },
@@ -1346,7 +1347,7 @@ mini~frames~nav~position / none .code:n = {
 
 \tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {head} {
 }{
-\setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
+ \setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
 }
 \tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {footline} {
 }{
@@ -1359,7 +1360,7 @@ mini~frames~nav~position / none .code:n = {
 \tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {right} {
 }{
 \setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
-}
+ }
 },
 mini~frames~nav~position / head .code:n = {
 \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} {
@@ -1829,223 +1830,223 @@ thick,
 }
 
 %%%%
-\tl_new:N \l__gotham_out_tmp_pbar_tl
+%\tl_new:N \l__gotham_out_tmp_pbar_tl
 \keys_define:nn { gotham / outer }{
 progressbar~position .choice:,
 progressbar~position .usage:n = { general },
 progressbar~position .default:n = { none },
 
 progressbar~position / none .code:n = {
-\tl_set:Nn \l__gotham_out_tmp_pbar_tl {none}
+% \tl_set:Nn \l__gotham_out_tmp_pbar_tl {none}
 
-\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} {
-}{
-\setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
-}
-\setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
-\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} {
-}{
-\setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
-}
-\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} {
-}{
-\setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
-}
-\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} {
-}{
-\setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
-}
+% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} {
+% }{
+% \setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
+% }
+% \setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
+% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} {
+% }{
+% \setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
+% }
+% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} {
+% }{
+% \setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
+% }
+% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} {
+% }{
+% \setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
+% }
 
-\__gotham_set_prop_template:nn{includeLogo/default}{gotham~square} 
-\setbeamertemplate{section~in~head/foot~shaded}[default/\prop_item:Nn \l__gotham_template_name_prop {section~in~head/foot~shaded/default}]
-\setbeamertemplate{section~in~head/foot}[default/\prop_item:Nn \l__gotham_template_name_prop {section~in~head/foot/default}]
+% \__gotham_set_prop_template:nn{includeLogo/default}{gotham~square} 
+% \setbeamertemplate{section~in~head/foot~shaded}[default/\prop_item:Nn \l__gotham_template_name_prop {section~in~head/foot~shaded/default}]
+% \setbeamertemplate{section~in~head/foot}[default/\prop_item:Nn \l__gotham_template_name_prop {section~in~head/foot/default}]
 },
 progressbar~position / head .code:n = {
-\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {head} {
-} {
-\tl_set:Nn \l__gotham_out_tmp_pbar_tl {head}
+% \tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {head} {
+% } {
+% \tl_set:Nn \l__gotham_out_tmp_pbar_tl {head}
 
-\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} {
-}{
-\setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
-}
-\setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
-\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} {
-}{
-\setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
-}
-\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} {
-}{
-\setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
-}
-\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} {
-}{
-\setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
-}
+% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} {
+% }{
+% \setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
+% }
+% \setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
+% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} {
+% }{
+% \setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
+% }
+% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} {
+% }{
+% \setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
+% }
+% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} {
+% }{
+% \setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
+% }
 
-\addtobeamertemplate{headline}{}{
-\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {head} {
-\usebeamertemplate*{progress~bar~in~head/foot}
-}{}
-}
-}
+% \addtobeamertemplate{headline}{}{
+% \tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {head} {
+% \usebeamertemplate*{progress~bar~in~head/foot}
+% }{}
+% }
+% }
 },
 progressbar~position / frametitle .code:n = {
-\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {frametitle} {
-} {
-\tl_set:Nn \l__gotham_out_tmp_pbar_tl {frametitle}
+% \tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {frametitle} {
+% } {
+% \tl_set:Nn \l__gotham_out_tmp_pbar_tl {frametitle}
 
-\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} {
-}{
-\setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
-}
-\setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
-\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} {
-}{
-\setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
-}
-\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} {
-}{
-\setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
-}
-\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} {
-}{
-\setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
-}
+% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} {
+% }{
+% \setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
+% }
+% \setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
+% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} {
+% }{
+% \setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
+% }
+% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} {
+% }{
+% \setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
+% }
+% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} {
+% }{
+% \setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
+% }
 
-\addtobeamertemplate{frametitle}{}{
-\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {frametitle} {
-\usebeamertemplate*{progress~bar~in~head/foot}
-}{}
-}
-}
+% \addtobeamertemplate{frametitle}{}{
+% \tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {frametitle} {
+% \usebeamertemplate*{progress~bar~in~head/foot}
+% }{}
+% }
+% }
 },
 progressbar~position / foot .code:n = {
-\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {footline} {
-} {
-\tl_set:Nn \l__gotham_out_tmp_pbar_tl {footline}
+% \tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {footline} {
+% } {
+% \tl_set:Nn \l__gotham_out_tmp_pbar_tl {footline}
 
-\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} {
-}{
-\setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
-}
-\setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
-\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} {
-}{
-\setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
-}
-\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} {
-}{
-\setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
-}
-\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} {
-}{
-\setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
-}
+% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} {
+% }{
+% \setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
+% }
+% \setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
+% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} {
+% }{
+% \setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
+% }
+% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} {
+% }{
+% \setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
+% }
+% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} {
+% }{
+% \setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
+% }
 
-\addtobeamertemplate{footline}{}{
-\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {footline} {
-\usebeamertemplate*{progress~bar~in~head/foot}
-}{}
-}
-}
+% \addtobeamertemplate{footline}{}{
+% \tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {footline} {
+% \usebeamertemplate*{progress~bar~in~head/foot}
+% }{}
+% }
+% }
 },
 progressbar~position / circlehead .code:n = {
-\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {circlehead} {
-} {
-\tl_set:Nn \l__gotham_out_tmp_pbar_tl {circlehead}
+% \tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {circlehead} {
+% } {
+% \tl_set:Nn \l__gotham_out_tmp_pbar_tl {circlehead}
 
-%%%\prop_put:Nnn \l__gotham_template_name_SAVE_prop {includeLogo/default} {gotham~square} % not needed after all.
-\__gotham_set_prop_template:nn{includeLogo/default}{gotham~circle}
-\__gotham_set_template:nn{section~in~head/foot~shaded}{default/gotham~secSubsec}
-\__gotham_set_template:nn{section~in~head/foot}{default/gotham~secSubsec}
+% %%%\prop_put:Nnn \l__gotham_template_name_SAVE_prop {includeLogo/default} {gotham~square} % not needed after all.
+% \__gotham_set_prop_template:nn{includeLogo/default}{gotham~circle}
+% \__gotham_set_template:nn{section~in~head/foot~shaded}{default/gotham~secSubsec}
+% \__gotham_set_template:nn{section~in~head/foot}{default/gotham~secSubsec}
 
-\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} {
-\addtobeamertemplate{headline}{}{
-\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {circlehead} {
-\begin{beamercolorbox}[wd=1.0\paperwidth, ht=2.5ex, dp=1.4ex, left]{headfoot}
-\usebeamerfont{section~in~head/foot}\hspace*{3.5ex}
-\usebeamertemplate{section~in~head/foot}
-\end{beamercolorbox}
-}{}
-}
-}{
-\__gotham_set_template:nn{headline}{default/gotham~section}
-}
-\setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
-\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} {
-}{
-\setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
-}
-\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} {
-}{
-\setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
-}
-\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} {
-}{
-\setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
-}
-}
+% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} {
+% \addtobeamertemplate{headline}{}{
+% \tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {circlehead} {
+% \begin{beamercolorbox}[wd=1.0\paperwidth, ht=2.5ex, dp=1.4ex, left]{headfoot}
+% \usebeamerfont{section~in~head/foot}\hspace*{3.5ex}
+% \usebeamertemplate{section~in~head/foot}
+% \end{beamercolorbox}
+% }{}
+% }
+% }{
+% \__gotham_set_template:nn{headline}{default/gotham~section}
+% }
+% \setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
+% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} {
+% }{
+% \setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
+% }
+% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} {
+% }{
+% \setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
+% }
+% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} {
+% }{
+% \setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
+% }
+% }
 },
 progressbar~position / left .code:n = {
-\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {left} {
-} {
-\tl_set:Nn \l__gotham_out_tmp_pbar_tl {left}
+% \tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {left} {
+% } {
+% \tl_set:Nn \l__gotham_out_tmp_pbar_tl {left}
 
-\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} {
-}{
-\setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
-}
-\setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
-\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} {
-}{
-\setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
-}
-\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} {
-}{
-\setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
-}
-\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} {
-}{
-\setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
-}
+% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} {
+% }{
+% \setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
+% }
+% \setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
+% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} {
+% }{
+% \setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
+% }
+% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} {
+% }{
+% \setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
+% }
+% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} {
+% }{
+% \setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
+% }
 
-\addtobeamertemplate{sidebar~left}{}{
-\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {left} {
-\usebeamertemplate*{progress~bar~in~left}
-}{}
-}
-}
+% \addtobeamertemplate{sidebar~left}{}{
+% \tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {left} {
+% \usebeamertemplate*{progress~bar~in~left}
+% }{}
+% }
+% }
 },
 progressbar~position / right .code:n = {
-\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {right} {
-} {
-\tl_set:Nn \l__gotham_out_tmp_pbar_tl {right}
+% \tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {right} {
+% } {
+% \tl_set:Nn \l__gotham_out_tmp_pbar_tl {right}
 
-\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} {
-}{
-\setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
-}
-\setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
-\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} {
-}{
-\setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
-}
-\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} {
-}{
-\setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
-}
-\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} {
-}{
-\setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
-}
+% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} {
+% }{
+% \setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
+% }
+% \setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
+% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} {
+% }{
+% \setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
+% }
+% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} {
+% }{
+% \setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
+% }
+% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} {
+% }{
+% \setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
+% }
 
-\addtobeamertemplate{sidebar~right}{}{
-\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {right} {
-\usebeamertemplate*{progress~bar~in~right}
-}{}
-}
-}
+% \addtobeamertemplate{sidebar~right}{}{
+% \tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {right} {
+% \usebeamertemplate*{progress~bar~in~right}
+% }{}
+% }
+% }
 },
 
 progressbar~position / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'#1'~is~unknown~for~the~(known)~option~'progressbar~position',~so~being~ignored. }{helping~message: progressbar~position / unknown} },
