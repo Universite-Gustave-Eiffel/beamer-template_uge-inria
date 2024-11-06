@@ -21,7 +21,7 @@
 %% The Current Maintainer of this work is Romain NOËL.
 %% Contributors: Romain NOËL (2023-20**)
 %% 
-\ProvidesExplPackage{beamerouterthemegotham}{2024-10-15}{1.1.1.a}{gotham outer theme}
+\ProvidesExplPackage{beamerouterthemegotham}{2024-11-11}{1.2.0.a}{gotham outer theme}
 \RequirePackage{expl3}
 \RequirePackage{xfp}
 \RequirePackage{calc}
@@ -484,18 +484,18 @@ frametitle~continuation~template .code:n = {
 \__gotham_add_beamerframe_key:n {nofootline}
 
 %%%%%%
-\newlength{\gothamFootlineOffset}
-\setlength{\gothamFootlineOffset}{-0.5ex}
+\newlength{\gothamFootlineVOffset}
+\setlength{\gothamFootlineVOffset}{-0.5ex}
 
 \newlength{\gothamFootlineHeight}
 \setlength{\gothamFootlineHeight}{1.5ex}
 \newlength{\gothamFootlineDepth}
 \setlength{\gothamFootlineDepth}{0.1ex}
-\newlength{\gothamFootlineRightOffset}
-\setlength{\gothamFootlineRightOffset}{1ex} 
+\newlength{\gothamFootlineHRightOffset}
+\setlength{\gothamFootlineHRightOffset}{\spaceskip}
 
 \defbeamertemplate*{footline}{default/gotham}{
-\vspace*{\gothamFootlineOffset}
+\vspace*{\gothamFootlineVOffset}
 \begin{beamercolorbox}[
 wd=\textwidth,
 sep=0pt,
@@ -512,7 +512,7 @@ dp={\gothamFootlineDepth},
 }
 \hspace{\gothamRightFooterPadding}
 {\usebeamertemplate{page~number~in~head/foot}}
-\hspace*{\gothamFootlineRightOffset}
+\hspace*{\gothamFootlineHRightOffset}
 \end{beamercolorbox}
 }
 \prop_put:Nnn \l__gotham_template_name_prop {footline/default} {gotham}
@@ -603,7 +603,9 @@ rotateFooter~default / unknown .code:n = { \PackageWarning{ gotham } { The~choic
 \newlength{\hlenRightRotFooter}
 \newlength{\hlenLeftRotFooter}
 
+\providecommand{\gothamHookFooter}{}
 \defbeamertemplate{frame~footer}{default/gotham}{
+%%% Add a ruler but wihtout affecting the dimensions of the footline
 \vbox to 0pt{
 \vss
 \hbox to 0pt{
@@ -617,6 +619,9 @@ rotateFooter~default / unknown .code:n = { \PackageWarning{ gotham } { The~choic
 \hss
 }
 }
+%%% Add Hook
+\gothamHookFooter{}
+%%% Add short date
 \hspace{\gothamLeftFooterPadding}
 \settowidth{\hlenLeftRotFooter}{\hspace{-\gothamLeftFooterPadding}}
 \addtolength{\hlenLeftRotFooter}{\gothamHposLeftRotFooter}
@@ -628,12 +633,14 @@ rotateFooter~default / unknown .code:n = { \PackageWarning{ gotham } { The~choic
 \insertshortdate
 }
 \hfill \
+%%% Add short title
 \hfill \ \insertshorttitle
 \gotham@strut
 \hfill \
 \hfill \
+%%% Add short author
 \bool_if:NTF \l_gotham_RotateFooter { 
-\settowidth{\hlenRightRotFooter}{\hspace{\gothamRightFooterPadding}\usebeamertemplate{page~number~in~head/foot}\hspace*{\gothamFootlineRightOffset}}
+\settowidth{\hlenRightRotFooter}{\hspace{\gothamRightFooterPadding}\usebeamertemplate{page~number~in~head/foot}\hspace*{\gothamFootlineHRightOffset}}
 \addtolength{\hlenRightRotFooter}{\gothamHposRightRotFooter}
 \begin{picture}(0,0)(0,0)
 \put(\hlenRightRotFooter,\gothamVposRightRotFooter){\rotatebox{90}{\insertshortauthor}}
@@ -641,6 +648,7 @@ rotateFooter~default / unknown .code:n = { \PackageWarning{ gotham } { The~choic
 }{
 \insertshortauthor
 }
+%%% Decrease space between progress bar and footer
 \vspace*{\gothamFooterHOffset}
 }
 \prop_put:Nnn \l__gotham_template_name_prop {frame~footer/default} {gotham}
@@ -1336,6 +1344,7 @@ mini~frames~nav~sectioning / unknown .code:n = { \PackageWarning{ gotham } { The
 
 %%%%
 \tl_new:N \l__gotham_out_tmp_mfnposi_tl
+\tl_new:N \l__gotham_out_tmp_pbar_tl
 \keys_define:nn { gotham / outer }{
 mini~frames~nav~position .choice:,
 mini~frames~nav~position .usage:n = { general },
@@ -1829,7 +1838,6 @@ thick,
 }
 
 %%%%
-\tl_new:N \l__gotham_out_tmp_pbar_tl
 \keys_define:nn { gotham / outer }{
 progressbar~position .choice:,
 progressbar~position .usage:n = { general },

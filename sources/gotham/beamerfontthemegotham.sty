@@ -21,7 +21,7 @@
 %% The Current Maintainer of this work is Romain NOËL.
 %% Contributors: Romain NOËL (2023-20**)
 %% 
-\ProvidesExplPackage{beamerfontthemegotham}{2024-10-15}{1.1.1.a}{gotham font theme}
+\ProvidesExplPackage{beamerfontthemegotham}{2024-11-11}{1.2.0.a}{gotham font theme}
 \RequirePackage{expl3}
 \RequirePackage{xparse}
 \RequirePackage{etoolbox}
@@ -133,12 +133,14 @@ BoldItalicFont={Fira~Sans~Italic~OT}]
 \setbeamerfont{frametitleToc}{size=\LARGE, series=\bfseries}
 \setbeamerfont{frametitleSection}{size*={60}{1}, series=\bfseries}
 
+\setbeamerfont{page~number~in~head/foot}{size=\footnotesize}
+\setbeamerfont{footline}{size=\scriptsize}
+
 \setbeamerfont{block~title}{size=\normalsize, series=\bfseries}
 \setbeamerfont{block~title~alerted}{size=\normalsize, series=\bfseries}
 \setbeamerfont{caption}{size=\small}
 \setbeamerfont{caption~name}{series=\bfseries}
 \setbeamerfont{description~item}{series=\bfseries}
-\setbeamerfont{page~number~in~head/foot}{size=\scriptsize}
 
 \setbeamerfont{bibliography~entry~author}{size=\normalsize, series=\normalfont}
 \setbeamerfont{bibliography~entry~title}{size=\normalsize, series=\bfseries}
