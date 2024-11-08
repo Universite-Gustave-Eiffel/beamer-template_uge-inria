@@ -840,11 +840,11 @@ subsubsectionstyle=show/show/hide,
 
 %%%%%%
 \newlength{\gotham@progressonsectionpage}
-\newlength{\gotham@progressonsectionpage@linewidth}
-\setlength{\gotham@progressonsectionpage@linewidth}{3pt}
+\newlength{\gothamProgressSectionHeight}
+\setlength{\gothamProgressSectionHeight}{3pt}
 
 \defbeamertemplate{progress~bar~in~section~page}{empty}{
-\vspace{\gotham@progressonsectionpage@linewidth+1ex}
+\vspace{\gothamProgressSectionHeight+1ex}
 }
 
 \def\inserttotalframenumber{100}
@@ -853,8 +853,8 @@ subsubsectionstyle=show/show/hide,
 \textwidth * \ratio{\insertframenumber~pt}{\inserttotalframenumber~pt}
 }
 \begin{tikzpicture}
-\fill[bg] (0,0) rectangle (\textwidth, \gotham@progressonsectionpage@linewidth);
-\fill[fg] (0,0) rectangle (\gotham@progressonsectionpage, \gotham@progressonsectionpage@linewidth);
+\fill[bg] (0,0) rectangle (\textwidth, \gothamProgressSectionHeight);
+\fill[fg] (0,0) rectangle (\gotham@progressonsectionpage, \gothamProgressSectionHeight);
 \end{tikzpicture}
 }
 
@@ -1036,8 +1036,8 @@ fg=normal~text.fg
 \paperwidth * \ratio{\insertframenumber pt}{\inserttotalframenumber pt}
 }
 \begin{tikzpicture}
-\fill[bg] (0,0) rectangle (\paperwidth, \gotham@progressonsectionpage@linewidth);
-\fill[fg] (0,0) rectangle (\gotham@progressonsectionpage, \gotham@progressonsectionpage@linewidth);
+\fill[bg] (0,0) rectangle (\paperwidth, \gothamProgressSectionHeight);
+\fill[fg] (0,0) rectangle (\gotham@progressonsectionpage, \gothamProgressSectionHeight);
 \end{tikzpicture}
 }
 

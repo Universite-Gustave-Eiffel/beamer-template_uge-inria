@@ -3149,21 +3149,21 @@
 % \end{implementation}
 
 % \begin{documentation}
-%   \begin{variable}{\gotham@progressonsectionpage@linewidth}
+%   \begin{variable}{\gothamProgressSectionHeight}
 %     Variables used to defined the progress bar in section pages.
-%     If the vertical size of the bar want to be changed, the command |\setlength{\gotham@progressonsectionpage@linewidth}{<0.4pt>}| can be used. 
+%     If the vertical size of the bar want to be changed, the command |\setlength{\gothamProgressSectionHeight}{<0.4pt>}| can be used. 
 %   \end{variable}
 % \end{documentation}
 %%%%%%
 % \begin{implementation}
-%   \begin{variable}{\gotham@progressonsectionpage@linewidth}
+%   \begin{variable}{\gothamProgressSectionHeight}
 %     Variables used to defined the progress bar in section pages.
 %    \begin{macrocode}
 % horizontal size of the bar (used internally and set to |\textwidth|.
 \newlength{\gotham@progressonsectionpage}
 % vertical size of the bar
-\newlength{\gotham@progressonsectionpage@linewidth}
-\setlength{\gotham@progressonsectionpage@linewidth}{3pt}
+\newlength{\gothamProgressSectionHeight}
+\setlength{\gothamProgressSectionHeight}{3pt}
 %    \end{macrocode}
 %   \end{variable}
 % \end{implementation}
@@ -3175,7 +3175,7 @@
 %     \TestFiles{gotham-test-041}
 %    \begin{macrocode}
 \defbeamertemplate{progress~bar~in~section~page}{empty}{
-	\vspace{\gotham@progressonsectionpage@linewidth+1ex}
+	\vspace{\gothamProgressSectionHeight+1ex}
 }
 
 \def\inserttotalframenumber{100}
@@ -3184,8 +3184,8 @@
 		\textwidth * \ratio{\insertframenumber~pt}{\inserttotalframenumber~pt}
 	}
 	\begin{tikzpicture}
-		\fill[bg] (0,0) rectangle (\textwidth, \gotham@progressonsectionpage@linewidth);
-		\fill[fg] (0,0) rectangle (\gotham@progressonsectionpage, \gotham@progressonsectionpage@linewidth);
+		\fill[bg] (0,0) rectangle (\textwidth, \gothamProgressSectionHeight);
+		\fill[fg] (0,0) rectangle (\gotham@progressonsectionpage, \gothamProgressSectionHeight);
 	\end{tikzpicture}
 }
 %    \end{macrocode}
@@ -3433,8 +3433,8 @@
 		\paperwidth * \ratio{\insertframenumber pt}{\inserttotalframenumber pt}
 	}
 	\begin{tikzpicture}
-		\fill[bg] (0,0) rectangle (\paperwidth, \gotham@progressonsectionpage@linewidth);
-		\fill[fg] (0,0) rectangle (\gotham@progressonsectionpage, \gotham@progressonsectionpage@linewidth);
+		\fill[bg] (0,0) rectangle (\paperwidth, \gothamProgressSectionHeight);
+		\fill[fg] (0,0) rectangle (\gotham@progressonsectionpage, \gothamProgressSectionHeight);
 	\end{tikzpicture}
 }
 %    \end{macrocode}
@@ -5415,24 +5415,24 @@
 %%% Frametitle %%%
 
 % \begin{documentation}
-%   \begin{variable}{\gotham@frametitle@toppadding, \gotham@frametitle@bottompadding, \gotham@frametitle@leftpadding, \gotham@frametitle@rightpadding}
+%   \begin{variable}{\gothamFrametitleToppading, \gothamFrametitleBottompading, \gothamFrametitleLeftpading, \gothamFrametitleRightpading}
 %     Dimensions controlling the top, bottom, left and right padding in the frametitle.
 %   \end{variable}
 % \end{documentation}
 %%%%%%
 % \begin{implementation}
-%   \begin{variable}{\gotham@frametitle@toppadding, \gotham@frametitle@bottompadding, \gotham@frametitle@leftpadding, \gotham@frametitle@rightpadding}
+%   \begin{variable}{\gothamFrametitleToppading, \gothamFrametitleBottompading, \gothamFrametitleLeftpading, \gothamFrametitleRightpading}
 %     Dimensions of lengths used in the frametitle: top, bottom, left and right padding. 
 %     All of them are equal to 2.2ex by default.
 %    \begin{macrocode}
-\newlength{\gotham@frametitle@toppadding}
-\setlength{\gotham@frametitle@toppadding}{2.2ex}
-\newlength{\gotham@frametitle@bottompadding}
-\setlength{\gotham@frametitle@bottompadding}{2.2ex}
-\newlength{\gotham@frametitle@leftpadding}
-\setlength{\gotham@frametitle@leftpadding}{2.2ex}
-\newlength{\gotham@frametitle@rightpadding}
-\setlength{\gotham@frametitle@rightpadding}{2.2ex}
+\newlength{\gothamFrametitleToppading}
+\setlength{\gothamFrametitleToppading}{2.2ex}
+\newlength{\gothamFrametitleBottompading}
+\setlength{\gothamFrametitleBottompading}{2.2ex}
+\newlength{\gothamFrametitleLeftpading}
+\setlength{\gothamFrametitleLeftpading}{2.2ex}
+\newlength{\gothamFrametitleRightpading}
+\setlength{\gothamFrametitleRightpading}{2.2ex}
 % \gotham@strut from inner
 \providecommand{\gotham@strut}{ 
 	\vphantom{ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz (/)}
@@ -5448,14 +5448,14 @@
 %     \TestFiles{gotham-test-046, gotham-test-046b, gotham-test-047}
 %    \begin{macrocode}
 \providecommand{\gotham@frametitlestrut@start}{
-	\rule{0pt}{\gotham@frametitle@toppadding +
+	\rule{0pt}{\gothamFrametitleToppading +
 		\totalheightof{
 			\ifcsdef{gotham@frametitleformat}{\gotham@frametitleformat{X}}{X}
 		}
 	}
 }
 \providecommand{\gotham@frametitlestrut@end}{
-	\rule[-\gotham@frametitle@bottompadding]{0pt}{\gotham@frametitle@bottompadding}
+	\rule[-\gothamFrametitleBottompading]{0pt}{\gothamFrametitleBottompading}
 }
 %    \end{macrocode}
 %   \end{macro}
@@ -5575,8 +5575,8 @@
 	\begin{beamercolorbox}[
 			wd=\paperwidth,
 			sep=0pt,
-			leftskip=\gotham@frametitle@leftpadding,
-			rightskip=\gotham@frametitle@rightpadding,
+			leftskip=\gothamFrametitleLeftpading,
+			rightskip=\gothamFrametitleRightpading,
 		]{frametitle}
 		\gotham@frametitlestrut@start
 		\insertframetitle
@@ -5613,8 +5613,8 @@
 	\begin{beamercolorbox}[
 		wd=\paperwidth,
 		sep=0pt,
-		leftskip=\gotham@frametitle@leftpadding,
-		rightskip=\gotham@frametitle@rightpadding,
+		leftskip=\gothamFrametitleLeftpading,
+		rightskip=\gothamFrametitleRightpading,
 	]{frametitle}
 		% put the subtitle in a raisebox to have no influence on the result.
 		\raisebox{0pt}[0pt][0pt]{
@@ -5643,8 +5643,8 @@
 	\begin{beamercolorbox}[
 		wd=\paperwidth,
 		sep=0pt,
-		leftskip=\gotham@frametitle@leftpadding,
-		rightskip=\gotham@frametitle@rightpadding,
+		leftskip=\gothamFrametitleLeftpading,
+		rightskip=\gothamFrametitleRightpading,
 	]{frametitle}
 		\gotham@frametitlestrut@start
 		\insertframetitle
@@ -6452,7 +6452,7 @@
 \defbeamertemplate*{mini~nav~progress~left}{gotham~miniframes~theme}
 {
 	\settoheight{\gotham@temp@heightFrametitle}{\gotham@strut}
-	\addtolength{\gotham@temp@heightFrametitle}{\gotham@frametitle@toppadding+\gotham@frametitle@bottompadding+\gothamProgressHeadFootLineheight}
+	\addtolength{\gotham@temp@heightFrametitle}{\gothamFrametitleToppading+\gothamFrametitleBottompading+\gothamProgressHeadFootLineheight}
 	
 	\setlength{\gotham@temp@PaperheightFrametitle}{\paperheight-\gotham@temp@heightFrametitle-\gothamFootlineHeight-\gothamFootlineDepth-\gothamProgressHeadFootLineheight}
 	
@@ -6470,7 +6470,7 @@
 \defbeamertemplate*{mini~nav~progress~right}{gotham~miniframes~theme}
 {
 	\settoheight{\gotham@temp@heightFrametitle}{\gotham@strut}
-	\addtolength{\gotham@temp@heightFrametitle}{\gotham@frametitle@toppadding+\gotham@frametitle@bottompadding+\gothamProgressHeadFootLineheight}
+	\addtolength{\gotham@temp@heightFrametitle}{\gothamFrametitleToppading+\gothamFrametitleBottompading+\gothamProgressHeadFootLineheight}
 	
 	\setlength{\gotham@temp@PaperheightFrametitle}{\paperheight-\gotham@temp@heightFrametitle-\gothamFootlineHeight-\gothamFootlineDepth-\gothamProgressHeadFootLineheight}
 	
@@ -7733,7 +7733,7 @@
 	\nointerlineskip
 	
 	\settoheight{\gotham@temp@heightFrametitle}{\gotham@strut}
-	\addtolength{\gotham@temp@heightFrametitle}{\gotham@frametitle@toppadding+\gotham@frametitle@bottompadding+\gothamProgressHeadFootLineheight}
+	\addtolength{\gotham@temp@heightFrametitle}{\gothamFrametitleToppading+\gothamFrametitleBottompading+\gothamProgressHeadFootLineheight}
 	
 	\setlength{\gotham@temp@PaperheightFrametitle}{\paperheight-\gotham@temp@heightFrametitle-\gothamFootlineHeight-\gothamFootlineDepth-0.25\baselineskip}
 	
@@ -7746,7 +7746,7 @@
 	\nointerlineskip
 	
 	\settoheight{\gotham@temp@heightFrametitle}{\gotham@strut}
-	\addtolength{\gotham@temp@heightFrametitle}{\gotham@frametitle@toppadding+\gotham@frametitle@bottompadding+\gothamProgressHeadFootLineheight}
+	\addtolength{\gotham@temp@heightFrametitle}{\gothamFrametitleToppading+\gothamFrametitleBottompading+\gothamProgressHeadFootLineheight}
 	
 	\setlength{\gotham@temp@PaperheightFrametitle}{\paperheight-\gotham@temp@heightFrametitle-\gothamFootlineHeight-\gothamFootlineDepth-0.25\baselineskip}
 
@@ -7868,7 +7868,7 @@
 	\nointerlineskip
 	
 	\settoheight{\gotham@temp@heightFrametitle}{\gotham@strut}
-	\addtolength{\gotham@temp@heightFrametitle}{\gotham@frametitle@toppadding+\gotham@frametitle@bottompadding+\gothamProgressHeadFootLineheight}
+	\addtolength{\gotham@temp@heightFrametitle}{\gothamFrametitleToppading+\gothamFrametitleBottompading+\gothamProgressHeadFootLineheight}
 	
 	\setlength{\gotham@temp@PaperheightFrametitle}{\paperheight-\gotham@temp@heightFrametitle-\gothamFootlineHeight-\gothamFootlineDepth-0.25\baselineskip}
 	
@@ -7888,7 +7888,7 @@
 	\nointerlineskip
 	
 	\settoheight{\gotham@temp@heightFrametitle}{\gotham@strut}
-	\addtolength{\gotham@temp@heightFrametitle}{\gotham@frametitle@toppadding+\gotham@frametitle@bottompadding+\gothamProgressHeadFootLineheight}
+	\addtolength{\gotham@temp@heightFrametitle}{\gothamFrametitleToppading+\gothamFrametitleBottompading+\gothamProgressHeadFootLineheight}
 	
 	\setlength{\gotham@temp@PaperheightFrametitle}{\paperheight-\gotham@temp@heightFrametitle-\gothamFootlineHeight-\gothamFootlineDepth-0.25\baselineskip}
 

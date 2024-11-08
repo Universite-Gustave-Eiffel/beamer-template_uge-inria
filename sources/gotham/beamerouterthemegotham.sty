@@ -284,27 +284,27 @@ edging~default / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'#1'
 %%% Frametitle %%%
 
 %%%%%%
-\newlength{\gotham@frametitle@toppadding}
-\setlength{\gotham@frametitle@toppadding}{2.2ex}
-\newlength{\gotham@frametitle@bottompadding}
-\setlength{\gotham@frametitle@bottompadding}{2.2ex}
-\newlength{\gotham@frametitle@leftpadding}
-\setlength{\gotham@frametitle@leftpadding}{2.2ex}
-\newlength{\gotham@frametitle@rightpadding}
-\setlength{\gotham@frametitle@rightpadding}{2.2ex}
+\newlength{\gothamFrametitleToppading}
+\setlength{\gothamFrametitleToppading}{2.2ex}
+\newlength{\gothamFrametitleBottompading}
+\setlength{\gothamFrametitleBottompading}{2.2ex}
+\newlength{\gothamFrametitleLeftpading}
+\setlength{\gothamFrametitleLeftpading}{2.2ex}
+\newlength{\gothamFrametitleRightpading}
+\setlength{\gothamFrametitleRightpading}{2.2ex}
 \providecommand{\gotham@strut}{
 \vphantom{ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz (/)}
 }
 
 \providecommand{\gotham@frametitlestrut@start}{
-\rule{0pt}{\gotham@frametitle@toppadding +
+\rule{0pt}{\gothamFrametitleToppading +
 \totalheightof{
 \ifcsdef{gotham@frametitleformat}{\gotham@frametitleformat{X}}{X}
 }
 }
 }
 \providecommand{\gotham@frametitlestrut@end}{
-\rule[-\gotham@frametitle@bottompadding]{0pt}{\gotham@frametitle@bottompadding}
+\rule[-\gothamFrametitleBottompading]{0pt}{\gothamFrametitleBottompading}
 }
 
 %%%%%%
@@ -343,8 +343,8 @@ edging~default / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'#1'
 \begin{beamercolorbox}[
 wd=\paperwidth,
 sep=0pt,
-leftskip=\gotham@frametitle@leftpadding,
-rightskip=\gotham@frametitle@rightpadding,
+leftskip=\gothamFrametitleLeftpading,
+rightskip=\gothamFrametitleRightpading,
 ]{frametitle}
 \gotham@frametitlestrut@start
 \insertframetitle
@@ -372,8 +372,8 @@ rightskip=\gotham@frametitle@rightpadding,
 \begin{beamercolorbox}[
 wd=\paperwidth,
 sep=0pt,
-leftskip=\gotham@frametitle@leftpadding,
-rightskip=\gotham@frametitle@rightpadding,
+leftskip=\gothamFrametitleLeftpading,
+rightskip=\gothamFrametitleRightpading,
 ]{frametitle}
 \raisebox{0pt}[0pt][0pt]{
 \raisebox{-0.3ex}{
@@ -391,8 +391,8 @@ rightskip=\gotham@frametitle@rightpadding,
 \begin{beamercolorbox}[
 wd=\paperwidth,
 sep=0pt,
-leftskip=\gotham@frametitle@leftpadding,
-rightskip=\gotham@frametitle@rightpadding,
+leftskip=\gothamFrametitleLeftpading,
+rightskip=\gothamFrametitleRightpading,
 ]{frametitle}
 \gotham@frametitlestrut@start
 \insertframetitle
@@ -761,7 +761,7 @@ numbering / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'#1'~is~u
 \defbeamertemplate*{mini~nav~progress~left}{gotham~miniframes~theme}
 {
 \settoheight{\gotham@temp@heightFrametitle}{\gotham@strut}
-\addtolength{\gotham@temp@heightFrametitle}{\gotham@frametitle@toppadding+\gotham@frametitle@bottompadding+\gothamProgressHeadFootLineheight}
+\addtolength{\gotham@temp@heightFrametitle}{\gothamFrametitleToppading+\gothamFrametitleBottompading+\gothamProgressHeadFootLineheight}
 
 \setlength{\gotham@temp@PaperheightFrametitle}{\paperheight-\gotham@temp@heightFrametitle-\gothamFootlineHeight-\gothamFootlineDepth-\gothamProgressHeadFootLineheight}
 
@@ -776,7 +776,7 @@ numbering / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'#1'~is~u
 \defbeamertemplate*{mini~nav~progress~right}{gotham~miniframes~theme}
 {
 \settoheight{\gotham@temp@heightFrametitle}{\gotham@strut}
-\addtolength{\gotham@temp@heightFrametitle}{\gotham@frametitle@toppadding+\gotham@frametitle@bottompadding+\gothamProgressHeadFootLineheight}
+\addtolength{\gotham@temp@heightFrametitle}{\gothamFrametitleToppading+\gothamFrametitleBottompading+\gothamProgressHeadFootLineheight}
 
 \setlength{\gotham@temp@PaperheightFrametitle}{\paperheight-\gotham@temp@heightFrametitle-\gothamFootlineHeight-\gothamFootlineDepth-\gothamProgressHeadFootLineheight}
 
@@ -1557,7 +1557,7 @@ mini~frames~nav~position / unknown .code:n = { \PackageWarning{ gotham } { The~c
 \nointerlineskip
 
 \settoheight{\gotham@temp@heightFrametitle}{\gotham@strut}
-\addtolength{\gotham@temp@heightFrametitle}{\gotham@frametitle@toppadding+\gotham@frametitle@bottompadding+\gothamProgressHeadFootLineheight}
+\addtolength{\gotham@temp@heightFrametitle}{\gothamFrametitleToppading+\gothamFrametitleBottompading+\gothamProgressHeadFootLineheight}
 
 \setlength{\gotham@temp@PaperheightFrametitle}{\paperheight-\gotham@temp@heightFrametitle-\gothamFootlineHeight-\gothamFootlineDepth-0.25\baselineskip}
 
@@ -1570,7 +1570,7 @@ mini~frames~nav~position / unknown .code:n = { \PackageWarning{ gotham } { The~c
 \nointerlineskip
 
 \settoheight{\gotham@temp@heightFrametitle}{\gotham@strut}
-\addtolength{\gotham@temp@heightFrametitle}{\gotham@frametitle@toppadding+\gotham@frametitle@bottompadding+\gothamProgressHeadFootLineheight}
+\addtolength{\gotham@temp@heightFrametitle}{\gothamFrametitleToppading+\gothamFrametitleBottompading+\gothamProgressHeadFootLineheight}
 
 \setlength{\gotham@temp@PaperheightFrametitle}{\paperheight-\gotham@temp@heightFrametitle-\gothamFootlineHeight-\gothamFootlineDepth-0.25\baselineskip}
 
@@ -1641,7 +1641,7 @@ mini~frames~nav~position / unknown .code:n = { \PackageWarning{ gotham } { The~c
 \nointerlineskip
 
 \settoheight{\gotham@temp@heightFrametitle}{\gotham@strut}
-\addtolength{\gotham@temp@heightFrametitle}{\gotham@frametitle@toppadding+\gotham@frametitle@bottompadding+\gothamProgressHeadFootLineheight}
+\addtolength{\gotham@temp@heightFrametitle}{\gothamFrametitleToppading+\gothamFrametitleBottompading+\gothamProgressHeadFootLineheight}
 
 \setlength{\gotham@temp@PaperheightFrametitle}{\paperheight-\gotham@temp@heightFrametitle-\gothamFootlineHeight-\gothamFootlineDepth-0.25\baselineskip}
 
@@ -1660,7 +1660,7 @@ mini~frames~nav~position / unknown .code:n = { \PackageWarning{ gotham } { The~c
 \nointerlineskip
 
 \settoheight{\gotham@temp@heightFrametitle}{\gotham@strut}
-\addtolength{\gotham@temp@heightFrametitle}{\gotham@frametitle@toppadding+\gotham@frametitle@bottompadding+\gothamProgressHeadFootLineheight}
+\addtolength{\gotham@temp@heightFrametitle}{\gothamFrametitleToppading+\gothamFrametitleBottompading+\gothamProgressHeadFootLineheight}
 
 \setlength{\gotham@temp@PaperheightFrametitle}{\paperheight-\gotham@temp@heightFrametitle-\gothamFootlineHeight-\gothamFootlineDepth-0.25\baselineskip}
 
