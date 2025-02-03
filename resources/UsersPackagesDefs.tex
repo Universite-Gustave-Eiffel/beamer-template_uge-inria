@@ -9,16 +9,16 @@
 %%%%---- TEXT FORMATTING -----------------------%%%%
 	% \usepackage{enumitem}
 	% \usepackage{ulem}
-		
+
 	%%%% Personal %%%%
 	\makeatletter
 		\newcommand{\ie}{\@ifstar{\emph{i.e.\@}}{\emph{id est}\ }}
 		\newcommand{\eg}{\@ifstar{\emph{e.g.\@}}{\emph{exempli gratia}\ }}
-		\newcommand{\cad}{\@ifstar{c.-\`a.-d.\@}{c'est-à-dire}\ } 
+		\newcommand{\cad}{\@ifstar{c.-\`a.-d.\@}{c'est-à-dire}\ }
 		\newcommand{\cf}{\@ifstar{\emph{cf.\@}}{\emph{confer}\ }}
 	\makeatother
 	\newcommand{\famName}[1]{\textsc{#1}}
-	
+
 
 %%%%---- SPACING & JUSTIFICATION ---------------%%%%
 %%%%---- LAYOUT & MARGINS ----------------------%%%%
@@ -34,21 +34,23 @@
 %%%%---- IMAGES --------------------------------%%%%
 	%\usepackage{placeins} % provide FloatBarrier
 	%\usepackage[absolute,overlay]{textpos} % for positioning text or floats at absolute coords.
-	\usepackage{subcaption} % multiple figures 
-		%\renewcommand{\thesubfigure}{{\normalfont\alph{subfigure}}} %
+	\usepackage{float} % finer control of float and new float env
+	\usepackage{subcaption} % multiple figures
+		%\renewcommand{\thesubfigure}{{\normalfont\alph{subfigure}}}%
+
 
 %%%%---- DRAWING & GRAPHS ----------------------%%%%
 	\usepackage{import}
-	\usepackage{tikz} 	%
-	\usepackage{pgfplots} 	%
-		\pgfplotsset{compat=newest} 	%
+	\usepackage{tikz} %
+	\usepackage{pgfplots} %
+		\pgfplotsset{compat=newest} %
 		\pdfsuppresswarningpagegroup=1
 
 
 %%%%---- TABLES & BOXES ------------------------%%%%
 	% \usepackage{tcolorbox} % colored box with a lot of flexibility
 	% 	\tcbuselibrary{skins,theorems} % extra for pseudo(code)
-	\usepackage{tabularray} % Typeset tabulars and arrays (contains equivalent of longtable, booktabs and dcolumn at least) 
+	\usepackage{tabularray} % Typeset tabulars and arrays (contains equivalent of longtable, booktabs and dcolumn at least)
 		\UseTblrLibrary{booktabs} % to load extra commands from booktabs
 		% \UseTblrLibrary{diagbox} % for cells with a diagbox
 		% \UseTblrLibrary{varwidth} % for cell with variable width
@@ -74,35 +76,39 @@
 			\end{block}%
 		}
 	% \usepackage{empheq} % emphasize equations
+	\usepackage[only,llbracket,rrbracket]{stmaryrd}
+	% \usepackage{bm}
 
 
 %%%%---- THEOREMS ------------------------------%%%%
 %%%%---- CHEMISTRY & BIO -----------------------%%%%
 %%%%---- CODING, LINKS & OTHERS ----------------%%%%
 	% \usepackage{listings} % to include piece of codes
-	% \usepackage{pseudo} % for flexible pseudocode
-	% 	\newtcbtheorem{algorithm}{Algorithm}{pseudo/booktabs, float}{alg} % create a float env for algoritms
+	\usepackage{pseudo} % for flexible pseudocode
+		\floatstyle{ruled} % create a env for algorithms with Float
+		\newfloat{algorithm}{htbp}{alg}
+		\floatname{algorithm}{Algorithm}
 	\usepackage{cleveref}%
 	\usepackage{standalone} 	% Other include compilable alone.
-		
-		
+
+
 %%%%---- INDEX & GLOSSARIES --------------------%%%%
 	\usepackage[record, automake, section=section]{glossaries-extra}
 		%Newglossaries
 		\newglossary*{acronym}{Abbreviations}
 		\newglossary*{notation}{Notation}
 		\newglossary*{symbol}{Nomenclature}
-		
-		% new keys must be defined before \GlsXtrLoadResources    
+
+		% new keys must be defined before \GlsXtrLoadResources
 		\glsaddstoragekey{unit}{}{\glsentryunit}
-		
+
 		% define style of the abbreviation in the text
 		\setabbreviationstyle[acronym]{long-short}
 		\setabbreviationstyle[foreignabbreviation]{long-short-user}
-		\setabbreviationstyle[inline]{long-short}	% 
-		\setabbreviationstyle[footer]{footnote} 	% 
-		
-		
+		\setabbreviationstyle[inline]{long-short}	%
+		\setabbreviationstyle[footer]{footnote} 	%
+
+
 		% \newcommand{\AtEndPreambPerso}{
 		\GlsXtrLoadResources[
 			src={\PathSymbolsEntries}, % entries in symbols.bib
@@ -158,8 +164,14 @@
 		% \AtEveryBibitem{\clearfield{url}}
 		\renewcommand{\mkbibnamefamily}[1]{\textsc{#1}}
 
-		\addbibresource[datatype=bibtex]{\Pathbasebib}
-		
+		% Let us now load the bib files.
+		%% \addbibresource[datatype=bibtex]{\Pathbasebib}
+		% requires etoolbox to loop from a CSV list. (etoolbox is loaded implicitly by ...)
+		%\addbibresource[datatype=bibtex]{\Pathbasebib}
+		\newcommand{\mylistDo}[1]{ \addbibresource[datatype=bibtex]{#1} }%
+		%\forcsvlist{\mylistDo}{\expandafter\Pathbasebib}
+		\expandafter\forcsvlist\expandafter\mylistDo\expandafter{\Pathbasebib}
+
 		% Create a \defbibentrysetlabel command in order to redefine the printing of mcite manually
 		\makeatletter
 			% warning the file called \blxmset@bibfile@name will be
@@ -171,10 +183,10 @@
 				@comment{auxiliary file for \string\defbibentrysetlabel}^^J%
 				@comment{This file may safely be deleted.
 					It will be recreated as required.}}
-			
+
 			\AtEndDocument{%
 				\closeout\blxmset@bibfile}
-			
+
 			\newrobustcmd*{\defbibentrysetlabel}[3]{%
 				\@bsphack
 				\immediate\write\blxmset@bibfile{%
@@ -183,26 +195,26 @@
 				}%
 				\nocite{#1}%
 				\@esphack}
-			
+
 			\addbibresource{\blxmset@bibfile@name}
 		\makeatother
-		
+
 		\renewcommand{\entrysetpunct}{.\newline}
-		
+
 		% Change the footnote style with letters to avoid confusion.
 		\renewcommand{\thefootnote}{\alph{footnote}}
 		% Change the style of the printing biblio to let appear the numbers like in the footnote
 		\setbeamertemplate{bibliography item}{\insertbiblabel}
-		
+
 		% Define the new cite command using the footnote
 		\DeclareCiteCommand{\footfullciteBeamer}
-		{\usebibmacro{prenote}} 
+		{\usebibmacro{prenote}}
 		{%
 			\renewcommand{\thefootnote}{\arabic{footnote}}% Switch to footnote with numbers
-			\footnotemark[\thefield{labelnumber}]% Add the mark corresponding to the number entry% 
+			\footnotemark[\thefield{labelnumber}]% Add the mark corresponding to the number entry%
 			\footnotetext[\thefield{labelnumber}]{%  Add the footnote text with same number entry.
 				% \printfield{labelnumber}
-				\printnames{labelname}% The name 
+				\printnames{labelname}% The name
 				\setunit{\printdelim{nametitledelim}}% separator
 				\printfield[citetitle]{labeltitle}% The title
 				\setunit{\addperiod\space}% separator
@@ -212,7 +224,7 @@
 		}
 		{\multicitedelim}
 		{\usebibmacro{postnote}}
-		
+
 		%
 		\DeclareCiteCommand{\fullciteBeamer}
 		{\usebibmacro{prenote}}
@@ -224,9 +236,13 @@
 		}
 		{\multicitedelim}
 		{\usebibmacro{postnote}}
-		
-		
+
+
 %%%%---- MULTIMEDIA ---------------------------%%%%
+	% from float package
+		\floatstyle{plain} % create a env for algorithms with Float
+		\newfloat{video}{H}{vid}
+		\floatname{video}{Video}
 	\usepackage{animate} % Create embedded animation from images on all OS and viewer !
 
 		% Os variables for the macros
@@ -244,7 +260,7 @@
 		% Load the useful package for linux
 		\ifx\OSvar\OSlinux
 			\usepackage{multimedia}
-			
+
 			\renewcommand{\includeVideo}[3][]{%
 				\movie[ % On linux with okular ++ poppler and phonon-backend-vlc installed
 					showcontrols=true, %
@@ -259,7 +275,7 @@
 		\ifx\OSvar\OSwindows
 			\usepackage{embedvideo}
 			% \usepackage{media9}
-			
+
 			% \renewcommand{\includeVideo}[3][]{%
 			% 	\includemedia[% % Windows AcrobatReader >9.1
 			% 		%	activate=pagevisible,%
@@ -276,7 +292,7 @@
 			% 	]{#3}{StrobeMediaPlayback.swf}% %{SlideShow.swf} %{APlayer.swf} %{StrobeMediaPlayback.swf} %{VPlayer.swf}
 			% }% end of the new command
 		\fi
-		
+
 
 %%%%---- TRANSLATION ---------------------------%%%%
 %%%%---- VARIABLES -----------------------------%%%%

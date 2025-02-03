@@ -21,7 +21,7 @@
 %% The Current Maintainer of this work is Romain NOËL.
 %% Contributors: Romain NOËL (2023-20**)
 %% 
-\ProvidesExplPackage{beamerouterthemegotham}{2024-11-11}{1.2.0.a}{gotham outer theme}
+\ProvidesExplPackage{beamerouterthemegotham}{2025-01-06}{1.2.1.b}{gotham outer theme}
 \RequirePackage{expl3}
 \RequirePackage{xfp}
 \RequirePackage{calc}
@@ -285,12 +285,12 @@ edging~default / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'#1'
 
 %%%%%%
 \newlength{\gothamFrametitleToppading}
-\setlength{\gothamFrametitleToppading}{2.2ex}
 \newlength{\gothamFrametitleBottompading}
-\setlength{\gothamFrametitleBottompading}{2.2ex}
 \newlength{\gothamFrametitleLeftpading}
-\setlength{\gothamFrametitleLeftpading}{2.2ex}
 \newlength{\gothamFrametitleRightpading}
+\setlength{\gothamFrametitleToppading}{2.2ex}
+\setlength{\gothamFrametitleBottompading}{2.2ex}
+\setlength{\gothamFrametitleLeftpading}{2.2ex}
 \setlength{\gothamFrametitleRightpading}{2.2ex}
 \providecommand{\gotham@strut}{
 \vphantom{ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz (/)}
@@ -485,13 +485,13 @@ frametitle~continuation~template .code:n = {
 
 %%%%%%
 \newlength{\gothamFootlineVOffset}
-\setlength{\gothamFootlineVOffset}{-0.5ex}
-
 \newlength{\gothamFootlineHeight}
-\setlength{\gothamFootlineHeight}{1.5ex}
 \newlength{\gothamFootlineDepth}
-\setlength{\gothamFootlineDepth}{0.1ex}
 \newlength{\gothamFootlineHRightOffset}
+
+\setlength{\gothamFootlineVOffset}{-0.5ex}
+\setlength{\gothamFootlineDepth}{0.1ex}
+\setlength{\gothamFootlineHeight}{1.5ex}
 \setlength{\gothamFootlineHRightOffset}{\spaceskip}
 
 \defbeamertemplate*{footline}{default/gotham}{
@@ -521,10 +521,10 @@ dp={\gothamFootlineDepth},
 
 %%%%%%
 \newlength{\gothamLeftFooterPadding}
-\setlength{\gothamLeftFooterPadding}{2.0ex}
 \newlength{\gothamRightFooterPadding}
-\setlength{\gothamRightFooterPadding}{3.5ex}
 \newlength{\gothamFooterHOffset}
+\setlength{\gothamLeftFooterPadding}{2.0ex}
+\setlength{\gothamRightFooterPadding}{3.5ex}
 \setlength{\gothamFooterHOffset}{0pt}
 
 \defbeamertemplate{frame~footer}{none}{}
@@ -586,6 +586,7 @@ rotateFooter~default / unknown .code:n = { \PackageWarning{ gotham } { The~choic
 \newlength{\gothamFootlineRuleLeftPadding}
 \newlength{\gothamFootlineRuleHeight}
 \newlength{\gothamFootlineRuleLength}
+
 \setlength{\gothamFootlineRuleLeftPadding}{7mm}
 \setlength{\gothamFootlineRuleHeight}{0.0pt}
 \setlength{\gothamFootlineRuleLength}{15mm}
@@ -674,8 +675,8 @@ default/\prop_item:Nn \l__gotham_template_name_prop {frame~footer/default}
 
 %%%%
 \newlength{\gothamCircleNumberingVshift}
-\setlength{\gothamCircleNumberingVshift}{1.4mm}
 \newlength{\gothamCircleNumberingHshift}
+\setlength{\gothamCircleNumberingVshift}{1.4mm}
 \setlength{\gothamCircleNumberingHshift}{2.6mm}
 
 \defbeamertemplate{page~number~in~head/foot}{circle}{ 

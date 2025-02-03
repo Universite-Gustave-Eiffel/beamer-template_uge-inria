@@ -42,6 +42,29 @@
 		\newcommand{\smalloh}[1]{\ensuremath{ \omicron\!\left({#1}\right) }}
 		\newcommand{\convo}[2]{\ensuremath{ {#1}\star{#2} }}
 		
+		\makeatletter
+			\newcommand{\@parenth}[1]{\left(#1\right)}
+			\newcommand{\@indexparenth}[2][]{_{#1}\left(#2\right)}
+			\newcommand{\@indexparenthStar}[2][]{_{#1}\, #2}
+			\newcommand{\@subsupscriparenth}[3][]{_{#1}^{#2}\left(#3\right)}
+			\newcommand{\@subsupscriparenthStar}[3][]{_{#1}^{#2}\, #3}
+			\newcommand{\divergN}{\nabla\@ifstar{\@divergNStar}{\@divergNNostar}}
+				\newcommand{\@divergNNostar}[2][]{_{#1}\cdot\left(#2\right)}
+				\newcommand{\@divergNStar}[2][]{_{#1}\cdot #2}
+			\newcommand{\gradN}{\nabla\@ifstar{\@indexparenthStar}{\@indexparenth}}
+			\newcommand{\LaplaN}{\mathop{}\!\nabla^2\@ifstar{\@indexparenthStar}{\@indexparenth}}
+			\newcommand{\DalembN}{\mathop{}\!\mathbin\Box\@ifstar{\@indexparenthStar}{\@indexparenth}}
+			\newcommand{\rotN}{\nabla\@ifstar{\@rotNStar}{\@rotNNostar}}
+				\newcommand{\@rotNNostar}[2][]{_{#1}\wedge\left(#2\right)}
+				\newcommand{\@rotNStar}[2][]{_{#1}\wedge #2}
+			\newcommand{\divergO}{\diverg\@ifstar{\@indexparenthStar}{\@indexparenth}}
+			\newcommand{\gradO}{\gradi\@ifstar{\@indexparenthStar}{\@indexparenth}}
+			\newcommand{\rotO}{\rota\@ifstar{\@indexparenthStar}{\@indexparenth}}
+			\newcommand{\LaplaO}{\mathop{}\!\mathbin\bigtriangleup\@ifstar{\@indexparenthStar}{\@indexparenth}}
+			\newcommand{\DalembO}{\mathop{}\!\mathbin\Box\@ifstar{\@indexparenthStar}{\@indexparenth}}
+			\newcommand{\gradNp}{\nabla\@ifstar{\@subsupscriparenthStar}{\@subsupscriparenth}}
+		\makeatother
+		
 %%%%---- THEOREMS ------------------------------%%%%
 %%%%---- CHEMISTRY & BIO -----------------------%%%%
 %%%%---- CODING --------------------------------%%%%

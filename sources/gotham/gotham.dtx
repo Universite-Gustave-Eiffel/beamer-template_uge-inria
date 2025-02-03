@@ -23,7 +23,7 @@
 \input expl3-generic \relax
 %</internal>
 %<class>\NeedsTeXFormat{LaTeX3e}
-%<package>\ProvidesExplPackage{beamerthemegotham}{2024-11-11}{1.2.0.a}{A modern, minimal-ish, versatile and extendable yet robust theme for Beamer}
+%<package>\ProvidesExplPackage{beamerthemegotham}{2025-01-06}{1.2.1.b}{A modern, minimal-ish, versatile and extendable yet robust theme for Beamer}
 %<author>Romain NOEL</author>
 %<maintainer>Romain NOEL</maintainer>
 %<url>https://gitlab.com/RomainNOEL/beamertheme-gotham</url>
@@ -39,8 +39,8 @@
 	% \usepackage{gotham}
 	% \usepackage{readprov}
 	% 	\ReadPackageInfos{beamerthemegotham}
-	\edef\GothamVersion{v1.2.0.a} %{\fileversion}
-	\edef\GothamDate{2024-11-11} %{\filedate}
+	\edef\GothamVersion{v1.2.1.b} %{\fileversion}
+	\edef\GothamDate{2025-01-06} %{\filedate}
 
 	\usepackage{parskip}
 	\usepackage{setspace}
@@ -92,12 +92,20 @@
 	\usepackage{subcaption} % For subfigures
 	\usepackage{cleveref} % for references
 
-		\providecommand{\defopt}[1]{default: #1}%{\underline{#1}}
-		% \DescribeGothamOption{optionName}{possible values}{default value}{descrption}
-		\newenvironment{DescribeGothamOption}[3]{
-			\DescribeOption{#1} % from l3doc
+		\providecommand{\defopt}[1]{\underline{#1}}%{default: #1}%{\underline{#1}}
+		\NewDocumentEnvironment{DescribeGothamOption}{ o m m m }{
+			\DescribeOption{#2} % from l3doc
+			\IfNoValueTF{#1}{
+				% true => left empty intentionally
+			}{
+				\DescribeOption{% add extra info like added or updated dates to mimic 'function' env.
+					\rule[2.5ex]{\linewidth}{0.3pt}
+					\\[-3.5ex]
+					{\scriptsize #1 \hfill\ }
+				}
+			}
 			\begin{minipage}[t]{\textwidth}
-				\textit{\textbf{\textcolor{tSec}{#2}}}\dotfill\,\defopt{#3}\par
+				\textit{\textbf{\textcolor{tSec}{#3}}}\dotfill\,\defopt{#4}\par
 				\begingroup
 					\vspace{0.5em}
 		}{
@@ -188,10 +196,10 @@
 %\begin{implementation}
 %    \begin{macrocode}
 %<*font>
-\ProvidesExplPackage{beamerfontthemegotham}{2024-11-11}{1.2.0.a}{gotham font theme}
+\ProvidesExplPackage{beamerfontthemegotham}{2025-01-06}{1.2.1.b}{gotham font theme}
 \RequirePackage{expl3}
-\RequirePackage{xparse}
-\RequirePackage{etoolbox}
+% \RequirePackage{xparse}
+% \RequirePackage{etoolbox}
 \RequirePackage{ifxetex}
 \RequirePackage{ifluatex}
 %    \end{macrocode}
@@ -205,7 +213,7 @@
 % \begin{implementation}
 % 	\begin{variable}{font messages}
 % 		Definition of the messages that are used and reused by font theme.
-% 		\changes{v0.2.0}{2024/01/25}{New}
+% 		\changes{v0.2.0}{2024-01-25}{New}
 %   \begin{macrocode}
 \msg_new:nnn { gotham } { font-not-found }
 {
@@ -973,9 +981,9 @@
 %\begin{implementation}
 %    \begin{macrocode}
 %<*color>
-\ProvidesExplPackage{beamercolorthemegotham}{2024-11-11}{1.2.0.a}{Gotham color theme}
+\ProvidesExplPackage{beamercolorthemegotham}{2025-01-06}{1.2.1.b}{Gotham color theme}
 \RequirePackage{expl3}
-\RequirePackage{xparse}
+% \RequirePackage{xparse}
 \RequirePackage{xcolor}
 %    \end{macrocode}
 % \end{implementation}
@@ -1578,10 +1586,11 @@
 %\begin{implementation}
 %    \begin{macrocode}
 %<*inner>
-\ProvidesExplPackage{beamerinnerthemegotham}{2024-11-11}{1.2.0.a}{gotham inner theme}
+\ProvidesExplPackage{beamerinnerthemegotham}{2025-01-06}{1.2.1.b}{gotham inner theme}
 \RequirePackage{expl3}
-\RequirePackage{xparse}
+% \RequirePackage{xparse}
 \RequirePackage{calc}
+% \RequirePackage{xfp}
 \RequirePackage{tikz}
 %    \end{macrocode}
 % \end{implementation}
@@ -1676,10 +1685,14 @@
 	\ifbeamer@inframe
 		\titlepage
 	\else
-		\frame[plain, noframenumbering]{\titlepage}
+		\frame[plain, c, noframenumbering]{\titlepage}
 	\fi
 }
 \def\titlepage{
+	% \setkeys{beamerframe}{c} % no effect
+	% \setkeys{beamerframe}{plain} % no effect
+	% \setbeamertemplate{footline}[empty] % no effect
+	% \setkeys{beamerframe}{nofootline} % create error of unclosed env
 	\usebeamertemplate{title~page}
 }
 %    \end{macrocode}
@@ -2955,7 +2968,17 @@
 \providebool{subsectionContent}
 \booltrue{subsectionContent}
 \providecommand{\subsecContentName}{Subsection~content}
+%    \end{macrocode}
+%   \end{variable}
+% \end{implementation}
+% \begin{implementation}
+%   \begin{variable}{\providebool{subsubsectionContent}, \subsubsecContentName}
+%    Boolean variable to enable the table of contents of the subsubsection, and the command containing the 'table of contents' title.
+%    \begin{macrocode}
 % Subsubsection is not useful (at least up to understanding of the moment) because we do not display frame with the content of a subsubsection since it is the small unity we are working with.
+\providebool{subsubsectionContent}
+\booltrue{subsubsectionContent}
+\providecommand{\subsubsecContentName}{Subsubsection~content}
 %    \end{macrocode}
 %   \end{variable}
 % \end{implementation}
@@ -2999,10 +3022,82 @@
 %   \end{macro}
 % \end{implementation}
 
+% \begin{documentation}
+% 	\begin{variable}[added=2025-01-06]{\partpageOptions, \sectionpageOptions, \subsectionpageOptions, \subsubsectionpageOptions}
+% 		Variable commands that contain the coma-separated list of options which are given to the partpage (respectively to the section, subsection and subsubsection).
+% 	\end{variable}
+% \end{documentation}
+%%%% 
 % \begin{implementation}
-%   \begin{function}{\__gotham_inner_disable_partpage:, \__gotham_inner_enable_partpage:}
-%     Commands to disable or enable the display of a 'part page' frame at the begining of every new part.
-%     It replaces the |\newcommand{\gotham@disablepartpage}| and | \newcommand{\gotham@enablepartpage}| 
+% 	\begin{variable}[added=2025-01-06]{\partpageOptions, \sectionpageOptions, \subsectionpageOptions, \subsubsectionpageOptions}
+% 		Options used in |\begin{frame}[\partpageOptions,part]{\partpage}...| .
+% 		TESTED in gotham-test-1039
+% 		\changes{v1.2.1}{2025-01-06}{newly introduced}
+%    \begin{macrocode}
+\providecommand{\partpageOptions}{noframenumbering}
+\providecommand{\sectionpageOptions}{noframenumbering}
+\providecommand{\subsectionpageOptions}{noframenumbering}
+\providecommand{\subsubsectionpageOptions}{noframenumbering}
+%    \end{macrocode}
+% 	\end{variable}
+% \end{implementation}
+
+% \begin{documentation}
+% 	\begin{variable}[added=2025-01-06]{\partpageTocOptions, \sectionpageTocOptions, \subsectionpageTocOptions, \subsubsectionpageTocOptions}
+% 		Variable commands that contain the coma-separated list of options which are given to the table of contents page at the begin of a part (respectively to the section, subsection and subsubsection).
+% 	\end{variable}
+% \end{documentation}
+%%%% 
+% \begin{implementation}
+% 	\begin{variable}[added=2025-01-06]{\partpageTocOptions, \sectionpageTocOptions, \subsectionpageTocOptions, \subsubsectionpageTocOptions}
+% 		Options used in |\begin{frame}[\partpageTocOptions,tocpart]{toc part page...}| .
+% 		TESTED in gotham-test-1039
+% 		\changes{v1.2.1}{2025-01-06}{newly introduced}
+%    \begin{macrocode}
+\providecommand{\partpageTocOptions}{noframenumbering}
+\providecommand{\sectionpageTocOptions}{noframenumbering}
+\providecommand{\subsectionpageTocOptions}{noframenumbering}
+% \providecommand{\subsubsectionpageTocOptions}{noframenumbering}
+%    \end{macrocode}
+% 	\end{variable}
+% \end{implementation}
+
+% \begin{documentation}
+% 	\begin{variable}[added=2025-01-06]{\partTocOptions, \sectionTocOptions, \subsectionTocOptions, \subsubsectionTocOptions}
+% 		Variable commands that contain the coma-separated list of options which are given to the table of content at the beginning of a part (respectively to the section, subsection and subsubsection).
+% 	\end{variable}
+% \end{documentation}
+%%%% 
+% \begin{implementation}
+% 	\begin{variable}[added=2025-01-06]{\partTocOptions, \sectionTocOptions, \subsectionTocOptions, \subsubsectionTocOptions}
+% 		Options used in |\tableofcontents[\partTocOptions]| .
+% 		TESTED in gotham-test-1039
+% 		\changes{v1.2.1}{2025-01-06}{newly introduced}
+%    \begin{macrocode}
+\providecommand{\partTocOptions}{}
+\providecommand{\sectionTocOptions}{
+	currentsection, currentsubsection, 
+	hideothersubsections, 
+	sectionstyle=show/shaded,
+}
+\providecommand{\subsectionTocOptions}{
+	currentsection, currentsubsection, 
+	% currentsubsubsection, 
+	hideothersubsections, 
+	sectionstyle=show/shaded,
+	subsectionstyle=show/shaded/hide,
+	subsubsectionstyle=show/show/hide,
+}
+% \providecommand{\subsubsectionTocOptions}{}
+%    \end{macrocode}
+% 	\end{variable}
+% \end{implementation}
+
+% \begin{implementation}
+%   \begin{function}[updated=2025-01-06]{\__gotham_inner_disable_partpage:, \__gotham_inner_enable_partpage:}
+%     Commands to disable or enable the display of a 'part page' frame at the beginning of every new part.
+%     It replaces the |\newcommand{\gotham@disablepartpage}| and | \newcommand{\gotham@enablepartpage}| .
+%     \changes{v1.2.1}{2025-01-06}{includes new variables} 
 %     \TestFiles{gotham-test-041}
 %    \begin{macrocode}
 \cs_new_protected:Nn \__gotham_inner_disable_partpage:
@@ -3018,14 +3113,32 @@
 		\ifbeamer@inframe
 			\partpage
 		\else
-			\frame[c, noframenumbering, part]{\partpage}
+			\ifdefempty{\partpageOptions}{
+				% empty command 
+				\frame[c, part]{\partpage}
+			}{
+				% non-empty command
+				\frame[c, \expandafter\partpageOptions, part]{\partpage}
+			}
 		\fi
 		
 		\ifbool{partContent}{
 			% true
-			\begin{frame}[noframenumbering, tocpart]
-				\frametitle{\partContentName}
-				\tableofcontents[part=\thepart]
+			\ifdefempty{\partpageTocOptions}{
+				% empty command 
+				\begin{frame}[tocpart]
+			}{
+				% non-empty command
+				\begin{frame}[tocpart, \expandafter\partpageTocOptions]
+			}
+				\ifdefempty{\partContentName}{}{\frametitle{\partContentName}}
+				\ifdefempty{\partTocOptions}{
+					% empty command 
+					\tableofcontents[part=\thepart]
+				}{
+					% non-empty command
+					\expandafter\tableofcontents[part=\thepart, \expandafter\partTocOptions]
+				}
 			\end{frame}
 		}{
 			% else empty
@@ -3037,9 +3150,10 @@
 % \end{implementation}
 
 % \begin{implementation}
-%   \begin{function}{\__gotham_inner_disable_sectionpage:, \__gotham_inner_enable_sectionpage:}
-%     Commands to disable or enable the display of a 'section page' frame at the begining of every new section.
-%     It replaces the |\newcommand{\gotham@disablesectionpage}| and | \newcommand{\gotham@enablesectionpage}| 
+%   \begin{function}[updated=2025-01-06]{\__gotham_inner_disable_sectionpage:, \__gotham_inner_enable_sectionpage:}
+%     Commands to disable or enable the display of a 'section page' frame at the beginning of every new section.
+%     It replaces the |\newcommand{\gotham@disablesectionpage}| and | \newcommand{\gotham@enablesectionpage}| .
+%     \changes{v1.2.1}{2025-01-06}{includes new variables}
 %     \TestFiles{gotham-test-041}
 %    \begin{macrocode}
 \cs_new_protected:Nn \__gotham_inner_disable_sectionpage:
@@ -3055,21 +3169,31 @@
 		\ifbeamer@inframe
 			\sectionpage
 		\else
-			\frame[c, noframenumbering, section]{\sectionpage}
+			\ifdefempty{\sectionpageOptions}{
+				% empty command 
+				\frame[c, section]{\sectionpage}
+			}{
+				% non-empty command
+				\frame[c, \expandafter\sectionpageOptions, section]{\sectionpage}
+			}
 		\fi
 		
 		\ifbool{sectionContent}{
 			% true
-			\begin{frame}[noframenumbering, tocsec]
-			\frametitle{\secContentName}
-				{\tableofcontents[currentsection, currentsubsection, 
-					hideothersubsections, 
-					sectionstyle=show/shaded,
-					]
+			\ifdefempty{\sectionpageTocOptions}{
+				% empty command 
+				\begin{frame}[tocsec]
+			}{
+				% non-empty command
+				\begin{frame}[\expandafter\sectionpageTocOptions, tocsec]
+			}
+				\ifdefempty{\secContentName}{}{\frametitle{\secContentName}}
+				{
+					\expandafter\tableofcontents\expandafter[\sectionTocOptions]
 				}
 			\end{frame}
 		}{
-			% else empty 
+			% else empty
 		}
 	}
 }
@@ -3078,9 +3202,10 @@
 % \end{implementation}
 
 % \begin{implementation}
-%   \begin{function}{\__gotham_inner_disable_subsectionpage:, \__gotham_inner_enable_subsectionpage:}
-%     Commands to disable or enable the display of a 'subsection page' frame at the begining of every new subsection.
-%     It replaces the |\newcommand{\gotham@disablesubsectionpage}| and | \newcommand{\gotham@enablesubsectionpage}| 
+%   \begin{function}[updated=2025-01-06]{\__gotham_inner_disable_subsectionpage:, \__gotham_inner_enable_subsectionpage:}
+%     Commands to disable or enable the display of a 'subsection page' frame at the beginning of every new subsection.
+%     It replaces the |\newcommand{\gotham@disablesubsectionpage}| and | \newcommand{\gotham@enablesubsectionpage}| .
+%     \changes{v1.2.1}{2025-01-06}{includes new variables}
 %     \TestFiles{gotham-test-041}
 %    \begin{macrocode}
 \cs_new_protected:Nn \__gotham_inner_disable_subsectionpage:
@@ -3096,20 +3221,27 @@
 		\ifbeamer@inframe
 			\subsectionpage
 		\else
-			\frame[c, noframenumbering, subsec]{\subsectionpage}
+			\ifdefempty{\subsectionpageOptions}{
+				% empty command 
+				\frame[c, subsec]{\subsectionpage}
+			}{
+				% non-empty command
+				\frame[c, \expandafter\subsectionpageOptions, subsec]{\subsectionpage}
+			}
 		\fi
 
 		\ifbool{subsectionContent}{
 			% true
-			\begin{frame}[noframenumbering, tocsubsec]
-			\frametitle{\subsecContentName}
-				{\tableofcontents[currentsection, currentsubsection, 
-					%currentsubsubsection, 
-					hideothersubsections, 
-					sectionstyle=show/shaded,
-					subsectionstyle=show/shaded/hide,
-					subsubsectionstyle=show/show/hide,
-					]
+			\ifdefempty{\subsectionpageTocOptions}{
+				% empty command 
+				\begin{frame}[tocsubsec]
+			}{
+				% non-empty command
+				\begin{frame}[\expandafter\subsectionpageTocOptions, tocsubsec]
+			}
+				\ifdefempty{\subsecContentName}{}{\frametitle{\subsecContentName}}
+				{
+					\expandafter\tableofcontents\expandafter[\subsectionTocOptions]
 				}
 			\end{frame}
 		}{
@@ -3122,9 +3254,10 @@
 % \end{implementation}
 
 % \begin{implementation}
-%   \begin{function}{\__gotham_inner_disable_subsubsectionpage:, \__gotham_inner_enable_subsubsectionpage:}
-%     Commands to disable or enable the display of a 'subsubsection page' frame at the begining of every new subsubsection.
-%     It replaces the |\newcommand{\gotham@disablesubsubsectionpage}| and | \newcommand{\gotham@enablesubsubsectionpage}| 
+%   \begin{function}[updated=2025-01-06]{\__gotham_inner_disable_subsubsectionpage:, \__gotham_inner_enable_subsubsectionpage:}
+%     Commands to disable or enable the display of a 'subsubsection page' frame at the beginning of every new subsubsection.
+%     It replaces the |\newcommand{\gotham@disablesubsubsectionpage}| and | \newcommand{\gotham@enablesubsubsectionpage}| .
+%     \changes{v1.2.1}{2025-01-06}{includes new variables}
 %     \TestFiles{gotham-test-041}
 %    \begin{macrocode}
 \cs_new_protected:Nn \__gotham_inner_disable_subsubsectionpage:
@@ -3140,8 +3273,33 @@
 		\ifbeamer@inframe
 			\subsubsectionpage
 		\else
-			\frame[c, noframenumbering, subsubsec]{\subsubsectionpage}
+			\ifdefempty{\subsubsectionpageOptions}{
+				% empty command 
+				\frame[c, subsubsec]{\subsubsectionpage}
+			}{
+				% non-empty command
+				\frame[c, \expandafter\subsubsectionpageOptions, subsubsec]{\subsubsectionpage}
+			}
 		\fi
+
+		% I don't think anyone will use this for now. But, just in case I keep it commented.
+		% \ifbool{subsubsectionContent}{
+		% 	% true
+		% 	\ifdefempty{\subsubsectionpageTocOptions}{
+		% 		% empty command 
+		% 		\begin{frame}[tocsubsubsec]
+		% 	}{
+		% 		% non-empty command
+		% 		\begin{frame}[\expandafter\subsubsectionpageTocOptions, tocsubsubsec]
+		% 	}
+		% 		\ifdefempty{\subsubsecContentName}{}{\frametitle{\subsubsecContentName}}
+		% 		{
+		% 			\expandafter\tableofcontents\expandafter[\subsubsectionTocOptions]
+		% 		}
+		% 	\end{frame}
+		% }{
+		% 	% else empty
+		% }
 	}
 }
 %    \end{macrocode}
@@ -4140,35 +4298,36 @@
 % \begin{implementation}
 %   \begin{macro}{\defbeamertemplate{section~in~toc}{gotham~bullet}}
 %     Template definitions for |gotham bullet| style of ToC that appear in section \textbar subsection \textbar subsubsection frame.
+%     \changes{v1.2.1}{2025-01-06}{adapt shaded subsection in toc}
 %     \UnitTested
 %     \TestFiles{gotham-test-042}
 %    \begin{macrocode}
 \defbeamertemplate{section~in~toc}{gotham~bullet}{
-	\hspace*{0.4cm}\tikz[baseline=-0.5ex]\node[section~number]{\textbf{\small\inserttocsectionnumber}};
-	\ \tikz[baseline=-0.5ex]\node[section]{\usebeamerfont*{toc~title} \inserttocsection};\\[-0.35cm]
+	\hspace*{0.4cm}\tikz[baseline=-0.5ex]\node[section~number]{\textbf{\inserttocsectionnumber}};
+	\ \tikz[baseline=-0.5ex]\node[section]{\usebeamerfont*{toc~title}\inserttocsection};\\[-0.35cm]
 	\hspace*{1.13cm}{\usebeamercolor*[fg]{footer} \rule{0.6\paperwidth}{0.2pt}\\\nointerlineskip}
 }
 \defbeamertemplate{subsection~in~toc}{gotham~bullet}{
 	\hspace*{0.53cm}\tikz[baseline=-0.5ex]\node[subsection~number]{};
-	\hspace*{0.5cm}\tikz[baseline=-0.5ex]\node[subsection]{\usebeamerfont*{toc~subtitle}\inserttocsubsection};\\[-0.2cm]
+	\hspace*{0.5cm}\tikz[baseline=-0.5ex]\node[subsection]{\usebeamerfont*{toc~subtitle}\inserttocsubsection \gotham@strut};\\[-0.2cm]
 }
 \defbeamertemplate{subsubsection~in~toc}{gotham~bullet}{
 	\hspace*{0.58cm}\tikz[baseline=-0.5ex]\node[subsubsection~number]{};
-	\hspace*{0.69cm}\tikz[baseline=-0.5ex]\node[subsubsection]{\usebeamerfont*{toc~subtitle}\inserttocsubsubsection};\\[-0.2cm]
+	\hspace*{0.69cm}\tikz[baseline=-0.5ex]\node[subsubsection]{\usebeamerfont*{toc~subtitle}\inserttocsubsubsection \gotham@strut};\\[-0.2cm]
 }
 % Shaded for sections already done in the presentation.
 \defbeamertemplate{section~in~toc~shaded}{gotham~bullet}{
-	\hspace*{0.4cm}\tikz[baseline=-0.5ex]\node[section~number, fill=colorBackElement!40, text=background]{\usebeamerfont*{toc~subtitle}\textbf{\inserttocsectionnumber}};
-	\ \tikz[baseline=-0.5ex]\node[section, text=colorExample!20]{\usebeamerfont*{toc~title} \inserttocsection};\\[-0.35cm]
-	\hspace*{1.3cm}{\usebeamercolor*[fg]{footer} \rule{0.6\paperwidth}{0.2pt}\\\nointerlineskip}
+	\hspace*{0.4cm}\tikz[baseline=-0.5ex]\node[section~number, fill=colorBackElement!40]{\usebeamerfont*{toc~subtitle}\textbf{\inserttocsectionnumber}};
+	\ \tikz[baseline=-0.5ex]\node[section, text=colorBackElement!20]{\usebeamerfont*{toc~title}\inserttocsection};\\[-0.35cm]
+	\hspace*{1.13cm}{\usebeamercolor*[fg]{footer} \rule{0.6\paperwidth}{0.2pt}\\\nointerlineskip}
 }
 \defbeamertemplate{subsection~in~toc~shaded}{gotham~bullet}{
-	\hspace*{0.55cm}\tikz[baseline=-0.5ex]\node[subsection~number,fill=colorBackElement!20]{};
-	\hspace*{0.5cm}\tikz[baseline=-0.5ex]\node[subsection, text=colorBackElement!20]{};\\[-0.2cm]
+	\hspace*{0.53cm}\tikz[baseline=-0.5ex]\node[subsection~number,fill=colorBackElement!20]{};
+	\hspace*{0.5cm}\tikz[baseline=-0.5ex]\node[subsection, text=colorBackElement!20]{\usebeamerfont*{toc~subtitle}\inserttocsubsection \gotham@strut};\\[-0.2cm]
 }
 \defbeamertemplate{subsubsection~in~toc~shaded}{gotham~bullet}{
 	\hspace*{0.58cm}\tikz[baseline=-0.5ex]\node[subsubsection~number,fill=colorBackElement!20]{};
-	\hspace*{0.69cm}\tikz[baseline=-0.5ex]\node[subsubsection,text=colorBackElement!20]{\usebeamerfont*{toc~subtitle}\inserttocsubsubsection};\\[-0.2cm]
+	\hspace*{0.69cm}\tikz[baseline=-0.5ex]\node[subsubsection,text=colorBackElement!20]{\usebeamerfont*{toc~subtitle}\inserttocsubsubsection \gotham@strut};\\[-0.2cm]
 }
 %    \end{macrocode}
 %   \end{macro}
@@ -4177,6 +4336,7 @@
 % \begin{implementation}
 %   \begin{macro}{\defbeamertemplate{section~in~toc}{gotham~bullet}}
 %     Template definitions for |gotham simple| style of ToC that appear in section \textbar subsection \textbar subsubsection frame.
+%     \changes{v1.2.1}{2025-01-06}{adapt shaded subsection in toc}
 %     \UnitTested
 %     \TestFiles{gotham-test-042}
 %    \begin{macrocode}
@@ -4196,6 +4356,24 @@
 	\qquad{{\inserttocsectionnumber}.\inserttocsubsectionnumber.\inserttocsubsubsectionnumber.}~\inserttocsubsubsection
 	\\
 }
+\defbeamertemplate{section~in~toc~shaded}{gotham~simple}{
+	\begin{colormixin}{20!parent.bg}
+	{{\inserttocsectionnumber}.}~\inserttocsection
+	\end{colormixin}
+	\\
+}
+\defbeamertemplate{subsection~in~toc~shaded}{gotham~simple}{
+	\begin{colormixin}{20!parent.bg}
+	\quad{{\inserttocsectionnumber}.\inserttocsubsectionnumber.}~\inserttocsubsection
+	\end{colormixin}
+	\\
+}
+\defbeamertemplate{subsubsection~in~toc~shaded}{gotham~simple}{
+	\begin{colormixin}{20!parent.bg}
+	\qquad{{\inserttocsectionnumber}.\inserttocsubsectionnumber.\inserttocsubsubsectionnumber.}~\inserttocsubsubsection
+	\end{colormixin}
+	\\
+}
 %    \end{macrocode}
 %   \end{macro}
 % \end{implementation}
@@ -4204,6 +4382,7 @@
 %   \begin{macro}{\defbeamertemplate{background~canvas}{toc/gotham~simple}, \defbeamertemplate{toc~page}{gotham~simple|bullet}}
 %     Definition of toc page style named gotham simple and gotham bullet, used for table of content pages.
 %     Both are using a dedicated background canvas.
+%     \changes{v1.2.1}{2025-01-05}{add shaded subsection in toc setup}
 %     \UnitTested
 %     \TestFiles{gotham-test-042}
 %    \begin{macrocode}
@@ -4215,15 +4394,21 @@
 \defbeamertemplate{toc~page}{gotham~simple}{
 	\setbeamertemplate{part~in~toc}[gotham~simple]
 	\setbeamertemplate{section~in~toc}[gotham~simple]
+	\setbeamertemplate{section~in~toc~shaded}[gotham~simple]
 	\setbeamertemplate{subsection~in~toc}[gotham~simple]
+	\setbeamertemplate{subsection~in~toc~shaded}[gotham~simple]
 	\setbeamertemplate{subsubsection~in~toc}[gotham~simple]
+	\setbeamertemplate{subsubsection~in~toc~shaded}[gotham~simple]
 	\setbeamertemplate{background~canvas}[toc/gotham~simple]
 }
 \defbeamertemplate{toc~page}{gotham~bullet}{
 	\setbeamertemplate{part~in~toc}[gotham~bullet]
 	\setbeamertemplate{section~in~toc}[gotham~bullet]
+	\setbeamertemplate{section~in~toc~shaded}[gotham~bullet]
 	\setbeamertemplate{subsection~in~toc}[gotham~bullet]
+	\setbeamertemplate{subsection~in~toc~shaded}[gotham~bullet]
 	\setbeamertemplate{subsubsection~in~toc}[gotham~bullet]
+	\setbeamertemplate{subsubsection~in~toc~shaded}[gotham~bullet]
 	\setbeamertemplate{background~canvas}[toc/gotham~simple]
 }
 %    \end{macrocode}
@@ -4279,8 +4464,11 @@
 \defbeamertemplate{toc~part~frame}{gotham~simple}{
 	\setbeamertemplate{part~in~toc}[gotham~simple]
 	\setbeamertemplate{section~in~toc}[gotham~simple]
+	\setbeamertemplate{section~in~toc~shaded}[gotham~simple]
 	\setbeamertemplate{subsection~in~toc}[gotham~simple]
+	\setbeamertemplate{subsection~in~toc~shaded}[gotham~simple]
 	\setbeamertemplate{subsubsection~in~toc}[gotham~simple]
+	\setbeamertemplate{subsubsection~in~toc~shaded}[gotham~simple]
 	\setbeamertemplate{background~canvas}[toc~part~gotham]
 	\setbeamertemplate{frametitle}[toc~gotham]
 	% \usebeamertemplate*{part~page}% already included
@@ -4288,8 +4476,11 @@
 \defbeamertemplate{toc~section~frame}{gotham~simple}{
 	\setbeamertemplate{part~in~toc}[gotham~simple]
 	\setbeamertemplate{section~in~toc}[gotham~simple]
+	\setbeamertemplate{section~in~toc~shaded}[gotham~simple]
 	\setbeamertemplate{subsection~in~toc}[gotham~simple]
+	\setbeamertemplate{subsection~in~toc~shaded}[gotham~simple]
 	\setbeamertemplate{subsubsection~in~toc}[gotham~simple]
+	\setbeamertemplate{subsubsection~in~toc~shaded}[gotham~simple]
 	\setbeamertemplate{background~canvas}[toc~section~gotham]
 	\setbeamertemplate{frametitle}[toc~gotham]%
 	% \usebeamertemplate*{section~page}% already included
@@ -4297,8 +4488,11 @@
 \defbeamertemplate{toc~subsection~frame}{gotham~simple}{
 	\setbeamertemplate{part~in~toc}[gotham~simple]
 	\setbeamertemplate{section~in~toc}[gotham~simple]
+	\setbeamertemplate{section~in~toc~shaded}[gotham~simple]
 	\setbeamertemplate{subsection~in~toc}[gotham~simple]
+	\setbeamertemplate{subsection~in~toc~shaded}[gotham~simple]
 	\setbeamertemplate{subsubsection~in~toc}[gotham~simple]
+	\setbeamertemplate{subsubsection~in~toc~shaded}[gotham~simple]
 	\setbeamertemplate{background~canvas}[toc~subsection~gotham]
 	\setbeamertemplate{frametitle}[toc~gotham]
 	% \usebeamertemplate*{subsection~page}% already included
@@ -4316,8 +4510,11 @@
 \defbeamertemplate{toc~part~frame}{gotham~bullet}{
 	\setbeamertemplate{part~in~toc}[gotham~bullet]
 	\setbeamertemplate{section~in~toc}[gotham~bullet]
+	\setbeamertemplate{section~in~toc~shaded}[gotham~bullet]
 	\setbeamertemplate{subsection~in~toc}[gotham~bullet]
+	\setbeamertemplate{subsection~in~toc~shaded}[gotham~bullet]
 	\setbeamertemplate{subsubsection~in~toc}[gotham~bullet]
+	\setbeamertemplate{subsubsection~in~toc~shaded}[gotham~bullet]
 	\setbeamertemplate{background~canvas}[toc~part~gotham]
 	\setbeamertemplate{frametitle}[toc~gotham]
 	% \usebeamertemplate*{part~page}% already included
@@ -4325,8 +4522,11 @@
 \defbeamertemplate{toc~section~frame}{gotham~bullet}{
 	\setbeamertemplate{part~in~toc}[gotham~bullet]
 	\setbeamertemplate{section~in~toc}[gotham~bullet]
+	\setbeamertemplate{section~in~toc~shaded}[gotham~bullet]
 	\setbeamertemplate{subsection~in~toc}[gotham~bullet]
+	\setbeamertemplate{subsection~in~toc~shaded}[gotham~bullet]
 	\setbeamertemplate{subsubsection~in~toc}[gotham~bullet]
+	\setbeamertemplate{subsubsection~in~toc~shaded}[gotham~bullet]
 	\setbeamertemplate{background~canvas}[toc~section~gotham]
 	\setbeamertemplate{frametitle}[toc~gotham]%
 	% \usebeamertemplate*{section~page}% already included
@@ -4334,8 +4534,11 @@
 \defbeamertemplate{toc~subsection~frame}{gotham~bullet}{
 	\setbeamertemplate{part~in~toc}[gotham~bullet]
 	\setbeamertemplate{section~in~toc}[gotham~bullet]
+	\setbeamertemplate{section~in~toc~shaded}[gotham~bullet]
 	\setbeamertemplate{subsection~in~toc}[gotham~bullet]
+	\setbeamertemplate{subsection~in~toc~shaded}[gotham~bullet]
 	\setbeamertemplate{subsubsection~in~toc}[gotham~bullet]
+	\setbeamertemplate{subsubsection~in~toc~shaded}[gotham~bullet]
 	\setbeamertemplate{background~canvas}[toc~subsection~gotham]
 	\setbeamertemplate{frametitle}[toc~gotham]
 	% \usebeamertemplate*{subsection~page}% already included
@@ -4734,7 +4937,7 @@
 % 		\TestFiles{gotham-test-043}
 %    \begin{macrocode}
 \defbeamertemplate*{itemize~item}{gotham}{%\textbullet}
-	\Large
+	\large
 	\setbeamertemplate{itemize~item}[circle]
 	\usebeamertemplate{itemize~item}
 }
@@ -4836,7 +5039,7 @@
 %\begin{implementation}
 %    \begin{macrocode}
 %<*outer>
-\ProvidesExplPackage{beamerouterthemegotham}{2024-11-11}{1.2.0.a}{gotham outer theme}
+\ProvidesExplPackage{beamerouterthemegotham}{2025-01-06}{1.2.1.b}{gotham outer theme}
 \RequirePackage{expl3}
 \RequirePackage{xfp}
 \RequirePackage{calc}
@@ -5426,12 +5629,12 @@
 %     All of them are equal to 2.2ex by default.
 %    \begin{macrocode}
 \newlength{\gothamFrametitleToppading}
-\setlength{\gothamFrametitleToppading}{2.2ex}
 \newlength{\gothamFrametitleBottompading}
-\setlength{\gothamFrametitleBottompading}{2.2ex}
 \newlength{\gothamFrametitleLeftpading}
-\setlength{\gothamFrametitleLeftpading}{2.2ex}
 \newlength{\gothamFrametitleRightpading}
+\setlength{\gothamFrametitleToppading}{2.2ex}
+\setlength{\gothamFrametitleBottompading}{2.2ex}
+\setlength{\gothamFrametitleLeftpading}{2.2ex}
 \setlength{\gothamFrametitleRightpading}{2.2ex}
 % \gotham@strut from inner
 \providecommand{\gotham@strut}{ 
@@ -5842,7 +6045,7 @@
 % \end{implementation}
 
 % \begin{documentation}
-%   \begin{variable}{\gothamFootlineVOffset, \gothamFootlineHRightOffset,\gothamFootlineHeight, \gothamFootlineDepth}
+%   \begin{variable}[updated=2024-11-11]{\gothamFootlineVOffset, \gothamFootlineHRightOffset,\gothamFootlineHeight, \gothamFootlineDepth}
 %     Lengths controlling the position of |footline|.
 %     |\gothamFootlineVOffset| is controlling vertical space between to bottom of the text (or the footnote) and the footline.
 %     |\gothamFootlineVOffset| is by default -0.5ex, to have more space in the frame but if the footer is not really used, the space can be even more optimized using |\setlength{\gothamFootlineVOffset}{-2.0ex}|.
@@ -5853,19 +6056,19 @@
 % \end{documentation}
 %%%%%%
 % \begin{implementation}
-%   \begin{variable}{\gothamFootlineVOffset, \gothamFootlineHeight, \gothamFootlineDepth}
+%   \begin{variable}[updated=2024-11-11]{\gothamFootlineVOffset, \gothamFootlineHeight, \gothamFootlineDepth}
 %     Lengths used in |footline| template.
 %    \begin{macrocode}
 % Footline lengths
 % space between to bottom of the text (or the footnote) and the footline
 \newlength{\gothamFootlineVOffset}
-\setlength{\gothamFootlineVOffset}{-0.5ex} 
-
 \newlength{\gothamFootlineHeight}
-\setlength{\gothamFootlineHeight}{1.5ex}
 \newlength{\gothamFootlineDepth}
-\setlength{\gothamFootlineDepth}{0.1ex}
 \newlength{\gothamFootlineHRightOffset}
+
+\setlength{\gothamFootlineVOffset}{-0.5ex} 
+\setlength{\gothamFootlineDepth}{0.1ex}
+\setlength{\gothamFootlineHeight}{1.5ex}
 \setlength{\gothamFootlineHRightOffset}{\spaceskip}
 %    \end{macrocode}
 %   \end{variable}
@@ -5922,10 +6125,10 @@
 %     Lengths used in |footer| template for positioning left right and bottom.
 %    \begin{macrocode}
 \newlength{\gothamLeftFooterPadding} 
-\setlength{\gothamLeftFooterPadding}{2.0ex} 
 \newlength{\gothamRightFooterPadding} 
-\setlength{\gothamRightFooterPadding}{3.5ex} 
 \newlength{\gothamFooterHOffset}
+\setlength{\gothamLeftFooterPadding}{2.0ex} 
+\setlength{\gothamRightFooterPadding}{3.5ex} 
 \setlength{\gothamFooterHOffset}{0pt}
 %    \end{macrocode}
 %   \end{variable}
@@ -6111,15 +6314,16 @@
 \newlength{\gothamFootlineRuleLeftPadding}
 \newlength{\gothamFootlineRuleHeight}
 \newlength{\gothamFootlineRuleLength}
+
 \setlength{\gothamFootlineRuleLeftPadding}{7mm} 
 \setlength{\gothamFootlineRuleHeight}{0.0pt}
 % \setlength{\gothamFootlineRuleHeight}{0.5pt} % This is nice also but have a cleaner default, I turned it to 0.
 \setlength{\gothamFootlineRuleLength}{15mm}
 
+% horizontal position (in picture env) for  the rotated footer.
 \newlength{\gothamHposLeftRotFooter}
 \newlength{\gothamHposRightRotFooter}
 \newlength{\gothamVposLeftRotFooter}
-% horizontal position (in picture env) for the rotated footer.
 \newlength{\gothamVposRightRotFooter}
 
 \setlength{\gothamHposLeftRotFooter}{-7pt}
@@ -6274,7 +6478,7 @@
 
 % \begin{documentation}
 %   \begin{variable}{\gothamCircleNumberingVshift, \gothamCircleNumberingHshift}
-%     Variable lengths controling the vertical and horizontal positioning of the |circle| numbering template.
+%     Variable lengths controling the vertical and horizontal positioning of the |circle| frame numbering template.
 %   \end{variable}
 % \end{documentation}
 %%%% 
@@ -6283,8 +6487,8 @@
 %     Length used in |raisebox| and |hspace| in |circle| frame numbering.
 %    \begin{macrocode}
 \newlength{\gothamCircleNumberingVshift}
-\setlength{\gothamCircleNumberingVshift}{1.4mm}
 \newlength{\gothamCircleNumberingHshift}
+\setlength{\gothamCircleNumberingVshift}{1.4mm}
 \setlength{\gothamCircleNumberingHshift}{2.6mm}
 %    \end{macrocode}
 %   \end{variable}
@@ -8711,7 +8915,6 @@
 %    \begin{macrocode}
 %<*package>
 \RequirePackage{expl3}
-\RequirePackage{xparse}
 % \RequirePackage{ifxetex}
 % \RequirePackage{ifluatex}
 % \RequirePackage{etoolbox}

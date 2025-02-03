@@ -21,9 +21,8 @@
 %% The Current Maintainer of this work is Romain NOËL.
 %% Contributors: Romain NOËL (2023-20**)
 %% 
-\ProvidesExplPackage{beamerinnerthemegotham}{2024-11-11}{1.2.0.a}{gotham inner theme}
+\ProvidesExplPackage{beamerinnerthemegotham}{2025-01-06}{1.2.1.b}{gotham inner theme}
 \RequirePackage{expl3}
-\RequirePackage{xparse}
 \RequirePackage{calc}
 \RequirePackage{tikz}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -80,7 +79,7 @@ parent=progress~bar
 \ifbeamer@inframe
 \titlepage
 \else
-\frame[plain, noframenumbering]{\titlepage}
+\frame[plain, c, noframenumbering]{\titlepage}
 \fi
 }
 \def\titlepage{
@@ -703,6 +702,9 @@ standin~template .code:n = {
 \providebool{subsectionContent}
 \booltrue{subsectionContent}
 \providecommand{\subsecContentName}{Subsection~content}
+\providebool{subsubsectionContent}
+\booltrue{subsubsectionContent}
+\providecommand{\subsubsecContentName}{Subsubsection~content}
 
 \def\partname{\translate{Part}}
 \defbeamertemplate*{part~title}{gotham}{
@@ -734,6 +736,32 @@ standin~template .code:n = {
 \insertsubsubsectionhead
 }
 
+%%%%
+\providecommand{\partpageOptions}{noframenumbering}
+\providecommand{\sectionpageOptions}{noframenumbering}
+\providecommand{\subsectionpageOptions}{noframenumbering}
+\providecommand{\subsubsectionpageOptions}{noframenumbering}
+
+%%%%
+\providecommand{\partpageTocOptions}{noframenumbering}
+\providecommand{\sectionpageTocOptions}{noframenumbering}
+\providecommand{\subsectionpageTocOptions}{noframenumbering}
+
+%%%%
+\providecommand{\partTocOptions}{}
+\providecommand{\sectionTocOptions}{
+currentsection, currentsubsection,
+hideothersubsections,
+sectionstyle=show/shaded,
+}
+\providecommand{\subsectionTocOptions}{
+currentsection, currentsubsection,
+hideothersubsections,
+sectionstyle=show/shaded,
+subsectionstyle=show/shaded/hide,
+subsubsectionstyle=show/show/hide,
+}
+
 \cs_new_protected:Nn \__gotham_inner_disable_partpage:
 {
 \AtBeginPart{
@@ -746,13 +774,25 @@ standin~template .code:n = {
 \ifbeamer@inframe
 \partpage
 \else
-\frame[c, noframenumbering, part]{\partpage}
+\ifdefempty{\partpageOptions}{
+\frame[c, part]{\partpage}
+}{
+\frame[c, \expandafter\partpageOptions, part]{\partpage}
+}
 \fi
 
 \ifbool{partContent}{
-\begin{frame}[noframenumbering, tocpart]
-\frametitle{\partContentName}
+\ifdefempty{\partpageTocOptions}{
+\begin{frame}[tocpart]
+}{
+\begin{frame}[tocpart, \expandafter\partpageTocOptions]
+}
+\ifdefempty{\partContentName}{}{\frametitle{\partContentName}}
+\ifdefempty{\partTocOptions}{
 \tableofcontents[part=\thepart]
+}{
+\expandafter\tableofcontents[part=\thepart, \expandafter\partTocOptions]
+}
 \end{frame}
 }{
 }
@@ -771,16 +811,22 @@ standin~template .code:n = {
 \ifbeamer@inframe
 \sectionpage
 \else
-\frame[c, noframenumbering, section]{\sectionpage}
+\ifdefempty{\sectionpageOptions}{
+\frame[c, section]{\sectionpage}
+}{
+\frame[c, \expandafter\sectionpageOptions, section]{\sectionpage}
+}
 \fi
 
 \ifbool{sectionContent}{
-\begin{frame}[noframenumbering, tocsec]
-\frametitle{\secContentName}
-{\tableofcontents[currentsection, currentsubsection,
-hideothersubsections,
-sectionstyle=show/shaded,
-]
+\ifdefempty{\sectionpageTocOptions}{
+\begin{frame}[tocsec]
+}{
+\begin{frame}[\expandafter\sectionpageTocOptions, tocsec]
+}
+\ifdefempty{\secContentName}{}{\frametitle{\secContentName}}
+{
+\expandafter\tableofcontents\expandafter[\sectionTocOptions]
 }
 \end{frame}
 }{
@@ -801,18 +847,22 @@ sectionstyle=show/shaded,
 \ifbeamer@inframe
 \subsectionpage
 \else
-\frame[c, noframenumbering, subsec]{\subsectionpage}
+\ifdefempty{\subsectionpageOptions}{
+\frame[c, subsec]{\subsectionpage}
+}{
+\frame[c, \expandafter\subsectionpageOptions, subsec]{\subsectionpage}
+}
 \fi
 
 \ifbool{subsectionContent}{
-\begin{frame}[noframenumbering, tocsubsec]
-\frametitle{\subsecContentName}
-{\tableofcontents[currentsection, currentsubsection,
-hideothersubsections,
-sectionstyle=show/shaded,
-subsectionstyle=show/shaded/hide,
-subsubsectionstyle=show/show/hide,
-]
+\ifdefempty{\subsectionpageTocOptions}{
+\begin{frame}[tocsubsec]
+}{
+\begin{frame}[\expandafter\subsectionpageTocOptions, tocsubsec]
+}
+\ifdefempty{\subsecContentName}{}{\frametitle{\subsecContentName}}
+{
+\expandafter\tableofcontents\expandafter[\subsectionTocOptions]
 }
 \end{frame}
 }{
@@ -833,8 +883,13 @@ subsubsectionstyle=show/show/hide,
 \ifbeamer@inframe
 \subsubsectionpage
 \else
-\frame[c, noframenumbering, subsubsec]{\subsubsectionpage}
+\ifdefempty{\subsubsectionpageOptions}{
+\frame[c, subsubsec]{\subsubsectionpage}
+}{
+\frame[c, \expandafter\subsubsectionpageOptions, subsubsec]{\subsubsectionpage}
+}
 \fi
+
 }
 }
 
@@ -1608,30 +1663,30 @@ align=left
 }
 
 \defbeamertemplate{section~in~toc}{gotham~bullet}{
-\hspace*{0.4cm}\tikz[baseline=-0.5ex]\node[section~number]{\textbf{\small\inserttocsectionnumber}};
-\ \tikz[baseline=-0.5ex]\node[section]{\usebeamerfont*{toc~title} \inserttocsection};\\[-0.35cm]
+\hspace*{0.4cm}\tikz[baseline=-0.5ex]\node[section~number]{\textbf{\inserttocsectionnumber}};
+\ \tikz[baseline=-0.5ex]\node[section]{\usebeamerfont*{toc~title}\inserttocsection};\\[-0.35cm]
 \hspace*{1.13cm}{\usebeamercolor*[fg]{footer} \rule{0.6\paperwidth}{0.2pt}\\\nointerlineskip}
 }
 \defbeamertemplate{subsection~in~toc}{gotham~bullet}{
 \hspace*{0.53cm}\tikz[baseline=-0.5ex]\node[subsection~number]{};
-\hspace*{0.5cm}\tikz[baseline=-0.5ex]\node[subsection]{\usebeamerfont*{toc~subtitle}\inserttocsubsection};\\[-0.2cm]
+\hspace*{0.5cm}\tikz[baseline=-0.5ex]\node[subsection]{\usebeamerfont*{toc~subtitle}\inserttocsubsection \gotham@strut};\\[-0.2cm]
 }
 \defbeamertemplate{subsubsection~in~toc}{gotham~bullet}{
 \hspace*{0.58cm}\tikz[baseline=-0.5ex]\node[subsubsection~number]{};
-\hspace*{0.69cm}\tikz[baseline=-0.5ex]\node[subsubsection]{\usebeamerfont*{toc~subtitle}\inserttocsubsubsection};\\[-0.2cm]
+\hspace*{0.69cm}\tikz[baseline=-0.5ex]\node[subsubsection]{\usebeamerfont*{toc~subtitle}\inserttocsubsubsection \gotham@strut};\\[-0.2cm]
 }
 \defbeamertemplate{section~in~toc~shaded}{gotham~bullet}{
-\hspace*{0.4cm}\tikz[baseline=-0.5ex]\node[section~number, fill=colorBackElement!40, text=background]{\usebeamerfont*{toc~subtitle}\textbf{\inserttocsectionnumber}};
-\ \tikz[baseline=-0.5ex]\node[section, text=colorExample!20]{\usebeamerfont*{toc~title} \inserttocsection};\\[-0.35cm]
-\hspace*{1.3cm}{\usebeamercolor*[fg]{footer} \rule{0.6\paperwidth}{0.2pt}\\\nointerlineskip}
+\hspace*{0.4cm}\tikz[baseline=-0.5ex]\node[section~number, fill=colorBackElement!40]{\usebeamerfont*{toc~subtitle}\textbf{\inserttocsectionnumber}};
+\ \tikz[baseline=-0.5ex]\node[section, text=colorBackElement!20]{\usebeamerfont*{toc~title}\inserttocsection};\\[-0.35cm]
+\hspace*{1.13cm}{\usebeamercolor*[fg]{footer} \rule{0.6\paperwidth}{0.2pt}\\\nointerlineskip}
 }
 \defbeamertemplate{subsection~in~toc~shaded}{gotham~bullet}{
-\hspace*{0.55cm}\tikz[baseline=-0.5ex]\node[subsection~number,fill=colorBackElement!20]{};
-\hspace*{0.5cm}\tikz[baseline=-0.5ex]\node[subsection, text=colorBackElement!20]{};\\[-0.2cm]
+\hspace*{0.53cm}\tikz[baseline=-0.5ex]\node[subsection~number,fill=colorBackElement!20]{};
+\hspace*{0.5cm}\tikz[baseline=-0.5ex]\node[subsection, text=colorBackElement!20]{\usebeamerfont*{toc~subtitle}\inserttocsubsection \gotham@strut};\\[-0.2cm]
 }
 \defbeamertemplate{subsubsection~in~toc~shaded}{gotham~bullet}{
 \hspace*{0.58cm}\tikz[baseline=-0.5ex]\node[subsubsection~number,fill=colorBackElement!20]{};
-\hspace*{0.69cm}\tikz[baseline=-0.5ex]\node[subsubsection,text=colorBackElement!20]{\usebeamerfont*{toc~subtitle}\inserttocsubsubsection};\\[-0.2cm]
+\hspace*{0.69cm}\tikz[baseline=-0.5ex]\node[subsubsection,text=colorBackElement!20]{\usebeamerfont*{toc~subtitle}\inserttocsubsubsection \gotham@strut};\\[-0.2cm]
 }
 
 \defbeamertemplate{part~in~toc}{gotham~simple}{
@@ -1650,6 +1705,24 @@ align=left
 \qquad{{\inserttocsectionnumber}.\inserttocsubsectionnumber.\inserttocsubsubsectionnumber.}~\inserttocsubsubsection
 \\
 }
+\defbeamertemplate{section~in~toc~shaded}{gotham~simple}{
+\begin{colormixin}{20!parent.bg}
+{{\inserttocsectionnumber}.}~\inserttocsection
+\end{colormixin}
+\\
+}
+\defbeamertemplate{subsection~in~toc~shaded}{gotham~simple}{
+\begin{colormixin}{20!parent.bg}
+\quad{{\inserttocsectionnumber}.\inserttocsubsectionnumber.}~\inserttocsubsection
+\end{colormixin}
+\\
+}
+\defbeamertemplate{subsubsection~in~toc~shaded}{gotham~simple}{
+\begin{colormixin}{20!parent.bg}
+\qquad{{\inserttocsectionnumber}.\inserttocsubsectionnumber.\inserttocsubsubsectionnumber.}~\inserttocsubsubsection
+\end{colormixin}
+\\
+}
 
 \defbeamertemplate{background~canvas}{toc/gotham~simple}{
 \ifbeamercolorempty[bg]{standin}{}{
@@ -1659,15 +1732,21 @@ align=left
 \defbeamertemplate{toc~page}{gotham~simple}{
 \setbeamertemplate{part~in~toc}[gotham~simple]
 \setbeamertemplate{section~in~toc}[gotham~simple]
+\setbeamertemplate{section~in~toc~shaded}[gotham~simple]
 \setbeamertemplate{subsection~in~toc}[gotham~simple]
+\setbeamertemplate{subsection~in~toc~shaded}[gotham~simple]
 \setbeamertemplate{subsubsection~in~toc}[gotham~simple]
+\setbeamertemplate{subsubsection~in~toc~shaded}[gotham~simple]
 \setbeamertemplate{background~canvas}[toc/gotham~simple]
 }
 \defbeamertemplate{toc~page}{gotham~bullet}{
 \setbeamertemplate{part~in~toc}[gotham~bullet]
 \setbeamertemplate{section~in~toc}[gotham~bullet]
+\setbeamertemplate{section~in~toc~shaded}[gotham~bullet]
 \setbeamertemplate{subsection~in~toc}[gotham~bullet]
+\setbeamertemplate{subsection~in~toc~shaded}[gotham~bullet]
 \setbeamertemplate{subsubsection~in~toc}[gotham~bullet]
+\setbeamertemplate{subsubsection~in~toc~shaded}[gotham~bullet]
 \setbeamertemplate{background~canvas}[toc/gotham~simple]
 }
 
@@ -1690,24 +1769,33 @@ align=left
 \defbeamertemplate{toc~part~frame}{gotham~simple}{
 \setbeamertemplate{part~in~toc}[gotham~simple]
 \setbeamertemplate{section~in~toc}[gotham~simple]
+\setbeamertemplate{section~in~toc~shaded}[gotham~simple]
 \setbeamertemplate{subsection~in~toc}[gotham~simple]
+\setbeamertemplate{subsection~in~toc~shaded}[gotham~simple]
 \setbeamertemplate{subsubsection~in~toc}[gotham~simple]
+\setbeamertemplate{subsubsection~in~toc~shaded}[gotham~simple]
 \setbeamertemplate{background~canvas}[toc~part~gotham]
 \setbeamertemplate{frametitle}[toc~gotham]
 }
 \defbeamertemplate{toc~section~frame}{gotham~simple}{
 \setbeamertemplate{part~in~toc}[gotham~simple]
 \setbeamertemplate{section~in~toc}[gotham~simple]
+\setbeamertemplate{section~in~toc~shaded}[gotham~simple]
 \setbeamertemplate{subsection~in~toc}[gotham~simple]
+\setbeamertemplate{subsection~in~toc~shaded}[gotham~simple]
 \setbeamertemplate{subsubsection~in~toc}[gotham~simple]
+\setbeamertemplate{subsubsection~in~toc~shaded}[gotham~simple]
 \setbeamertemplate{background~canvas}[toc~section~gotham]
 \setbeamertemplate{frametitle}[toc~gotham]%
 }
 \defbeamertemplate{toc~subsection~frame}{gotham~simple}{
 \setbeamertemplate{part~in~toc}[gotham~simple]
 \setbeamertemplate{section~in~toc}[gotham~simple]
+\setbeamertemplate{section~in~toc~shaded}[gotham~simple]
 \setbeamertemplate{subsection~in~toc}[gotham~simple]
+\setbeamertemplate{subsection~in~toc~shaded}[gotham~simple]
 \setbeamertemplate{subsubsection~in~toc}[gotham~simple]
+\setbeamertemplate{subsubsection~in~toc~shaded}[gotham~simple]
 \setbeamertemplate{background~canvas}[toc~subsection~gotham]
 \setbeamertemplate{frametitle}[toc~gotham]
 }
@@ -1715,24 +1803,33 @@ align=left
 \defbeamertemplate{toc~part~frame}{gotham~bullet}{
 \setbeamertemplate{part~in~toc}[gotham~bullet]
 \setbeamertemplate{section~in~toc}[gotham~bullet]
+\setbeamertemplate{section~in~toc~shaded}[gotham~bullet]
 \setbeamertemplate{subsection~in~toc}[gotham~bullet]
+\setbeamertemplate{subsection~in~toc~shaded}[gotham~bullet]
 \setbeamertemplate{subsubsection~in~toc}[gotham~bullet]
+\setbeamertemplate{subsubsection~in~toc~shaded}[gotham~bullet]
 \setbeamertemplate{background~canvas}[toc~part~gotham]
 \setbeamertemplate{frametitle}[toc~gotham]
 }
 \defbeamertemplate{toc~section~frame}{gotham~bullet}{
 \setbeamertemplate{part~in~toc}[gotham~bullet]
 \setbeamertemplate{section~in~toc}[gotham~bullet]
+\setbeamertemplate{section~in~toc~shaded}[gotham~bullet]
 \setbeamertemplate{subsection~in~toc}[gotham~bullet]
+\setbeamertemplate{subsection~in~toc~shaded}[gotham~bullet]
 \setbeamertemplate{subsubsection~in~toc}[gotham~bullet]
+\setbeamertemplate{subsubsection~in~toc~shaded}[gotham~bullet]
 \setbeamertemplate{background~canvas}[toc~section~gotham]
 \setbeamertemplate{frametitle}[toc~gotham]%
 }
 \defbeamertemplate{toc~subsection~frame}{gotham~bullet}{
 \setbeamertemplate{part~in~toc}[gotham~bullet]
 \setbeamertemplate{section~in~toc}[gotham~bullet]
+\setbeamertemplate{section~in~toc~shaded}[gotham~bullet]
 \setbeamertemplate{subsection~in~toc}[gotham~bullet]
+\setbeamertemplate{subsection~in~toc~shaded}[gotham~bullet]
 \setbeamertemplate{subsubsection~in~toc}[gotham~bullet]
+\setbeamertemplate{subsubsection~in~toc~shaded}[gotham~bullet]
 \setbeamertemplate{background~canvas}[toc~subsection~gotham]
 \setbeamertemplate{frametitle}[toc~gotham]
 }
@@ -1929,7 +2026,7 @@ rightskip=\dimexpr\gotham@blockadjust~plus~4em\relax,
 
 %%%%
 \defbeamertemplate*{itemize~item}{gotham}{%\textbullet}
-\Large
+\large
 \setbeamertemplate{itemize~item}[circle]
 \usebeamertemplate{itemize~item}
 }
