@@ -21,7 +21,7 @@
 %% The Current Maintainer of this work is Romain NOËL.
 %% Contributors: Romain NOËL (2023-20**)
 %% 
-\ProvidesExplPackage{beamerinnerthemegotham}{2025-01-06}{1.2.1.b}{gotham inner theme}
+\ProvidesExplPackage{beamerinnerthemegotham}{2025-02-11}{1.2.1.c}{gotham inner theme}
 \RequirePackage{expl3}
 \RequirePackage{calc}
 \RequirePackage{tikz}
@@ -1665,7 +1665,7 @@ align=left
 \defbeamertemplate{section~in~toc}{gotham~bullet}{
 \hspace*{0.4cm}\tikz[baseline=-0.5ex]\node[section~number]{\textbf{\inserttocsectionnumber}};
 \ \tikz[baseline=-0.5ex]\node[section]{\usebeamerfont*{toc~title}\inserttocsection};\\[-0.35cm]
-\hspace*{1.13cm}{\usebeamercolor*[fg]{footer} \rule{0.6\paperwidth}{0.2pt}\\\nointerlineskip}
+\hspace*{1.13cm}{\usebeamercolor*[fg]{footer} \rule{0.6\paperwidth}{0.2pt}{\par\vskip-0.35\baselineskip}\nointerlineskip}
 }
 \defbeamertemplate{subsection~in~toc}{gotham~bullet}{
 \hspace*{0.53cm}\tikz[baseline=-0.5ex]\node[subsection~number]{};
@@ -1678,7 +1678,7 @@ align=left
 \defbeamertemplate{section~in~toc~shaded}{gotham~bullet}{
 \hspace*{0.4cm}\tikz[baseline=-0.5ex]\node[section~number, fill=colorBackElement!40]{\usebeamerfont*{toc~subtitle}\textbf{\inserttocsectionnumber}};
 \ \tikz[baseline=-0.5ex]\node[section, text=colorBackElement!20]{\usebeamerfont*{toc~title}\inserttocsection};\\[-0.35cm]
-\hspace*{1.13cm}{\usebeamercolor*[fg]{footer} \rule{0.6\paperwidth}{0.2pt}\\\nointerlineskip}
+\hspace*{1.13cm}{\usebeamercolor*[fg]{footer} \rule{0.6\paperwidth}{0.2pt}{\par\vskip-0.35\baselineskip}\nointerlineskip}
 }
 \defbeamertemplate{subsection~in~toc~shaded}{gotham~bullet}{
 \hspace*{0.53cm}\tikz[baseline=-0.5ex]\node[subsection~number,fill=colorBackElement!20]{};

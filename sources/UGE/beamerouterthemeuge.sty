@@ -29,32 +29,32 @@
 	\pgfuseimage{UGElogo}
 }
 
-% \defbeamertemplate{frametitle}{default/gotham~subsameline}{
-% 	\nointerlineskip
-% 	\begin{beamercolorbox}[
-% 			wd=\paperwidth,
-% 			sep=0pt,
-% 			leftskip=\gothamFrametitleLeftpading,
-% 			rightskip=\gothamFrametitleRightpading,
-% 		]{frametitle}
-% 		\gotham@frametitlestrut@start
-% 		\insertframetitle
-% 		\ifx\insertframesubtitle\@empty
-% 			%% if subtitle to the frame is empty
-% 		\else
-% 			%% if not empty: add subtitle
-% 			{\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\gothamFrameSubtitleSep \insertframesubtitle}
-% 			\vspace*{\gothamFramesubtitleStrutend}
-% 		\fi
-% 		\nolinebreak
-% 		%% Add logo
-% 		\hfill{
-% 			\setbeamertemplate{instituteLogo}[default/\prop_item:Nn \l__gotham_template_name_prop {instituteLogo/default}]
-% 			\usebeamertemplate{instituteLogo}
-% 		}
-% 		\gotham@frametitlestrut@end
-% 	\end{beamercolorbox}
-% }
+\defbeamertemplate{frametitle}{default/uge}{
+	\nointerlineskip
+	\begin{beamercolorbox}[
+			wd=\paperwidth,
+			sep=0pt,
+			leftskip=\gothamFrametitleLeftpading,
+			rightskip=\gothamFrametitleRightpading,
+		]{frametitle}
+		\gotham@frametitlestrut@start
+		\insertframetitle
+		\ifx\insertframesubtitle\@empty
+			%% if subtitle to the frame is empty
+		\else
+			%% if not empty: add subtitle
+			{\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\gothamFrameSubtitleSep \insertframesubtitle}
+			\vspace*{\gothamFramesubtitleStrutend}
+		\fi
+		\nolinebreak
+		%% Add logo
+		\hfill{
+			\setbeamertemplate{instituteLogo}[default/\prop_item:Nn \l__gotham_template_name_prop {instituteLogo/default}]
+			\usebeamertemplate{instituteLogo}
+		}
+		\gotham@frametitlestrut@end
+	\end{beamercolorbox}
+}
 
 
 %% Sidebars %%%

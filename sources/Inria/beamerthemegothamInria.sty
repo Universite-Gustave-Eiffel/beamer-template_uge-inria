@@ -14,18 +14,56 @@
 \providecommand{\PathSOinria}{\PathSO/Inria/}
 
 %\mode<presentation>
+\bool_new:N \l_gothamInria_loadFOnt
+\bool_set_true:N \l_gothamInria_loadFOnt
 
-\usefonttheme{inria}
+\keys_define:nn { gotham / inria }{
+	% load~font
+	load~font .choice:,
+	load~font .usage:n = { general },
+	load~font .default:n = { true },
+
+	load~font / true .code:n = { \bool_set_true:N \l_gothamInria_loadFOnt },
+	load~font / on .code:n = { \bool_set_true:N \l_gothamInria_loadFOnt },
+	load~font / enable .code:n = { \bool_set_true:N \l_gothamInria_loadFOnt },
+
+	load~font / false .code:n = { \bool_set_false:N \l_gothamInria_loadFOnt },
+	load~font / off .code:n = { \bool_set_false:N \l_gothamInria_loadFOnt },
+	load~font / disable .code:n = { \bool_set_false:N \l_gothamInria_loadFOnt },
+
+	load~font / unknown .code:n = { \PackageWarning{ inria } { The~choice~'#1'~is~unknown~for~the~(known)~option~'load~font',~so~being~ignored. }{helping~message: load~font / unknown} },
+}
+\keys_set:nn { gotham / inria } { 
+	load~font 
+}
+
+\ProcessKeyOptions[ gotham / inria ]
+
+\bool_if:NTF \l_gothamInria_loadFOnt {
+	\usefonttheme{inria}
+}{
+	% false
+}
 \usecolortheme{inria}
 \useinnertheme{inria}
 \useoutertheme{inria}
 
-\ProcessKeyOptions[ gotham / font ]
-\ProcessKeyOptions[ gotham / color ]
-\ProcessKeyOptions[ gotham / inner ]
-\ProcessKeyOptions[ gotham / outer ]
+% \ProcessKeyOptions[ gotham / font ]
+% \ProcessKeyOptions[ gotham / color ]
+% \ProcessKeyOptions[ gotham / inner ]
+% \ProcessKeyOptions[ gotham / outer ]
 
 \NewDocumentCommand \InriaSet { m }{
+	\renewcommand{\gothamInstituteLogoSquare}[1][4ex]{
+		\pgfuseimage{InriaLogo}
+	}
+	\setlength{\gothamFootlineRuleHeight}{0.5pt}
+	\setlength{\gothamFootlineRuleLength}{\linewidth}
+	\setlength{\gothamFootlineHeight}{2.ex} 
+	\setlength{\sidebarRightHOffset}{-0.0mm}
+	\setlength{\sectionhoffset}{7em}
+
+
 	\str_case:enF { #1 }
 	{
 		{old1} {

@@ -14,18 +14,62 @@
 
 
 %\mode<presentation>
+\bool_new:N \l_gothamcea_loadFOnt
+\bool_set_true:N \l_gothamcea_loadFOnt
 
-\usefonttheme{CEA}
+\keys_define:nn { gotham / cea }{
+	% load~font
+	load~font .choice:,
+	load~font .usage:n = { general },
+	load~font .default:n = { true },
+
+	load~font / true .code:n = { \bool_set_true:N \l_gothamcea_loadFOnt },
+	load~font / on .code:n = { \bool_set_true:N \l_gothamcea_loadFOnt },
+	load~font / enable .code:n = { \bool_set_true:N \l_gothamcea_loadFOnt },
+
+	load~font / false .code:n = { \bool_set_false:N \l_gothamcea_loadFOnt },
+	load~font / off .code:n = { \bool_set_false:N \l_gothamcea_loadFOnt },
+	load~font / disable .code:n = { \bool_set_false:N \l_gothamcea_loadFOnt },
+
+	load~font / unknown .code:n = { \PackageWarning{ cea } { The~choice~'#1'~is~unknown~for~the~(known)~option~'load~font',~so~being~ignored. }{helping~message: load~font / unknown} },
+}
+\keys_set:nn { gotham / cea } { 
+	load~font 
+}
+
+\ProcessKeyOptions[ gotham / cea ]
+
+\bool_if:NTF \l_gothamcea_loadFOnt {
+	\usefonttheme{CEA}
+}{
+	% false
+}
 \usecolortheme{CEA}
 \useinnertheme{CEA}
 \useoutertheme{CEA}
 
-\ProcessKeyOptions[ gotham / font ]
-\ProcessKeyOptions[ gotham / color ]
-\ProcessKeyOptions[ gotham / inner ]
-\ProcessKeyOptions[ gotham / outer ]
+% \ProcessKeyOptions[ gotham / font ]
+% \ProcessKeyOptions[ gotham / color ]
+% \ProcessKeyOptions[ gotham / inner ]
+% \ProcessKeyOptions[ gotham / outer ]
 
 \NewDocumentCommand \CEASet { m }{
+	\renewcommand{\gothamInstituteLogoSquare}[1][4ex]{
+		\raisebox{4mm}{\pgfuseimage{CEAlogo}}
+	}
+	\renewcommand{\gothamRightFiligrane}{
+		\tikz[overlay,remember~picture]{
+			\node (rigthPattern) at ([shift={(-35pt,-11pt)}]current~page.north~east) {\pgfuseimage{CEAfiligrane}};
+		}
+	}
+	\setlength{\gothamFootlineHeight}{2.ex} 
+	\setlength{\gothamFootlineRuleHeight}{0.5pt}
+	\setlength{\gothamFootlineHRightOffset}{10mm}
+	\renewcommand{\gothamHookFooter}{
+		\setbeamertemplate{instituteLogo}[default/\prop_item:Nn \l__gotham_template_name_prop {instituteLogo/default}]
+		\usebeamertemplate{instituteLogo}
+	}
+
 	\str_case:enF { #1 }
 	{
 		{official} {

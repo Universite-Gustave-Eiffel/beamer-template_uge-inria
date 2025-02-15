@@ -11,21 +11,57 @@
 
 % Theme settings
 \providecommand{\PathSOuge}{\PathSO/UGE/}
-\providecommand{\PathSOinria}{\PathSO/Inria/}
+\providecommand{\PathSOuge}{\PathSO/uge/}
 
 %\mode<presentation>
+\bool_new:N \l_gothamuge_loadFOnt
+\bool_set_true:N \l_gothamuge_loadFOnt
 
-\usefonttheme{uge}
+\keys_define:nn { gotham / uge }{
+	% load~font
+	load~font .choice:,
+	load~font .usage:n = { general },
+	load~font .default:n = { true },
+
+	load~font / true .code:n = { \bool_set_true:N \l_gothamuge_loadFOnt },
+	load~font / on .code:n = { \bool_set_true:N \l_gothamuge_loadFOnt },
+	load~font / enable .code:n = { \bool_set_true:N \l_gothamuge_loadFOnt },
+
+	load~font / false .code:n = { \bool_set_false:N \l_gothamuge_loadFOnt },
+	load~font / off .code:n = { \bool_set_false:N \l_gothamuge_loadFOnt },
+	load~font / disable .code:n = { \bool_set_false:N \l_gothamuge_loadFOnt },
+
+	load~font / unknown .code:n = { \PackageWarning{ uge } { The~choice~'#1'~is~unknown~for~the~(known)~option~'load~font',~so~being~ignored. }{helping~message: load~font / unknown} },
+}
+\keys_set:nn { gotham / uge } { 
+	load~font 
+}
+
+\ProcessKeyOptions[ gotham / uge ]
+
+\bool_if:NTF \l_gothamuge_loadFOnt {
+	\usefonttheme{uge}
+}{
+	% false
+}
 \usecolortheme{uge}
 \useinnertheme{uge}
 \useoutertheme{uge}
 
-\ProcessKeyOptions[ gotham / font ]
-\ProcessKeyOptions[ gotham / color ]
-\ProcessKeyOptions[ gotham / inner ]
-\ProcessKeyOptions[ gotham / outer ]
+% \ProcessKeyOptions[ gotham / font ]
+% \ProcessKeyOptions[ gotham / color ]
+% \ProcessKeyOptions[ gotham / inner ]
+% \ProcessKeyOptions[ gotham / outer ]
 
 \NewDocumentCommand \UgeSet { m }{
+	\setlength{\sidebarRightHOffset}{-8.4mm}
+	\renewcommand{\gothamInstituteLogoSquare}[1][4ex]{
+		\pgfuseimage{UGElogo}
+	}
+	\renewcommand{\gothamRightFiligrane}{
+		\pgfuseimage{UGEfiligrane}
+	}
+
 	\str_case:enF { #1 }
 	{
 		{official} {

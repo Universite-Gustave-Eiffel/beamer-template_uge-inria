@@ -39,15 +39,27 @@
 	% \colorlet{colorAlert}{colorD}
 	% \colorlet{colorExample}{colorE}
 
-	% \renewcommand{\gothamHookPostColorBGSet}{
-	% 	\ifbool{darkBG}{% Dark true
-	% 		\colorlet{colorStandout}{colorA/reserved}
-	% 		\setbeamercolor{frametitle}{use=primary~palette, parent=primary~palette}
-	% 	}{% Light true
-	% 		\colorlet{colorStandout}{colorA/reserved}
-	% 		\setbeamercolor{frametitle}{use=primary~palette, parent=primary~palette}
-	% 	}
-	% }
+	\renewcommand{\gothamHookPostColorBGSet}{
+		% \ifbool{darkBG}{% Dark true
+		% 	\colorlet{colorStandout}{colorA/reserved}
+		% 	\setbeamercolor{frametitle}{use=primary~palette, parent=primary~palette}
+		% }{% Light true
+		% 	\colorlet{colorStandout}{colorA/reserved}
+		% 	\setbeamercolor{frametitle}{use=primary~palette, parent=primary~palette}
+		% }
+
+		\colorlet{colorStandout}{colorA}
+		\colorlet{colorFrametitle}{colorA}
+		\colorlet{colorProgBar}{colorC}
+		% \setbeamercolor{frametitleSection}{use=primary~palette, bg=, fg=primary~palette.bg}
+		\setbeamercolor{frametitle}{
+			use=primary~palette,
+			parent=primary~palette,
+			bg=colorFrametitle,
+			fg=colorBG
+		}
+		\setbeamercolor{standout}{bg=colorStandout, fg=colorPale}
+	}
 }
 
 \keys_define:nn { gotham / color }

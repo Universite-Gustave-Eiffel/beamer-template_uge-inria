@@ -21,7 +21,7 @@
 %% The Current Maintainer of this work is Romain NOËL.
 %% Contributors: Romain NOËL (2023-20**)
 %% 
-\ProvidesExplPackage{beamerthemegotham}{2025-01-06}{1.2.1.b}{A modern, minimal-ish, versatile and extendable yet robust theme for Beamer}
+\ProvidesExplPackage{beamerthemegotham}{2025-02-11}{1.2.1.c}{A modern, minimal-ish, versatile and extendable yet robust theme for Beamer}
 \RequirePackage{expl3}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%   PACKAGE   %%%%%%%%%%%%%
@@ -127,6 +127,62 @@ unknown .code:n =
 \ProcessKeyOptions[ gotham / color ]
 \ProcessKeyOptions[ gotham / inner ]
 \ProcessKeyOptions[ gotham / outer ]
+
+
+%%%%%%
+\DeclareDocumentCommand{\gothamreset}{m}{
+\renewcommand{\gothamInstituteLogoSquare}[1][4ex]{ }
+\renewcommand{\gothamInstituteLogoCircle}[1][4ex]{ }
+\renewcommand{\gothamHookPostColorBGSet}{
+\colorlet{colorStandout}{colorA}
+\colorlet{colorFrametitle}{colorA}
+\colorlet{colorProgBar}{colorC}
+\setbeamercolor{frametitle}{
+use=primary~palette,
+parent=primary~palette,
+bg=colorFrametitle,
+fg=colorBG
+}
+\setbeamercolor{standout}{bg=colorStandout, fg=colorPale}
+}
+\renewcommand{\gothamtitlepagelogo}{}
+\renewcommand{\gothamtitlepagebg}{}
+\renewcommand{\gothamRightFiligrane}{}
+\renewcommand{\gothamLeftFiligrane}{}
+\renewcommand{\gothamHookFooter}{}
+
+\setlength{\gothamProgressSectionHeight}{3pt}
+\setlength{\sectionhoffset}{0pt}
+\setlength{\sidebarRightHOffset}{-2.5ex}
+\setlength{\sidebarLeftHOffset}{+0.5ex}
+\setlength{\gothamFrametitleToppading}{2.2ex}
+\setlength{\gothamFrametitleBottompading}{2.2ex}
+\setlength{\gothamFrametitleLeftpading}{2.2ex}
+\setlength{\gothamFrametitleRightpading}{2.2ex}
+\setlength{\gothamFramesubtitleStrutend}{0pt}
+\setlength{\gothamFootlineVOffset}{-0.5ex}
+\setlength{\gothamFootlineDepth}{0.1ex}
+\setlength{\gothamFootlineHeight}{1.5ex}
+\setlength{\gothamFootlineHRightOffset}{\spaceskip}
+\setlength{\gothamHposLeftRotFooter}{-7pt}
+\setlength{\gothamHposRightRotFooter}{2pt}
+\setlength{\gothamVposLeftRotFooter}{15pt}
+\setlength{\gothamVposRightRotFooter}{15pt}
+\setlength{\gothamLeftFooterPadding}{2.0ex}
+\setlength{\gothamRightFooterPadding}{3.5ex}
+\setlength{\gothamFooterHOffset}{0pt}
+\setlength{\gothamFootlineRuleLeftPadding}{7mm}
+\setlength{\gothamFootlineRuleHeight}{0.0pt}
+\setlength{\gothamFootlineRuleLength}{15mm}
+\setlength{\gothamProgressCircHeight}{1.8\baselineskip}
+\setlength{\gothamCounterCircleRadius}{1.12ex}
+\setlength{\gothamProgressCircBorderWidth}{1.65mm}
+\setlength{\gothamCircleNumberingVshift}{1.4mm}
+\setlength{\gothamCircleNumberingHshift}{2.6mm}
+\setlength{\gothamProgressHeadFootLineheight}{1.2ex}
+
+\keys_set:nn { gotham/all/all } { default } 
+}
 
 %% 
 %% Adapted from classic "A model .dtx file" by Joseph Wright
