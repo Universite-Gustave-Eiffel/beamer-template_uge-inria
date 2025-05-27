@@ -5,7 +5,7 @@ Since we are often working with different institutions, we have to switch betwee
 
 
 ## What is it ?
-The purpose of this LaTeX/Beamer theme is to provide a template for presentations at Université Gustave Eiffel or Inria or CEA thanks to [Gotham](https://gitlab.com/RomainNOEL/beamertheme-gotham) beamer theme
+The purpose of this LaTeX/Beamer theme is to provide a template for presentations at Université Gustave Eiffel or Inria or CEA, thanks to [Gotham](https://gitlab.com/RomainNOEL/beamertheme-gotham) beamer theme.
 
 
 ## How to use/install
