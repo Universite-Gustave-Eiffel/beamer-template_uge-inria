@@ -5,7 +5,7 @@ Since we are often working with different institutions, we have to switch betwee
 
 
 ## What is it ?
-The purpose of this LaTeX/Beamer theme is to provide a template for presentations at Université Gustave Eiffel or Inria or CEA.
+The purpose of this LaTeX/Beamer theme is to provide a template for presentations at Université Gustave Eiffel or Inria or CEA thanks to [Gotham](https://gitlab.com/RomainNOEL/beamertheme-gotham) beamer theme
 
 
 ## How to use/install
@@ -16,7 +16,7 @@ There is two major ways to use this template: downloading from Git or "make a co
   If you have a LaTeX distribution installed on your computer, you can download the sources by clicking on `<> Code`/`Download ZIP`.
   After extracting the sources, you can directly edit (and probably rename) the file `ready2Go.tex`.
   Then, you can compile your presentation using your favorite LaTeX compiler (pdflatex, xelatex, luatex, arara, latexmk...).
-  If you use the `glossaires` package (or some others) as given in the example, do not forget to add the compilation option `--shell-escape`.
+  If you use the `glossaries` package (or some others) as given in the example, do not forget to add the compilation option `--shell-escape`.
   This remark stands also for your favorite LaTeX IDE (~~VSCode~~ Codium, TeXStudio, TeXMaker, Lyx, Emacs, ...)
   Compilation command example: `pdflatex output.pdf ready2Go.tex --shell-escape`.
 
