@@ -224,6 +224,11 @@
 % %%%%%%%%%%
 
 \defbeamertemplate{background~canvas}{toc/inria~old}{
+	% adapted from beamer default
+	\raisebox{0pt}[0pt][0pt]{
+		\ifbeamercolorempty[bg]{normal~text}{}{\color{bg}\vrule width\paperwidth~height\paperheight}
+	}
+	%
 	\tikz[overlay, remember~picture]{
 		% dark rectangle in the center of the page
 		\node [rectangle, fill=InriaDarkgray, 
