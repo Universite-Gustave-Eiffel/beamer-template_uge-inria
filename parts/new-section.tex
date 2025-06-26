@@ -1,9 +1,9 @@
 % !TEX TS-program = pdflatex
 % !TeX encoding = UTF-8
 % !TeX spellcheck = en_GB
-%==============================================================================
-%== template for LaTeX presentation ===========================================
-%==============================================================================
+%===========================================================================
+%== template for LaTeX presentation ========================================
+%===========================================================================
 \providecommand{\PathP}{./}  % Path to Parts folders
 \providecommand{\PathR}{../resources/}  % Path to Resources folders
 \providecommand{\PathSO}{../sources/} 	% Path to Sources folders
@@ -12,7 +12,7 @@
 \providecommand{\lang}{english} % english, french
 
 \makeatletter
-	\def\input@path{{\PathSO}{\PathSO/gotham}} 		% to be able to find package in resource folders.
+	\def\input@path{{\PathSO}{\PathSO/gotham}}  % to be able to find package in resource folders.
 	\ifx\c@levelstanda\undefined 	% to create a newcounter if it doesn't exists.
 		\newcounter{levelstanda}
 	\else
@@ -54,9 +54,9 @@
 %-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 %        LOADING MY PACKAGES
 %-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-	\newcommand{\Pathbasebib}{\PathR/Presentation.bib}
-	\newcommand{\PathSymbolsEntries}{\PathR/UsersSymbolsAcronyms}%.bib
-	\def\OSvar{linux} % windows, mac, linux
+		\newcommand{\Pathbasebib}{\PathR/Presentation.bib}
+		\newcommand{\PathSymbolsEntries}{\PathR/UsersSymbolsAcronyms}%.bib
+		\def\OSvar{linux} % windows, mac, linux
 	\input{\PathR/UsersPackagesDefs.tex}
 	\input{\PathR/UsersMathsCommands.tex}
 
@@ -70,7 +70,7 @@
 \begin{document} %
 \stepcounter{levelstanda}
 
-%%%  MAINMATTER  %%%
+%%%  MAIN-MATTER  %%%
 %%%%%%%%%%%%%%%%%%%%
 
 %\section{A new section}

@@ -17,7 +17,53 @@
 		\newcommand{\cad}{\@ifstar{c.-\`a.-d.\@}{c'est-à-dire}\ }
 		\newcommand{\cf}{\@ifstar{\emph{cf.\@}}{\emph{confer}\ }}
 	\makeatother
-	\newcommand{\famName}[1]{\textsc{#1}}
+
+	\ExplSyntaxOn
+		% Create a new command to fake Small Caps by scaling uppercase with one mandatory argument.
+		\DeclareDocumentCommand{\fakesc}{ m }{
+			\textapperance_smallcaps:n { #1 }
+		}
+
+		%–– user-adjustable scaling parameters
+		\tl_new:N \l__fauxsc_hscale_dim  \tl_set:Nn \l__fauxsc_hscale_dim {.83}
+		\tl_new:N \l__fauxsc_vscale_dim  \tl_set:Nn \l__fauxsc_vscale_dim {.72}%.72
+
+		\tl_new:N \l__textapperance_textsmallcaps_input_tl% Initialize string variable
+		\cs_new_protected:Npn \textapperance_smallcaps:n #1 {
+			% Fully expand contents and store them in the variable
+			\tl_set:Nx \l__textapperance_textsmallcaps_input_tl { #1 }
+			
+			% Replace everything thats NOT a capital letter NEITHER punctuation by \textsmaller[2]{\uppercase{<match>}}
+			\regex_replace_all:nnN { ([^A-Z\ \,\.\;\:\!\?\'\"\(\)\[\]\{\}0-9]+) }{ 
+				% { \c{relscale}{0.75}\cB\{\c{uppercase}\cB\{\0\cE\}\cE\}} } 
+				\c{scalebox}{
+					\c{l__fauxsc_hscale_dim}}[\c{l__fauxsc_vscale_dim}]{
+					\cB\{\c{uppercase}\cB\{\0\cE\}\cE\}
+				}
+			} \l__textapperance_textsmallcaps_input_tl 
+			\tl_use:N \l__textapperance_textsmallcaps_input_tl % print the result
+		}
+
+		% Adapt some language element to the command \langue.
+		% Test: does \langue exist?
+		\cs_if_exist:cTF { langue }{
+			% Yes, it exists.  
+			% Now compare its expansion to the string "french".
+			\str_if_eq:VnTF \langue { french }{
+				% ⟨true⟩ branch so its adapt some commands
+				\renewcommand{\partContentName}{Contenu de la partie}
+				\renewcommand{\secContentName}{Contenu de la section}
+				\renewcommand{\subsecContentName}{Contenu de la sous-section}
+			}{
+				% ⟨false⟩ branch (exists but isn’t “french”) so do nothing
+			}
+		}{
+			% Command doesn’t exist
+			\typeout{\string\langue~does~not~exist.}
+		}
+	\ExplSyntaxOff
+
+	\newcommand{\famName}[1]{\fakesc{#1}}%\textsc
 
 
 %%%%---- SPACING & JUSTIFICATION ---------------%%%%

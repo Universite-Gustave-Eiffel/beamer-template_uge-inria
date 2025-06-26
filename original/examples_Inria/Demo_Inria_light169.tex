@@ -30,15 +30,15 @@
 	% the option "notes=only, " to print only the notes !
 	\usepackage[orthodox]{nag}	% Help to prevent buggus with warnings
 
-   \usepackage[utf8]{inputenc}
+	\usepackage[utf8]{inputenc}
 	\usepackage[T1]{fontenc}
 
 %-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 %        LOADING MY PACKAGES
 %-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-	\newcommand{\Pathbasebib}{\PathR/Presentation.bib}
-	\newcommand{\PathSymbolsEntries}{\PathR/UsersSymbolsAcronyms}%.bib
-	\def\OSvar{linux} % windows, mac, linux
+		\newcommand{\Pathbasebib}{\PathR/Presentation.bib}
+		\newcommand{\PathSymbolsEntries}{\PathR/UsersSymbolsAcronyms}%.bib
+		\def\OSvar{linux} % windows, mac, linux
 
 	\input{\PathR/UsersPackagesDefs.tex}
 	\input{\PathR/UsersMathsCommands.tex}
@@ -59,15 +59,15 @@
 	% Your institution style
 	% \usetheme{gothamUGE}
 	\usetheme{gothamInria}
-      \InriaSet{old1}% {RF,old1,old2,old3} apply specific gotham set for Inria
+		\InriaSet{old1}% {RF,old1,old2,old3} apply specific gotham set for Inria
 	% \usetheme{gothamCEA}
 		
 
 %-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 %	PRESENTATION INFORMATION
 %-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-	\title[]{Inria Template}
-	\subtitle{A modern beamer theme based on Gotham}
+	\title[]{Inria Template long long longl long long longl long long longl}
+	\subtitle{A modern beamer theme based on Gotham long long long}
 	\date[]{\today}
 	\author[romain.noel@inria.fr]{
 		Romain NOËL\inst{1}\inst{2}
@@ -99,9 +99,9 @@
 \begin{document}
 \stepcounter{levelstanda}
 
-%%%%%%%%%%%%%%%%%%%%%
-%%%  FRONTMATTER  %%%
-%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%  FRONT-MATTER  %%%
+%%%%%%%%%%%%%%%%%%%%%%
 	% FRAME
 	%\maketitle
 	\begin{frame}[plain,noframenumbering]
@@ -115,9 +115,9 @@
 	\end{frame}
 
 
-%%%%%%%%%%%%%%%%%%%%
-%%%  MAINMATTER  %%%
-%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+%%%  MAIN-MATTER  %%%
+%%%%%%%%%%%%%%%%%%%%%
 \input{\PathP/section-Beamer.tex}
 
 \input{\PathP/section-Gotham.tex}
@@ -125,9 +125,9 @@
 \input{\PathP/section-Conclusion.tex}
 
 
-%%%%%%%%%%%%%%%%%%%%
-%%%  BACKMATTER  %%%
-%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+%%%  BACK-MATTER  %%%
+%%%%%%%%%%%%%%%%%%%%%
 
 	% FRAME
 	\begin{frame}[noframenumbering, allowframebreaks]{References}
@@ -140,7 +140,7 @@
 %%  APPENDIX  %%
 %%%%%%%%%%%%%%%%
 \appendix
-% \miniframesoff % to deactive the navigation bar requires ()
+% \miniframesoff % to deactivate the navigation bar requires ()
 
 	% FRAME
 	\begin{frame}[fragile]{Backup slides}

@@ -78,19 +78,19 @@
 		};
 	}
 	
-	\vspace{-11pt}
+	\vspace{-4pt}
 	\addtolength{\leftskip}{13em}
 	\dim_add:Nn \l__gotham_titleseparator_width_dim {-15em}
 	{
-		\ifbool{darkBG}{ % Dark true 
+		\ifbool{darkBG}{% Dark true 
 			\setbeamercolor{normal~text}{fg=colorDark, }
 		}{% Light
 			\setbeamercolor{normal~text}{fg=colorPale, }
 		}
 		% \centering%
 		\vfill%
-		\ifx\inserttitle\@empty\else\quad\usebeamertemplate*{title}\fi
-		\ifx\insertsubtitle\@empty\else\quad\usebeamertemplate*{subtitle}\fi
+		\ifx\inserttitle\@empty\else\usebeamertemplate*{title}\fi
+		\ifx\insertsubtitle\@empty\else\usebeamertemplate*{subtitle}\fi
 		\usebeamertemplate*{title~separator}
 		\ifx\beamer@shortauthor\@empty\else\usebeamertemplate*{author}\fi
 		\ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi

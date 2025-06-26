@@ -9,7 +9,7 @@
 \providecommand{\PathSO}{./sources/} 	% Path to Sources folders
 \providecommand{\PathS}{./supplies/} 	% Path to Supplies folders
 \providecommand{\BuildTrigger}{buildnew} % Trigger to build or not standalone parts.
-\providecommand{\langue}{english}		% english, french
+\providecommand{\langue}{french}		% english, french
 
 \makeatletter
 	\def\input@path{{\PathSO}{\PathSO/gotham}{\PathSO/UGE/}{\PathSO/Inria/}} 		% to be able to find package in resource folders.
@@ -81,12 +81,12 @@
 %	PRESENTATION INFORMATION
 %-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-	\title[]{Univ-Eiffel Template}
+	\title[]{Univ-Eiffel Template long long longl long long longl long long longl long long longl}
 	\subtitle{A modern beamer theme based}
 	\date[]{\today}
 	\author[romain.noel@univ-eiffel.fr]{
-		Romain NOËL\inst{1}\inst{2}
-		\and John DOE\inst{3}
+		Romain \famName{Noël}\inst{1}\inst{2}
+		\and John \famName{Doe}\inst{3}
 	}
 	\institute[Univ. Eiffel]{
 		\inst{1} Université Gustave Eiffel
@@ -116,9 +116,9 @@
 \begin{document}
 \stepcounter{levelstanda}
 
-%%%%%%%%%%%%%%%%%%%%%
-%%%  FRONTMATTER  %%%
-%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%  FRONT-MATTER  %%%
+%%%%%%%%%%%%%%%%%%%%%%
 	% FRAME
 	\begin{frame}[plain,noframenumbering]
 		\titlepage
@@ -131,9 +131,9 @@
 	\end{frame}
 
 
-%%%%%%%%%%%%%%%%%%%%
-%%%  MAINMATTER  %%%
-%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+%%%  MAIN-MATTER  %%%
+%%%%%%%%%%%%%%%%%%%%%
 \section{name your section}
 \input{\PathP/new-section.tex}
 
@@ -148,9 +148,9 @@
 	\end{frame}
 
 
-%%%%%%%%%%%%%%%%%%%%
-%%%  BACKMATTER  %%%
-%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+%%%  BACK-MATTER  %%%
+%%%%%%%%%%%%%%%%%%$%%
 	% \begin{frame}[noframenumbering, allowframebreaks]{References}
 	% 	\printbibliography[heading=none]
 	% 	% \bibliography{demo}
