@@ -61,10 +61,24 @@
 
 \pgfdeclareimage[width=3.1cm]{InriaLogoSection}{\PathSOinria/logos/inr_logo_blanc.pdf}
 
+\defbeamertemplate{background~canvas}{titlepage/inria~old}{
+	% adapted from beamer default
+	% \raisebox{-0.5\paperwidth}[\leftskip][0pt]{
+	% 	\ifbeamercolorempty[bg]{normal~text}{}{\color{blue}\vrule width\paperwidth~height\paperheight}
+	% }
+	%
+	\tikz[overlay, remember~picture]{
+		% dark rectangle in the center of the page
+		\node [rectangle, fill=InriaDarkgray, 
+			minimum~width=15\paperwidth/16, minimum~height=7.5\paperheight/9
+		] (box) at ([shift={(0,-0.222)}]current~page.center) {};
+	}
+}
+
 % The title page template
 \defbeamertemplate{title~page}{inria~old}{
 	% reuse the background from TOC
-	\setbeamertemplate{background~canvas}[toc/inria~old]
+	\setbeamertemplate{background~canvas}[titlepage/inria~old]
 	\usebeamertemplate{background~canvas}
 	
 	% red rectangle on top left corner
@@ -92,7 +106,13 @@
 		\ifx\inserttitle\@empty\else\usebeamertemplate*{title}\fi
 		\ifx\insertsubtitle\@empty\else\usebeamertemplate*{subtitle}\fi
 		\usebeamertemplate*{title~separator}
-		\ifx\beamer@shortauthor\@empty\else\usebeamertemplate*{author}\fi
+		% \ifx\beamer@shortauthor\@empty\else\usebeamertemplate*{author}\fi
+		\expandafter\ifblank\expandafter{\beamer@andstripped}{
+					% empty author
+					\vspace*{1.em}
+				}{
+					\usebeamertemplate*{author}
+				}
 		\ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
 		\ifx\insertinstitute\@empty\else{
 			\parbox{0.9\textwidth-13em}{
@@ -225,9 +245,9 @@
 
 \defbeamertemplate{background~canvas}{toc/inria~old}{
 	% adapted from beamer default
-	\raisebox{0pt}[0pt][0pt]{
+	% \raisebox{0pt}[0pt][0pt]{
 		\ifbeamercolorempty[bg]{normal~text}{}{\color{bg}\vrule width\paperwidth~height\paperheight}
-	}
+	% }
 	%
 	\tikz[overlay, remember~picture]{
 		% dark rectangle in the center of the page

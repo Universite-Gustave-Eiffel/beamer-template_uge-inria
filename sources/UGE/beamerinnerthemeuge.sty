@@ -86,7 +86,13 @@
 						\ifx\inserttitle\@empty\else\usebeamertemplate*{title}\fi
 						\ifx\insertsubtitle\@empty\else\usebeamertemplate*{subtitle}\fi
 						\usebeamertemplate*{title~separator}
-						\ifx\beamer@shortauthor\@empty\else\usebeamertemplate*{author}\fi
+						% \ifx\beamer@shortauthor\@empty\else\usebeamertemplate*{author}\fi
+						\expandafter\ifblank\expandafter{\beamer@andstripped}{
+							% empty author
+							\vspace*{1.em}
+						}{
+							\usebeamertemplate*{author}
+						}
 						\ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
 						\ifx\insertinstitute\@empty\else{\parbox{0.9\textwidth}{\raggedright\usebeamertemplate*{institute}} }\fi
 						\vfill
@@ -135,7 +141,13 @@
 						\ifx\inserttitle\@empty\else\usebeamertemplate*{title}\fi
 						\ifx\insertsubtitle\@empty\else\usebeamertemplate*{subtitle}\fi
 						\usebeamertemplate*{title~separator}
-						\ifx\beamer@shortauthor\@empty\else\usebeamertemplate*{author}\fi
+						% \ifx\beamer@shortauthor\@empty\else\usebeamertemplate*{author}\fi
+						\expandafter\ifblank\expandafter{\beamer@andstripped}{
+							% empty author
+							\vspace*{1.em}
+						}{
+							\usebeamertemplate*{author}
+						}
 						\ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
 						\ifx\insertinstitute\@empty\else{\parbox{0.9\textwidth}{\raggedright\usebeamertemplate*{institute}} }\fi
 						\vfill
