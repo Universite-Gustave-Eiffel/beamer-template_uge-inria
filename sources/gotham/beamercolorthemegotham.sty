@@ -21,7 +21,7 @@
 %% The Current Maintainer of this work is Romain NOËL.
 %% Contributors: Romain NOËL (2023-20**)
 %% 
-\ProvidesExplPackage{beamercolorthemegotham}{2025-02-11}{1.2.1.c}{Gotham color theme}
+\ProvidesExplPackage{beamercolorthemegotham}{2025-07-02}{1.2.2.a}{Gotham color theme}
 \RequirePackage{expl3}
 \RequirePackage{xcolor}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -94,19 +94,27 @@
 \booltrue{transparentBG}
 
 \cs_new_protected:Nn \__gotham_color_set_darkBG:{
-\setbeamercolor{normal~text}{%
-fg=colorBG,
-bg=colorFG,
-}%
-\usebeamercolor[fg]{normal~text}%
-\booltrue{darkBG}%
+\booltrue{darkBG}
 \boolfalse{transparentBG}
 \colorlet{colorFrametitle}{colorAreversed}
 \colorlet{colorStandout}{colorAreversed}
 \colorlet{colorStandin}{colorFG}
 \colorlet{colorTitlepage}{colorAreversed}
+%%% adapt and reload
+\colorlet{colorBG}{colorPale}
+\colorlet{colorFG}{colorDark}
+\colorlet{colorFiligrane}{colorB}
+\colorlet{colorBackElement}{colorB}
+\colorlet{colorProgBar}{colorC}
+\colorlet{colorAlert}{colorD}
+\colorlet{colorExample}{colorE}
 %%% dark
-\setbeamercolor{primary~palette}{% reversed color compared to normal text
+\setbeamercolor{normal~text}{
+fg=colorBG,
+bg=colorFG,
+}
+\usebeamercolor[fg]{normal~text}
+\setbeamercolor{primary~palette}{
 use=normal~text,
 fg=normal~text.bg,
 bg=normal~text.fg
@@ -115,18 +123,26 @@ bg=normal~text.fg
 }
 
 \cs_new_protected:Nn \__gotham_color_set_lightBG:{
-\setbeamercolor{normal~text}{
-fg=colorFG,
-bg=colorBG
-}
-\usebeamercolor[fg]{normal~text}
 \boolfalse{darkBG}
 \boolfalse{transparentBG}
 \colorlet{colorFrametitle}{colorA}
 \colorlet{colorStandout}{colorA}
 \colorlet{colorStandin}{colorBG}
 \colorlet{colorTitlepage}{colorA}
+%%% adapt and reload
+\colorlet{colorBG}{colorPale}
+\colorlet{colorFG}{colorDark}
+\colorlet{colorFiligrane}{colorB}
+\colorlet{colorBackElement}{colorB}
+\colorlet{colorProgBar}{colorC}
+\colorlet{colorAlert}{colorD}
+\colorlet{colorExample}{colorE}
 %%% light
+\setbeamercolor{normal~text}{
+fg=colorFG,
+bg=colorBG
+}
+\usebeamercolor[fg]{normal~text}
 \setbeamercolor{primary~palette}{
 use=normal~text,
 fg=normal~text.bg,
@@ -136,11 +152,6 @@ bg=normal~text.fg
 }
 
 \cs_new_protected:Nn \__gotham_color_set_transparentBG:{
-\setbeamercolor{normal~text}{
-fg=colorFG,
-bg=,
-}
-\usebeamercolor[fg]{normal~text}
 \boolfalse{darkBG}
 \booltrue{transparentBG}
 \colorlet{colorFrametitle}{colorA}
@@ -148,7 +159,20 @@ bg=,
 {\usebeamercolor[bg]{normal~text}\colorlet{colorStandin}{bg}}% this is not working because the colorlet is not kept outside of the {} environment...
 \colorlet{colorStandin}{colorBG} % since the two previous lines are not working, let define it like light-bg
 \colorlet{colorTitlepage}{colorA}
-%%% like light background.
+%%% adapt and reload
+\colorlet{colorBG}{colorPale}
+\colorlet{colorFG}{colorDark}
+\colorlet{colorFiligrane}{colorB}
+\colorlet{colorBackElement}{colorB}
+\colorlet{colorProgBar}{colorC}
+\colorlet{colorAlert}{colorD}
+\colorlet{colorExample}{colorE}
+%%% transparent like light background.
+\setbeamercolor{normal~text}{
+fg=colorFG,
+bg=,
+}
+\usebeamercolor[fg]{normal~text}
 \setbeamercolor{primary~palette}{
 use=normal~text,
 fg=colorBG,

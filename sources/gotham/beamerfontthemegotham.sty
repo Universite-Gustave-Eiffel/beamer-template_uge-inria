@@ -21,7 +21,7 @@
 %% The Current Maintainer of this work is Romain NOËL.
 %% Contributors: Romain NOËL (2023-20**)
 %% 
-\ProvidesExplPackage{beamerfontthemegotham}{2025-02-11}{1.2.1.c}{gotham font theme}
+\ProvidesExplPackage{beamerfontthemegotham}{2025-07-02}{1.2.2.a}{gotham font theme}
 \RequirePackage{expl3}
 \RequirePackage{ifxetex}
 \RequirePackage{ifluatex}
@@ -64,9 +64,9 @@
 \int_zero:N \g_gotham_fontsnotfound_int
 \clist_map_function:nN { #1 } \checkfont:n
 \int_compare:nTF { \g_gotham_fontsnotfound_int = 0 }
-{% True
+{
 #2
-}{% False
+}{
 #3
 }
 }
@@ -86,7 +86,7 @@ FiraSans-Italic.otf}
 BoldFont={FiraSans-Regular.otf},
 BoldItalicFont={FiraSans-Italic.otf}]
 {FiraSans-Light.otf}
-\renewcommand{\ttdefault}{lmtt} % Latin Modern Typewriter
+\renewcommand{\ttdefault}{lmtt}
 }{
 \iffontsavailable{FiraSans~Light~OT,
 FiraSans~LightItalic~OT,
@@ -97,9 +97,9 @@ FiraSans~Italic~OT}
 BoldFont={Fira~Sans~Regular~OT},
 BoldItalicFont={Fira~Sans~Italic~OT}]
 {Fira~Sans~Light~OT}
-\renewcommand{\ttdefault}{lmtt} % Latin Modern Typewriter
+\renewcommand{\ttdefault}{lmtt}
 }{
-\msg_warning:nn { gotham } { fonts-not-available }%
+\msg_warning:nn { gotham } { fonts-not-available }
 }
 }
 \iffontsavailable{FiraMono-Medium.otf, FiraMono-Bold.otf}{

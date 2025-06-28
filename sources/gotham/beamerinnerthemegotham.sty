@@ -21,7 +21,7 @@
 %% The Current Maintainer of this work is Romain NOËL.
 %% Contributors: Romain NOËL (2023-20**)
 %% 
-\ProvidesExplPackage{beamerinnerthemegotham}{2025-02-11}{1.2.1.c}{gotham inner theme}
+\ProvidesExplPackage{beamerinnerthemegotham}{2025-07-02}{1.2.2.a}{gotham inner theme}
 \RequirePackage{expl3}
 \RequirePackage{calc}
 \RequirePackage{tikz}
@@ -777,23 +777,28 @@ subsubsectionstyle=show/show/hide,
 \ifdefempty{\partpageOptions}{
 \frame[c, part]{\partpage}
 }{
-\frame[c, \expandafter\partpageOptions, part]{\partpage}
+\edef\l__gotham_partpageOptions_tmp{c, \partpageOptions, part}
+\expandafter\frame\expandafter[\l__gotham_partpageOptions_tmp]{\partpage}
 }
 \fi
 
 \ifbool{partContent}{
 \ifdefempty{\partpageTocOptions}{
-\begin{frame}[tocpart]
-}{
-\begin{frame}[tocpart, \expandafter\partpageTocOptions]
-}
+\frame[tocpart]{
 \ifdefempty{\partContentName}{}{\frametitle{\partContentName}}
-\ifdefempty{\partTocOptions}{
-\tableofcontents[part=\thepart]
-}{
-\expandafter\tableofcontents[part=\thepart, \expandafter\partTocOptions]
+{
+\expandafter\tableofcontents\expandafter[\partTocOptions]
 }
-\end{frame}
+}
+}{
+\edef\l__gotham_partpageTocOptions_tmp{\partpageTocOptions , tocpart}
+   \expandafter\frame\expandafter[\l__gotham_partpageTocOptions_tmp]{
+\ifdefempty{\partContentName}{}{\frametitle{\partContentName}}
+{
+\expandafter\tableofcontents\expandafter[\partTocOptions]
+}
+}
+}
 }{
 }
 }
@@ -814,21 +819,28 @@ subsubsectionstyle=show/show/hide,
 \ifdefempty{\sectionpageOptions}{
 \frame[c, section]{\sectionpage}
 }{
-\frame[c, \expandafter\sectionpageOptions, section]{\sectionpage}
+\edef\l__gotham_sectionpageOptions_tmp{c, \sectionpageOptions, section}
+\expandafter\frame\expandafter[\l__gotham_sectionpageOptions_tmp]{\sectionpage}
 }
 \fi
 
 \ifbool{sectionContent}{
 \ifdefempty{\sectionpageTocOptions}{
-\begin{frame}[tocsec]
-}{
-\begin{frame}[\expandafter\sectionpageTocOptions, tocsec]
-}
+\frame[tocsec]{
 \ifdefempty{\secContentName}{}{\frametitle{\secContentName}}
 {
 \expandafter\tableofcontents\expandafter[\sectionTocOptions]
 }
-\end{frame}
+}
+}{
+\edef\l__gotham_sectionpageTocOptions_tmp{\sectionpageTocOptions , tocsec}
+   \expandafter\frame\expandafter[\l__gotham_sectionpageTocOptions_tmp]{
+\ifdefempty{\secContentName}{}{\frametitle{\secContentName}}
+{
+\expandafter\tableofcontents\expandafter[\sectionTocOptions]
+}
+}
+}
 }{
 }
 }
@@ -850,21 +862,28 @@ subsubsectionstyle=show/show/hide,
 \ifdefempty{\subsectionpageOptions}{
 \frame[c, subsec]{\subsectionpage}
 }{
-\frame[c, \expandafter\subsectionpageOptions, subsec]{\subsectionpage}
+\edef\l__gotham_subsectionpageOptions_tmp{c, \subsectionpageOptions, subsec}
+\expandafter\frame\expandafter[\l__gotham_subsectionpageOptions_tmp]{\subsectionpage}
 }
 \fi
 
 \ifbool{subsectionContent}{
 \ifdefempty{\subsectionpageTocOptions}{
-\begin{frame}[tocsubsec]
-}{
-\begin{frame}[\expandafter\subsectionpageTocOptions, tocsubsec]
-}
+\frame[tocsubsec]{
 \ifdefempty{\subsecContentName}{}{\frametitle{\subsecContentName}}
 {
 \expandafter\tableofcontents\expandafter[\subsectionTocOptions]
 }
-\end{frame}
+}
+}{
+\edef\l__gotham_subsectionpageTocOptions_tmp{\subsectionpageTocOptions , tocsubsec}
+   \expandafter\frame\expandafter[\l__gotham_subsectionpageTocOptions_tmp]{
+\ifdefempty{\subsecContentName}{}{\frametitle{\subsecContentName}}
+{
+\expandafter\tableofcontents\expandafter[\subsectionTocOptions]
+}
+}
+}
 }{
 }
 }
@@ -886,7 +905,9 @@ subsubsectionstyle=show/show/hide,
 \ifdefempty{\subsubsectionpageOptions}{
 \frame[c, subsubsec]{\subsubsectionpage}
 }{
-\frame[c, \expandafter\subsubsectionpageOptions, subsubsec]{\subsubsectionpage}
+
+\edef\l__gotham_subsubsectionpageOptions_tmp{c,\subsubsectionpageOptions,subsubsec}%{c,subsubsec,\subsubsectionpageOptions}%
+   \expandafter\frame\expandafter[\l__gotham_subsubsectionpageOptions_tmp]{\subsubsectionpage}
 }
 \fi
 
