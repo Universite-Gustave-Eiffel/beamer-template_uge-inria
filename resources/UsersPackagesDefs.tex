@@ -51,9 +51,9 @@
 			% Now compare its expansion to the string "french".
 			\str_if_eq:VnTF \langue { french }{
 				% ⟨true⟩ branch so its adapt some commands
-				\renewcommand{\partContentName}{Contenu de la partie}
-				\renewcommand{\secContentName}{Contenu de la section}
-				\renewcommand{\subsecContentName}{Contenu de la sous-section}
+				\renewcommand{\partContentName}{Contenu\ de\ la\ partie}
+				\renewcommand{\secContentName}{Contenu\ de\ la\ section}
+				\renewcommand{\subsecContentName}{Contenu\ de\ la\ sous-section}
 			}{
 				% ⟨false⟩ branch (exists but isn’t “french”) so do nothing
 			}
