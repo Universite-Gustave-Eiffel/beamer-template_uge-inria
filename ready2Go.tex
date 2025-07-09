@@ -12,9 +12,9 @@
 \providecommand{\langue}{french}		% english, french
 
 \makeatletter
-	\def\input@path{{\PathSO}{\PathSO/gotham}{\PathSO/UGE/}{\PathSO/Inria/}} 		% to be able to find package in resource folders.
-	\ifx\c@levelstanda\undefined 	% to create a new counter if it doesn't exists.
+	\ifx\c@levelstanda\undefined 	% to create a newcounter if it doesn't exists.
 		\newcounter{levelstanda}
+		\def\input@path{ {\PathSO}{\PathSO/gotham}{\PathSO/UGE/}{\PathSO/Inria/} } % to be able to find package in source folders.
 	\else
 		{}% it already exist
 	\fi

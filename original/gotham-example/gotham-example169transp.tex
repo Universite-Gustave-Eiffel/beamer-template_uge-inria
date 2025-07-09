@@ -6,7 +6,7 @@
 \providecommand{\BuildTrigger}{buildnew} 	% Trigger to build or not standalone parts.
 
 \makeatletter
-	\def\input@path{{\PathSO}{\PathSO/gotham}} % to be able to find package in resource folders.
+	\def\input@path{{\PathSO}{\PathSO/gotham}} % to be able to find package in source folders.
 	\ifx\c@levelstanda\undefined 	% to create a newcounter if it doesn't exists.
 		\newcounter{levelstanda}
 	\else
