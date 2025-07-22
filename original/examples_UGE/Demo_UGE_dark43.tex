@@ -14,7 +14,7 @@
 \makeatletter
 	\ifx\c@levelstanda\undefined 	% to create a newcounter if it doesn't exists.
 		\newcounter{levelstanda}
-		\def\input@path{ {\PathSO}{\PathSO/gotham}{\PathSO/UGE/}{\PathSO/Inria/} } % to be able to find package in source folders.
+		\def\input@path{ {\PathSO}{\PathSO/gotham}{\PathSO/UGE/}{\PathSO/Inria/}{\PathSO/CEA/} }  % to be able to find package in source folders.
 	\else
 		{}% it already exist
 	\fi
@@ -87,7 +87,7 @@
 		\and John DOE\inst{3}
 	}
 	\institute[Univ. Eiffel]{
-		\inst{1} Université Gustave Eiffel 
+		\inst{1} Université Gustave Eiffel
 		\and \inst{2} Inria
 		\and \inst{3} An Awesome Company
 	}
