@@ -12,30 +12,57 @@
 
 % === font ============================================================
 \ifboolexpr{bool~{xetex}~or~bool~{luatex}}{
-   
-   % 
+
+   %
    \fontspec [Path = \PathSOinria/fonts/,
       UprightFont = *-Regular,
       ItalicFont = *-Italic
    ]{InriaSerif}
-   
+
 	%
-	% We search for regular, italic, light, light italic,fonts under the default |Fira Sans| names.
+	% We search for serif fonts: regular, italic, light, light italic,fonts under the default |TeX Gyre ScholaX| names.
 	\iffontsavailable{InriaSerif-Light.otf,
 			InriaSerif-LightItalic.otf,
 			InriaSerif-Regular.otf,
 			InriaSerif-Italic.otf}
 	{
-		\setsansfont[ItalicFont={InriaSerif-LightItalic.otf},
+		\setmainfont[ItalicFont={InriaSerif-LightItalic.otf},
 			BoldFont={InriaSerif-Regular.otf},
 			BoldItalicFont={InriaSerif-Italic.otf}]
 		{InriaSerif-Light.otf}
 	}{
-		% If this fails, the suffix OT --- used by some Linux distributions --- will be tried. 
+		% If this fails, the suffix OT --- used by some Linux distributions --- will be tried.
 		\iffontsavailable{InriaSerif~Light~OT,
 			InriaSerif~LightItalic~OT,
 			InriaSerif~Regular~OT,
 			InriaSerif~Italic~OT}
+		{
+			\setmainfont[ItalicFont={Inria~Sans~LightItalic~OT},
+				BoldFont={Inria~Sans~Regular~OT},
+				BoldItalicFont={Inria~Sans~Italic~OT}]
+			{TeX~Gyre~ScholaX~OT}
+		}{
+			% If this also fails, a warning will be displayed and the standard fonts will be used.
+			\msg_warning:nn { gothamUGE } { fonts-not-available }%
+		}
+	}
+	%
+	% We search for sans fonts: regular, italic, light, light italic,fonts under the default |Fira Sans| names.
+	\iffontsavailable{InriaSans-Light.otf,
+			InriaSans-LightItalic.otf,
+			InriaSans-Regular.otf,
+			InriaSans-Italic.otf}
+	{
+		\setsansfont[ItalicFont={InriaSans-LightItalic.otf},
+			BoldFont={InriaSans-Regular.otf},
+			BoldItalicFont={InriaSans-Italic.otf}]
+		{InriaSans-Light.otf}
+	}{
+		% If this fails, the suffix OT --- used by some Linux distributions --- will be tried.
+		\iffontsavailable{InriaSans~Light~OT,
+			InriaSans~LightItalic~OT,
+			InriaSans~Regular~OT,
+			InriaSans~Italic~OT}
 		{
 			\setsansfont[ItalicFont={Inria~Sans~LightItalic~OT},
 				BoldFont={Inria~Sans~Regular~OT},
@@ -43,21 +70,21 @@
 			{Fira~Sans~Light~OT}
 		}{
 			% If this also fails, a warning will be displayed and the standard fonts will be used.
-			\msg_warning:nn { gothamInria } { fonts-not-available }%
+			\msg_warning:nn { gothamUGE } { fonts-not-available }%
 		}
 	}
 	%
-	% We search for regular, mono, and mono bold fonts under the default |Fira Mono| names.
+	% We search for tt fonts: regular, mono, and mono bold fonts under the default |Fira Mono| names.
 	\iffontsavailable{FiraMono-Medium.otf, FiraMono-Bold.otf}{
 		\setmonofont[BoldFont={FiraMono-Medium.otf}]{FiraMono-Bold.otf}
 	}{
-		% If this fails, the suffix OT --- used by some Linux distributions --- will be tried. 
+		% If this fails, the suffix OT --- used by some Linux distributions --- will be tried.
 		\iffontsavailable{Fira~Mono~Medium~OT, Fira~Mono~Bold~OT}{
 			\setmonofont[BoldFont={Fira~Mono~Medium~OT}]{Fira~Mono~Bold~OT}
 		}{
 			% If this also fails, a warning will be displayed and the standard fonts will be used.
-			\msg_warning:nn { gothamInria } { fonts-not-available } 
-		} 
+			\msg_warning:nn { gothamInria } { fonts-not-available }
+		}
 	}
 	%
 	% Add a feature for numbers in tables.
