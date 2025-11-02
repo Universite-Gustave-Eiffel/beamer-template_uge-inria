@@ -1,7 +1,7 @@
 %% I recommend to use the Inria Fonts, FREELY available
 %% at https://black-foundry.com/blog/inria-serif-and-inria/ and under an Open Font Licence.
 %%
-\ProvidesExplPackage{beamerfontthemegothamCEA}{2024-10-15}{1.1.1.a}{CEA font theme}
+\ProvidesExplPackage{beamerfontthemegothamCEA}{2025-11-02}{1.1.2.a}{CEA font theme}
 
 %\mode<presentation>
 
@@ -12,6 +12,19 @@
 
 % === font ============================================================
 \ifboolexpr{bool~{xetex}~or~bool~{luatex}}{
+
+	\@ifpackageloaded{fontspec}{
+		\PassOptionsToPackage{no-math}{fontspec}
+	}{
+		\RequirePackage[no-math]{fontspec}
+	}
+
+	\ifboolexpr{bool~{xetex}}{
+		\RequirePackage{mathspec}
+	}{
+		\RequirePackage{unicode-math}
+	}
+   \RequirePackage{mathastext}
 
    %
    \fontspec [Path = \PathSOinria/fonts/,
@@ -28,8 +41,15 @@
 	{
 		\setmainfont[ItalicFont={InriaSerif-LightItalic.otf},
 			BoldFont={InriaSerif-Regular.otf},
-			BoldItalicFont={InriaSerif-Italic.otf}]
-		{InriaSerif-Light.otf}
+			BoldItalicFont={InriaSerif-Italic.otf},
+			Scale=MatchLowercase
+		]{InriaSerif-Light.otf}
+
+		\ifboolexpr{bool~{xetex}}{
+			\setmathfont(Digits,Latin,Greek,Symbols)[Scale=MatchLowercase]{Inria~Serif}
+		}{
+			\setmathfont[Scale=MatchLowercase]{Inria~Serif}
+		}
 	}{
 		% If this fails, the suffix OT --- used by some Linux distributions --- will be tried.
 		\iffontsavailable{InriaSerif~Light~OT,
@@ -39,11 +59,18 @@
 		{
 			\setmainfont[ItalicFont={Inria~Sans~LightItalic~OT},
 				BoldFont={Inria~Sans~Regular~OT},
-				BoldItalicFont={Inria~Sans~Italic~OT}]
-			{TeX~Gyre~ScholaX~OT}
+				BoldItalicFont={Inria~Sans~Italic~OT},
+				Scale=MatchLowercase
+			]{TeX~Gyre~ScholaX~OT}
+
+			\ifboolexpr{bool~{xetex}}{
+				\setmathfont(Digits,Latin,Greek,Symbols)[Scale=MatchLowercase]{Inria~Serif}
+			}{
+				\setmathfont[Scale=MatchLowercase]{Inria~Serif}
+			}
 		}{
 			% If this also fails, a warning will be displayed and the standard fonts will be used.
-			\msg_warning:nn { gothamUGE } { fonts-not-available }%
+			\msg_warning:nn { gothamCEA } { fonts-not-available }%
 		}
 	}
 	%
@@ -55,8 +82,11 @@
 	{
 		\setsansfont[ItalicFont={InriaSans-LightItalic.otf},
 			BoldFont={InriaSans-Regular.otf},
-			BoldItalicFont={InriaSans-Italic.otf}]
-		{InriaSans-Light.otf}
+			BoldItalicFont={InriaSans-Italic.otf},
+			Scale=MatchLowercase
+		]{InriaSans-Light.otf}
+
+		\setmathrm[Scale=MatchLowercase]{Inria~Sans}
 	}{
 		% If this fails, the suffix OT --- used by some Linux distributions --- will be tried.
 		\iffontsavailable{InriaSans~Light~OT,
@@ -66,13 +96,17 @@
 		{
 			\setsansfont[ItalicFont={Inria~Sans~LightItalic~OT},
 				BoldFont={Inria~Sans~Regular~OT},
-				BoldItalicFont={Inria~Sans~Italic~OT}]
-			{Fira~Sans~Light~OT}
+				BoldItalicFont={Inria~Sans~Italic~OT},
+				Scale=MatchLowercase
+			]{Fira~Sans~Light~OT}
+
+			\setmathrm[Scale=MatchLowercase]{Inria~Sans}
 		}{
 			% If this also fails, a warning will be displayed and the standard fonts will be used.
-			\msg_warning:nn { gothamUGE } { fonts-not-available }%
+			\msg_warning:nn { gothamCEA } { fonts-not-available }%
 		}
 	}
+
 	%
 	% We search for tt fonts: regular, mono, and mono bold fonts under the default |Fira Mono| names.
 	\iffontsavailable{FiraMono-Medium.otf, FiraMono-Bold.otf}{
@@ -86,6 +120,7 @@
 			\msg_warning:nn { gothamCEA } { fonts-not-available }
 		}
 	}
+
 	%
 	% Add a feature for numbers in tables.
 	\AtBeginEnvironment{tabular}{
@@ -101,6 +136,7 @@
 }
 
 %\linespread{1.12} % enlarge line space
+
 
 %\mode<all>
 %% End of file `beamerfontthemeCEA.sty'.
