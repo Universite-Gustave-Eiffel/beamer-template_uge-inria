@@ -19,12 +19,12 @@
 	\makeatother
 
 	\ExplSyntaxOn
-		% Create a new command to fake Small Caps by scaling uppercase with one mandatory argument.
+		%% Create a new command to fake Small Caps by scaling uppercase with one mandatory argument.
 		\DeclareDocumentCommand{\fakesc}{ m }{
 			\textapperance_smallcaps:n { #1 }
 		}
 
-		%–– user-adjustable scaling parameters
+		%  user-adjustable scaling parameters
 		\tl_new:N \l__fauxsc_hscale_dim  \tl_set:Nn \l__fauxsc_hscale_dim {.83}
 		\tl_new:N \l__fauxsc_vscale_dim  \tl_set:Nn \l__fauxsc_vscale_dim {.72}%.72
 
@@ -32,22 +32,22 @@
 		\cs_new_protected:Npn \textapperance_smallcaps:n #1 {
 			% Fully expand contents and store them in the variable
 			\tl_set:Nx \l__textapperance_textsmallcaps_input_tl { #1 }
-			
+
 			% Replace everything thats NOT a capital letter NEITHER punctuation by \textsmaller[2]{\uppercase{<match>}}
-			\regex_replace_all:nnN { ([^A-Z\ \,\.\;\:\!\?\'\"\(\)\[\]\{\}0-9]+) }{ 
-				% { \c{relscale}{0.75}\cB\{\c{uppercase}\cB\{\0\cE\}\cE\}} } 
+			\regex_replace_all:nnN { ([^A-Z\ \,\.\;\:\!\?\'\"\(\)\[\]\{\}0-9]+) }{
+				% { \c{relscale}{0.75}\cB\{\c{uppercase}\cB\{\0\cE\}\cE\}} }
 				\c{scalebox}{
 					\c{l__fauxsc_hscale_dim}}[\c{l__fauxsc_vscale_dim}]{
 					\cB\{\c{uppercase}\cB\{\0\cE\}\cE\}
 				}
-			} \l__textapperance_textsmallcaps_input_tl 
+			} \l__textapperance_textsmallcaps_input_tl
 			\tl_use:N \l__textapperance_textsmallcaps_input_tl % print the result
 		}
 
-		% Adapt some language element to the command \langue.
+		%% Adapt some language element to the command \langue.
 		% Test: does \langue exist?
 		\cs_if_exist:cTF { langue }{
-			% Yes, it exists.  
+			% Yes, it exists.
 			% Now compare its expansion to the string "french".
 			\str_if_eq:VnTF \langue { french }{
 				% ⟨true⟩ branch so its adapt some commands
@@ -60,6 +60,20 @@
 		}{
 			% Command doesn’t exist
 			\typeout{\string\langue~does~not~exist.}
+		}
+
+		%% command to exclude small words from titlecase
+		\NewDocumentCommand \TitlecaseExclusions { m }
+		{
+			% for coma separated list
+			% \clist_map_inline:nn { #1 }
+
+			% for space separated list
+			\seq_set_split:Nnn \l_tmpa_seq { ~ } { #1 }
+			\seq_map_inline:Nn \l_tmpa_seq
+			{
+				\text_declare_titlecase_exclusion:n { ##1 }
+			}
 		}
 	\ExplSyntaxOff
 

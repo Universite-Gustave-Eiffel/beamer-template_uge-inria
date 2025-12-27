@@ -9,7 +9,7 @@
 %% Copyright (C) 2023-20** by Romain NOËL <romainoel@free.fr>
 %% 
 %% This work may be distributed and/or modified under the
-%% conditions of the LaTeX Project Public License, either version 1.3
+%% conditions of the LaTeX Project Public License, either version 1.3c
 %% of this license or (at your option) any later version.
 %% The latest version of this license is in
 %% http://www.latex-project.org/lppl.txt
@@ -21,7 +21,7 @@
 %% The Current Maintainer of this work is Romain NOËL.
 %% Contributors: Romain NOËL (2023-20**)
 %% 
-\ProvidesExplPackage{beamerfontthemegotham}{2025-07-02}{1.2.2.a}{gotham font theme}
+\ProvidesExplPackage{beamerfontthemegotham}{2025-12-25}{1.2.4.a}{gotham font theme}
 \RequirePackage{expl3}
 \RequirePackage{ifxetex}
 \RequirePackage{ifluatex}
@@ -154,6 +154,7 @@ BoldItalicFont={Fira~Sans~Italic~OT}]
 \def\gotham@parttitleformat#1{#1}
 \def\gotham@sectiontitleformat#1{#1}
 \def\gotham@subsectiontitleformat#1{#1}
+\def\gotham@subsubsectiontitleformat#1{#1}
 \def\gotham@frametitleformat#1{#1}
 \def\gotham@framesubtitleformat#1{#1}
 
@@ -168,17 +169,51 @@ BoldItalicFont={Fira~Sans~Italic~OT}]
 {\def\insertsubtitle{{\gotham@subtitleformat{#2}}}}
 {}
 {\PackageError{beamerfontthemegotham}{Patching~subtitle~failed}\@ehc}
-\patchcmd{\sectionentry} % beamerbasenavigation.sty l.335
-{\def\insertsectionhead{#2}}
-{\def\insertsectionhead{\gotham@sectiontitleformat{#2}}}
+
+
+%% number, partname, page.
+\providecommand\beamer@partintoc[3]{%
+\ifnum\c@tocdepth=-1\relax
+\makebox[6em]{PART #1:} #2
+\par
+\fi
+}
+\define@key{beamertoc}{onlyparts}[]{%
+\c@tocdepth=-1\relax
+}
+\patchcmd{\beamer@part} % beamerbasenavigation.sty l.195
+{\def\beamer@partname{#2}}
+{\def\beamer@partname{\gotham@parttitleformat{#2}}}
+{}
+{\PackageError{beamerfontthemegotham}{Patching~part~title~failed}\@ehc}%
+\patchcmd{\beamer@part} % beamerbasenavigation.sty l.195
+{\def\beamer@partnameshort{#1}}
+{\def\beamer@partnameshort{\gotham@parttitleformat{#1}}}
+{}
+{\PackageError{beamerfontthemegotham}{Patching~part~title~failed}\@ehc}%
+\patchcmd{\beamer@part} % beamerbasenavigation.sty l.195
+{\protect\partentry{#2}{\the\c@part}}
+{\protect\partentry{\gotham@parttitleformat{#2}}{\the\c@part}}
+{}
+{\PackageError{beamerfontthemegotham}{Patching~part~title~failed}\@ehc}%
+\patchcmd{\beamer@part} % beamerbasenavigation.sty l.195
+{\Hy@writebookmark{\the\c@part}{#1}{Outline\the\c@part}{1}{toc}}
+{\Hy@writebookmark{\the\c@part}{\gotham@parttitleformat{#1}}{Outline\the\c@part}{1}{toc}}
+{}
+{\PackageError{beamerfontthemegotham}{Patching~part~title~failed}\@ehc}%
+
+%%%%% SECTION  %%%%%
+\patchcmd{\beamer@section} % beamerbasenavigation.sty l.195
+{\protect\beamer@sectionintoc{\the\c@section}{#2}}
+{\protect\beamer@sectionintoc{\the\c@section}{\gotham@sectiontitleformat{#2}}}
 {}
 {\PackageError{beamerfontthemegotham}{Patching~section~title~failed}\@ehc}%
-%% NOT WORKING YET!
-%% \patchcmd{\subsectionentry} % beamerbasenavigation.sty l.384
-%%  {\def\insertsubsectionhead{##5}}
-%%  {\def\insertsubsectionhead{\gotham@subsectiontitleformat{##5}}}
-%%  {}
-%%  {\PackageError{beamerfontthemegotham}{Patching~subsection~title~failed}\@ehc}%
+\patchcmd{\beamer@section} % beamerbasenavigation.sty l.195
+{\long\def\secname{#2}}
+{\long\def\secname{\gotham@sectiontitleformat{#2}}}
+{}
+{\PackageError{beamerfontthemegotham}{Patching~section~title~failed}\@ehc}%
+
 \@tempswafalse
 \patchcmd{\beamer@section} % beamerbasesection.sty l. 209
 {\def\insertsectionhead{\hyperlink{Navigation\the\c@page}{#1}}}
@@ -194,23 +229,59 @@ BoldItalicFont={Fira~Sans~Italic~OT}]
 {\PackageError{beamerfontthemegotham}{Patching~section~title~failed}\@ehc}
 \fi
 \@tempswafalse
-%% NOT WORKING YET !
-%% \patchcmd{\beamer@subsection} % beamerbasesection.sty l. 209
-%%  {\def\insertsubsectionhead{\hyperlink{Navigation\the\c@page}{#1}}}
-%%  {\def\insertsubsectionhead{\hyperlink{Navigation\the\c@page}\gotham@subsectiontitleformat{#1}}}
-%%  % \__gotham_subsection_title_format:n{#2}
-%%  {\@tempswatrue}
-%%  {}
-%% \patchcmd{\beamer@subsection} % beamerbasesection.sty l. 209
-%%  {\protected@edef\insertsubsectionhead{\noexpand\hyperlink{Navigation\the\c@page}{#1}}}
-%%  {\protected@edef\insertsubsectionhead{\noexpand\hyperlink{Navigation\the\c@page}{\noexpand\gotham@subsectiontitleformat{#1}}}}
-%%  % \exp_not:N \__gotham_subsection_title_format:n {#1}
-%%  {\@tempswatrue}
-%%  {}
-%% \if@tempswa\else
-%%  {\PackageError{beamerfontthemegotham}{Patching~subsection~title~failed}\@ehc}
-%% \fi%
-%% \@tempswafalse
+
+
+\patchcmd{\beamer@subsection} % beamerbasenavigation.sty l.195
+{\protect\beamer@subsectionintoc{\the\c@section}{\the\c@subsection}{#2}}
+{\protect\beamer@subsectionintoc{\the\c@section}{\the\c@subsection}{\gotham@subsectiontitleformat{#2}}}
+{}
+{\PackageError{beamerfontthemegotham}{Patching~subsection~title~failed}\@ehc}%
+\patchcmd{\beamer@subsection} % beamerbasenavigation.sty l.195
+{\long\def\subsecname{#2}}
+{\long\def\subsecname{\gotham@subsectiontitleformat{#2}}}
+{}
+{\PackageError{beamerfontthemegotham}{Patching~subsection~title~failed}\@ehc}%
+
+\@tempswafalse
+\patchcmd{\beamer@subsection} % beamerbasesubsection.sty l. 209
+{\def\insertsubsectionhead{\hyperlink{Navigation\the\c@page}{#1}}}
+{\def\insertsubsectionhead{\hyperlink{Navigation\the\c@page}{\gotham@subsectiontitleformat{#1}}}}
+{\@tempswatrue}
+{}
+\patchcmd{\beamer@subsection} % beamerbasesubsection.sty l. 209
+{\edef\insertsubsectionhead{\noexpand\hyperlink{Navigation\the\c@page}{\unexpanded{#1}}}}
+{\edef\insertsubsectionhead{\noexpand\hyperlink{Navigation\the\c@page}{\noexpand\gotham@subsectiontitleformat{\unexpanded{#1}}}}}
+{\@tempswatrue}
+{}
+\if@tempswa\else
+{\PackageError{beamerfontthemegotham}{Patching~subsection~title~failed}\@ehc}
+\fi
+\@tempswafalse
+
+
+\patchcmd{\beamer@subsubsection} % beamerbasenavigation.sty l.195
+{\long\def\subsubsecname{#2}}
+{\long\def\subsubsecname{\gotham@subsubsectiontitleformat{#2}}}
+{}
+{\PackageError{beamerfontthemegotham}{Patching~subsubsection~title~failed}\@ehc}%
+\patchcmd{\beamer@subsubsection} %\protect\beamer@subsubsectionintoc
+{{\the\c@section}{\the\c@subsection}{\the\c@subsubsection}{#2}}
+{{\the\c@section}{\the\c@subsection}{\the\c@subsubsection}{\gotham@subsubsectiontitleformat{#2}}}
+{}
+{\PackageError{beamerfontthemegotham}{Patching~subsubsection~title~failed}\@ehc}%
+
+\@tempswafalse
+
+\patchcmd{\beamer@subsubsection} % beamerbasesubsubsection.sty l. 209
+{\edef\insertsubsubsectionhead{\noexpand\hyperlink{Navigation\the\c@page}{\unexpanded{#1}}}}
+{\edef\insertsubsubsectionhead{\noexpand\hyperlink{Navigation\the\c@page}{\noexpand\gotham@subsubsectiontitleformat{\unexpanded{#1}}}}}
+{\@tempswatrue}
+{}
+\if@tempswa\else
+{\PackageError{beamerfontthemegotham}{Patching~subsubsection~title~failed}\@ehc}
+\fi
+\@tempswafalse
+
 \providecommand{\beamer@insertframetitlecontinuation}{
 \usebeamertemplate*{frametitle~continuation}
 }
@@ -565,6 +636,52 @@ shape~subsection / italic .code:n =
 shape~subsection / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'\l_keys_value_tl'~is~unknown~for~the~(known)~option~'\l_keys_key_tl',~so~being~ignored. }{helping~message: shape~subsection / unknown} },
 }
 
+\keys_define:nn { gotham / font }
+{
+format~subsubsection .choice:,
+format~subsubsection .usage:n = { general },
+format~subsubsection .default:n = { regular },
+format~subsubsection / regular .code:n =
+{
+\let\gotham@subsubsectiontitleformat\@empty
+},
+format~subsubsection / lower .code:n =
+{
+\let\gotham@subsubsectiontitleformat \text_lowercase:n %\lowercase
+\PackageWarning{ gotham } { Be~aware~that~format~subsubsection=lower~can~lead~to~problems. }
+},
+format~subsubsection / upper .code:n =
+{
+\let\gotham@subsubsectiontitleformat \text_uppercase:n %\uppercase
+\PackageWarning{ gotham } { Be~aware~that~format~subsubsection=upper~can~lead~to~problems. }
+},
+format~subsubsection / titlecase .code:n =
+{
+\let\gotham@subsubsectiontitleformat\text_titlecase_all:n %\Maketitlecase
+\PackageWarning{ gotham } { Be~aware~that~format~subsubsection=titlecase~can~lead~to~problems. }
+},
+format~subsubsection / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'\l_keys_value_tl'~is~unknown~for~the~(known)~option~'\l_keys_key_tl',~so~being~ignored. }{helping~message: format~subsubsection / unknown} },
+}
+\keys_define:nn { gotham / font }
+{
+shape~subsubsection .choice:,
+shape~subsubsection .usage:n = { general },
+shape~subsubsection .default:n = { regular },
+shape~subsubsection / regular .code:n =
+{
+\setbeamerfont{subsubsection~title}{shape=\normalfont}
+},
+shape~subsubsection / smallcaps .code:n =
+{
+\setbeamerfont{subsubsection~title}{shape=\scshape}
+},
+shape~subsubsection / italic .code:n =
+{
+\setbeamerfont{subsubsection~title}{shape=\itshape}
+},
+shape~subsubsection / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'\l_keys_value_tl'~is~unknown~for~the~(known)~option~'\l_keys_key_tl',~so~being~ignored. }{helping~message: shape~subsubsection / unknown} },
+}
+
 \keys_set:nn { gotham / font } {
 format~title, shape~title,
 format~subtitle, shape~subtitle,
@@ -573,6 +690,7 @@ format~framesubtitle, shape~framesubtitle,
 format~part, shape~part,
 format~section, shape~section,
 format~subsection, shape~subsection,
+format~subsubsection, shape~subsubsection,
 }
 
 \ProcessKeyOptions[ gotham / font ]

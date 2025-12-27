@@ -9,7 +9,7 @@
 %% Copyright (C) 2023-20** by Romain NOËL <romainoel@free.fr>
 %% 
 %% This work may be distributed and/or modified under the
-%% conditions of the LaTeX Project Public License, either version 1.3
+%% conditions of the LaTeX Project Public License, either version 1.3c
 %% of this license or (at your option) any later version.
 %% The latest version of this license is in
 %% http://www.latex-project.org/lppl.txt
@@ -21,7 +21,7 @@
 %% The Current Maintainer of this work is Romain NOËL.
 %% Contributors: Romain NOËL (2023-20**)
 %% 
-\ProvidesExplPackage{beamercolorthemegotham}{2025-07-02}{1.2.2.a}{Gotham color theme}
+\ProvidesExplPackage{beamercolorthemegotham}{2025-12-25}{1.2.4.a}{Gotham color theme}
 \RequirePackage{expl3}
 \RequirePackage{xcolor}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -53,28 +53,6 @@
 }
 \providecommand{\gothamHookPostColorBGSet}{}
 
-\cs_new_protected:Nn \__gotham_color_set_style_anthracite:{
-\colorlet{colorPale}{gPaleYell} % BG in light/normal mode
-\colorlet{colorDark}{gDarkBlack} % FG in light/normal mode
-\colorlet{colorA}{gAnthracite} % frametitle, standin.out,
-\colorlet{colorAreversed}{gLightTeal} % frametitle, standin.in,
-\colorlet{colorB}{gMidGrey} % gray BG : progress bar, blocks
-\colorlet{colorC}{gDeepYellOr} % progress bar
-\colorlet{colorD}{gLightOrange} % alert
-\colorlet{colorE}{gLightGreen} % example
-}
-
-\cs_new_protected:Nn \__gotham_color_set_style_red:{
-\colorlet{colorPale}{gPaleYell} % BG in light/normal mode
-\colorlet{colorDark}{gDarkBlack} % FG in light/normal mode
-\colorlet{colorA}{red} % frametitle, standin.out,
-\colorlet{colorAreversed}{gLightTeal} % frametitle, standin.in,
-\colorlet{colorB}{gMidGrey} % gray BG : progress bar, blocks
-\colorlet{colorC}{gDeepYellOr} % progress bar
-\colorlet{colorD}{gLightOrange} % alert
-\colorlet{colorE}{gLightGreen} % example
-}
-
 %%%%%%
 \colorlet{colorFG}{colorDark}
 \colorlet{colorBG}{colorPale}
@@ -88,6 +66,66 @@
 \colorlet{colorAlert}{colorD}
 \colorlet{colorExample}{colorE}
 
+\prop_if_exist:NTF \l__gotham_color_assignation_prop
+{}{
+\prop_new:N \l__gotham_color_assignation_prop
+
+\prop_put:Nnn \l__gotham_color_assignation_prop {colorFG} {colorDark}
+\prop_put:Nnn \l__gotham_color_assignation_prop {colorBG} {colorPale}
+\prop_put:Nnn \l__gotham_color_assignation_prop {colorStandin} {colorPale}
+\prop_put:Nnn \l__gotham_color_assignation_prop {colorStandout} {colorA}
+\prop_put:Nnn \l__gotham_color_assignation_prop {colorFrametitle} {colorA}
+\prop_put:Nnn \l__gotham_color_assignation_prop {colorTitlepage} {colorA}
+\prop_put:Nnn \l__gotham_color_assignation_prop {colorFiligrane} {colorB}
+\prop_put:Nnn \l__gotham_color_assignation_prop {colorBackElement} {colorB}
+\prop_put:Nnn \l__gotham_color_assignation_prop {colorProgBar} {colorC}
+\prop_put:Nnn \l__gotham_color_assignation_prop {colorAlert} {colorD}
+\prop_put:Nnn \l__gotham_color_assignation_prop {colorExample} {colorE}
+}
+
+\cs_new_protected:Nn \__gotham_reload_color:{
+\colorlet{colorFG}{\prop_item:Nn \l__gotham_color_assignation_prop {colorFG}}
+\colorlet{colorBG}{\prop_item:Nn \l__gotham_color_assignation_prop {colorBG}}
+\colorlet{colorStandin}{\prop_item:Nn \l__gotham_color_assignation_prop {colorStandin}}
+\colorlet{colorStandout}{\prop_item:Nn \l__gotham_color_assignation_prop {colorStandout}}
+\colorlet{colorFrametitle}{\prop_item:Nn \l__gotham_color_assignation_prop {colorFrametitle}}
+\colorlet{colorTitlepage}{\prop_item:Nn \l__gotham_color_assignation_prop {colorTitlepage}}
+\colorlet{colorFiligrane}{\prop_item:Nn \l__gotham_color_assignation_prop {colorFiligrane}}
+\colorlet{colorBackElement}{\prop_item:Nn \l__gotham_color_assignation_prop {colorBackElement}}
+\colorlet{colorProgBar}{\prop_item:Nn \l__gotham_color_assignation_prop {colorProgBar}}
+\colorlet{colorAlert}{\prop_item:Nn \l__gotham_color_assignation_prop {colorAlert}}
+\colorlet{colorExample}{\prop_item:Nn \l__gotham_color_assignation_prop {colorExample}}
+}
+
+%%%%%%
+\providecommand{\gothamReloadColors}{
+\__gotham_reload_color:
+}
+
+\cs_new_protected:Nn \__gotham_color_set_style_anthracite:{
+\colorlet{colorPale}{gPaleYell} % BG in light/normal mode
+\colorlet{colorDark}{gDarkBlack} % FG in light/normal mode
+\colorlet{colorA}{gAnthracite} % frametitle, standin.out,
+\colorlet{colorAreversed}{gLightTeal} % frametitle, standin.in,
+\colorlet{colorB}{gMidGrey} % gray BG : progress bar, blocks
+\colorlet{colorC}{gDeepYellOr} % progress bar
+\colorlet{colorD}{gLightOrange} % alert
+\colorlet{colorE}{gLightGreen} % example
+\__gotham_reload_color:
+}
+
+\cs_new_protected:Nn \__gotham_color_set_style_red:{
+\colorlet{colorPale}{gPaleYell} % BG in light/normal mode
+\colorlet{colorDark}{gDarkBlack} % FG in light/normal mode
+\colorlet{colorA}{red} % frametitle, standin.out,
+\colorlet{colorAreversed}{gLightTeal} % frametitle, standin.in,
+\colorlet{colorB}{gMidGrey} % gray BG : progress bar, blocks
+\colorlet{colorC}{gDeepYellOr} % progress bar
+\colorlet{colorD}{gLightOrange} % alert
+\colorlet{colorE}{gLightGreen} % example
+\__gotham_reload_color:
+}
+
 \providebool{darkBG}
 \boolfalse{darkBG}
 \providebool{transparentBG}
@@ -96,18 +134,14 @@
 \cs_new_protected:Nn \__gotham_color_set_darkBG:{
 \booltrue{darkBG}
 \boolfalse{transparentBG}
-\colorlet{colorFrametitle}{colorAreversed}
-\colorlet{colorStandout}{colorAreversed}
-\colorlet{colorStandin}{colorFG}
-\colorlet{colorTitlepage}{colorAreversed}
+\prop_put:Nnn \l__gotham_color_assignation_prop {colorStandin} {colorFG}
+\prop_put:Nnn \l__gotham_color_assignation_prop {colorStandout} {colorAreversed}
+\prop_put:Nnn \l__gotham_color_assignation_prop {colorFrametitle} {colorAreversed}
+\prop_put:Nnn \l__gotham_color_assignation_prop {colorTitlepage} {colorAreversed}
+
 %%% adapt and reload
-\colorlet{colorBG}{colorPale}
-\colorlet{colorFG}{colorDark}
-\colorlet{colorFiligrane}{colorB}
-\colorlet{colorBackElement}{colorB}
-\colorlet{colorProgBar}{colorC}
-\colorlet{colorAlert}{colorD}
-\colorlet{colorExample}{colorE}
+\__gotham_reload_color:
+
 %%% dark
 \setbeamercolor{normal~text}{
 fg=colorBG,
@@ -125,18 +159,14 @@ bg=normal~text.fg
 \cs_new_protected:Nn \__gotham_color_set_lightBG:{
 \boolfalse{darkBG}
 \boolfalse{transparentBG}
-\colorlet{colorFrametitle}{colorA}
-\colorlet{colorStandout}{colorA}
-\colorlet{colorStandin}{colorBG}
-\colorlet{colorTitlepage}{colorA}
+\prop_put:Nnn \l__gotham_color_assignation_prop {colorStandin} {colorBG}
+\prop_put:Nnn \l__gotham_color_assignation_prop {colorStandout} {colorA}
+\prop_put:Nnn \l__gotham_color_assignation_prop {colorFrametitle} {colorA}
+\prop_put:Nnn \l__gotham_color_assignation_prop {colorTitlepage} {colorA}
+
 %%% adapt and reload
-\colorlet{colorBG}{colorPale}
-\colorlet{colorFG}{colorDark}
-\colorlet{colorFiligrane}{colorB}
-\colorlet{colorBackElement}{colorB}
-\colorlet{colorProgBar}{colorC}
-\colorlet{colorAlert}{colorD}
-\colorlet{colorExample}{colorE}
+\__gotham_reload_color:
+
 %%% light
 \setbeamercolor{normal~text}{
 fg=colorFG,
@@ -154,19 +184,15 @@ bg=normal~text.fg
 \cs_new_protected:Nn \__gotham_color_set_transparentBG:{
 \boolfalse{darkBG}
 \booltrue{transparentBG}
-\colorlet{colorFrametitle}{colorA}
-\colorlet{colorStandout}{colorA}
 {\usebeamercolor[bg]{normal~text}\colorlet{colorStandin}{bg}}% this is not working because the colorlet is not kept outside of the {} environment...
-\colorlet{colorStandin}{colorBG} % since the two previous lines are not working, let define it like light-bg
-\colorlet{colorTitlepage}{colorA}
+\prop_put:Nnn \l__gotham_color_assignation_prop {colorStandin} {colorBG} % since the two previous lines are not working, let define it like light-bg
+\prop_put:Nnn \l__gotham_color_assignation_prop {colorStandout} {colorA}
+\prop_put:Nnn \l__gotham_color_assignation_prop {colorFrametitle} {colorA}
+\prop_put:Nnn \l__gotham_color_assignation_prop {colorTitlepage} {colorA}
+
 %%% adapt and reload
-\colorlet{colorBG}{colorPale}
-\colorlet{colorFG}{colorDark}
-\colorlet{colorFiligrane}{colorB}
-\colorlet{colorBackElement}{colorB}
-\colorlet{colorProgBar}{colorC}
-\colorlet{colorAlert}{colorD}
-\colorlet{colorExample}{colorE}
+\__gotham_reload_color:
+
 %%% transparent like light background.
 \setbeamercolor{normal~text}{
 fg=colorFG,
@@ -319,7 +345,7 @@ parent=progress~bar
 %%%%
 \keys_define:nn { gotham / color }
 {
-block .choice:, 
+block .choice:,
 block .usage:n = { general },
 block .default:n = { native },
 block / native .code:n = { \__gotham_color_set_native_block: },

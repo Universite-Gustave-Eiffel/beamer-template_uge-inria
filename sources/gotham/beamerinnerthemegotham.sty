@@ -9,7 +9,7 @@
 %% Copyright (C) 2023-20** by Romain NOËL <romainoel@free.fr>
 %% 
 %% This work may be distributed and/or modified under the
-%% conditions of the LaTeX Project Public License, either version 1.3
+%% conditions of the LaTeX Project Public License, either version 1.3c
 %% of this license or (at your option) any later version.
 %% The latest version of this license is in
 %% http://www.latex-project.org/lppl.txt
@@ -21,7 +21,7 @@
 %% The Current Maintainer of this work is Romain NOËL.
 %% Contributors: Romain NOËL (2023-20**)
 %% 
-\ProvidesExplPackage{beamerinnerthemegotham}{2025-07-02}{1.2.2.a}{gotham inner theme}
+\ProvidesExplPackage{beamerinnerthemegotham}{2025-12-25}{1.2.4.a}{gotham inner theme}
 \RequirePackage{expl3}
 \RequirePackage{calc}
 \RequirePackage{tikz}
@@ -146,20 +146,28 @@ parent=progress~bar
 
 \defbeamertemplate{title~page}{gotham~normal}{
 \ifx\insertframetitle\@empty\else\vspace*{-3em}\fi
-\begin{picture}(0,0) 
+\begin{picture}(0,0)
 \put(-30,-125){\noindent
 \fcolorbox{normal~text.bg}{normal~text.bg}{
 \begin{minipage}[b][\paperheight]{\paperwidth}
+\hfil
+\end{minipage}
+}
+}
+
+\put(-3.4,-125){\noindent
+\fcolorbox{normal~text.bg}{normal~text.bg}{
+\begin{minipage}[b][\paperheight]{\textwidth}
 \parbox[c][0pt][c]{0pt}{\gothamtitlepagebg}
 \centering
 \vfill
 \ifx\inserttitle\@empty\else
-\parbox{0.9\textwidth}{\centering
+\parbox{0.99\textwidth}{\centering
 \usebeamertemplate*{title}
 }\\[1.ex]
 \fi
 \ifx\insertsubtitle\@empty\else
-\parbox{0.9\textwidth}{\centering
+\parbox{0.99\textwidth}{\centering
 \usebeamertemplate*{subtitle}
 }\\[2.ex]
 \fi
@@ -170,7 +178,7 @@ parent=progress~bar
 \usebeamertemplate*{author}
 }
 \ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
-\ifx\insertinstitute\@empty\else{\parbox{0.9\textwidth}{\raggedright\usebeamertemplate*{institute}} }\fi
+\ifx\insertinstitute\@empty\else{\parbox{0.95\textwidth}{\raggedright\usebeamertemplate*{institute}} }\fi
 \vfill
 \vbox{}
 \end{minipage}
@@ -181,9 +189,9 @@ parent=progress~bar
 \gothamtitlepagelogo
 }
 
-\put(-27,-123){
+\put(0,-123){
 \noindent\vbox{
-\begin{minipage}[b][0.96\paperheight]{0.899\textwidth}
+\begin{minipage}[b][0.96\paperheight]{\paperwidth}
 \ifx\inserttitlegraphic\@empty\else\usebeamertemplate*{title~graphic}\fi
 \end{minipage}
 }
@@ -195,7 +203,7 @@ parent=progress~bar
 \begin{picture}(0,0)
 \put(-28,-128){\gothamtitlepagebg}
 
-\put(-4,-125){\noindent
+\put(-3.4,-125){\noindent
 \ifbool{darkBG}{
 \setbeamercolor{normal~text}{fg=colorFG, }
 \fcolorbox{colorPale}{colorPale}% reversed
@@ -237,29 +245,45 @@ parent=progress~bar
 \end{picture}
 }
 
+%%%%%%
+\newlength{\gothamDividedPicTop}
+\newlength{\gothamDividedPicBottomIncr}
+\setlength{\gothamDividedPicTop}{0.275\paperwidth}
+\setlength{\gothamDividedPicBottomIncr}{0.275\paperwidth}
+\newlength{\gothamDividedPicTextWidth}
+\setlength{\gothamDividedPicTextWidth}{.55\textwidth}
+
 \defbeamertemplate{title~page}{gotham~dividedpic}{
-\long\def\tmpEmpty{}
 \def\titlecontent{\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle}
 \def\subtitlecontent{\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle}
 \settowidth\l__gotham_title_width_dim\titlecontent
 \settowidth\l__gotham_subtitle_width_dim\subtitlecontent
 \setlength\l__gotham_title_max_width_dim{\ifdim\l__gotham_title_width_dim>\l__gotham_subtitle_width_dim\l__gotham_title_width_dim\else\l__gotham_subtitle_width_dim\fi}
-\begin{minipage}{.55\textwidth}
+\begin{minipage}{\gothamDividedPicTextWidth}
 \raggedright
 \titlecontent\\
 \subtitlecontent\\
-\textcolor{colorProgBar}{\rule{\ifdim\l__gotham_title_max_width_dim<.55\textwidth\l__gotham_title_max_width_dim\else.55\textwidth\fi}{\dim_use:N \l__gotham_titleseparator_height_dim}}\\[2em]
+
+\textcolor{colorProgBar}{\rule{\ifdim\l__gotham_title_max_width_dim<\gothamDividedPicTextWidth\l__gotham_title_max_width_dim\else\gothamDividedPicTextWidth\fi}{\dim_use:N \l__gotham_titleseparator_height_dim}}\\[0.75em]
+
+\expandafter\ifblank\expandafter{\beamer@andstripped}{
+\vspace*{2.em}
+}{%
 \usebeamerfont{author}\usebeamercolor[fg]{author}
 \insertauthor\\
-\expandafter\ifblank\expandafter{\beamer@andstripped}{
-\vspace*{1.em}
-}{ 
-\usebeamerfont{author}\usebeamercolor[fg]{author}
-\insertshortauthor
-\vspace{2em}
 }
+\ifx\beamer@shortauthor\@empty{
+}\else{
+\ifx\beamer@shortauthor\beamer@andstripped{
+}\else{
+\usebeamerfont{author}\usebeamercolor[fg]{author}
+{\insertshortauthor} \par
+\vspace{0.5em}
+}\fi
+}
+\fi
 \ifx\insertinstitute\@empty\else{
-\usebeamertemplate*{institute}\vspace{2em}
+\usebeamertemplate*{institute}\vspace{1.5em}
 }\fi
 \insertdate
 \end{minipage}
@@ -267,17 +291,17 @@ parent=progress~bar
 \begin{tikzpicture}[remember~picture, overlay]
 \clip (current~page.south~east)
 -- (current~page.north~east)
--- ++(-5.1, 0)
--- ++(-3, -\paperheight)
+-- ++(-\gothamDividedPicTop, 0)
+-- ++(-\gothamDividedPicBottomIncr, -\paperheight)
 -- cycle;
 
-\ifx\gothamtitlepagebg\tmpEmpty
+\ifx\gothamtitlepagebg\@empty
 \fill[
-right~color=colorTitlepage!100,%\ifbool{darkBG}{colorPale!100}{colorDark!100},
+right~color=colorTitlepage!100,
 ]
 (current~page.south~east)
 rectangle
-++(\dimexpr-0.55\paperwidth, \dimexpr\paperheight+1cm);
+++(\dimexpr-\gothamDividedPicTop-\gothamDividedPicBottomIncr, \dimexpr\paperheight);
 \else
 \node[
 anchor=south~east,
@@ -328,7 +352,7 @@ outer~sep=0
 {\parbox[c][0pt][c]{\textwidth}{
 \raggedleft
 \inserttitlegraphic
-}} 
+}}
 \fi
 
 \expandafter\ifblank\expandafter{\beamer@andstripped}{
@@ -370,7 +394,7 @@ outer~sep=0
 \PackageError{beamerinnerthemegotham}
 {The~beamer~template~named~'#1'~with~the~option~'#2'~does~not~exist}
 {helping~message unknown setbeamertemplate option}
-} 
+}
 }
 }
 
@@ -762,15 +786,34 @@ subsectionstyle=show/shaded/hide,
 subsubsectionstyle=show/show/hide,
 }
 
+
+%% number, partname, page.
+\@ifundefined{beamer@partintoc}{
+   \providecommand\beamer@partintoc[3]{
+\ifnum\c@tocdepth=-1\relax
+\makebox[6em]{PART #1:} #2
+\par
+\fi
+}
+\define@key{beamertoc}{onlyparts}[]{
+\c@tocdepth=-1\relax
+}
+}{
+   %\providecommand\beamer@partintoc is defined, so I guess that \define@key{beamertoc}{onlyparts} also.
+}
+
 \cs_new_protected:Nn \__gotham_inner_disable_partpage:
 {
 \AtBeginPart{
+\addtocontents{toc}{\protect\beamer@partintoc{\the\c@part}{\beamer@partname}{\the\c@page}}%
 }
 }
 
 \cs_new_protected:Nn \__gotham_inner_enable_partpage:
 {
 \AtBeginPart{
+\addtocontents{toc}{\protect\beamer@partintoc{\the\c@part}{\beamer@partname}{\the\c@page}}%
+
 \ifbeamer@inframe
 \partpage
 \else
@@ -903,9 +946,10 @@ subsubsectionstyle=show/show/hide,
 \subsubsectionpage
 \else
 \ifdefempty{\subsubsectionpageOptions}{
+%% empty command
 \frame[c, subsubsec]{\subsubsectionpage}
 }{
-
+%% non-empty command :
 \edef\l__gotham_subsubsectionpageOptions_tmp{c,\subsubsectionpageOptions,subsubsec}%{c,subsubsec,\subsubsectionpageOptions}%
    \expandafter\frame\expandafter[\l__gotham_subsubsectionpageOptions_tmp]{\subsubsectionpage}
 }
@@ -1016,7 +1060,7 @@ fg=normal~text.fg
 }
 \setbeamertemplate{progress~bar~in~section~page}[empty]
 \setbeamertemplate{part~page}[progressbar/simple]
-   % \usebeamertemplate*{part~page}% activated automatically 
+   % \usebeamertemplate*{part~page}% activated automatically
 }
 
 \defbeamertemplate{section~frame}{gotham~simple}{
@@ -1064,7 +1108,7 @@ fg=normal~text.fg
 }
 \setbeamertemplate{progress~bar~in~section~page}[display]
 \setbeamertemplate{part~page}[progressbar/simple]
-   % \usebeamertemplate*{part~page}% activated automatically 
+   % \usebeamertemplate*{part~page}% activated automatically
 }
 
 \defbeamertemplate{section~frame}{gotham~progressbar}{
@@ -1689,12 +1733,16 @@ align=left
 \hspace*{1.13cm}{\usebeamercolor*[fg]{footer} \rule{0.6\paperwidth}{0.2pt}{\par\vskip-0.35\baselineskip}\nointerlineskip}
 }
 \defbeamertemplate{subsection~in~toc}{gotham~bullet}{
+\leavevmode
 \hspace*{0.53cm}\tikz[baseline=-0.5ex]\node[subsection~number]{};
-\hspace*{0.5cm}\tikz[baseline=-0.5ex]\node[subsection]{\usebeamerfont*{toc~subtitle}\inserttocsubsection \gotham@strut};\\[-0.2cm]
+\hspace*{0.5cm}\tikz[baseline=-0.5ex]\node[subsection]{\usebeamerfont*{toc~subtitle}\inserttocsubsection \gotham@strut};
+\par \vspace{-0.38cm}
 }
 \defbeamertemplate{subsubsection~in~toc}{gotham~bullet}{
+\leavevmode
 \hspace*{0.58cm}\tikz[baseline=-0.5ex]\node[subsubsection~number]{};
-\hspace*{0.69cm}\tikz[baseline=-0.5ex]\node[subsubsection]{\usebeamerfont*{toc~subtitle}\inserttocsubsubsection \gotham@strut};\\[-0.2cm]
+\hspace*{0.69cm}\tikz[baseline=-0.5ex]\node[subsubsection]{\usebeamerfont*{toc~subtitle}\inserttocsubsubsection \gotham@strut};
+\par \vspace{-0.38cm}
 }
 \defbeamertemplate{section~in~toc~shaded}{gotham~bullet}{
 \hspace*{0.4cm}\tikz[baseline=-0.5ex]\node[section~number, fill=colorBackElement!40]{\usebeamerfont*{toc~subtitle}\textbf{\inserttocsectionnumber}};
@@ -1702,47 +1750,57 @@ align=left
 \hspace*{1.13cm}{\usebeamercolor*[fg]{footer} \rule{0.6\paperwidth}{0.2pt}{\par\vskip-0.35\baselineskip}\nointerlineskip}
 }
 \defbeamertemplate{subsection~in~toc~shaded}{gotham~bullet}{
+\leavevmode
 \hspace*{0.53cm}\tikz[baseline=-0.5ex]\node[subsection~number,fill=colorBackElement!20]{};
-\hspace*{0.5cm}\tikz[baseline=-0.5ex]\node[subsection, text=colorBackElement!20]{\usebeamerfont*{toc~subtitle}\inserttocsubsection \gotham@strut};\\[-0.2cm]
+\hspace*{0.5cm}\tikz[baseline=-0.5ex]\node[subsection, text=colorBackElement!20]{\usebeamerfont*{toc~subtitle}\inserttocsubsection \gotham@strut};
+\par \vspace{-0.38cm}
 }
 \defbeamertemplate{subsubsection~in~toc~shaded}{gotham~bullet}{
+\leavevmode
 \hspace*{0.58cm}\tikz[baseline=-0.5ex]\node[subsubsection~number,fill=colorBackElement!20]{};
-\hspace*{0.69cm}\tikz[baseline=-0.5ex]\node[subsubsection,text=colorBackElement!20]{\usebeamerfont*{toc~subtitle}\inserttocsubsubsection \gotham@strut};\\[-0.2cm]
+\hspace*{0.69cm}\tikz[baseline=-0.5ex]\node[subsubsection,text=colorBackElement!20]{\usebeamerfont*{toc~subtitle}\inserttocsubsubsection \gotham@strut};
+\par \vspace{-0.38cm}
 }
 
 \defbeamertemplate{part~in~toc}{gotham~simple}{
+\leavevmode
 {{\inserttocpartnumber}.}~\inserttocpart
-\\
+\par \vspace{-0.2cm}
 }
 \defbeamertemplate{section~in~toc}{gotham~simple}{
 {{\inserttocsectionnumber}.}~\inserttocsection
-\\
+\par \vspace{-0.2cm}
 }
 \defbeamertemplate{subsection~in~toc}{gotham~simple}{
+\leavevmode
 \quad{{\inserttocsectionnumber}.\inserttocsubsectionnumber.}~\inserttocsubsection
-\\
+\par \vspace{-0.2cm}
 }
 \defbeamertemplate{subsubsection~in~toc}{gotham~simple}{
+\leavevmode
 \qquad{{\inserttocsectionnumber}.\inserttocsubsectionnumber.\inserttocsubsubsectionnumber.}~\inserttocsubsubsection
-\\
+\par \vspace{-0.2cm}
 }
 \defbeamertemplate{section~in~toc~shaded}{gotham~simple}{
+\leavevmode
 \begin{colormixin}{20!parent.bg}
 {{\inserttocsectionnumber}.}~\inserttocsection
 \end{colormixin}
-\\
+\par \vspace{-0.2cm}
 }
 \defbeamertemplate{subsection~in~toc~shaded}{gotham~simple}{
+\leavevmode
 \begin{colormixin}{20!parent.bg}
 \quad{{\inserttocsectionnumber}.\inserttocsubsectionnumber.}~\inserttocsubsection
 \end{colormixin}
-\\
+\par \vspace{-0.2cm}
 }
 \defbeamertemplate{subsubsection~in~toc~shaded}{gotham~simple}{
+\leavevmode
 \begin{colormixin}{20!parent.bg}
 \qquad{{\inserttocsectionnumber}.\inserttocsubsectionnumber.\inserttocsubsubsectionnumber.}~\inserttocsubsubsection
 \end{colormixin}
-\\
+\par \vspace{-0.2cm}
 }
 
 \defbeamertemplate{background~canvas}{toc/gotham~simple}{

@@ -23,14 +23,14 @@
 \input expl3-generic \relax
 %</internal>
 %<class>\NeedsTeXFormat{LaTeX3e}
-%<package>\ProvidesExplPackage{beamerthemegotham}{2025-07-02}{1.2.2.a}{A modern, minimal-ish, versatile and extendable yet robust theme for Beamer}
+%<package>\ProvidesExplPackage{beamerthemegotham}{2025-12-25}{1.2.4.a}{A modern, minimal-ish, versatile and extendable yet robust theme for Beamer}
 %<author>Romain NOEL</author>
 %<maintainer>Romain NOEL</maintainer>
 %<url>https://gitlab.com/RomainNOEL/beamertheme-gotham</url>
-%<desc> 
-% A modern, minimal-ish, versatile and extendable yet robust theme for Beamer. It uses l3build system to both build and verify (Test-Driven Development) the delivered code. 
+%<desc>
+% A modern, minimal-ish, versatile and extendable yet robust theme for Beamer. It uses l3build system to both build and verify (Test-Driven Development) the delivered code.
 % </desc>
-% 
+%
 %<*driver>
 \documentclass{l3doc}
 	\usepackage[T1]{fontenc}
@@ -39,8 +39,8 @@
 	% \usepackage{gotham}
 	% \usepackage{readprov}
 	% 	\ReadPackageInfos{beamerthemegotham}
-	\edef\GothamVersion{v1.2.2.a} %{\fileversion}
-	\edef\GothamDate{2025-07-02} %{\filedate}
+	\edef\GothamVersion{v1.2.4.a} %{\fileversion}
+	\edef\GothamDate{2025-12-25} %{\filedate}
 
 	\usepackage{parskip}
 	\usepackage{setspace}
@@ -125,7 +125,7 @@
 	%% =====================================================================
 
 
-	%% l3doc commands 
+	%% l3doc commands
 	\EnableCrossrefs
 	\CodelineIndex
 	\RecordChanges
@@ -158,7 +158,7 @@
 	\usepackage{standalone}
 	%\usepackage{gotham}
 	\providecommand{\defopt}[1]{\underline{#1}}
-	% l3doc commands 
+	% l3doc commands
 	\EnableCrossrefs
 	\CodelineIndex
 	\RecordChanges
@@ -178,7 +178,7 @@
 	\usepackage{standalone}
 	%\usepackage{gotham}
 	\providecommand{\defopt}[1]{\underline{#1}}
-	% l3doc commands 
+	% l3doc commands
 	\EnableCrossrefs
 	\CodelineIndex
 	\RecordChanges
@@ -189,14 +189,14 @@
 	\DocInput{gotham.dtx}
 \end{document}
 %</userCmd>
-% 
+%
 % \fi
 %
 %
 %\begin{implementation}
 %    \begin{macrocode}
 %<*font>
-\ProvidesExplPackage{beamerfontthemegotham}{2025-07-02}{1.2.2.a}{gotham font theme}
+\ProvidesExplPackage{beamerfontthemegotham}{2025-12-25}{1.2.4.a}{gotham font theme}
 \RequirePackage{expl3}
 % \RequirePackage{xparse}
 % \RequirePackage{etoolbox}
@@ -324,9 +324,9 @@
 			BoldItalicFont={FiraSans-Italic.otf}]
 		{FiraSans-Light.otf}
 		% Latin Modern Typewriter
-		\renewcommand{\ttdefault}{lmtt} 
+		\renewcommand{\ttdefault}{lmtt}
 	}{
-		% If this fails, the suffix OT --- used by some Linux distributions --- will be tried. 
+		% If this fails, the suffix OT --- used by some Linux distributions --- will be tried.
 		\iffontsavailable{FiraSans~Light~OT,
 			FiraSans~LightItalic~OT,
 			FiraSans~Regular~OT,
@@ -337,7 +337,7 @@
 				BoldItalicFont={Fira~Sans~Italic~OT}]
 			{Fira~Sans~Light~OT}
 			% Latin Modern Typewriter
-			\renewcommand{\ttdefault}{lmtt} 
+			\renewcommand{\ttdefault}{lmtt}
 		}{
 			% If this also fails, a warning will be displayed and the standard fonts will be used.
 			\msg_warning:nn { gotham } { fonts-not-available }
@@ -348,14 +348,14 @@
 	\iffontsavailable{FiraMono-Medium.otf, FiraMono-Bold.otf}{
 		\setmonofont[BoldFont={FiraMono-Medium.otf}]{FiraMono-Bold.otf}
 	}{
-		% If this fails, the suffix OT --- used by some Linux distributions --- will be tried. 
+		% If this fails, the suffix OT --- used by some Linux distributions --- will be tried.
 		\iffontsavailable{Fira~Mono~Medium~OT, Fira~Mono~Bold~OT}{
 			\setmonofont[BoldFont={Fira~Mono~Medium~OT}]{Fira~Mono~Bold~OT}
 			\renewcommand{\ttdefault}{lmtt} % Latin Modern Typewriter
 		}{
 			% If this also fails, a warning will be displayed and the standard fonts will be used.
-			\msg_warning:nn { gotham } { fonts-not-available } 
-		} 
+			\msg_warning:nn { gotham } { fonts-not-available }
+		}
 	}
 	%
 	% Add a feature for numbers in tables.
@@ -375,7 +375,7 @@
 % \begin{implementation}
 % 	\begin{macro}{\setbeamerfont{title}, general font definitions}
 %		Set all needed font environment variables:shape, size, series.
-%		Remark: Case is missing. 
+%		Remark: Case is missing.
 % 		\UnitTested
 % 		\TestFiles{gotham-test-035, gotham-test-036}
 % 		\TestMissing{block, caption, description, bibio}
@@ -414,7 +414,7 @@
 % \begin{implementation}
 % 	\begin{function}{\__gotham_title_format:n, titles formats}
 %		Pre-hooks that will be inserted to control case format of titles in addition with the fonts set.
-% 		\TestFiles{gotham-test-035, gotham-test-036}
+% 		\TestFiles{gotham-test-035, gotham-test-036, gotham-test-036b, gotham-test-1045}
 % 		\TestMissing{format of framesubtitle, part and subsection are not tested (and not working) yet.}
 %    \begin{macrocode}
 \def\gotham@titleformat#1{#1}
@@ -422,6 +422,7 @@
 \def\gotham@parttitleformat#1{#1}
 \def\gotham@sectiontitleformat#1{#1}
 \def\gotham@subsectiontitleformat#1{#1}
+\def\gotham@subsubsectiontitleformat#1{#1}
 \def\gotham@frametitleformat#1{#1}
 \def\gotham@framesubtitleformat#1{#1}
 % IF ONE DAY: I can patch beamer with expl3, I will use the following commands instead.
@@ -443,8 +444,9 @@
 % 		This solution was suggested by Enrico Gregorio in an answer to \href{http://tex.stackexchange.com/questions/112526/}{this StackExchange question}.
 % 		Remark: patchcmd from etoolbox (or other), is not compatible with expl3.
 % 		\UnitTested
-% 		\TestFiles{gotham-test-035, gotham-test-036}
+% 		\TestFiles{gotham-test-035, gotham-test-036, gotham-test-036b, gotham-test-1042}
 % 		\TestMissing{format of framesubtitle, part and subsection are not tested (and not working) yet.}
+% 		\changes{v1.2.4}{2025-12-04}{change or add patches for parts,section, sub, subsubsec and all their 'section*'intoc}
 %    \begin{macrocode}
 \ExplSyntaxOff
 \patchcmd{\beamer@title}
@@ -459,19 +461,62 @@
 	% {\def\insertsubtitle{ \__gotham_subtitle_format:n{#2} }}
 	{}
 	{\PackageError{beamerfontthemegotham}{Patching~subtitle~failed}\@ehc}
-\patchcmd{\sectionentry} % beamerbasenavigation.sty l.335
-	{\def\insertsectionhead{#2}}
-	{\def\insertsectionhead{\gotham@sectiontitleformat{#2}}}
+
+
+% %%%% PART  %%%%%
+
+% Missing command for part in toc from https://tex.stackexchange.com/questions/5285/tableofcontents-from-part-commands-in-beamer
+%% number, partname, page.
+\providecommand\beamer@partintoc[3]{%
+	\ifnum\c@tocdepth=-1\relax
+		% requesting onlyparts.
+		\makebox[6em]{PART #1:} #2
+		\par
+	\fi
+}
+\define@key{beamertoc}{onlyparts}[]{%
+	\c@tocdepth=-1\relax
+}
+\patchcmd{\beamer@part} % beamerbasenavigation.sty l.195
+	{\def\beamer@partname{#2}}
+	{\def\beamer@partname{\gotham@parttitleformat{#2}}}
 	{}
-	{\PackageError{beamerfontthemegotham}{Patching~section~title~failed}\@ehc}% 
+	{\PackageError{beamerfontthemegotham}{Patching~part~title~failed}\@ehc}%
+\patchcmd{\beamer@part} % beamerbasenavigation.sty l.195
+	{\def\beamer@partnameshort{#1}}
+	{\def\beamer@partnameshort{\gotham@parttitleformat{#1}}}
+	{}
+	{\PackageError{beamerfontthemegotham}{Patching~part~title~failed}\@ehc}%
+\patchcmd{\beamer@part} % beamerbasenavigation.sty l.195
+	{\protect\partentry{#2}{\the\c@part}}
+	{\protect\partentry{\gotham@parttitleformat{#2}}{\the\c@part}}
+	{}
+	{\PackageError{beamerfontthemegotham}{Patching~part~title~failed}\@ehc}%
+\patchcmd{\beamer@part} % beamerbasenavigation.sty l.195
+	{\Hy@writebookmark{\the\c@part}{#1}{Outline\the\c@part}{1}{toc}}
+	{\Hy@writebookmark{\the\c@part}{\gotham@parttitleformat{#1}}{Outline\the\c@part}{1}{toc}}
+	{}
+	{\PackageError{beamerfontthemegotham}{Patching~part~title~failed}\@ehc}%
+
+
+%%%%% SECTION  %%%%%
 %
-%% NOT WORKING YET!
-%% \patchcmd{\subsectionentry} % beamerbasenavigation.sty l.384
-%% 	{\def\insertsubsectionhead{##5}}
-%% 	{\def\insertsubsectionhead{\gotham@subsectiontitleformat{##5}}}
-%% 	{}
-%% 	{\PackageError{beamerfontthemegotham}{Patching~subsection~title~failed}\@ehc}% 
-%
+% \patchcmd{\sectionentry} % beamerbasenavigation.sty l.335
+% 	{\def\insertsectionhead{#2}}
+% 	{\def\insertsectionhead{\gotham@sectiontitleformat{#2}}}
+% 	{}
+% 	{\PackageError{beamerfontthemegotham}{Patching~section~title~failed}\@ehc}%
+\patchcmd{\beamer@section} % beamerbasenavigation.sty l.195
+	{\protect\beamer@sectionintoc{\the\c@section}{#2}}
+	{\protect\beamer@sectionintoc{\the\c@section}{\gotham@sectiontitleformat{#2}}}
+	{}
+	{\PackageError{beamerfontthemegotham}{Patching~section~title~failed}\@ehc}%
+\patchcmd{\beamer@section} % beamerbasenavigation.sty l.195
+	{\long\def\secname{#2}}
+	{\long\def\secname{\gotham@sectiontitleformat{#2}}}
+	{}
+	{\PackageError{beamerfontthemegotham}{Patching~section~title~failed}\@ehc}%
+
 \@tempswafalse
 \patchcmd{\beamer@section} % beamerbasesection.sty l. 209
 	{\def\insertsectionhead{\hyperlink{Navigation\the\c@page}{#1}}}
@@ -489,25 +534,66 @@
 	{\PackageError{beamerfontthemegotham}{Patching~section~title~failed}\@ehc}
 \fi
 \@tempswafalse
-%
-%% NOT WORKING YET !
-%% \patchcmd{\beamer@subsection} % beamerbasesection.sty l. 209
-%% 	{\def\insertsubsectionhead{\hyperlink{Navigation\the\c@page}{#1}}}
-%% 	{\def\insertsubsectionhead{\hyperlink{Navigation\the\c@page}\gotham@subsectiontitleformat{#1}}}
-%% 		% \__gotham_subsection_title_format:n{#2}
-%% 	{\@tempswatrue}
-%% 	{}
-%% \patchcmd{\beamer@subsection} % beamerbasesection.sty l. 209
-%% 	{\protected@edef\insertsubsectionhead{\noexpand\hyperlink{Navigation\the\c@page}{#1}}}
-%% 	{\protected@edef\insertsubsectionhead{\noexpand\hyperlink{Navigation\the\c@page}{\noexpand\gotham@subsectiontitleformat{#1}}}}
-%% 		% \exp_not:N \__gotham_subsection_title_format:n {#1}
-%% 	{\@tempswatrue}
-%% 	{}
-%% \if@tempswa\else
-%% 	{\PackageError{beamerfontthemegotham}{Patching~subsection~title~failed}\@ehc}
-%% \fi%
-%% \@tempswafalse
-%
+
+
+% %%%% SUBSECTION %%%%%
+
+\patchcmd{\beamer@subsection} % beamerbasenavigation.sty l.195
+	{\protect\beamer@subsectionintoc{\the\c@section}{\the\c@subsection}{#2}}
+	{\protect\beamer@subsectionintoc{\the\c@section}{\the\c@subsection}{\gotham@subsectiontitleformat{#2}}}
+	{}
+	{\PackageError{beamerfontthemegotham}{Patching~subsection~title~failed}\@ehc}%
+\patchcmd{\beamer@subsection} % beamerbasenavigation.sty l.195
+	{\long\def\subsecname{#2}}
+	{\long\def\subsecname{\gotham@subsectiontitleformat{#2}}}
+	{}
+	{\PackageError{beamerfontthemegotham}{Patching~subsection~title~failed}\@ehc}%
+
+\@tempswafalse
+\patchcmd{\beamer@subsection} % beamerbasesubsection.sty l. 209
+	{\def\insertsubsectionhead{\hyperlink{Navigation\the\c@page}{#1}}}
+	{\def\insertsubsectionhead{\hyperlink{Navigation\the\c@page}{\gotham@subsectiontitleformat{#1}}}}
+		% \__gotham_subsection_title_format:n{#2}
+	{\@tempswatrue}
+	{}
+\patchcmd{\beamer@subsection} % beamerbasesubsection.sty l. 209
+	{\edef\insertsubsectionhead{\noexpand\hyperlink{Navigation\the\c@page}{\unexpanded{#1}}}}
+	{\edef\insertsubsectionhead{\noexpand\hyperlink{Navigation\the\c@page}{\noexpand\gotham@subsectiontitleformat{\unexpanded{#1}}}}}
+		% \exp_not:N \__gotham_subsection_title_format:n {#1}
+	{\@tempswatrue}
+	{}
+\if@tempswa\else
+	{\PackageError{beamerfontthemegotham}{Patching~subsection~title~failed}\@ehc}
+\fi
+\@tempswafalse
+
+
+% %%% SUBSUBSECTION  %%%%%
+
+\patchcmd{\beamer@subsubsection} % beamerbasenavigation.sty l.195
+	{\long\def\subsubsecname{#2}}
+	{\long\def\subsubsecname{\gotham@subsubsectiontitleformat{#2}}}
+	{}
+	{\PackageError{beamerfontthemegotham}{Patching~subsubsection~title~failed}\@ehc}%
+\patchcmd{\beamer@subsubsection} %\protect\beamer@subsubsectionintoc
+	{{\the\c@section}{\the\c@subsection}{\the\c@subsubsection}{#2}}
+	{{\the\c@section}{\the\c@subsection}{\the\c@subsubsection}{\gotham@subsubsectiontitleformat{#2}}}
+	{}
+	{\PackageError{beamerfontthemegotham}{Patching~subsubsection~title~failed}\@ehc}%
+
+\@tempswafalse
+
+\patchcmd{\beamer@subsubsection} % beamerbasesubsubsection.sty l. 209
+	{\edef\insertsubsubsectionhead{\noexpand\hyperlink{Navigation\the\c@page}{\unexpanded{#1}}}}
+	{\edef\insertsubsubsectionhead{\noexpand\hyperlink{Navigation\the\c@page}{\noexpand\gotham@subsubsectiontitleformat{\unexpanded{#1}}}}}
+		% \exp_not:N \__gotham_subsubsection_title_format:n {#1}
+	{\@tempswatrue}
+	{}
+\if@tempswa\else
+	{\PackageError{beamerfontthemegotham}{Patching~subsubsection~title~failed}\@ehc}
+\fi
+\@tempswafalse
+
 %
 % Similarly, to make the |\MakeLowercase| and |\MakeUppercase| macros work in the frame title we have to patch |\beamer@@frametitle|.
 \providecommand{\beamer@insertframetitlecontinuation}{
@@ -549,7 +635,7 @@
 % \begin{documentation}
 % \begin{function}{\usefonttheme}
 %	\begin{syntax}
-%		\cs{usefonttheme}\oarg{option1=value1, ...}\marg{gotham} 
+%		\cs{usefonttheme}\oarg{option1=value1, ...}\marg{gotham}
 %		\textrm{where the options are (default marked as} \defopt{default}\textrm{):}
 % 		\meta{title format} = \oarg{\defopt{textregular} \textbar lower \textbar upper \textbar titlecase}
 %		\meta{title shape} = \oarg{\defopt{textregular} \textbar smallcaps \textbar italic}
@@ -565,17 +651,20 @@
 %		\meta{section shape} = \oarg{\defopt{textregular} \textbar smallcaps \textbar italic}
 % 		\meta{subsection format} = \oarg{\defopt{textregular} \textbar lower \textbar upper \textbar titlecase}
 %		\meta{subsection shape} = \oarg{\defopt{textregular} \textbar smallcaps \textbar italic}
+% 		\meta{subsubsection format} = \oarg{\defopt{textregular} \textbar lower \textbar upper \textbar titlecase}
+%		\meta{subsubsection shape} = \oarg{\defopt{textregular} \textbar smallcaps \textbar italic}
 %	\end{syntax}
-%	The 'package' (usefonttheme) options can control both shape and format of title (of the presentation), subtitle, part title, section title, subsection title, frametitle and framesubtitle.
+%	The 'package' (usefonttheme) options can control both shape and format of title (of the presentation), subtitle, part title, section title, subsection title, subsubsection title, frametitle and framesubtitle.
 % \end{function}
 % \end{documentation}
-%%%% 
+%%%%
 % \begin{implementation}
 % 	\begin{macro}{font key -- interface}
 % 		Controls the format and shape of the title (of the presentation), subtitle, part title, section title, subsection title, frametitle and framesubtitle.
 % 		\UnitTested
-% 		\TestFiles{gotham-test-035, gotham-test-036}
-% 		\TestMissing{format of framesubtitle, part and subsection are not tested (and not working) yet.}
+% 		\TestFiles{gotham-test-035, gotham-test-036, gotham-test-036b}
+% 		\TestMissing{format of framesubtitle are not tested (and not working) yet.}
+% 		\changes{v1.2.4}{2025-12-04}{add subsubsection format and shape options}
 %    \begin{macrocode}
 \keys_define:nn { gotham / font }
 {
@@ -583,27 +672,27 @@
 	format~title .choice:,
 	format~title .usage:n = { general },
 	format~title .default:n = { regular },
-	format~title / regular .code:n = 
+	format~title / regular .code:n =
 	{
 		\let\gotham@titleformat\@empty
 		% \cs_set_eq:NN \__gotham_title_format:n \__gotham_unchanged:n
 	},
-	format~title / lower .code:n = 
+	format~title / lower .code:n =
 	{
 		\let\gotham@titleformat \text_lowercase:n %\lowercase
 		% \cs_set_eq:NN \__gotham_title_format:n \text_lowercase:n
 		\PackageWarning{ gotham } { Be~aware~that~format~title=lower~can~lead~to~problems. }
 	},
-	format~title / upper .code:n = 
+	format~title / upper .code:n =
 	{
 		\let\gotham@titleformat \text_uppercase:n %\uppercase
 		% \cs_set_eq:NN \__gotham_title_format:n \text_uppercase:n
 		\PackageWarning{ gotham } { Be~aware~that~format~title=upper~can~lead~to~problems. }
 	},
-	format~title / titlecase .code:n = 
+	format~title / titlecase .code:n =
 	{
 		\let\gotham@titleformat \text_titlecase_all:n %\MakeTitlecase
-		% \cs_set_eq:NN \__gotham_title_format:n \text_titlecase_all:n 
+		% \cs_set_eq:NN \__gotham_title_format:n \text_titlecase_all:n
 		\PackageWarning{ gotham } { Be~aware~that~format~title=titlecase~can~lead~to~problems. }
 	},
 	format~title / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'\l_keys_value_tl'~is~unknown~for~the~(known)~option~'\l_keys_key_tl',~so~being~ignored. }{helping~message: format~title / unknown } },
@@ -614,15 +703,15 @@
 	shape~title .choice:,
 	shape~title .usage:n = { general },
 	shape~title .default:n = { regular },
-	shape~title / regular .code:n = 
+	shape~title / regular .code:n =
 	{
 		\setbeamerfont{title}{shape=\normalfont}
 	},
-	shape~title / smallcaps .code:n = 
+	shape~title / smallcaps .code:n =
 	{
 		\setbeamerfont{title}{shape=\scshape}
 	},
-	shape~title / italic .code:n = 
+	shape~title / italic .code:n =
 	{
 		\setbeamerfont{title}{shape=\itshape}
 	},
@@ -635,24 +724,24 @@
 	format~subtitle .choice:,
 	format~subtitle .usage:n = { general },
 	format~subtitle .default:n = { regular },
-	format~subtitle / regular .code:n = 
+	format~subtitle / regular .code:n =
 	{
 		\let\gotham@subtitleformat\@empty
 		% \cs_set_eq:NN \__gotham_subtitle_format:n \__gotham_unchanged:n
 	},
-	format~subtitle / lower .code:n = 
+	format~subtitle / lower .code:n =
 	{
 		\let\gotham@subtitleformat \text_lowercase:n	%\lowercase
-		% \cs_set_eq:NN \__gotham_subtitle_format:n \text_lowercase:n		
+		% \cs_set_eq:NN \__gotham_subtitle_format:n \text_lowercase:n
 		\PackageWarning{ gotham } { Be~aware~that~format~subtitle=lower~can~lead~to~problems. }
 	},
-	format~subtitle / upper .code:n = 
+	format~subtitle / upper .code:n =
 	{
 		\let\gotham@subtitleformat \text_uppercase:n	%\uppercase
 		\cs_set_eq:NN \__gotham_subtitle_format:n \text_uppercase:n
 		\PackageWarning{ gotham } { Be~aware~that~format~subtitle=upper~can~lead~to~problems. }
 	},
-	format~subtitle / titlecase .code:n = 
+	format~subtitle / titlecase .code:n =
 	{
 		\let\gotham@subtitleformat \text_titlecase_all:n %\MakeTitlecase
 		% \cs_set_eq:NN \__gotham_subtitle_format:n \text_titlecase_all:n %\MakeTitlecase
@@ -666,15 +755,15 @@
 	shape~subtitle .choice:,
 	shape~subtitle .usage:n = { general },
 	shape~subtitle .default:n = { regular },
-	shape~subtitle / regular .code:n = 
+	shape~subtitle / regular .code:n =
 	{
 		\setbeamerfont{subtitle}{shape=\normalfont}
 	},
-	shape~subtitle / smallcaps .code:n = 
+	shape~subtitle / smallcaps .code:n =
 	{
 		\setbeamerfont{subtitle}{shape=\scshape}
 	},
-	shape~subtitle / italic .code:n = 
+	shape~subtitle / italic .code:n =
 	{
 		\setbeamerfont{subtitle}{shape=\itshape}
 	},
@@ -687,24 +776,24 @@
 	format~frametitle .choice:,
 	format~frametitle .usage:n = { general },
 	format~frametitle .default:n = { regular },
-	format~frametitle / regular .code:n = 
+	format~frametitle / regular .code:n =
 	{
 		\let\gotham@frametitleformat\@empty
 		% \cs_set_eq:NN \__gotham_frametitle_format:n \__gotham_unchanged:n
 	},
-	format~frametitle / lower .code:n = 
+	format~frametitle / lower .code:n =
 	{
 		\let\gotham@frametitleformat \text_lowercase:n %\lowercase
 		% \cs_set_eq:NN \__gotham_frametitle_format:n \text_lowercase:n
 		\PackageWarning{ gotham } { Be~aware~that~format~frametitle=lower~can~lead~to~problems. }
 	},
-	format~frametitle / upper .code:n = 
+	format~frametitle / upper .code:n =
 	{
 		\let\gotham@frametitleformat \text_uppercase:n %\uppercase
 		% \cs_set_eq:NN \__gotham_frametitle_format:n \text_uppercase:n
 		\PackageWarning{ gotham } { Be~aware~that~format~frametitle=upper~can~lead~to~problems. }
 	},
-	format~frametitle / titlecase .code:n = 
+	format~frametitle / titlecase .code:n =
 	{
 		\let\gotham@frametitleformat \text_titlecase_all:n %\Maketitlecase
 		% \cs_set_eq:NN \__gotham_frametitle_format:n \text_titlecase_all:n %\MakeTitlecase
@@ -718,15 +807,15 @@
 	shape~frametitle .choice:,
 	shape~frametitle .usage:n = { general },
 	shape~frametitle .default:n = { regular },
-	shape~frametitle / regular .code:n = 
+	shape~frametitle / regular .code:n =
 	{
 		\setbeamerfont{frametitle}{shape=\normalfont}
 	},
-	shape~frametitle / smallcaps .code:n = 
+	shape~frametitle / smallcaps .code:n =
 	{
 		\setbeamerfont{frametitle}{shape=\scshape}
 	},
-	shape~frametitle / italic .code:n = 
+	shape~frametitle / italic .code:n =
 	{
 		\setbeamerfont{frametitle}{shape=\itshape}
 	},
@@ -739,24 +828,24 @@
 	format~framesubtitle .choice:,
 	format~framesubtitle .usage:n = { general },
 	format~framesubtitle .default:n = { regular },
-	format~framesubtitle / regular .code:n = 
+	format~framesubtitle / regular .code:n =
 	{
 		\let\gotham@framesubtitleformat\@empty
 		% \cs_set_eq:NN \__gotham_framesubtitle_format:n \__gotham_unchanged:n
 	},
-	format~framesubtitle / lower .code:n = 
+	format~framesubtitle / lower .code:n =
 	{
 		\let\gotham@framesubtitleformat \text_lowercase:n %\lowercase
 		% \cs_set_eq:NN \__gotham_framesubtitle_format:n \text_lowercase:n
 		\PackageWarning{ gotham } { Be~aware~that~format~framesubtitle=lower~can~lead~to~problems. }
 	},
-	format~framesubtitle / upper .code:n = 
+	format~framesubtitle / upper .code:n =
 	{
 		\let\gotham@framesubtitleformat \text_uppercase:n %\uppercase
 		% \cs_set_eq:NN \__gotham_framesubtitle_format:n \text_uppercase:n
 		\PackageWarning{ gotham } { Be~aware~that~format~framesubtitle=upper~can~lead~to~problems. }
 	},
-	format~framesubtitle / titlecase .code:n = 
+	format~framesubtitle / titlecase .code:n =
 	{
 		\let\gotham@framesubtitleformat \text_titlecase_all:n %\Maketitlecase
 		% \cs_set_eq:NN \__gotham_framesubtitle_format:n \text_titlecase_all:n %\Maketitlecase
@@ -770,15 +859,15 @@
 	shape~framesubtitle .choice:,
 	shape~framesubtitle .usage:n = { general },
 	shape~framesubtitle .default:n = { regular },
-	shape~framesubtitle / regular .code:n = 
+	shape~framesubtitle / regular .code:n =
 	{
 		\setbeamerfont{framesubtitle}{shape=\normalfont}
 	},
-	shape~framesubtitle / smallcaps .code:n = 
+	shape~framesubtitle / smallcaps .code:n =
 	{
 		\setbeamerfont{framesubtitle}{shape=\scshape}
 	},
-	shape~framesubtitle / italic .code:n = 
+	shape~framesubtitle / italic .code:n =
 	{
 		\setbeamerfont{framesubtitle}{shape=\itshape}
 	},
@@ -791,24 +880,24 @@
 	format~part .choice:,
 	format~part .usage:n = { general },
 	format~part .default:n = { regular },
-	format~part / regular .code:n = 
+	format~part / regular .code:n =
 	{
 		\let\gotham@parttitleformat\@empty
 		% \cs_set_eq:NN \__gotham_part_title_format:n \text_titlecase:n
 	},
-	format~part / lower .code:n = 
+	format~part / lower .code:n =
 	{
 		\let\gotham@parttitleformat \text_lowercase:n %\lowercase
 		% \cs_set_eq:NN \__gotham_part_title_format:n \text_lowercase:n
 		\PackageWarning{ gotham } { Be~aware~that~format~part=lower~can~lead~to~problems. }
 	},
-	format~part / upper .code:n = 
+	format~part / upper .code:n =
 	{
 		\let\gotham@parttitleformat \text_uppercase:n %\uppercase
 		% \cs_set_eq:NN \__gotham_part_title_format:n \text_uppercase:n
 		\PackageWarning{ gotham } { Be~aware~that~format~part=upper~can~lead~to~problems. }
 	},
-	format~part / titlecase .code:n = 
+	format~part / titlecase .code:n =
 	{
 		\let\gotham@parttitleformat\text_titlecase_all:n %\Maketitlecase
 		% \cs_set_eq:NN \__gotham_part_title_format:n \text_titlecase:n
@@ -822,15 +911,15 @@
 	shape~part .choice:,
 	shape~part .usage:n = { general },
 	shape~part .default:n = { regular },
-	shape~part / regular .code:n = 
+	shape~part / regular .code:n =
 	{
 		\setbeamerfont{part~title}{shape=\normalfont}
 	},
-	shape~part / smallcaps .code:n = 
+	shape~part / smallcaps .code:n =
 	{
 		\setbeamerfont{part~title}{shape=\scshape}
 	},
-	shape~part / italic .code:n = 
+	shape~part / italic .code:n =
 	{
 		\setbeamerfont{part~title}{shape=\itshape}
 	},
@@ -843,24 +932,24 @@
 	format~section .choice:,
 	format~section .usage:n = { general },
 	format~section .default:n = { regular },
-	format~section / regular .code:n = 
+	format~section / regular .code:n =
 	{
 		\let\gotham@sectiontitleformat\@empty
 		% \cs_set_eq:NN \__gotham_section_title_format:n \__gotham_unchanged:n
 	},
-	format~section / lower .code:n = 
+	format~section / lower .code:n =
 	{
 		\let\gotham@sectiontitleformat \text_lowercase:n %\lowercase
 		% \cs_set_eq:NN \__gotham_section_title_format:n \text_lowercase:n
 		\PackageWarning{ gotham } { Be~aware~that~format~section=lower~can~lead~to~problems. }
 	},
-	format~section / upper .code:n = 
+	format~section / upper .code:n =
 	{
 		\let\gotham@sectiontitleformat \text_uppercase:n %\uppercase
 		% \cs_set_eq:NN \__gotham_section_title_format:n \text_uppercase:n
 		\PackageWarning{ gotham } { Be~aware~that~format~section=upper~can~lead~to~problems. }
 	},
-	format~section / titlecase .code:n = 
+	format~section / titlecase .code:n =
 	{
 		\let\gotham@sectiontitleformat \text_titlecase_all:n %\Maketitlecase
 		% \cs_set_eq:NN \__gotham_section_title_format:n \text_titlecase_all:n
@@ -874,15 +963,15 @@
 	shape~section .choice:,
 	shape~section .usage:n = { general },
 	shape~section .default:n = { regular },
-	shape~section / regular .code:n = 
+	shape~section / regular .code:n =
 	{
 		\setbeamerfont{section~title}{shape=\normalfont}
 	},
-	shape~section / smallcaps .code:n = 
+	shape~section / smallcaps .code:n =
 	{
 		\setbeamerfont{section~title}{shape=\scshape}
 	},
-	shape~section / italic .code:n = 
+	shape~section / italic .code:n =
 	{
 		\setbeamerfont{section~title}{shape=\itshape}
 	},
@@ -895,24 +984,24 @@
 	format~subsection .choice:,
 	format~subsection .usage:n = { general },
 	format~subsection .default:n = { regular },
-	format~subsection / regular .code:n = 
+	format~subsection / regular .code:n =
 	{
 		\let\gotham@subsectiontitleformat\@empty
 		% \cs_set_eq:NN \__gotham_subsection_title_format:n \__gotham_unchanged:n
 	},
-	format~subsection / lower .code:n = 
+	format~subsection / lower .code:n =
 	{
 		\let\gotham@subsectiontitleformat \text_lowercase:n %\lowercase
 		% \cs_set_eq:NN \__gotham_subsection_title_format:n \text_lowercase:n
 		\PackageWarning{ gotham } { Be~aware~that~format~subsection=lower~can~lead~to~problems. }
 	},
-	format~subsection / upper .code:n = 
+	format~subsection / upper .code:n =
 	{
 		\let\gotham@subsectiontitleformat \text_uppercase:n %\uppercase
 		% \cs_set_eq:NN \__gotham_subsection_title_format:n \text_uppercase:n
 		\PackageWarning{ gotham } { Be~aware~that~format~subsection=upper~can~lead~to~problems. }
 	},
-	format~subsection / titlecase .code:n = 
+	format~subsection / titlecase .code:n =
 	{
 		\let\gotham@subsectiontitleformat\text_titlecase_all:n %\Maketitlecase
 		% \cs_set_eq:NN \__gotham_subsection_title_format:n \text_titlecase_all:n
@@ -926,19 +1015,71 @@
 	shape~subsection .choice:,
 	shape~subsection .usage:n = { general },
 	shape~subsection .default:n = { regular },
-	shape~subsection / regular .code:n = 
+	shape~subsection / regular .code:n =
 	{
 		\setbeamerfont{subsection~title}{shape=\normalfont}
 	},
-	shape~subsection / smallcaps .code:n = 
+	shape~subsection / smallcaps .code:n =
 	{
 		\setbeamerfont{subsection~title}{shape=\scshape}
 	},
-	shape~subsection / italic .code:n = 
+	shape~subsection / italic .code:n =
 	{
 		\setbeamerfont{subsection~title}{shape=\itshape}
 	},
 	shape~subsection / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'\l_keys_value_tl'~is~unknown~for~the~(known)~option~'\l_keys_key_tl',~so~being~ignored. }{helping~message: shape~subsection / unknown} },
+}
+
+\keys_define:nn { gotham / font }
+{
+	% format subsubsection
+	format~subsubsection .choice:,
+	format~subsubsection .usage:n = { general },
+	format~subsubsection .default:n = { regular },
+	format~subsubsection / regular .code:n =
+	{
+		\let\gotham@subsubsectiontitleformat\@empty
+		% \cs_set_eq:NN \__gotham_subsubsection_title_format:n \__gotham_unchanged:n
+	},
+	format~subsubsection / lower .code:n =
+	{
+		\let\gotham@subsubsectiontitleformat \text_lowercase:n %\lowercase
+		% \cs_set_eq:NN \__gotham_subsubsection_title_format:n \text_lowercase:n
+		\PackageWarning{ gotham } { Be~aware~that~format~subsubsection=lower~can~lead~to~problems. }
+	},
+	format~subsubsection / upper .code:n =
+	{
+		\let\gotham@subsubsectiontitleformat \text_uppercase:n %\uppercase
+		% \cs_set_eq:NN \__gotham_subsubsection_title_format:n \text_uppercase:n
+		\PackageWarning{ gotham } { Be~aware~that~format~subsubsection=upper~can~lead~to~problems. }
+	},
+	format~subsubsection / titlecase .code:n =
+	{
+		\let\gotham@subsubsectiontitleformat\text_titlecase_all:n %\Maketitlecase
+		% \cs_set_eq:NN \__gotham_subsubsection_title_format:n \text_titlecase_all:n
+		\PackageWarning{ gotham } { Be~aware~that~format~subsubsection=titlecase~can~lead~to~problems. }
+	},
+	format~subsubsection / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'\l_keys_value_tl'~is~unknown~for~the~(known)~option~'\l_keys_key_tl',~so~being~ignored. }{helping~message: format~subsubsection / unknown} },
+}
+\keys_define:nn { gotham / font }
+{
+	% shape subsubsection
+	shape~subsubsection .choice:,
+	shape~subsubsection .usage:n = { general },
+	shape~subsubsection .default:n = { regular },
+	shape~subsubsection / regular .code:n =
+	{
+		\setbeamerfont{subsubsection~title}{shape=\normalfont}
+	},
+	shape~subsubsection / smallcaps .code:n =
+	{
+		\setbeamerfont{subsubsection~title}{shape=\scshape}
+	},
+	shape~subsubsection / italic .code:n =
+	{
+		\setbeamerfont{subsubsection~title}{shape=\itshape}
+	},
+	shape~subsubsection / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'\l_keys_value_tl'~is~unknown~for~the~(known)~option~'\l_keys_key_tl',~so~being~ignored. }{helping~message: shape~subsubsection / unknown} },
 }
 %    \end{macrocode}
 % \end{macro}
@@ -951,7 +1092,7 @@
 % 		\TestFiles{gotham-test-035}
 %    \begin{macrocode}
 % when no value is given, default is called.
-\keys_set:nn { gotham / font } { 
+\keys_set:nn { gotham / font } {
 	format~title, shape~title,
 	format~subtitle, shape~subtitle,
 	format~frametitle, shape~frametitle,
@@ -959,6 +1100,7 @@
 	format~part, shape~part,
 	format~section, shape~section,
 	format~subsection, shape~subsection,
+	format~subsubsection, shape~subsubsection,
 }
 %    \end{macrocode}
 % \end{macro}
@@ -988,7 +1130,7 @@
 %\begin{implementation}
 %    \begin{macrocode}
 %<*color>
-\ProvidesExplPackage{beamercolorthemegotham}{2025-07-02}{1.2.2.a}{Gotham color theme}
+\ProvidesExplPackage{beamercolorthemegotham}{2025-12-25}{1.2.4.a}{Gotham color theme}
 \RequirePackage{expl3}
 % \RequirePackage{xparse}
 \RequirePackage{xcolor}
@@ -1022,14 +1164,14 @@
 % \begin{documentation}
 % \begin{variable}{\colorlet{colorPale}, set gotham palette colors}
 %	\begin{syntax}
-% 		\cs{colorlet} \marg{colorPale} \marg{gPaleYell} 
-% 		\cs{colorlet} \marg{colorDark} \marg{gDarkBlack} 
-% 		\cs{colorlet} \marg{colorA} \marg{gAnthracite} 
-% 		\cs{colorlet} \marg{colorAreversed} \marg{gLightTeal} 
-% 		\cs{colorlet} \marg{colorB} \marg{gMidGrey} 
-% 		\cs{colorlet} \marg{colorC} \marg{gDeepYellOr} 
-% 		\cs{colorlet} \marg{colorD} \marg{gLightOrange} 
-% 		\cs{colorlet} \marg{colorE} \marg{gLightGreen} 
+% 		\cs{colorlet} \marg{colorPale} \marg{gPaleYell}
+% 		\cs{colorlet} \marg{colorDark} \marg{gDarkBlack}
+% 		\cs{colorlet} \marg{colorA} \marg{gAnthracite}
+% 		\cs{colorlet} \marg{colorAreversed} \marg{gLightTeal}
+% 		\cs{colorlet} \marg{colorB} \marg{gMidGrey}
+% 		\cs{colorlet} \marg{colorC} \marg{gDeepYellOr}
+% 		\cs{colorlet} \marg{colorD} \marg{gLightOrange}
+% 		\cs{colorlet} \marg{colorE} \marg{gLightGreen}
 %	\end{syntax}
 %	Setup the colors use for presentations:
 % 	\begin{itemize}
@@ -1039,7 +1181,7 @@
 % 		\item	|colorAreversed| is used for frametitle and standout BG in dark mode
 % 		\item	|colorB| is used for progress bar and blocks BG
 % 		\item	|colorC| is used for progress bar FG
-% 		\item	|colorD| is used for alert FG/BG depending on the block mode 
+% 		\item	|colorD| is used for alert FG/BG depending on the block mode
 % 		\item	|colorE| is used for example FG/BG depending on the block mode
 %	\end{itemize}
 % \end{variable}
@@ -1066,44 +1208,6 @@
 \providecommand{\gothamHookPostColorBGSet}{}
 %    \end{macrocode}
 % \end{variable}
-% \end{implementation}
-
-% \begin{implementation}
-% 	\begin{function}{\__gotham_color_set_style_anthracite:}
-%		Command to activate anthracite colorset.
-% 		\TestFiles{gotham-test-1037}
-%    \begin{macrocode}
-\cs_new_protected:Nn \__gotham_color_set_style_anthracite:{
-	\colorlet{colorPale}{gPaleYell} % BG in light/normal mode
-	\colorlet{colorDark}{gDarkBlack} % FG in light/normal mode
-	\colorlet{colorA}{gAnthracite} % frametitle, standin.out,
-	\colorlet{colorAreversed}{gLightTeal} % frametitle, standin.in,
-	\colorlet{colorB}{gMidGrey} % gray BG : progress bar, blocks
-	\colorlet{colorC}{gDeepYellOr} % progress bar
-	\colorlet{colorD}{gLightOrange} % alert
-	\colorlet{colorE}{gLightGreen} % example
-}
-%    \end{macrocode}
-% \end{function}
-% \end{implementation}
-
-% \begin{implementation}
-% 	\begin{function}{\__gotham_color_set_style_red:}
-%		Command to activate red colorset.
-% 		\TestFiles{gotham-test-1037}
-%    \begin{macrocode}
-\cs_new_protected:Nn \__gotham_color_set_style_red:{
-	\colorlet{colorPale}{gPaleYell} % BG in light/normal mode
-	\colorlet{colorDark}{gDarkBlack} % FG in light/normal mode
-	\colorlet{colorA}{red} % frametitle, standin.out,
-	\colorlet{colorAreversed}{gLightTeal} % frametitle, standin.in,
-	\colorlet{colorB}{gMidGrey} % gray BG : progress bar, blocks
-	\colorlet{colorC}{gDeepYellOr} % progress bar
-	\colorlet{colorD}{gLightOrange} % alert
-	\colorlet{colorE}{gLightGreen} % example
-}
-%    \end{macrocode}
-% \end{function}
 % \end{implementation}
 
 % \begin{documentation}
@@ -1147,6 +1251,123 @@
 % \end{implementation}
 
 % \begin{implementation}
+% 	\begin{variable}{\l__gotham_color_assignation_prop:}
+%		Define a map of color names used internally to the color set elements.
+% 		\changes{v1.2.3}{2025-11-04}{New}
+%    \begin{macrocode}
+\prop_if_exist:NTF \l__gotham_color_assignation_prop
+{}{
+	% if not defined than define it.
+	\prop_new:N \l__gotham_color_assignation_prop
+
+	% Key value (by default)
+	\prop_put:Nnn \l__gotham_color_assignation_prop {colorFG} {colorDark}
+	\prop_put:Nnn \l__gotham_color_assignation_prop {colorBG} {colorPale}
+	\prop_put:Nnn \l__gotham_color_assignation_prop {colorStandin} {colorPale}
+	\prop_put:Nnn \l__gotham_color_assignation_prop {colorStandout} {colorA}
+	\prop_put:Nnn \l__gotham_color_assignation_prop {colorFrametitle} {colorA}
+	\prop_put:Nnn \l__gotham_color_assignation_prop {colorTitlepage} {colorA}
+	\prop_put:Nnn \l__gotham_color_assignation_prop {colorFiligrane} {colorB}
+	\prop_put:Nnn \l__gotham_color_assignation_prop {colorBackElement} {colorB}
+	\prop_put:Nnn \l__gotham_color_assignation_prop {colorProgBar} {colorC}
+	\prop_put:Nnn \l__gotham_color_assignation_prop {colorAlert} {colorD}
+	\prop_put:Nnn \l__gotham_color_assignation_prop {colorExample} {colorE}
+}
+%    \end{macrocode}
+% \end{variable}
+% \end{implementation}
+
+
+% \begin{implementation}
+% 	\begin{function}{\__gotham_reload_color:}
+%		Command to reassign a color names used internally to its corresponding color element of the set.
+%		This reassignation is done through the dedicated map.
+% 		\changes{v1.2.3}{2025-11-04}{New}
+% 		\TestFiles{gotham-test-1040}
+%    \begin{macrocode}
+\cs_new_protected:Nn \__gotham_reload_color:{
+	\colorlet{colorFG}{\prop_item:Nn \l__gotham_color_assignation_prop {colorFG}}
+	\colorlet{colorBG}{\prop_item:Nn \l__gotham_color_assignation_prop {colorBG}}
+	\colorlet{colorStandin}{\prop_item:Nn \l__gotham_color_assignation_prop {colorStandin}}
+	\colorlet{colorStandout}{\prop_item:Nn \l__gotham_color_assignation_prop {colorStandout}}
+	\colorlet{colorFrametitle}{\prop_item:Nn \l__gotham_color_assignation_prop {colorFrametitle}}
+	\colorlet{colorTitlepage}{\prop_item:Nn \l__gotham_color_assignation_prop {colorTitlepage}}
+	\colorlet{colorFiligrane}{\prop_item:Nn \l__gotham_color_assignation_prop {colorFiligrane}}
+	\colorlet{colorBackElement}{\prop_item:Nn \l__gotham_color_assignation_prop {colorBackElement}}
+	\colorlet{colorProgBar}{\prop_item:Nn \l__gotham_color_assignation_prop {colorProgBar}}
+	\colorlet{colorAlert}{\prop_item:Nn \l__gotham_color_assignation_prop {colorAlert}}
+	\colorlet{colorExample}{\prop_item:Nn \l__gotham_color_assignation_prop {colorExample}}
+}
+%    \end{macrocode}
+% \end{function}
+% \end{implementation}
+
+% \begin{documentation}
+% \begin{function}{\gothamReloadColors}
+%	\begin{syntax}
+%		 \cs{gothamReloadColors}
+%	\end{syntax}
+%	Command to reassign a color names used internally to its corresponding color element of the set.
+% \end{function}
+% \end{documentation}
+%%%%%%
+% \begin{implementation}
+% 	\begin{function}{\gothamReloadColors}
+%		Command accessible to users to call the reassignation of color names used internally.
+% 		\changes{v1.2.3}{2025-11-04}{New}
+% 		\TestFiles{gotham-test-1040}
+%    \begin{macrocode}
+\providecommand{\gothamReloadColors}{
+	\__gotham_reload_color:
+}
+%    \end{macrocode}
+% \end{function}
+% \end{implementation}
+
+% \begin{implementation}
+% 	\begin{function}{\__gotham_color_set_style_anthracite:}
+%		Command to activate anthracite colorset.
+% 		\changes{v1.2.3}{2025-11-04}{reload all colors from function}
+% 		\TestFiles{gotham-test-1037}
+%    \begin{macrocode}
+\cs_new_protected:Nn \__gotham_color_set_style_anthracite:{
+	\colorlet{colorPale}{gPaleYell} % BG in light/normal mode
+	\colorlet{colorDark}{gDarkBlack} % FG in light/normal mode
+	\colorlet{colorA}{gAnthracite} % frametitle, standin.out,
+	\colorlet{colorAreversed}{gLightTeal} % frametitle, standin.in,
+	\colorlet{colorB}{gMidGrey} % gray BG : progress bar, blocks
+	\colorlet{colorC}{gDeepYellOr} % progress bar
+	\colorlet{colorD}{gLightOrange} % alert
+	\colorlet{colorE}{gLightGreen} % example
+	\__gotham_reload_color:
+}
+%    \end{macrocode}
+% \end{function}
+% \end{implementation}
+
+% \begin{implementation}
+% 	\begin{function}{\__gotham_color_set_style_red:}
+%		Command to activate red colorset.
+% 		\changes{v1.2.3}{2025-11-04}{reload all colors from function}
+% 		\TestFiles{gotham-test-1037, gotham-test-1040}
+%    \begin{macrocode}
+\cs_new_protected:Nn \__gotham_color_set_style_red:{
+	\colorlet{colorPale}{gPaleYell} % BG in light/normal mode
+	\colorlet{colorDark}{gDarkBlack} % FG in light/normal mode
+	\colorlet{colorA}{red} % frametitle, standin.out,
+	\colorlet{colorAreversed}{gLightTeal} % frametitle, standin.in,
+	\colorlet{colorB}{gMidGrey} % gray BG : progress bar, blocks
+	\colorlet{colorC}{gDeepYellOr} % progress bar
+	\colorlet{colorD}{gLightOrange} % alert
+	\colorlet{colorE}{gLightGreen} % example
+	\__gotham_reload_color:
+}
+%    \end{macrocode}
+% \end{function}
+% \end{implementation}
+
+
+% \begin{implementation}
 % 	\begin{variable}{\providebool{darkBG}, \providebool{transparentBG}}
 %		Variable to track color setup.
 %    \begin{macrocode}
@@ -1163,23 +1384,22 @@
 % \begin{implementation}
 % 	\begin{function}{\__gotham_color_set_darkBG:}
 %		Command to activate dark mode
-% 		\TestFiles{gotham-test-037}
+% 		\changes{v1.2.0}{2024-11-11}{add hook after colorset}
+% 		\changes{v1.2.2}{2025-07-02}{reload all colors to apply changes from users}
+% 		\changes{v1.2.3}{2025-11-04}{change map and reload all colors from function}
+% 		\TestFiles{gotham-test-037, gotham-test-1037, gotham-test-055}
 %    \begin{macrocode}
 \cs_new_protected:Nn \__gotham_color_set_darkBG:{
 	\booltrue{darkBG}
 	\boolfalse{transparentBG}
-	\colorlet{colorFrametitle}{colorAreversed}
-	\colorlet{colorStandout}{colorAreversed}
-	\colorlet{colorStandin}{colorFG}
-	\colorlet{colorTitlepage}{colorAreversed}
+	\prop_put:Nnn \l__gotham_color_assignation_prop {colorStandin} {colorFG}
+	\prop_put:Nnn \l__gotham_color_assignation_prop {colorStandout} {colorAreversed}
+	\prop_put:Nnn \l__gotham_color_assignation_prop {colorFrametitle} {colorAreversed}
+	\prop_put:Nnn \l__gotham_color_assignation_prop {colorTitlepage} {colorAreversed}
+
 	%%% adapt and reload
-	\colorlet{colorBG}{colorPale}
-	\colorlet{colorFG}{colorDark}
-	\colorlet{colorFiligrane}{colorB}
-	\colorlet{colorBackElement}{colorB}
-	\colorlet{colorProgBar}{colorC}
-	\colorlet{colorAlert}{colorD}
-	\colorlet{colorExample}{colorE}
+	\__gotham_reload_color:
+
 	%%% dark
 	\setbeamercolor{normal~text}{
 		fg=colorBG,
@@ -1201,23 +1421,21 @@
 % \begin{implementation}
 % 	\begin{function}{\__gotham_color_set_lightBG:}
 %		Command to activate light background.
-% 		\TestFiles{gotham-test-037}
-%    \begin{macrocode}
+% 		\changes{v1.2.0}{2024-11-11}{add hook after colorset}
+% 		\changes{v1.2.2}{2025-07-02}{reload all colors to apply changes from users}
+% 		\changes{v1.2.3}{2025-11-04}{change map and reload all colors from function}
+% 		\TestFiles{gotham-test-037, gotham-test-1037, gotham-test-055}%    \begin{macrocode}
 \cs_new_protected:Nn \__gotham_color_set_lightBG:{
 	\boolfalse{darkBG}
 	\boolfalse{transparentBG}
-	\colorlet{colorFrametitle}{colorA}
-	\colorlet{colorStandout}{colorA}
-	\colorlet{colorStandin}{colorBG}
-	\colorlet{colorTitlepage}{colorA}
+	\prop_put:Nnn \l__gotham_color_assignation_prop {colorStandin} {colorBG}
+	\prop_put:Nnn \l__gotham_color_assignation_prop {colorStandout} {colorA}
+	\prop_put:Nnn \l__gotham_color_assignation_prop {colorFrametitle} {colorA}
+	\prop_put:Nnn \l__gotham_color_assignation_prop {colorTitlepage} {colorA}
+
 	%%% adapt and reload
-	\colorlet{colorBG}{colorPale}
-	\colorlet{colorFG}{colorDark}
-	\colorlet{colorFiligrane}{colorB}
-	\colorlet{colorBackElement}{colorB}
-	\colorlet{colorProgBar}{colorC}
-	\colorlet{colorAlert}{colorD}
-	\colorlet{colorExample}{colorE}
+	\__gotham_reload_color:
+
 	%%% light
 	\setbeamercolor{normal~text}{
 		fg=colorFG,
@@ -1239,26 +1457,24 @@
 % \begin{implementation}
 % 	\begin{function}{\__gotham_color_set_transparentBG:}
 %		Command to activate transparent background.
-% 		\TestFiles{gotham-test-037}
-%    \begin{macrocode}
+% 		\changes{v1.2.0}{2024-11-11}{add hook after colorset}
+% 		\changes{v1.2.2}{2025-07-02}{reload all colors to apply changes from users}
+% 		\changes{v1.2.3}{2025-11-04}{change map and reload all colors from function}
+% 		\TestFiles{gotham-test-037, gotham-test-1037, gotham-test-055}%    \begin{macrocode}
 % \providecommand{\gotham@colors@transparent}{
 \cs_new_protected:Nn \__gotham_color_set_transparentBG:{
 	\boolfalse{darkBG}
 	\booltrue{transparentBG}
-	\colorlet{colorFrametitle}{colorA}
-	\colorlet{colorStandout}{colorA}
 	{\usebeamercolor[bg]{normal~text}\colorlet{colorStandin}{bg}}% this is not working because the colorlet is not kept outside of the {} environment...
 	% \usebeamercolor{normal~text} % reset % NOT working neither
-	\colorlet{colorStandin}{colorBG} % since the two previous lines are not working, let define it like light-bg
-	\colorlet{colorTitlepage}{colorA}
+	\prop_put:Nnn \l__gotham_color_assignation_prop {colorStandin} {colorBG} % since the two previous lines are not working, let define it like light-bg
+	\prop_put:Nnn \l__gotham_color_assignation_prop {colorStandout} {colorA}
+	\prop_put:Nnn \l__gotham_color_assignation_prop {colorFrametitle} {colorA}
+	\prop_put:Nnn \l__gotham_color_assignation_prop {colorTitlepage} {colorA}
+
 	%%% adapt and reload
-	\colorlet{colorBG}{colorPale}
-	\colorlet{colorFG}{colorDark}
-	\colorlet{colorFiligrane}{colorB}
-	\colorlet{colorBackElement}{colorB}
-	\colorlet{colorProgBar}{colorC}
-	\colorlet{colorAlert}{colorD}
-	\colorlet{colorExample}{colorE}
+	\__gotham_reload_color:
+
 	%%% transparent like light background.
 	\setbeamercolor{normal~text}{
 		fg=colorFG,
@@ -1388,7 +1604,7 @@
 
 % \begin{implementation}
 % 	\begin{macro}{Gotham color adaptation}
-%		Set colors variable from Gotham color setup that needs specific adaptation, i.e. |structure| as mentioned in Beamer documentation and |progress bar| since it is a new feature. 
+%		Set colors variable from Gotham color setup that needs specific adaptation, i.e. |structure| as mentioned in Beamer documentation and |progress bar| since it is a new feature.
 % 		\UnitTested
 % 		\TestFiles{gotham-test-037}
 %    \begin{macrocode}
@@ -1405,7 +1621,7 @@
 % \begin{implementation}
 % 	\begin{macro}{Usual color env}
 %		Set colors variable from Gotham color setup.
-% 		The titles and structural elements (e.g. |itemize| bullets) are set in the same color as |normal text|. 
+% 		The titles and structural elements (e.g. |itemize| bullets) are set in the same color as |normal text|.
 %		This would ideally done by setting |normal text| as a parent style, which we do to set |titlelike|, but this doesn't work for |structure| as its foreground is set explicitly in |beamercolorthemedefault.sty|.
 % 		\UnitTested
 % 		\TestFiles{gotham-test-037}
@@ -1419,8 +1635,8 @@
 	parent=primary~palette,
 	bg=colorFrametitle
 }
-% The Gotham inner or outer themes optionally display progress bars in various locations. 
-% Their color is set by |progress bar| but the two different kinds can be customized separately. 
+% The Gotham inner or outer themes optionally display progress bars in various locations.
+% Their color is set by |progress bar| but the two different kinds can be customized separately.
 % The horizontal rule on the title page is also set based on the progress bar color and can be customized with |title separator|.
 \setbeamercolor{title~separator}{
 	use=progress~bar,
@@ -1461,7 +1677,7 @@
 %
 % Bibliography
 %
-% We also reset the bibliography colors in order to pick up the surrounding colors at the time of use. 
+% We also reset the bibliography colors in order to pick up the surrounding colors at the time of use.
 % This prevents us having to set the correct color in normal and standout mode.
 % \setbeamercolor{bibliography entry author}{fg=, bg=}
 % \setbeamercolor{bibliography entry title}{fg=, bg=}
@@ -1494,20 +1710,20 @@
 % \begin{documentation}
 % \begin{function}{\usecolortheme}
 %	\begin{syntax}
-%		\cs{usecolortheme}\oarg{option1=value1, ...}\marg{gotham} 
+%		\cs{usecolortheme}\oarg{option1=value1, ...}\marg{gotham}
 %		\textrm{where the options are (default marked as} \defopt{default}\textrm{):}
 % 		\meta{background} = \oarg{\defopt{transparent} \textbar light \textbar dark}
 %		\meta{block} = \oarg{\defopt{native} \textbar fill \textbar transparent}
 %     \meta{colorset} = \oarg{\defopt{anthracite} \textbar red }
 %	\end{syntax}
 %	The 'package' (usecolortheme) options can control color mode (dark, ligh or transparent background) and the block (native or fill or transparent).
-% 	Block environments such as |theorem| and |example| have no background color by default. 
-% 	The option |block=fill| sets a background color based on the background and foreground of |normal text|. 
+% 	Block environments such as |theorem| and |example| have no background color by default.
+% 	The option |block=fill| sets a background color based on the background and foreground of |normal text|.
 % 	The option |block=transparent| reverts the block environments to an empty background, which can be useful if changing colors mid-presentation.
 % 	The option |colorset=red| changes the colorset used to define a color theme.
 % \end{function}
 % \end{documentation}
-%%%% 
+%%%%
 % \begin{implementation}
 % 	\begin{macro}{color key -- interface}
 % 		Controls the background mode (dark, ligh or transparent background) and the block (fill or transparent) and colorset (anthracite, red, blue, green, etc).
@@ -1517,7 +1733,7 @@
 \keys_define:nn { gotham / color }
 {
 	% block
-	block .choice:,	
+	block .choice:,
 	block .usage:n = { general },
 	block .default:n = { native },
 	block / native .code:n = { \__gotham_color_set_native_block: },
@@ -1594,7 +1810,7 @@
 %\begin{implementation}
 %    \begin{macrocode}
 %<*inner>
-\ProvidesExplPackage{beamerinnerthemegotham}{2025-07-02}{1.2.2.a}{gotham inner theme}
+\ProvidesExplPackage{beamerinnerthemegotham}{2025-12-25}{1.2.4.a}{gotham inner theme}
 \RequirePackage{expl3}
 % \RequirePackage{xparse}
 \RequirePackage{calc}
@@ -1682,10 +1898,11 @@
 % \end{implementation}
 
 % \begin{implementation}
-%  \begin{macro}{\maketitle,\titlepage} 
-% 		Normal people should use |\maketitle| or |\titlepage| instead of using the |title page| beamer template directly. 
+%  \begin{macro}{\maketitle,\titlepage}
+% 		Normal people should use |\maketitle| or |\titlepage| instead of using the |title page| beamer template directly.
 % 		Beamer already defines these macros, but we patch them here to make the title page |[plain]| by default, remove |\@thanks|, and ensure the title frame number doesn't count.
 %   	Inserts the title frame, or causes the current frame to use the |title page| template.
+% 		\changes{v1.2.0}{2024-11-11}{add vertically centered}
 % 		\UnitTested
 % 		\TestFiles{gotham-test-038}
 %    \begin{macrocode}
@@ -1709,7 +1926,7 @@
 
 % \begin{implementation}
 %  \begin{macro}{\defbeamertemplate{title~graphic}{gotham}}
-%		Definition of elements templates that will be used in titlepage.  
+%		Definition of elements templates that will be used in titlepage.
 % 		\UnitTested
 % 		\TestFiles{gotham-test-038}
 %    \begin{macrocode}
@@ -1778,7 +1995,7 @@
 \defbeamertemplate*{title~separator}{gotham}{
 	\begin{tikzpicture}
 		% \fill[fg] (0,0) rectangle (\gotham@titleseparator@linewidth, \gotham@titleseparator@lineheight);
-		\fill[fg] (0,0) rectangle 
+		\fill[fg] (0,0) rectangle
 		(\dim_use:N \l__gotham_titleseparator_width_dim,
 		\dim_use:N \l__gotham_titleseparator_height_dim);
 	\end{tikzpicture}
@@ -1824,33 +2041,44 @@
 
 % \begin{implementation}
 % 	\begin{macro}{\defbeamertemplate{title~page}{gotham~normal}}
-% 		Template for the normal gotham title page. 
-% 		Each element is only typeset if it is defined by the user. 
+% 		Template for the normal gotham title page.
+% 		Each element is only typeset if it is defined by the user.
 % 		If |\subtitle| is empty, for example, it won't leave a blank space on the title slide.
+% 		\changes{v1.2.0}{2024-11-11}{length of subtitle}
+% 		\changes{v1.2.3}{2025-07-27}{adapt margins}
 % 		\UnitTested
-% 		\TestFiles{gotham-test-038}
+% 		\TestFiles{gotham-test-038, gotham-test-056, gotham-test-1027}
 %	 \begin{macrocode}
 
-% Beamer's definition of |\insertauthor| is always nonempty, so we have to test another macro initialized by |\author{...}| to see if the user has defined an author. 
-% This solution was suggested by Sam Carter in an  answer to \href{https://tex.stackexchange.com/questions/241306/}{this Stack Exchange question}.
+% Beamer's definition of |\insertauthor| is always nonempty, so we have to test another macro initialized by |\author{...}| to see if the user has defined an author.
+% This solution was suggested by Sam Carter in an answer to \href{https://tex.stackexchange.com/questions/241306/}{this Stack Exchange question}.
 
 \defbeamertemplate{title~page}{gotham~normal}{
 	\ifx\insertframetitle\@empty\else\vspace*{-3em}\fi
-	\begin{picture}(0,0)		
-		% The text: title, author, institute, etc.
+	\begin{picture}(0,0)
+		% the background covering the whole page
 		\put(-30,-125){\noindent
 			\fcolorbox{normal~text.bg}{normal~text.bg}{
-			\begin{minipage}[b][\paperheight]{\paperwidth}
-				\parbox[c][0pt][c]{0pt}{\gothamtitlepagebg} 
+				\begin{minipage}[b][\paperheight]{\paperwidth}
+					\hfil
+				\end{minipage}
+			}
+		}
+
+		% The text: title, author, institute, etc.
+		\put(-3.4,-125){\noindent
+			\fcolorbox{normal~text.bg}{normal~text.bg}{
+			\begin{minipage}[b][\paperheight]{\textwidth}
+				\parbox[c][0pt][c]{0pt}{\gothamtitlepagebg}
 				\centering
 				\vfill
 				\ifx\inserttitle\@empty\else
-					\parbox{0.9\textwidth}{\centering
+					\parbox{0.99\textwidth}{\centering
 						\usebeamertemplate*{title}
 					}\\[1.ex]
 				\fi
 				\ifx\insertsubtitle\@empty\else
-					\parbox{0.9\textwidth}{\centering
+					\parbox{0.99\textwidth}{\centering
 						\usebeamertemplate*{subtitle}
 					}\\[2.ex]
 				\fi
@@ -1863,26 +2091,25 @@
 				}{
 					\usebeamertemplate*{author}
 				}
-				% \ifx\insertauthor\empty Empty~Author\else TT \fi
 				\ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
-				\ifx\insertinstitute\@empty\else{\parbox{0.9\textwidth}{\raggedright\usebeamertemplate*{institute}} }\fi
+				\ifx\insertinstitute\@empty\else{\parbox{0.95\textwidth}{\raggedright\usebeamertemplate*{institute}} }\fi
 				\vfill
 				\vbox{}
 			\end{minipage}
 			}
 			% end third argument of fcolorobx
 		}
-		
+
 		% the institute logo on title page
 		\put(234,-120){
 			\gothamtitlepagelogo
 		}
-		
+
 		% the extra logos on title page (\inserttitlegraphic)
-		\put(-27,-123){
+		\put(0,-123){
 			\noindent\vbox{
-				\begin{minipage}[b][0.96\paperheight]{0.899\textwidth}
-				\ifx\inserttitlegraphic\@empty\else\usebeamertemplate*{title~graphic}\fi
+				\begin{minipage}[b][0.96\paperheight]{\paperwidth}
+					\ifx\inserttitlegraphic\@empty\else\usebeamertemplate*{title~graphic}\fi
 				\end{minipage}
 			}
 		}
@@ -1894,7 +2121,7 @@
 
 % \begin{implementation}
 % 	\begin{macro}{\defbeamertemplate{title~page}{gotham~reversed}}
-% 		With a similarly layout to gotham normal, but this template inverses the background and foreground colors compared to the color mode chose (dark, light or transparent). 
+% 		With a similarly layout to gotham normal, but this template inverses the background and foreground colors compared to the color mode chose (dark, light or transparent).
 % 		\UnitTested
 % 		\TestFiles{gotham-test-038}
 %	 \begin{macrocode}
@@ -1902,9 +2129,9 @@
 	\begin{picture}(0,0)
 		% The background picture
 		\put(-28,-128){\gothamtitlepagebg}
-		
+
 		% The text: title, author, institute, etc.
-		\put(-4,-125){\noindent
+		\put(-3.4,-125){\noindent
 			% \fcolorbox{declared-color-frame}{declared-color-background}{text}
 			\ifbool{darkBG}{
 				% Dark true
@@ -1938,12 +2165,12 @@
 			}
 			% end third argument of fcolorobx
 		}
-		
+
 		% the institute logo on title page
 		\put(234,-120){
 			\gothamtitlepagelogo
 		}
-		
+
 		% the extra logos on title page (\inserttitlegraphic)
 		\put(-27,-123){
 			\noindent\vbox{
@@ -1958,41 +2185,71 @@
 %  \end{macro}
 % \end{implementation}
 
+% \begin{documentation}
+%   \begin{variable}{\gothamDividedPicTop, \gothamDividedPicBottomIncr, \gothamDividedPicTextWidth}
+%     variables controlling the dimensions of the splitting trapezoid on the title page for the gotham divided style.
+%     |\gothamDividedPicTop| controls the distance between the top right corner and the top splitting point.
+%     |\gothamDividedPicBottomIncr| controls the increment toward the left direction for the bottom splitting point.
+%     |\gothamDividedPicTextWidth| controls the width of the text on the titlepage (for the divided style).
+%   \end{variable}
+% \end{documentation}
+%%%%%%
+% \begin{implementation}
+%   \begin{variable}{\gothamDividedPicTop, \gothamDividedPicBottomIncr, \gothamDividedPicTextWidth}
+%     variables controlling the dimensions of the trapezoid splitting the title page for the gotham divided style.
+%    \begin{macrocode}
+\newlength{\gothamDividedPicTop}
+\newlength{\gothamDividedPicBottomIncr}
+\setlength{\gothamDividedPicTop}{0.275\paperwidth}
+\setlength{\gothamDividedPicBottomIncr}{0.275\paperwidth}
+\newlength{\gothamDividedPicTextWidth}
+\setlength{\gothamDividedPicTextWidth}{.55\textwidth}
+%    \end{macrocode}
+%   \end{variable}
+% \end{implementation}
 
 % \begin{implementation}
 % 	\begin{macro}{defbeamertemplate{title~page}{gotham~dividedpic}}
 % 		This title page template is inspired from \url{https://github.com/LukasPietzschmann/awesome-beamer}
+% 		\changes{v1.2.4}{2025-12-25}{adapt the background image evaluation (|ifx gothamtitlepagebg empty|) and duplicated authors/shortauthor from issue n13.}
 % 		\UnitTested
-% 		\TestFiles{gotham-test-038}
+% 		\TestFiles{gotham-test-038, gotham-test-1044}
 %	 \begin{macrocode}
 \defbeamertemplate{title~page}{gotham~dividedpic}{
-	\long\def\tmpEmpty{}
 	\def\titlecontent{\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle}
 	\def\subtitlecontent{\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle}
 	\settowidth\l__gotham_title_width_dim\titlecontent
 	\settowidth\l__gotham_subtitle_width_dim\subtitlecontent
 	\setlength\l__gotham_title_max_width_dim{\ifdim\l__gotham_title_width_dim>\l__gotham_subtitle_width_dim\l__gotham_title_width_dim\else\l__gotham_subtitle_width_dim\fi}
 	% \thispagestyle{navigation@titlepage}
-	\begin{minipage}{.55\textwidth}
+	\begin{minipage}{\gothamDividedPicTextWidth}
 		\raggedright
 		\titlecontent\\
 		\subtitlecontent\\
-		% \textcolor{accent}{\rule{\ifdim\l__gotham_title_max_width_dim<.55\textwidth\l__gotham_title_max_width_dim\else.55\textwidth\fi}{\smile@linewidth}}\\[2em]
-		\textcolor{colorProgBar}{\rule{\ifdim\l__gotham_title_max_width_dim<.55\textwidth\l__gotham_title_max_width_dim\else.55\textwidth\fi}{\dim_use:N \l__gotham_titleseparator_height_dim}}\\[2em]
-		\usebeamerfont{author}\usebeamercolor[fg]{author}
-		\insertauthor\\
-		% \ifx\insertauthor\empty\else
+
+		\textcolor{colorProgBar}{\rule{\ifdim\l__gotham_title_max_width_dim<\gothamDividedPicTextWidth\l__gotham_title_max_width_dim\else\gothamDividedPicTextWidth\fi}{\dim_use:N \l__gotham_titleseparator_height_dim}}\\[0.75em]
+
 		\expandafter\ifblank\expandafter{\beamer@andstripped}{
 			% empty author
-			\vspace*{1.em}
-		}{	
+			\vspace*{2.em}
+		}{%
 			\usebeamerfont{author}\usebeamercolor[fg]{author}
-			\insertshortauthor
-			\vspace{2em}
+			\insertauthor\\
 		}
-		% \fi
+		\ifx\beamer@shortauthor\@empty{
+			% empty short author
+		}\else{
+			\ifx\beamer@shortauthor\beamer@andstripped{
+				% if the short author is equal to the author skip it.
+			}\else{
+				\usebeamerfont{author}\usebeamercolor[fg]{author}
+				{\insertshortauthor} \par
+				\vspace{0.5em}
+			}\fi
+		}
+		\fi
 		\ifx\insertinstitute\@empty\else{
-			\usebeamertemplate*{institute}\vspace{2em}
+			\usebeamertemplate*{institute}\vspace{1.5em}
 		}\fi
 		\insertdate
 	\end{minipage}
@@ -2001,20 +2258,17 @@
 	\begin{tikzpicture}[remember~picture, overlay]
 		\clip (current~page.south~east)
 			-- (current~page.north~east)
-			-- ++(-5.1, 0)
-			-- ++(-3, -\paperheight)
+			-- ++(-\gothamDividedPicTop, 0)
+			-- ++(-\gothamDividedPicBottomIncr, -\paperheight)
 			-- cycle;
 
-		\ifx\gothamtitlepagebg\tmpEmpty
+		\ifx\gothamtitlepagebg\@empty
 			\fill[
-				% path~fading=title~page~picture~fading,
-				% left~color=\ifbool{darkBG}{colorDark!200}{colorPale!100},
-				right~color=colorTitlepage!100,%\ifbool{darkBG}{colorPale!100}{colorDark!100},
-				% fading~angle=-15,
+				right~color=colorTitlepage!100,
 			]
 			(current~page.south~east)
 			rectangle
-			++(\dimexpr-0.55\paperwidth, \dimexpr\paperheight+1cm);
+			++(\dimexpr-\gothamDividedPicTop-\gothamDividedPicBottomIncr, \dimexpr\paperheight);
 		\else
 			\node[
 				anchor=south~east,
@@ -2036,11 +2290,12 @@
 % 	\begin{macro}{defbeamertemplate{title~page}{gotham~splitvert}}
 % 		This title page template is inspired from \url{https://github.com/pcafrica/focus-beamertheme}
 % 		\UnitTested
+% 		\changes{v1.2.0}{2024-11-11}{length of subtitle}
 % 		\TestFiles{gotham-test-038}
 %	 \begin{macrocode}
 \defbeamertemplate{title~page}{gotham~splitvert}{
 	% \IfEmpty{\insertframetitle}{
-	\ifx\beamer@frametitle\@empty 
+	\ifx\beamer@frametitle\@empty
 		\vspace*{-0.5\paperheight}
 	\else %}{
 		\vspace*{-0.63\paperheight}
@@ -2051,7 +2306,7 @@
 			\fill[color=gotham@@tempColor] (current~page.north~west) rectangle ([shift = {(0, -0.45\paperheight)}] current~page.north~east);
 		\end{tikzpicture}
 	}
-	
+
 	% \vspace{1.65\baselineskip}
 	\begin{minipage}[b][0.5\paperheight]{\textwidth}
 		% \vspace{\baselineskip}
@@ -2072,8 +2327,8 @@
 		\fi
 		\vspace{1.\baselineskip}
 	\end{minipage}
-	
-	
+
+
 	% Set the title graphic in a zero-height box, so that
 	% the position of other elements is not affected.
 	\ifx\inserttitlegraphic\@empty\else
@@ -2084,7 +2339,7 @@
 			\raggedleft
 			\inserttitlegraphic
 			% \usebeamertemplate*{title~graphic}
-		}}	
+		}}
 	\fi
 
 	% \ifx\insertauthor\empty\else
@@ -2102,7 +2357,7 @@
 		\end{minipage}
 	}
 	% \fi
-	
+
 	\ifx\insertinstitute\@empty\else
 		\newline
 		\vspace*{-1.65\baselineskip}
@@ -2112,7 +2367,7 @@
 			\usebeamertemplate*{institute}
 		\end{minipage}
 	\fi
-	
+
 	\ifx\insertdate\@empty\else
 		\newline
 		\begin{minipage}[t]{\textwidth}
@@ -2148,7 +2403,7 @@
 % 		Unfortunatly, (as far as I know) it not possible to test if the element name exists independtly from the prefined option.
 % 		\TestFiles{gotham-test-038}
 %    \begin{macrocode}
-\cs_if_exist:NTF \__gotham_set_template:nn {}{ 
+\cs_if_exist:NTF \__gotham_set_template:nn {}{
 	% If it doesn't exist, then create it.
 
 	% Define the command to set template if it exists.
@@ -2160,7 +2415,7 @@
 			\PackageError{beamerinnerthemegotham}
 			{The~beamer~template~named~'#1'~with~the~option~'#2'~does~not~exist}
 			{helping~message unknown setbeamertemplate option}
-		}	
+		}
 	}
 }
 %    \end{macrocode}
@@ -2170,14 +2425,14 @@
 % \begin{documentation}
 % \begin{function}{\useinnertheme}
 %	\begin{syntax}
-%		\cs{useinnertheme}\oarg{option1=value1, ...}\marg{gotham} 
+%		\cs{useinnertheme}\oarg{option1=value1, ...}\marg{gotham}
 %		\textrm{where the options are (default marked as} \defopt{default}\textrm{):}
 % 		\meta{title page} = \oarg{\defopt{gotham normal} \textbar gotham splitvert \textbar gotham dividedpic \textbar gotham reversed}
 %	\end{syntax}
 %	The 'package' (useinnertheme) options can set different title page templates.
 % \end{function}
 % \end{documentation}
-%%%% 
+%%%%
 % \begin{implementation}
 % 	\begin{macro}{inner key -- interface}
 % 		Controls for the title page templates.
@@ -2221,7 +2476,7 @@
 %     Dictionary/map of template elements and predefined option according to the context.
 %     Naming convention: template/What/Who, i.e. Name: key=background~canvas/watermark, value = gotham~draft
 %    \begin{macrocode}
-\prop_if_exist:NTF \l__gotham_template_name_prop 
+\prop_if_exist:NTF \l__gotham_template_name_prop
 {}{
 	% if not defined than define it.
 	\prop_new:N \l__gotham_template_name_prop
@@ -2243,7 +2498,7 @@
 %%%%%%
 % \begin{implementation}
 %   \begin{macro}{\defbeamertemplate{background~canvas}{empty}{def}}
-%     empty background canvas that contains color, that can be used to reset background. 
+%     empty background canvas that contains color, that can be used to reset background.
 %     \UnitTested
 %     \TestFiles{gotham-test-038}
 %    \begin{macrocode}
@@ -2282,11 +2537,11 @@
 % \begin{implementation}
 %   \begin{function}{\__gotham_add_beamerframe_key:n}
 %     \begin{arguments}
-%       \item Name of the option to add, this name should also correspond to the name of the environment followed by the suffix 'env'. 
+%       \item Name of the option to add, this name should also correspond to the name of the environment followed by the suffix 'env'.
 %     \end{arguments}
 %     Function to add an option of a frame using an environment.
 %     For example, if the name 'optionA' is the argument given to the function, an frame option named 'optionA' will be added, and this option will surround the frame with the environment named 'optionAenv'.
-%     So, the environment 'optionA' must have been declared before. 
+%     So, the environment 'optionA' must have been declared before.
 %     \TestFiles{gotham-test-038}
 %    \begin{macrocode}
 \seq_if_exist:NTF \l__gotham_frameoption_tmp_seq {}{
@@ -2294,7 +2549,7 @@
 	\seq_new:N \l__gotham_frameoption_tmp_seq
 }
 
-\cs_if_exist:NTF \__gotham_add_beamerframe_key:n {}{ 
+\cs_if_exist:NTF \__gotham_add_beamerframe_key:n {}{
 	% if it doesn't exist, then create it.
 
 	% Define the command to add frameoptions
@@ -2325,7 +2580,7 @@
 %%%%%%
 % \begin{implementation}
 %   \begin{macro}{\begin{frame}[noBCG]}
-%     Add a frame option |noBGC| to display an empty background canvas. 
+%     Add a frame option |noBGC| to display an empty background canvas.
 %		To do it, we must add a global boolean variable, capture the option at the begin of the frame and patch the end of the frame.
 %     \UnitTested
 %     \TestFiles{gotham-test-038}
@@ -2341,7 +2596,7 @@
 
 % \begin{documentation}
 %   \begin{variable}{\l_gotham_defaultWatermark}
-%     Boolean to triggering if watermark should be displayed by default (without giving the frame option). 
+%     Boolean to triggering if watermark should be displayed by default (without giving the frame option).
 %		The variable is |false| by default.
 %   \end{variable}
 % \end{documentation}
@@ -2374,7 +2629,7 @@
 %%%%%%
 % \begin{implementation}
 %   \begin{macro}{\begin{frame}[watermark]}
-%     Add a frame option |watermark| to display an empty background canvas. 
+%     Add a frame option |watermark| to display an empty background canvas.
 %		To do it, we must add a global boolean variable, capture the option at the begin of the frame and patch the end of the frame.
 %     \UnitTested
 %     \TestFiles{gotham-test-038}
@@ -2398,7 +2653,7 @@
 %%%%%%
 % \begin{implementation}
 %   \begin{macro}{\begin{frame}[nowatermark]}
-%     Add a frame option |nowatermark| to do not display an empty background canvas. 
+%     Add a frame option |nowatermark| to do not display an empty background canvas.
 %		To do it, we must add a global boolean variable, capture the option at the begin of the frame and patch the end of the frame.
 %     \UnitTested
 %     \TestFiles{gotham-test-038}
@@ -2418,18 +2673,18 @@
 %    \begin{macrocode}
 \seq_if_exist:NTF \l__gotham_tmpa_seq
 {}{
-	% sequence 
-	\seq_new:N \l__gotham_tmpa_seq 
+	% sequence
+	\seq_new:N \l__gotham_tmpa_seq
 }
 \tl_if_exist:NTF \l__gotham_tmpa_tl
 {}{
 	% token list A
-	\tl_new:N \l__gotham_tmpa_tl 
+	\tl_new:N \l__gotham_tmpa_tl
 }
 \tl_if_exist:NTF \l__gotham_tmpb_tl
 {}{
 	% token list B
-	\tl_new:N \l__gotham_tmpb_tl 
+	\tl_new:N \l__gotham_tmpb_tl
 }
 %    \end{macrocode}
 %   \end{variable}
@@ -2443,7 +2698,7 @@
 %     \end{arguments}
 %     Function that store in a map the name a template use later.
 %     The following naming convention is used: Template/What/Who~Name: watermark/gotham~draft.
-% 	   The means for example that if a beamer template is defined using 
+% 	   The means for example that if a beamer template is defined using
 %     |\defbeamertemplate{background}{watermark/gotham~draft}{...}|,
 %     then the function has to be call using
 % 		|\__gotham_set_prop_template{background/watermark}{gotham~draft}|,
@@ -2452,7 +2707,7 @@
 %     If the template name given as input does not exist, an error is raised.
 %     \TestFiles{gotham-test-039}
 %    \begin{macrocode}
-\cs_if_exist:NTF \__gotham_set_prop_template:nn {}{ 
+\cs_if_exist:NTF \__gotham_set_prop_template:nn {}{
 	% if it doesn't exist, then create it.
 	\cs_new_protected:Nn \__gotham_set_prop_template:nn
 	{
@@ -2489,17 +2744,17 @@
 % \begin{documentation}
 % \begin{function}{\useinnertheme}
 %	\begin{syntax}
-%		\cs{useinnertheme}\oarg{option1=value1, ...}\marg{gotham} 
+%		\cs{useinnertheme}\oarg{option1=value1, ...}\marg{gotham}
 %		\textrm{where the options are (default marked as} \defopt{default}\textrm{):}
 %		\meta{watermark default} = \oarg{\defopt{off} \textbar on }
 % 		\meta{watermark template} = \oarg{\defopt{gotham draft} \textbar ...}
 %	\end{syntax}
 %	The 'package' (useinnertheme) options can control |background| (and |background canvas|) templates according to situations.
-% 	Block environments such as |theorem| and |example| have no background color by default. 
+% 	Block environments such as |theorem| and |example| have no background color by default.
 % 	The option |watermark default=on| can enable the |watermark template| on every frame; but it can still be turned off for specific frames when using the frame option |nowatermark|.
 % \end{function}
 % \end{documentation}
-%%%% 
+%%%%
 % \begin{implementation}
 % 	\begin{macro}{inner key -- interface}
 % 		Controls the inner settings for background and watermark).
@@ -2546,7 +2801,7 @@
 %   \begin{macro}{\begin{frame}[c]}
 %     Add a frame option |c| for improved vertically centered text in the frame.
 %     By default, Beamer frames offer the |c| option to \textit{almost} vertically center the text, but the placement is a little too high.
-%     To fix this, we redefine the |c| option to equalize |\beamer@frametopskip| and |\beamer@framebottomskip|. 
+%     To fix this, we redefine the |c| option to equalize |\beamer@frametopskip| and |\beamer@framebottomskip|.
 %     This solution was suggested by Enrico Gregorio in an answer to \href{http://tex.stackexchange.com/questions/247826/}{this Stack Exchange question}.
 %     \UnitTested
 %     \TestFiles{gotham-test-039}
@@ -2594,7 +2849,7 @@
 	% \setkeys{beamerframe}{c}
 	% \setkeys{beamerframe}{noframenumbering}
 	% \centering
-	
+
 	\setbeamertemplate{background~canvas}[standout/\prop_item:Nn \l__gotham_template_name_prop {background~canvas/standout}]
 	% \usebeamertemplate{background~canvas}%[standout/gotham]
 	\usebeamerfont{standout}
@@ -2603,7 +2858,7 @@
 		%true : empty background (transparent)
 		\setbeamercolor{background~canvas}{
 			use=primary~palette,
-			bg=primary~palette.fg 
+			bg=primary~palette.fg
 		}
 	}{
 		%false : background not empty (dark or light)
@@ -2618,7 +2873,7 @@
 %    \end{macrocode}
 %   \end{macro}
 % \end{implementation}
-	
+
 % \begin{documentation}
 %   \begin{function}{\begin{frame}[standout]}
 %      Add a frame option |standout| to display the standout frame template.
@@ -2627,7 +2882,7 @@
 %%%%%%
 % \begin{implementation}
 %   \begin{macro}{\begin{frame}[standout]}
-%     Add a frame option |standout| to display the standout frame template. 
+%     Add a frame option |standout| to display the standout frame template.
 %		To do it, we must add a global boolean variable, capture the option at the begin of the frame and patch the end of the frame.
 %     \UnitTested
 %     \TestFiles{gotham-test-040}
@@ -2715,7 +2970,7 @@
 %%%%%%
 % \begin{implementation}
 %   \begin{macro}{\begin{frame}[standin]}
-%     Add a frame option |standin| to display the standin frame template. 
+%     Add a frame option |standin| to display the standin frame template.
 %		To do it, we must add a global boolean variable, capture the option at the begin of the frame and patch the end of the frame.
 %     \UnitTested
 %     \TestFiles{gotham-test-040}
@@ -2731,7 +2986,7 @@
 % \begin{documentation}
 % \begin{function}{\useinnertheme}
 %	\begin{syntax}
-%		\cs{useinnertheme}\oarg{option1=value1, ...}\marg{gotham} 
+%		\cs{useinnertheme}\oarg{option1=value1, ...}\marg{gotham}
 %		\textrm{where the options are (default marked as} \defopt{default}\textrm{):}
 %		\meta{standin template} = \oarg{\defopt{gotham} \textbar ...}
 % 		\meta{standout template} = \oarg{\defopt{gotham} \textbar ...}
@@ -2742,7 +2997,7 @@
 %  These templates are activated when giving the frame option |\begin{frame}[standin]| and |standout|.
 % \end{function}
 % \end{documentation}
-%%%% 
+%%%%
 % \begin{implementation}
 % 	\begin{macro}{inner key -- interface}
 % 		Controls the inner settings for standout and standin.
@@ -2754,8 +3009,8 @@
 	% standout BG template
 	standout~BG~template .usage:n = { general },
 	standout~BG~template .default:n = { gotham },
-	standout~BG~template .code:n = { 
-		\__gotham_set_prop_template:nn{background~canvas/standout}{#1} 
+	standout~BG~template .code:n = {
+		\__gotham_set_prop_template:nn{background~canvas/standout}{#1}
 	},
 }
 \keys_define:nn { gotham / inner }
@@ -2763,8 +3018,8 @@
 	% standin BG template
 	standin~BG~template .usage:n = { general },
 	standin~BG~template .default:n = { gotham },
-	standin~BG~template .code:n = { 
-		\__gotham_set_prop_template:nn{background~canvas/standin}{#1} 
+	standin~BG~template .code:n = {
+		\__gotham_set_prop_template:nn{background~canvas/standin}{#1}
 	},
 }
 \keys_define:nn { gotham / inner }
@@ -2772,7 +3027,7 @@
 	% standout template
 	standout~template .usage:n = { general },
 	standout~template .default:n = { gotham },
-	standout~template .code:n = { 
+	standout~template .code:n = {
 		\__gotham_set_template:nn{standout}{#1}
 	},
 }
@@ -2781,7 +3036,7 @@
 	% standin template
 	standin~template .usage:n = { general },
 	standin~template .default:n = { gotham },
-	standin~template .code:n = { 
+	standin~template .code:n = {
 		\__gotham_set_template:nn{standin}{#1}
 	},
 }
@@ -2801,7 +3056,7 @@
 %%%%%%
 % \begin{implementation}
 %   \begin{macro}{\begin{frame}[part]}
-%     Add a frame option |part| to display the part frame template. 
+%     Add a frame option |part| to display the part frame template.
 %		To do it, we must add a global boolean variable, capture the option at the begin of the frame and patch the end of the frame.
 %     \UnitTested
 %     \TestFiles{gotham-test-041}
@@ -2838,7 +3093,7 @@
 %%%%%%
 % \begin{implementation}
 %   \begin{macro}{\begin{frame}[section]}
-%     Add a frame option |section| to display the section frame template. 
+%     Add a frame option |section| to display the section frame template.
 %		To do it, we must add a global boolean variable, capture the option at the begin of the frame and patch the end of the frame.
 %     \UnitTested
 %     \TestFiles{gotham-test-041}
@@ -2875,7 +3130,7 @@
 %%%%%%
 % \begin{implementation}
 %   \begin{macro}{\begin{frame}[subsection]}
-%     Add a frame option |subsection| to display the subsection frame template. 
+%     Add a frame option |subsection| to display the subsection frame template.
 %		To do it, we must add a global boolean variable, capture the option at the begin of the frame and patch the end of the frame.
 %     \UnitTested
 %     \TestFiles{gotham-test-041}
@@ -2912,7 +3167,7 @@
 %%%%%%
 % \begin{implementation}
 %   \begin{macro}{\begin{frame}[subsubsection]}
-%     Add a frame option |subsubsection| to display the subsubsection frame template. 
+%     Add a frame option |subsubsection| to display the subsubsection frame template.
 %		To do it, we must add a global boolean variable, capture the option at the begin of the frame and patch the end of the frame.
 %     \UnitTested
 %     \TestFiles{gotham-test-041}
@@ -3002,7 +3257,7 @@
 	\usebeamercolor[fg]{part~title}
 	\usebeamerfont{part~title}
 	\partname \ \insertromanpartnumber
-	\\[1.75ex] 
+	\\[1.75ex]
 	\insertpart
 }
 \defbeamertemplate*{section~title}{gotham}{
@@ -3035,7 +3290,7 @@
 % 		Variable commands that contain the coma-separated list of options which are given to the partpage (respectively to the section, subsection and subsubsection).
 % 	\end{variable}
 % \end{documentation}
-%%%% 
+%%%%
 % \begin{implementation}
 % 	\begin{variable}[added=2025-01-06]{\partpageOptions, \sectionpageOptions, \subsectionpageOptions, \subsubsectionpageOptions}
 % 		Options used in |\begin{frame}[\partpageOptions,part]{\partpage}...| .
@@ -3055,7 +3310,7 @@
 % 		Variable commands that contain the coma-separated list of options which are given to the toc page's frame at the begin of a part (respectively to the section, subsection and subsubsection).
 % 	\end{variable}
 % \end{documentation}
-%%%% 
+%%%%
 % \begin{implementation}
 % 	\begin{variable}[added=2025-01-06]{\partpageTocOptions, \sectionpageTocOptions, \subsectionpageTocOptions, \subsubsectionpageTocOptions}
 % 		Options used in |\begin{frame}[\partpageTocOptions,tocpart]{toc part page...}| .
@@ -3075,7 +3330,7 @@
 % 		Variable commands that contain the coma-separated list of options which are given to the |\tableofcontents| at the beginning of a part (respectively to the section, subsection and subsubsection).
 % 	\end{variable}
 % \end{documentation}
-%%%% 
+%%%%
 % \begin{implementation}
 % 	\begin{variable}[added=2025-01-06]{\partTocOptions, \sectionTocOptions, \subsectionTocOptions, \subsubsectionTocOptions}
 % 		Options used in |\tableofcontents[\partTocOptions]| .
@@ -3084,14 +3339,14 @@
 %    \begin{macrocode}
 \providecommand{\partTocOptions}{}
 \providecommand{\sectionTocOptions}{
-	currentsection, currentsubsection, 
-	hideothersubsections, 
+	currentsection, currentsubsection,
+	hideothersubsections,
 	sectionstyle=show/shaded,
 }
 \providecommand{\subsectionTocOptions}{
-	currentsection, currentsubsection, 
-	% currentsubsubsection, 
-	hideothersubsections, 
+	currentsection, currentsubsection,
+	% currentsubsubsection,
+	hideothersubsections,
 	sectionstyle=show/shaded,
 	subsectionstyle=show/shaded/hide,
 	subsubsectionstyle=show/show/hide,
@@ -3102,26 +3357,51 @@
 % \end{implementation}
 
 % \begin{implementation}
-%   \begin{function}[updated=2025-01-06]{\__gotham_inner_disable_partpage:, \__gotham_inner_enable_partpage:}
+%   \begin{function}[updated=2025-07-02]{\__gotham_inner_disable_partpage:, \__gotham_inner_enable_partpage:}
 %     Commands to disable or enable the display of a 'part page' frame at the beginning of every new part.
-%     \changes{v1.2.1}{2025-01-06}{includes new variables} 
+%     \changes{v1.2.1}{2025-01-06}{includes new variables}
+% 		\changes{v1.2.2}{2025-07-02}{fix when multiple options given}
+% 		\changes{v1.2.4}{2025-12-25}{add partintoc}
 %     \TestFiles{gotham-test-041}
 %    \begin{macrocode}
+
+% Missing command for part in toc from https://tex.stackexchange.com/questions/5285/tableofcontents-from-part-commands-in-beamer
+%% number, partname, page.
+\@ifundefined{beamer@partintoc}{
+   \providecommand\beamer@partintoc[3]{
+		\ifnum\c@tocdepth=-1\relax
+			% requesting onlyparts.
+			\makebox[6em]{PART #1:} #2
+			\par
+		\fi
+	}
+	\define@key{beamertoc}{onlyparts}[]{
+		\c@tocdepth=-1\relax
+	}
+}{
+   %\providecommand\beamer@partintoc is defined, so I guess that \define@key{beamertoc}{onlyparts} also.
+	% they are probably both coming from gotham fonts.
+}
+
 \cs_new_protected:Nn \__gotham_inner_disable_partpage:
 {
 	\AtBeginPart{
-		% intentionally empty
+		% intentionally empty except adding part name in toc.
+		\addtocontents{toc}{\protect\beamer@partintoc{\the\c@part}{\beamer@partname}{\the\c@page}}%
 	}
 }
 
 \cs_new_protected:Nn \__gotham_inner_enable_partpage:
 {
 	\AtBeginPart{
+		% add part name in toc
+		\addtocontents{toc}{\protect\beamer@partintoc{\the\c@part}{\beamer@partname}{\the\c@page}}%
+
 		\ifbeamer@inframe
 			\partpage
 		\else
 			\ifdefempty{\partpageOptions}{
-				% empty partpageOptions command 
+				% empty partpageOptions command
 				\frame[c, part]{\partpage}
 			}{
 				% non-empty partpageOptions command
@@ -3163,8 +3443,9 @@
 % \end{implementation}
 
 % \begin{implementation}
-%   \begin{function}[updated=2025-01-06]{\__gotham_inner_disable_sectionpage:, \__gotham_inner_enable_sectionpage:}
+%   \begin{function}[updated=2025-07-02]{\__gotham_inner_disable_sectionpage:, \__gotham_inner_enable_sectionpage:}
 %     Commands to disable or enable the display of a 'section page' frame at the beginning of every new section.
+% 		\changes{v1.2.2}{2025-07-02}{fix when multiple options given}
 %     \changes{v1.2.1}{2025-01-06}{includes new variables}
 %     \TestFiles{gotham-test-041}
 %    \begin{macrocode}
@@ -3182,7 +3463,7 @@
 			\sectionpage
 		\else
 			\ifdefempty{\sectionpageOptions}{
-				% empty sectionpageOptions command 
+				% empty sectionpageOptions command
 				\frame[c, section]{\sectionpage}
 			}{
 				% non-empty sectionpageOptions command
@@ -3224,9 +3505,10 @@
 % \end{implementation}
 
 % \begin{implementation}
-%   \begin{function}[updated=2025-01-06]{\__gotham_inner_disable_subsectionpage:, \__gotham_inner_enable_subsectionpage:}
+%   \begin{function}[updated=2025-07-02]{\__gotham_inner_disable_subsectionpage:, \__gotham_inner_enable_subsectionpage:}
 %     Commands to disable or enable the display of a 'subsection page' frame at the beginning of every new subsection.
 %     \changes{v1.2.1}{2025-01-06}{includes new variables}
+% 		\changes{v1.2.2}{2025-07-02}{fix when multiple options given}
 %     \TestFiles{gotham-test-041}
 %    \begin{macrocode}
 \cs_new_protected:Nn \__gotham_inner_disable_subsectionpage:
@@ -3243,7 +3525,7 @@
 			\subsectionpage
 		\else
 			\ifdefempty{\subsectionpageOptions}{
-				% empty subsectionpageOptions command 
+				% empty subsectionpageOptions command
 				\frame[c, subsec]{\subsectionpage}
 			}{
 				% non-empty subsectionpageOptions command
@@ -3285,9 +3567,10 @@
 % \end{implementation}
 
 % \begin{implementation}
-%   \begin{function}[updated=2025-01-06]{\__gotham_inner_disable_subsubsectionpage:, \__gotham_inner_enable_subsubsectionpage:}
+%   \begin{function}[updated=2025-07-02]{\__gotham_inner_disable_subsubsectionpage:, \__gotham_inner_enable_subsubsectionpage:}
 %     Commands to disable or enable the display of a 'subsubsection page' frame at the beginning of every new subsubsection.
 %     \changes{v1.2.1}{2025-01-06}{includes new variables}
+% 		\changes{v1.2.2}{2025-07-02}{fix when multiple options given}
 %     \TestFiles{gotham-test-041}
 %    \begin{macrocode}
 \cs_new_protected:Nn \__gotham_inner_disable_subsubsectionpage:
@@ -3304,11 +3587,10 @@
 			\subsubsectionpage
 		\else
 			\ifdefempty{\subsubsectionpageOptions}{
-				% empty command 
+				%% empty command
 				\frame[c, subsubsec]{\subsubsectionpage}
 			}{
-				% non-empty command
-
+				%% non-empty command :
 				% store temporary the options
 				\edef\l__gotham_subsubsectionpageOptions_tmp{c,\subsubsectionpageOptions,subsubsec}%{c,subsubsec,\subsubsectionpageOptions}%
 				% Give these options expanded to the frame command
@@ -3320,7 +3602,7 @@
 		% \ifbool{subsubsectionContent}{
 		% 	% true
 		% 	\ifdefempty{\subsubsectionpageTocOptions}{
-		% 		% empty command 
+		% 		% empty command
 		% 		\begin{frame}[tocsubsubsec]
 		% 	}{
 		% 		% non-empty command
@@ -3343,7 +3625,7 @@
 % \begin{documentation}
 %   \begin{variable}{\gothamProgressSectionHeight}
 %     Variables used to defined the progress bar in section pages.
-%     If the vertical size of the bar want to be changed, the command |\setlength{\gothamProgressSectionHeight}{<0.4pt>}| can be used. 
+%     If the vertical size of the bar want to be changed, the command |\setlength{\gothamProgressSectionHeight}{<0.4pt>}| can be used.
 %   \end{variable}
 % \end{documentation}
 %%%%%%
@@ -3386,7 +3668,7 @@
 
 % \begin{documentation}
 %   \begin{variable}{\sectionhoffset}
-%     length controlling the horizontal offset of the (section title + progress bar) block. 
+%     length controlling the horizontal offset of the (section title + progress bar) block.
 %     Can be useful when extra stuff want to be display on sides of the block.
 %     The default value is 0.
 %   \end{variable}
@@ -3510,7 +3792,7 @@
 	}
 	\setbeamertemplate{progress~bar~in~section~page}[empty]
 	\setbeamertemplate{part~page}[progressbar/simple]
-   % \usebeamertemplate*{part~page}% activated automatically	
+   % \usebeamertemplate*{part~page}% activated automatically
 }
 
 \defbeamertemplate{section~frame}{gotham~simple}{
@@ -3567,7 +3849,7 @@
 	}
 	\setbeamertemplate{progress~bar~in~section~page}[display]
 	\setbeamertemplate{part~page}[progressbar/simple]
-   % \usebeamertemplate*{part~page}% activated automatically	
+   % \usebeamertemplate*{part~page}% activated automatically
 }
 
 \defbeamertemplate{section~frame}{gotham~progressbar}{
@@ -3635,7 +3917,7 @@
 
 % \begin{implementation}
 %   \begin{macro}{\defbeamertemplate{part|section|subsection|subsubsection page}{gotham splitvert progressbar/simple}, \defbeamertemplate{part|section|subsection|subsubsection frame}{gotham splitvert progressbar}, \defbeamertemplate{part|section|subsection|subsubsection frame}{gotham splitvert simple}}
-%     Templates for part \textbar section \textbar subsection \textbar subsubsection pages that are common for 'gotham splitvert progressbar' and 'gotham splitvert simple' styles (which implies part \textbar section \textbar subsection \textbar subsubsection frames). 
+%     Templates for part \textbar section \textbar subsection \textbar subsubsection pages that are common for 'gotham splitvert progressbar' and 'gotham splitvert simple' styles (which implies part \textbar section \textbar subsection \textbar subsubsection frames).
 %     \UnitTested
 %     \TestFiles{gotham-test-041}
 %    \begin{macrocode}
@@ -3643,7 +3925,7 @@
 \defbeamertemplate{part~page}{gotham~splitvert~progressbar/simple}{
 	% \frametitle{part!}
 	% \IfEmpty{\insertframetitle}{
-	\ifx\beamer@frametitle\@empty 
+	\ifx\beamer@frametitle\@empty
 		\vspace*{-0.05\paperheight}
 	\else %}{
 		\vspace*{-0.165\paperheight}
@@ -3654,7 +3936,7 @@
 			\fill[color=gotham@@tempColor] (current~page.north~west) rectangle ([shift = {(0, -0.45\paperheight)}] current~page.north~east);
 		\end{tikzpicture}
 	}
-	
+
 	% \hspace*{\sectionhoffset}
 	\begin{minipage}[b][0.45\paperheight]{\textwidth}
 		\centering
@@ -3695,7 +3977,7 @@
 \defbeamertemplate{section~page}{gotham~splitvert~progressbar/simple}{
 	% \frametitle{section!}
 	% \IfEmpty{\insertframetitle}{
-	\ifx\beamer@frametitle\@empty 
+	\ifx\beamer@frametitle\@empty
 		\vspace*{-0.05\paperheight}
 	\else %}{
 		\vspace*{-0.165\paperheight}
@@ -3747,7 +4029,7 @@
 \defbeamertemplate{subsection~page}{gotham~splitvert~progressbar/simple}{
 	% \frametitle{subsection!}
 	% \IfEmpty{\insertframetitle}{
-	\ifx\beamer@frametitle\@empty 
+	\ifx\beamer@frametitle\@empty
 		\vspace*{-0.05\paperheight}
 	\else %}{
 		\vspace*{-0.165\paperheight}
@@ -3803,7 +4085,7 @@
 \defbeamertemplate{subsubsection~page}{gotham~splitvert~progressbar/simple}{
 	% \frametitle{subsubsection!}
 	% \IfEmpty{\insertframetitle}{
-	\ifx\beamer@frametitle\@empty 
+	\ifx\beamer@frametitle\@empty
 		\vspace*{-0.05\paperheight}
 	\else %}{
 		\vspace*{-0.165\paperheight}
@@ -3863,7 +4145,7 @@
 
 % \begin{implementation}
 %   \begin{macro}{\defbeamertemplate{part|section|subsection|subsubsection page}{gotham progressvert}, \defbeamertemplate{part|section|subsection|subsubsection frame}{gotham progressvert}}
-%     Templates for part \textbar section \textbar subsection \textbar subsubsection pages for 'gotham progressvert'. 
+%     Templates for part \textbar section \textbar subsection \textbar subsubsection pages for 'gotham progressvert'.
 %     \UnitTested
 %     \TestFiles{gotham-test-041}
 %    \begin{macrocode}
@@ -3872,7 +4154,7 @@
 \defbeamertemplate{part~page}{gotham~progressvert}{
 	% \frametitle{part!}
 	% \IfEmpty{\insertframetitle}{
-	\ifx\beamer@frametitle\@empty 
+	\ifx\beamer@frametitle\@empty
 		\vspace*{-0.05\paperheight}
 	\else %}{
 		\vspace*{-0.165\paperheight}
@@ -3884,37 +4166,37 @@
 		\usebeamercolor{frametitle}\colorlet{gotham@@tempColor}{bg}
 		\colorlet{gotham@@tempColorB}{fg}
 		\begin{tikzpicture}[overlay, remember~picture]
-			\fill[color=gotham@@tempColor] 
+			\fill[color=gotham@@tempColor]
 				([shift={(0,0)}] current~page.north~west) --
 				([shift={(0,-\gotham@progressonsectionpage)}] current~page.north~west) --
 				([shift={(0,-\gotham@progressonsectionpage)}] current~page.north~east) --
-				([shift={(0,0)}] current~page.north~east) 
+				([shift={(0,0)}] current~page.north~east)
 				--cycle;
 			\node[color=gotham@@tempColorB, align=left, text~width=0.8\textwidth] at ([shift={(\sectionhoffset,0)}] current~page.center) {
 				{\usebeamerfont{part~title}
 				\partname \ \insertromanpartnumber
-				\\[1.75ex]  
+				\\[1.75ex]
 				\insertpart
 				}
 			};
 
-			\clip 
+			\clip
 				([shift={(0,0)}] current~page.south~west) --
 				([shift={(0,\paperheight-\gotham@progressonsectionpage)}] current~page.south~west) --
 				([shift={(0,\paperheight-\gotham@progressonsectionpage)}] current~page.south~east) --
-				([shift={(0,0)}] current~page.south~east) 
+				([shift={(0,0)}] current~page.south~east)
 				--cycle;
-			
-			\fill[color=gotham@@tempColorB] 
+
+			\fill[color=gotham@@tempColorB]
 				([shift={(0,0)}]current~page.south~west) --
 				([shift={(0,\paperheight-\gotham@progressonsectionpage)}] current~page.south~west) --
 				([shift={(0,\paperheight-\gotham@progressonsectionpage)}] current~page.south~east) --
-				([shift={(0,0)}] current~page.south~east) 
+				([shift={(0,0)}] current~page.south~east)
 				--cycle;
 			\node[color=gotham@@tempColor, align=left, text~width=0.8\textwidth] at ([shift={(\sectionhoffset,0)}] current~page.center) {
 				{\usebeamerfont{part~title}
 				\partname \ \insertromanpartnumber
-				\\ 
+				\\
 				\insertpart
 				}
 			};
@@ -3937,7 +4219,7 @@
 \defbeamertemplate{section~page}{gotham~progressvert}{
 	% \frametitle{section!}
 	% \IfEmpty{\insertframetitle}{
-	\ifx\beamer@frametitle\@empty 
+	\ifx\beamer@frametitle\@empty
 		\vspace*{-0.05\paperheight}
 	\else %}{
 		\vspace*{-0.165\paperheight}
@@ -3949,11 +4231,11 @@
 		\usebeamercolor{frametitle}\colorlet{gotham@@tempColor}{bg}
 		\colorlet{gotham@@tempColorB}{fg}
 		\begin{tikzpicture}[overlay, remember~picture]
-			\fill[color=gotham@@tempColor] 
+			\fill[color=gotham@@tempColor]
 				([shift={(0,0)}] current~page.north~west) --
 				([shift={(0,-\gotham@progressonsectionpage)}] current~page.north~west) --
 				([shift={(0,-\gotham@progressonsectionpage)}] current~page.north~east) --
-				([shift={(0,0)}] current~page.north~east) 
+				([shift={(0,0)}] current~page.north~east)
 				--cycle;
 			\node[color=gotham@@tempColorB, align=left, text~width=0.8\textwidth] at ([shift={(\sectionhoffset,0)}] current~page.center) {
 				{\usebeamerfont{section~title}
@@ -3961,18 +4243,18 @@
 				\insertsectionhead}
 			};
 
-			\clip 
+			\clip
 				([shift={(0,0)}] current~page.south~west) --
 				([shift={(0,\paperheight-\gotham@progressonsectionpage)}] current~page.south~west) --
 				([shift={(0,\paperheight-\gotham@progressonsectionpage)}] current~page.south~east) --
-				([shift={(0,0)}] current~page.south~east) 
+				([shift={(0,0)}] current~page.south~east)
 				--cycle;
-			
-			\fill[color=gotham@@tempColorB] 
+
+			\fill[color=gotham@@tempColorB]
 				([shift={(0,0)}]current~page.south~west) --
 				([shift={(0,\paperheight-\gotham@progressonsectionpage)}] current~page.south~west) --
 				([shift={(0,\paperheight-\gotham@progressonsectionpage)}] current~page.south~east) --
-				([shift={(0,0)}] current~page.south~east) 
+				([shift={(0,0)}] current~page.south~east)
 				--cycle;
 			\node[color=gotham@@tempColor, align=left, text~width=0.8\textwidth] at ([shift={(\sectionhoffset,0)}] current~page.center) {
 				{\usebeamerfont{section~title}
@@ -3998,7 +4280,7 @@
 \defbeamertemplate{subsection~page}{gotham~progressvert}{
 	% \frametitle{subsection!}
 	% \IfEmpty{\insertframetitle}{
-	\ifx\beamer@frametitle\@empty 
+	\ifx\beamer@frametitle\@empty
 		\vspace*{-0.05\paperheight}
 	\else %}{
 		\vspace*{-0.165\paperheight}
@@ -4010,11 +4292,11 @@
 		\usebeamercolor{frametitle}\colorlet{gotham@@tempColor}{bg}
 		\colorlet{gotham@@tempColorB}{fg}
 		\begin{tikzpicture}[overlay, remember~picture]
-			\fill[color=gotham@@tempColor] 
+			\fill[color=gotham@@tempColor]
 				([shift={(0,0)}] current~page.north~west) --
 				([shift={(0,-\gotham@progressonsectionpage)}] current~page.north~west) --
 				([shift={(0,-\gotham@progressonsectionpage)}] current~page.north~east) --
-				([shift={(0,0)}] current~page.north~east) 
+				([shift={(0,0)}] current~page.north~east)
 				--cycle;
 			\node[color=gotham@@tempColorB, align=left, text~width=0.8\textwidth] at ([shift={(\sectionhoffset,0)}] current~page.center) {
 				{\usebeamerfont{section~title}
@@ -4026,18 +4308,18 @@
 				\insertsubsectionhead}
 			};
 
-			\clip 
+			\clip
 				([shift={(0,0)}] current~page.south~west) --
 				([shift={(0,\paperheight-\gotham@progressonsectionpage)}] current~page.south~west) --
 				([shift={(0,\paperheight-\gotham@progressonsectionpage)}] current~page.south~east) --
-				([shift={(0,0)}] current~page.south~east) 
+				([shift={(0,0)}] current~page.south~east)
 				--cycle;
-			
-			\fill[color=gotham@@tempColorB] 
+
+			\fill[color=gotham@@tempColorB]
 				([shift={(0,0)}]current~page.south~west) --
 				([shift={(0,\paperheight-\gotham@progressonsectionpage)}] current~page.south~west) --
 				([shift={(0,\paperheight-\gotham@progressonsectionpage)}] current~page.south~east) --
-				([shift={(0,0)}] current~page.south~east) 
+				([shift={(0,0)}] current~page.south~east)
 				--cycle;
 			\node[color=gotham@@tempColor, align=left, text~width=0.8\textwidth] at ([shift={(\sectionhoffset,0)}] current~page.center) {
 				{\usebeamerfont{section~title}
@@ -4067,7 +4349,7 @@
 \defbeamertemplate{subsubsection~page}{gotham~progressvert}{
 	% \frametitle{subsubsection!}
 	% \IfEmpty{\insertframetitle}{
-	\ifx\beamer@frametitle\@empty 
+	\ifx\beamer@frametitle\@empty
 		\vspace*{-0.05\paperheight}
 	\else %}{
 		\vspace*{-0.165\paperheight}
@@ -4079,11 +4361,11 @@
 		\usebeamercolor{frametitle}\colorlet{gotham@@tempColor}{bg}
 		\colorlet{gotham@@tempColorB}{fg}
 		\begin{tikzpicture}[overlay, remember~picture]
-			\fill[color=gotham@@tempColor] 
+			\fill[color=gotham@@tempColor]
 				([shift={(0,0)}] current~page.north~west) --
 				([shift={(0,-\gotham@progressonsectionpage)}] current~page.north~west) --
 				([shift={(0,-\gotham@progressonsectionpage)}] current~page.north~east) --
-				([shift={(0,0)}] current~page.north~east) 
+				([shift={(0,0)}] current~page.north~east)
 				--cycle;
 			\node[color=gotham@@tempColorB, align=left, text~width=0.8\textwidth] at ([shift={(\sectionhoffset,0)}] current~page.center) {
 				{\usebeamerfont{section~title}
@@ -4099,18 +4381,18 @@
 				\insertsubsubsectionhead}
 			};
 
-			\clip 
+			\clip
 				([shift={(0,0)}] current~page.south~west) --
 				([shift={(0,\paperheight-\gotham@progressonsectionpage)}] current~page.south~west) --
 				([shift={(0,\paperheight-\gotham@progressonsectionpage)}] current~page.south~east) --
-				([shift={(0,0)}] current~page.south~east) 
+				([shift={(0,0)}] current~page.south~east)
 				--cycle;
-			
-			\fill[color=gotham@@tempColorB] 
+
+			\fill[color=gotham@@tempColorB]
 				([shift={(0,0)}]current~page.south~west) --
 				([shift={(0,\paperheight-\gotham@progressonsectionpage)}] current~page.south~west) --
 				([shift={(0,\paperheight-\gotham@progressonsectionpage)}] current~page.south~east) --
-				([shift={(0,0)}] current~page.south~east) 
+				([shift={(0,0)}] current~page.south~east)
 				--cycle;
 			\node[color=gotham@@tempColor, align=left, text~width=0.8\textwidth] at ([shift={(\sectionhoffset,0)}] current~page.center) {
 				{\usebeamerfont{section~title}
@@ -4147,7 +4429,7 @@
 % \begin{documentation}
 % \begin{function}{\useinnertheme}
 %	\begin{syntax}
-%		\cs{useinnertheme}\oarg{option1=value1, ...}\marg{gotham} 
+%		\cs{useinnertheme}\oarg{option1=value1, ...}\marg{gotham}
 %		\textrm{where the options are (default marked as} \defopt{default}\textrm{):}
 %		\meta{partframe template} = \oarg{\defopt{gotham progressbar} \textbar gotham simple \textbar gotham splitvert progressbar \textbar gotham splitvert simple \textbar gotham progressvert \textbar ...}
 % 		\meta{partframe default} = \oarg{\defopt{on} \textbar off}
@@ -4162,7 +4444,7 @@
 %  These templates can be disabled (or re-enabled) by default using the option |partframe default| (or |sectionframe|, |subsectionframe| and |subsubsectionframe| respectively).
 % \end{function}
 % \end{documentation}
-%%%% 
+%%%%
 % \begin{implementation}
 % 	\begin{macro}{inner key -- interface}
 % 		Controls the inner settings for partframe (or |sectionframe|, |subsectionframe| and |subsubsectionframe| respectively) and standin.
@@ -4274,7 +4556,7 @@
 
 % \begin{implementation}
 %   \begin{macro}{\tikzset{section~number/.style={}} }
-%     Definition of how sections, subsections and subsubsections' numbers will appear in 'gotham bullet' style for tables of contents. 
+%     Definition of how sections, subsections and subsubsections' numbers will appear in 'gotham bullet' style for tables of contents.
 %     \UnitTested
 %     \TestFiles{gotham-test-042}
 %    \begin{macrocode}
@@ -4332,9 +4614,10 @@
 % \begin{implementation}
 %   \begin{macro}{\defbeamertemplate{section~in~toc}{gotham~bullet}}
 %     Template definitions for |gotham bullet| style of ToC that appear in section \textbar subsection \textbar subsubsection frame.
-%     \changes{v1.2.1}{2025-02-10}{adapt shaded subsection in toc}
+% 		\changes{v1.2.1}{2025-02-10}{adapt shaded subsection in toc}
+% 		\changes{v1.2.3}{2025-07-27}{protect from interaction with minted}
 %     \UnitTested
-%     \TestFiles{gotham-test-042}
+%     \TestFiles{gotham-test-042, gotham-test-057}
 %    \begin{macrocode}
 \defbeamertemplate{section~in~toc}{gotham~bullet}{
 	\hspace*{0.4cm}\tikz[baseline=-0.5ex]\node[section~number]{\textbf{\inserttocsectionnumber}};
@@ -4342,12 +4625,18 @@
 	\hspace*{1.13cm}{\usebeamercolor*[fg]{footer} \rule{0.6\paperwidth}{0.2pt}{\par\vskip-0.35\baselineskip}\nointerlineskip}
 }
 \defbeamertemplate{subsection~in~toc}{gotham~bullet}{
+	\leavevmode
 	\hspace*{0.53cm}\tikz[baseline=-0.5ex]\node[subsection~number]{};
-	\hspace*{0.5cm}\tikz[baseline=-0.5ex]\node[subsection]{\usebeamerfont*{toc~subtitle}\inserttocsubsection \gotham@strut};\\[-0.2cm]
+	\hspace*{0.5cm}\tikz[baseline=-0.5ex]\node[subsection]{\usebeamerfont*{toc~subtitle}\inserttocsubsection \gotham@strut};
+	% \\[-0.2cm]
+	\par \vspace{-0.38cm}
 }
 \defbeamertemplate{subsubsection~in~toc}{gotham~bullet}{
+	\leavevmode
 	\hspace*{0.58cm}\tikz[baseline=-0.5ex]\node[subsubsection~number]{};
-	\hspace*{0.69cm}\tikz[baseline=-0.5ex]\node[subsubsection]{\usebeamerfont*{toc~subtitle}\inserttocsubsubsection \gotham@strut};\\[-0.2cm]
+	\hspace*{0.69cm}\tikz[baseline=-0.5ex]\node[subsubsection]{\usebeamerfont*{toc~subtitle}\inserttocsubsubsection \gotham@strut};
+	% \\[-0.2cm]
+	\par \vspace{-0.38cm}
 }
 % Shaded for sections already done in the presentation.
 \defbeamertemplate{section~in~toc~shaded}{gotham~bullet}{
@@ -4356,12 +4645,18 @@
 	\hspace*{1.13cm}{\usebeamercolor*[fg]{footer} \rule{0.6\paperwidth}{0.2pt}{\par\vskip-0.35\baselineskip}\nointerlineskip}
 }
 \defbeamertemplate{subsection~in~toc~shaded}{gotham~bullet}{
+	\leavevmode
 	\hspace*{0.53cm}\tikz[baseline=-0.5ex]\node[subsection~number,fill=colorBackElement!20]{};
-	\hspace*{0.5cm}\tikz[baseline=-0.5ex]\node[subsection, text=colorBackElement!20]{\usebeamerfont*{toc~subtitle}\inserttocsubsection \gotham@strut};\\[-0.2cm]
+	\hspace*{0.5cm}\tikz[baseline=-0.5ex]\node[subsection, text=colorBackElement!20]{\usebeamerfont*{toc~subtitle}\inserttocsubsection \gotham@strut};
+	% \\[-0.2cm]
+	\par \vspace{-0.38cm}
 }
 \defbeamertemplate{subsubsection~in~toc~shaded}{gotham~bullet}{
+	\leavevmode
 	\hspace*{0.58cm}\tikz[baseline=-0.5ex]\node[subsubsection~number,fill=colorBackElement!20]{};
-	\hspace*{0.69cm}\tikz[baseline=-0.5ex]\node[subsubsection,text=colorBackElement!20]{\usebeamerfont*{toc~subtitle}\inserttocsubsubsection \gotham@strut};\\[-0.2cm]
+	\hspace*{0.69cm}\tikz[baseline=-0.5ex]\node[subsubsection,text=colorBackElement!20]{\usebeamerfont*{toc~subtitle}\inserttocsubsubsection \gotham@strut};
+	% \\[-0.2cm]
+	\par \vspace{-0.38cm}
 }
 %    \end{macrocode}
 %   \end{macro}
@@ -4375,38 +4670,51 @@
 %     \TestFiles{gotham-test-042}
 %    \begin{macrocode}
 \defbeamertemplate{part~in~toc}{gotham~simple}{
+	\leavevmode
 	{{\inserttocpartnumber}.}~\inserttocpart
-	\\
+	% \\
+	\par \vspace{-0.2cm}
 }
 \defbeamertemplate{section~in~toc}{gotham~simple}{
 	{{\inserttocsectionnumber}.}~\inserttocsection
-	\\
+	% \\
+	\par \vspace{-0.2cm}
 }
 \defbeamertemplate{subsection~in~toc}{gotham~simple}{
+	\leavevmode
 	\quad{{\inserttocsectionnumber}.\inserttocsubsectionnumber.}~\inserttocsubsection
-	\\
+	% \\
+	\par \vspace{-0.2cm}
 }
 \defbeamertemplate{subsubsection~in~toc}{gotham~simple}{
+	\leavevmode
 	\qquad{{\inserttocsectionnumber}.\inserttocsubsectionnumber.\inserttocsubsubsectionnumber.}~\inserttocsubsubsection
-	\\
+	% \\
+	\par \vspace{-0.2cm}
 }
 \defbeamertemplate{section~in~toc~shaded}{gotham~simple}{
+	\leavevmode
 	\begin{colormixin}{20!parent.bg}
-	{{\inserttocsectionnumber}.}~\inserttocsection
+		{{\inserttocsectionnumber}.}~\inserttocsection
 	\end{colormixin}
-	\\
+	% \\
+	\par \vspace{-0.2cm}
 }
 \defbeamertemplate{subsection~in~toc~shaded}{gotham~simple}{
+	\leavevmode
 	\begin{colormixin}{20!parent.bg}
-	\quad{{\inserttocsectionnumber}.\inserttocsubsectionnumber.}~\inserttocsubsection
+		\quad{{\inserttocsectionnumber}.\inserttocsubsectionnumber.}~\inserttocsubsection
 	\end{colormixin}
-	\\
+	% \\
+	\par \vspace{-0.2cm}
 }
 \defbeamertemplate{subsubsection~in~toc~shaded}{gotham~simple}{
+	\leavevmode
 	\begin{colormixin}{20!parent.bg}
-	\qquad{{\inserttocsectionnumber}.\inserttocsubsectionnumber.\inserttocsubsubsectionnumber.}~\inserttocsubsubsection
+		\qquad{{\inserttocsectionnumber}.\inserttocsubsectionnumber.\inserttocsubsubsectionnumber.}~\inserttocsubsubsection
 	\end{colormixin}
-	\\
+	% \\
+	\par \vspace{-0.2cm}
 }
 %    \end{macrocode}
 %   \end{macro}
@@ -4457,7 +4765,7 @@
 %%%%%%
 % \begin{implementation}
 %   \begin{macro}{\begin{frame}[toc]}
-%     Add a frame option |toc| to display the toc frame template. 
+%     Add a frame option |toc| to display the toc frame template.
 %		To do it, we must add a global boolean variable, capture the option at the begin of the frame and patch the end of the frame.
 %     \UnitTested
 %     \TestFiles{gotham-test-042}
@@ -4472,7 +4780,7 @@
 
 % \begin{implementation}
 %   \begin{macro}{\defbeamertemplate{background~canvas}{toc~part|section|subsection~gotham}}
-%     Defintion of the background canvas used by the toc in part\,\textbar\,section\,\textbar\,subsection. 
+%     Defintion of the background canvas used by the toc in part\,\textbar\,section\,\textbar\,subsection.
 %     \UnitTested
 %     \TestFiles{gotham-test-042}
 %    \begin{macrocode}
@@ -4589,7 +4897,7 @@
 %%%%%%
 % \begin{implementation}
 %   \begin{macro}{\begin{frame}[tocpart]}
-%     Add a frame option |tocpart| to display the tocpart frame template. 
+%     Add a frame option |tocpart| to display the tocpart frame template.
 %		To do it, we must add a global boolean variable, capture the option at the begin of the frame and patch the end of the frame.
 %     \UnitTested
 %     \TestFiles{gotham-test-042}
@@ -4626,7 +4934,7 @@
 %%%%%%
 % \begin{implementation}
 %   \begin{macro}{\begin{frame}[tocsec]}
-%     Add a frame option |tocsec| to display the tocsec frame template. 
+%     Add a frame option |tocsec| to display the tocsec frame template.
 %		To do it, we must add a global boolean variable, capture the option at the begin of the frame and patch the end of the frame.
 %     \UnitTested
 %     \TestFiles{gotham-test-042}
@@ -4663,7 +4971,7 @@
 %%%%%%
 % \begin{implementation}
 %   \begin{macro}{\begin{frame}[tocsubsec]}
-%     Add a frame option |tocsubsec| to display the tocsubsec frame template. 
+%     Add a frame option |tocsubsec| to display the tocsubsec frame template.
 %		To do it, we must add a global boolean variable, capture the option at the begin of the frame and patch the end of the frame.
 %     \UnitTested
 %     \TestFiles{gotham-test-042}
@@ -4700,7 +5008,7 @@
 %%%%%%
 % \begin{implementation}
 %   \begin{macro}{\begin{frame}[tocsubsubsec]}
-%     Add a frame option |tocsubsubsec| to display the tocsubsubsec frame template. 
+%     Add a frame option |tocsubsubsec| to display the tocsubsubsec frame template.
 %		To do it, we must add a global boolean variable, capture the option at the begin of the frame and patch the end of the frame.
 %     \UnitTested
 %     \TestFiles{gotham-test-042}
@@ -4732,7 +5040,7 @@
 % \begin{documentation}
 % \begin{function}{\useinnertheme}
 %	\begin{syntax}
-%		\cs{useinnertheme}\oarg{option1=value1, ...}\marg{gotham} 
+%		\cs{useinnertheme}\oarg{option1=value1, ...}\marg{gotham}
 %		\textrm{where the options are (default marked as} \defopt{default}\textrm{):}
 %		\meta{tocframe template} = \oarg{\defopt{gotham bullet} \textbar gotham simple \textbar ...}
 % 		\meta{parttocframe template default} = \oarg{\defopt{gotham simple} \textbar gotham bullet}
@@ -4746,7 +5054,7 @@
 %  These templates can be disabled (or re-enabled) by default using the option |parttocframe default| (or |sectocframe| and |subssectocframe| respectively).
 % \end{function}
 % \end{documentation}
-%%%% 
+%%%%
 % \begin{implementation}
 % 	\begin{macro}{inner key -- interface}
 % 		Controls the inner settings for |parttocframe| (or |sectocframe|, |subsectocframe| respectively).
@@ -4878,8 +5186,8 @@
 \providecommand{\gotham@block}[1]{
 	\par\vskip\medskipamount
 	\setlength{\parskip}{0pt}
-	
-	% If a background color is defined for the block title or body, we need to add a little bit of padding to the corresponding box. 
+
+	% If a background color is defined for the block title or body, we need to add a little bit of padding to the corresponding box.
 	% Ideally, this would be accomplished by setting |colsep=0.75ex|, which is intended to add ``color separation space'' only when the box has a colored background.
 	% Unfortunately, |colsep| also adds this separation if the background color is inherited, even if the inherited color is actually empty.
 	% (The technical reason for this boils down to the fact that the |\ifx| directive does not expand macros.)
@@ -4893,7 +5201,7 @@
 		\ifbeamercolorempty[bg]{block~title}{
 			\begin{beamercolorbox}[rightskip=0pt~plus~4em]{block~title#1}
 		}
-	%   Otherwise, if the |block title| has a background, we set the padding based on |\gotham@blockskip|. 
+	%   Otherwise, if the |block title| has a background, we set the padding based on |\gotham@blockskip|.
 	% However, we have to visually compensate for the |\gotham@strut| added to the block title (see below) by subtracting |\gotham@blockadjust| from the top and bottom padding.
 	%
 		{
@@ -4904,7 +5212,7 @@
 			]{block~title#1}
 		}
 	}
-	% We can now set the contents of the |block title|. 
+	% We can now set the contents of the |block title|.
 	% The zero-width but positive-height box |\gotham@strut| ensures that the block title box has a consistent height, even if it lacks punctuation, ascenders, or descenders.
 	%
 		\usebeamerfont*{block~title#1}
@@ -4912,7 +5220,7 @@
 		\insertblocktitle
 		\gotham@strut
 	\end{beamercolorbox}
-	% Next, we typeset the |block body|. 
+	% Next, we typeset the |block body|.
 	% This the code is similar to, but simpler than, the |block title| code since we don't need to adjust for any struts.
 	\nointerlineskip
 	\ifbeamercolorempty[bg]{block~body#1}{
@@ -4928,7 +5236,7 @@
 	\usebeamerfont{block~body#1}
 	\setlength{\parskip}{\gotham@parskip}
 }
-% This concludes the auxiliary macro |\gotham@block|. 
+% This concludes the auxiliary macro |\gotham@block|.
 %    \end{macrocode}
 %   \end{macro}
 % \end{implementation}
@@ -4939,7 +5247,7 @@
 %	The style of blocks can be changed using |\setbeamertemplate{blocks}[rounded][shadow=true]|.
 % \end{function}
 % \end{documentation}
-%%%% 
+%%%%
 % \begin{implementation}
 % 	\begin{macro}{\defbeamertemplate{block~begin}{gotham}}
 % 		We could define the block beamer templates using the auxiliary macro |\gotham@block|....
@@ -4963,7 +5271,7 @@
 %	Three level of itemize environment are defined by default with decreasing size:  |circle|, |triangle| and |square|.
 % \end{function}
 % \end{documentation}
-%%%% 
+%%%%
 % \begin{implementation}
 % 	\begin{macro}{\defbeamertemplate{block~begin}{gotham}}
 % 		We define the block beamer templates using the auxiliary macro |\gotham@block|.
@@ -5028,7 +5336,7 @@
 % 		\TestFiles{gotham-test-043}
 %    \begin{macrocode}
 % when no value is given, default is called.
-\keys_set:nn { gotham / inner } { 
+\keys_set:nn { gotham / inner } {
 	title~page,
 	watermark~template, watermark~default,
 	standout~template, standin~template,
@@ -5036,7 +5344,7 @@
 	sectionframe~template, sectionframe~default,
 	subsectionframe~template, subsectionframe~default,
 	subsubsectionframe~template, subsubsectionframe~default,
-	tocframe~template, 
+	tocframe~template,
 	parttocframe~template, parttocframe~default,
 	sectiontocframe~template, sectiontocframe~default,
 	subsectiontocframe~template, subsectiontocframe~default,
@@ -5073,7 +5381,7 @@
 %\begin{implementation}
 %    \begin{macrocode}
 %<*outer>
-\ProvidesExplPackage{beamerouterthemegotham}{2025-07-02}{1.2.2.a}{gotham outer theme}
+\ProvidesExplPackage{beamerouterthemegotham}{2025-12-25}{1.2.4.a}{gotham outer theme}
 \RequirePackage{expl3}
 \RequirePackage{xfp}
 \RequirePackage{calc}
@@ -5150,7 +5458,7 @@
 %     Dictionary/map of template elements and predefined option according to the context.
 %     Naming convention: template/What/Who, i.e. Name: key=background~canvas/watermark, value = gotham~draft
 %    \begin{macrocode}
-\prop_if_exist:NTF \l__gotham_template_name_prop 
+\prop_if_exist:NTF \l__gotham_template_name_prop
 {}{
 	% if not defined than define it.
 	\prop_new:N \l__gotham_template_name_prop
@@ -5165,18 +5473,18 @@
 %    \begin{macrocode}
 \seq_if_exist:NTF \l__gotham_tmpa_seq
 {}{
-	% sequence 
-	\seq_new:N \l__gotham_tmpa_seq 
+	% sequence
+	\seq_new:N \l__gotham_tmpa_seq
 }
 \tl_if_exist:NTF \l__gotham_tmpa_tl
 {}{
 	% token list A
-	\tl_new:N \l__gotham_tmpa_tl 
+	\tl_new:N \l__gotham_tmpa_tl
 }
 \tl_if_exist:NTF \l__gotham_tmpb_tl
 {}{
 	% token list B
-	\tl_new:N \l__gotham_tmpb_tl 
+	\tl_new:N \l__gotham_tmpb_tl
 }
 %    \end{macrocode}
 %   \end{variable}
@@ -5190,7 +5498,7 @@
 %     \end{arguments}
 %     Function that store in a map the name a template use later.
 %     The following naming convention is used: Template/What/Who~Name: watermark/gotham~draft.
-% 	   The means for example that if a beamer template is defined using 
+% 	   The means for example that if a beamer template is defined using
 %     |\defbeamertemplate{background}{watermark/gotham~draft}{...}|,
 %     then the function has to be call using
 % 		|\__gotham_set_prop_template{background/watermark}{gotham~draft}|,
@@ -5199,7 +5507,7 @@
 %     If the template name given as input does not exist, an error is raised.
 %     \TestFiles{gotham-test-044}
 %    \begin{macrocode}
-\cs_if_exist:NTF \__gotham_set_prop_template:nn {}{ 
+\cs_if_exist:NTF \__gotham_set_prop_template:nn {}{
 	% if it doesn't exist, then create it.
 	\cs_new_protected:Nn \__gotham_set_prop_template:nn
 	{
@@ -5236,11 +5544,11 @@
 % \begin{implementation}
 %   \begin{function}{\__gotham_add_beamerframe_key:n}
 %     \begin{arguments}
-%       \item Name of the option to add, this name should also correspond to the name of the environment followed by the suffix 'env'. 
+%       \item Name of the option to add, this name should also correspond to the name of the environment followed by the suffix 'env'.
 %     \end{arguments}
 %     Function to add an option of a frame using an environment.
 %     For example, if the name 'optionA' is the argument given to the function, an frame option named 'optionA' will be added, and this option will surround the frame with the environment named 'optionAenv'.
-%     So, the environment 'optionA' must have been declared before. 
+%     So, the environment 'optionA' must have been declared before.
 %     \TestFiles{gotham-test-038}
 %    \begin{macrocode}
 \seq_if_exist:NTF \l__gotham_frameoption_tmp_seq {}{
@@ -5248,7 +5556,7 @@
 	\seq_new:N \l__gotham_frameoption_tmp_seq
 }
 
-\cs_if_exist:NTF \__gotham_add_beamerframe_key:n {}{ 
+\cs_if_exist:NTF \__gotham_add_beamerframe_key:n {}{
 	% if it doesn't exist, then create it.
 
 	% Define the command to add frameoptions
@@ -5290,7 +5598,7 @@
 % 		Unfortunatly, (as far as I know) it not possible to test if the element name exists independtly from the prefined option.
 % 		\TestFiles{gotham-test-038}
 %    \begin{macrocode}
-\cs_if_exist:NTF \__gotham_set_template:nn {}{ 
+\cs_if_exist:NTF \__gotham_set_template:nn {}{
 	% If it doesn't exist, then create it.
 
 	% Define the command to set template if it exists.
@@ -5302,7 +5610,7 @@
 			\PackageError{beamerinnerthemegotham}
 			{The~beamer~template~named~'#1'~with~the~option~'#2'~does~not~exist}
 			{helping~message unknown setbeamertemplate option}
-		}	
+		}
 	}
 }
 %    \end{macrocode}
@@ -5336,14 +5644,14 @@
 
 % \begin{documentation}
 %   \begin{function}{\gothamRightFiligrane, \gothamLeftFiligrane}
-%     Commands used internally by |\setbeamertemplate{sidebar~canvas~right}[default/gotham~filigrane]| (left respectively), that are empty by default. 
+%     Commands used internally by |\setbeamertemplate{sidebar~canvas~right}[default/gotham~filigrane]| (left respectively), that are empty by default.
 %     But these commands can be simply redefined to custom watermarks (filigrane) in sidebars.
 %   \end{function}
 % \end{documentation}
 %%%%%%
 % \begin{implementation}
 %   \begin{macro}{\gothamRightFiligrane, \gothamLeftFiligrane}
-%     Commands used internally by |\setbeamertemplate{sidebar~canvas~right}[default/gotham~filigrane]| (left respectively), that are empty by default. 
+%     Commands used internally by |\setbeamertemplate{sidebar~canvas~right}[default/gotham~filigrane]| (left respectively), that are empty by default.
 %     But these commands can be simply redefined to custom watermarks (filigrane) in sidebars.
 %     \UnitTested
 %     \TestFiles{gotham-test-044}
@@ -5363,7 +5671,7 @@
 
 % \begin{implementation}
 %   \begin{macro}{\defbeamertemplate{sidebar~canvas~right}{}, \defbeamertemplate{sidebar~canvas~left}{}}
-%     Definitions of |\defbeamertemplate{sidebar~canvas~right}| (respectively |\defbeamertemplate{sidebar~canvas~left}|) that are used by gotham by default. 
+%     Definitions of |\defbeamertemplate{sidebar~canvas~right}| (respectively |\defbeamertemplate{sidebar~canvas~left}|) that are used by gotham by default.
 %     \UnitTested
 %     \TestFiles{gotham-test-044}
 %    \begin{macrocode}
@@ -5398,7 +5706,7 @@
 
 % \begin{documentation}
 %   \begin{variable}{\l_gotham_defaultEdging}
-%     Boolean to triggering if edging should be displayed by default (without giving the frame option). 
+%     Boolean to triggering if edging should be displayed by default (without giving the frame option).
 %		The variable is |false| by default.
 %   \end{variable}
 % \end{documentation}
@@ -5412,7 +5720,7 @@
 \bool_new:N \l_gotham_defaultEdging
 \bool_set_false:N \l_gotham_defaultEdging
 % At every new frame, reset the options to default (unless some options/keys are given)
-\BeforeBeginEnvironment{frame}{	
+\BeforeBeginEnvironment{frame}{
 	\bool_if:NTF \l_gotham_defaultEdging {
 		\setbeamertemplate{sidebar~canvas~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~canvas~left/default}]
 		\setbeamertemplate{sidebar~canvas~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~canvas~right/default}]
@@ -5434,7 +5742,7 @@
 %%%%%%
 % \begin{implementation}
 %   \begin{macro}{\begin{frame}[edging]}
-%     Add a frame option |edging| to display an empty sidebar canvas canvas. 
+%     Add a frame option |edging| to display an empty sidebar canvas canvas.
 %		To do it, we must add a global boolean variable, capture the option at the begin of the frame and patch the end of the frame.
 %     \UnitTested
 %     \TestFiles{gotham-test-044}
@@ -5461,7 +5769,7 @@
 %%%%%%
 % \begin{implementation}
 %   \begin{macro}{\begin{frame}[noedging]}
-%     Add a frame option |noedging| to do not display an empty sidebar canvas canvas. 
+%     Add a frame option |noedging| to do not display an empty sidebar canvas canvas.
 %		To do it, we must add a global boolean variable, capture the option at the begin of the frame and patch the end of the frame.
 %     \UnitTested
 %     \TestFiles{gotham-test-044}
@@ -5479,7 +5787,7 @@
 % \begin{documentation}
 % \begin{function}{\useoutertheme}
 %	\begin{syntax}
-%		\cs{useoutertheme}\oarg{option1=value1, ...}\marg{gotham} 
+%		\cs{useoutertheme}\oarg{option1=value1, ...}\marg{gotham}
 %		\textrm{where the options are (default marked as} \defopt{default}\textrm{):}
 %     \meta{edging default} = \oarg{\defopt{off} \textbar on }
 %		\meta{sidebar canvas left template} = \oarg{\defopt{gotham} \textbar ...}
@@ -5490,7 +5798,7 @@
 % 	The option |edging default=on| can enable the |sidebar canvas right| (and |sidebar canvas left|) templates on every frame; but it can still be turned off for specific frames when using the frame option |noedging|.
 % \end{function}
 % \end{documentation}
-%%%% 
+%%%%
 % \begin{implementation}
 % 	\begin{macro}{outer key -- interface}
 % 		Controls the outer settings for sidebar canvas right and sidebar canvas left.
@@ -5634,7 +5942,7 @@
 % \begin{implementation}
 %   \begin{macro}{\defbeamertemplate{headline}{default/gotham~section}}
 %     The headline template used to print the current section name and subection.
-%     This template is used with |circlehead| progress bar 
+%     This template is used with |circlehead| progress bar
 %     \UnitTested
 %     \TestFiles{gotham-test-046, gotham-test-046b, gotham-test-047}
 %    \begin{macrocode}
@@ -5659,7 +5967,7 @@
 %%%%%%
 % \begin{implementation}
 %   \begin{variable}{\gothamFrametitleToppading, \gothamFrametitleBottompading, \gothamFrametitleLeftpading, \gothamFrametitleRightpading}
-%     Dimensions of lengths used in the frametitle: top, bottom, left and right padding. 
+%     Dimensions of lengths used in the frametitle: top, bottom, left and right padding.
 %     All of them are equal to 2.2ex by default.
 %    \begin{macrocode}
 \newlength{\gothamFrametitleToppading}
@@ -5671,7 +5979,7 @@
 \setlength{\gothamFrametitleLeftpading}{2.2ex}
 \setlength{\gothamFrametitleRightpading}{2.2ex}
 % \gotham@strut from inner
-\providecommand{\gotham@strut}{ 
+\providecommand{\gotham@strut}{
 	\vphantom{ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz (/)}
 }
 %    \end{macrocode}
@@ -5765,8 +6073,8 @@
 % \begin{documentation}
 %   \begin{function}{\gothamFrameSubtitleSep}
 %     Command that can be redefined to control the separator between the title of the frame and its subtitle.
-%     For example if a default Beamer style is desired, one can use |\renewcommand{\gothamFrameSubtitleSep}{\\[-.42em]}|. 
-%     By default it is a hyphen. 
+%     For example if a default Beamer style is desired, one can use |\renewcommand{\gothamFrameSubtitleSep}{\\[-.42em]}|.
+%     By default it is a hyphen.
 %   \end{function}
 % \end{documentation}
 %%%%%%
@@ -5796,7 +6104,7 @@
 %    \begin{macrocode}
 \newlength{\gothamFramesubtitleStrutend}
 \setlength{\gothamFramesubtitleStrutend}{0pt}
-% \setlength{\gothamFramesubtitleStrutend}{-1.25ex} %% When \newcommand{\gothamFrameSubtitleSep}{\\[-.42em]} 
+% \setlength{\gothamFramesubtitleStrutend}{-1.25ex} %% When \newcommand{\gothamFrameSubtitleSep}{\\[-.42em]}
 %    \end{macrocode}
 %   \end{variable}
 % \end{implementation}
@@ -5911,7 +6219,7 @@
 % \begin{documentation}
 % \begin{function}{\useoutertheme}
 %	\begin{syntax}
-%		\cs{useoutertheme}\oarg{option1=value1, ...}\marg{gotham} 
+%		\cs{useoutertheme}\oarg{option1=value1, ...}\marg{gotham}
 %		\textrm{where the options are (default marked as} \defopt{default}\textrm{):}
 %     \meta{frametitle template} = \oarg{\defopt{gotham subsameline} \textbar gotham subnewline \textbar ... }
 %		\meta{framesubtitle template} = \oarg{\defopt{gotham subnewline} \textbar ...}
@@ -5919,7 +6227,7 @@
 %	The 'package' (useoutertheme) options can control |frametitle| (and |framesubtitle|) templates.
 % \end{function}
 % \end{documentation}
-%%%% 
+%%%%
 % \begin{implementation}
 % 	\begin{macro}{outer key -- interface}
 % 		Controls the outer settings for frametitle and framesubtitle.
@@ -5930,7 +6238,7 @@
 	% frametitle template
 	frametitle~template .usage:n = { general },
 	frametitle~template .default:n = { gotham~subsameline },
-	frametitle~template .code:n = { 
+	frametitle~template .code:n = {
 		\__gotham_set_prop_template:nn{frametitle/default}{#1}
 		\setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
 	}
@@ -5939,7 +6247,7 @@
 	% frametitle template
 	framesubtitle~template .usage:n = { general },
 	framesubtitle~template .default:n = { gotham~subnewline },
-	framesubtitle~template .code:n = { 
+	framesubtitle~template .code:n = {
 		\__gotham_set_prop_template:nn{framesubtitle/default}{#1}
 		\setbeamertemplate{framesubtitle}[default/\prop_item:Nn \l__gotham_template_name_prop {framesubtitle/default}]
 	}
@@ -5954,14 +6262,14 @@
 % \begin{implementation}
 %   \begin{macro}{\defbeamertemplate{frametitle~continuation}{default/beamer}}
 %     Template for numerotation of frametitle when a frame are continuing on sevral pages (allowed with the beamer option |allowframebreaks|).
-%     Beamer theme (by default) is using roman number with uppercase. 
+%     Beamer theme (by default) is using roman number with uppercase.
 %     \UnitTested
 %     \TestFiles{gotham-test-047}
 %    \begin{macrocode}
 \defbeamertemplate{frametitle~continuation}{default/beamer}{
 	\usebeamerfont{frametitle}
 	{
-		\MakeUppercase{\romannumeral \insertcontinuationcount} 
+		\MakeUppercase{\romannumeral \insertcontinuationcount}
 	}
 }
 %    \end{macrocode}
@@ -5971,7 +6279,7 @@
 % \begin{implementation}
 %   \begin{macro}{\defbeamertemplate{frametitle~continuation}{default/tot}}
 %     Template for numerotation of frametitle when a frame are continuing on sevral pages (allowed with the beamer option |allowframebreaks|).
-%     This template is using arabic number slash over the total number of page for this frame. 
+%     This template is using arabic number slash over the total number of page for this frame.
 %     \UnitTested
 %     \TestFiles{gotham-test-047}
 %    \begin{macrocode}
@@ -5993,14 +6301,14 @@
 % \begin{implementation}
 %   \begin{macro}{\defbeamertemplate{frametitle~continuation}{default/gotham}}
 %     Template for numerotation of frametitle when a frame are continuing on sevral pages (allowed with the beamer option |allowframebreaks|).
-%     Gotham theme (by default) is using roman number with lowercase. 
+%     Gotham theme (by default) is using roman number with lowercase.
 %     \UnitTested
 %     \TestFiles{gotham-test-047}
 %    \begin{macrocode}
 \defbeamertemplate{frametitle~continuation}{default/gotham}{
 	\usebeamerfont{frametitle}
-	{	
-		%\small 
+	{
+		%\small
 		(\romannumeral \insertcontinuationcount)
 	}
 }
@@ -6012,14 +6320,14 @@
 % \begin{documentation}
 % \begin{function}{\useoutertheme}
 %	\begin{syntax}
-%		\cs{useoutertheme}\oarg{option1=value1, ...}\marg{gotham} 
+%		\cs{useoutertheme}\oarg{option1=value1, ...}\marg{gotham}
 %		\textrm{where the options are (default marked as} \defopt{default}\textrm{):}
 %     \meta{frametitle continuation template} = \oarg{\defopt{gotham} \textbar tot \textbar beamer \textbar ... }
 %	\end{syntax}
 %	The 'package' (useoutertheme) options can control |frametitle continuation| templates.
 % \end{function}
 % \end{documentation}
-%%%% 
+%%%%
 % \begin{implementation}
 % 	\begin{macro}{outer key -- interface}
 % 		Controls the outer settings for frametitle continuation.
@@ -6030,7 +6338,7 @@
 	% frametitle template
 	frametitle~continuation~template .usage:n = { general },
 	frametitle~continuation~template .default:n = { gotham },
-	frametitle~continuation~template .code:n = { 
+	frametitle~continuation~template .code:n = {
 		\__gotham_set_prop_template:nn{frametitle~continuation/default}{#1}
 		\setbeamertemplate{frametitle~continuation}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle~continuation/default}]
 	}
@@ -6047,7 +6355,7 @@
 
 % \begin{implementation}
 %   \begin{macro}{\defbeamertemplate{footline}{empty}}
-%     Empty footline template used when the option nofootline is given. 
+%     Empty footline template used when the option nofootline is given.
 %     \UnitTested
 %     \TestFiles{gotham-test-048}
 %    \begin{macrocode}
@@ -6064,7 +6372,7 @@
 %%%%%%
 % \begin{implementation}
 %   \begin{macro}{\begin{frame}[nofootline]}
-%     Add a frame option |nofootline| to do not display an empty footline. 
+%     Add a frame option |nofootline| to do not display an empty footline.
 %		To do it, we must add a global boolean variable, capture the option at the begin of the frame and patch the end of the frame.
 %     \UnitTested
 %     \TestFiles{gotham-test-048}
@@ -6100,7 +6408,7 @@
 \newlength{\gothamFootlineDepth}
 \newlength{\gothamFootlineHRightOffset}
 
-\setlength{\gothamFootlineVOffset}{-0.5ex} 
+\setlength{\gothamFootlineVOffset}{-0.5ex}
 \setlength{\gothamFootlineDepth}{0.1ex}
 \setlength{\gothamFootlineHeight}{1.5ex}
 \setlength{\gothamFootlineHRightOffset}{\spaceskip}
@@ -6111,6 +6419,7 @@
 % \begin{implementation}
 %   \begin{macro}{\defbeamertemplate*{footline}{default/gotham}}
 %     Template that is activate by default since this footline is relatively generic.
+% 		\changes{v1.2.0}{2024-11-11}{add gothamFootlineHRightOffset}
 %     \UnitTested
 %     \TestFiles{gotham-test-048}
 %    \begin{macrocode}
@@ -6118,7 +6427,7 @@
 	% new line to adjust the footline position.
 	\vspace*{\gothamFootlineVOffset}
 	\begin{beamercolorbox}[
-		wd=\textwidth, 
+		wd=\textwidth,
 		sep=0pt,
 		leftskip=3ex,
 		rightskip=3ex,
@@ -6143,6 +6452,28 @@
 %   \end{macro}
 % \end{implementation}
 
+% \begin{documentation}
+%   \begin{function}{\begin{frame}[nopagenumber]}
+%      Add a frame option |nopagenumber| to do not display the page number in the footline.
+%   \end{function}
+% \end{documentation}
+%%%%%%
+% \begin{implementation}
+%   \begin{macro}{\begin{frame}[nopagenumber]}
+%     Add a frame option |nopagenumber| to do not display an page number locally.
+%		To do it, we must add a global boolean variable, capture the option at the begin of the frame and patch the end of the frame.
+%     \UnitTested
+%     \TestFiles{gotham-test-048}
+%    \begin{macrocode}
+% bool to trigger the add of nopagenumber in frame.
+\newenvironment{nopagenumberenv}{
+	\setbeamertemplate{page~number~in~head/foot}[none]
+}{}
+\__gotham_add_beamerframe_key:n {nopagenumber}
+%    \end{macrocode}
+%   \end{macro}
+% \end{implementation}
+
 
 %%% Footer  %%%
 
@@ -6158,11 +6489,11 @@
 %   \begin{variable}{\gothamLeftFooterPadding, \gothamRightFooterPadding, \gothamFooterHOffset}
 %     Lengths used in |footer| template for positioning left right and bottom.
 %    \begin{macrocode}
-\newlength{\gothamLeftFooterPadding} 
-\newlength{\gothamRightFooterPadding} 
+\newlength{\gothamLeftFooterPadding}
+\newlength{\gothamRightFooterPadding}
 \newlength{\gothamFooterHOffset}
-\setlength{\gothamLeftFooterPadding}{2.0ex} 
-\setlength{\gothamRightFooterPadding}{3.5ex} 
+\setlength{\gothamLeftFooterPadding}{2.0ex}
+\setlength{\gothamRightFooterPadding}{3.5ex}
 \setlength{\gothamFooterHOffset}{0pt}
 %    \end{macrocode}
 %   \end{variable}
@@ -6186,7 +6517,7 @@
 %     \TestFiles{gotham-test-048}
 %    \begin{macrocode}
 \defbeamertemplate{frame~footer}{empty}{
-	\hspace{\gothamLeftFooterPadding} 
+	\hspace{\gothamLeftFooterPadding}
 	\hfill \
 	\gotham@strut
 	% decrease space between progress bar and footer
@@ -6204,7 +6535,7 @@
 %%%%%%
 % \begin{implementation}
 %   \begin{macro}{\begin{frame}[nofooter]}
-%     Add a frame option |nofooter| to do not display an empty footer. 
+%     Add a frame option |nofooter| to do not display an empty footer.
 %		To do it, we must add a global boolean variable, capture the option at the begin of the frame and patch the end of the frame.
 %     \UnitTested
 %     \TestFiles{gotham-test-048}
@@ -6220,7 +6551,7 @@
 
 % \begin{documentation}
 %   \begin{variable}{\l_gotham_defaultRotateFooter}
-%     Boolean to triggering if rotated footer should be displayed by default (without giving the frame option). 
+%     Boolean to triggering if rotated footer should be displayed by default (without giving the frame option).
 %		The variable is |false| by default.
 %   \end{variable}
 % \end{documentation}
@@ -6255,13 +6586,13 @@
 %%%%%%
 % \begin{implementation}
 %   \begin{macro}{\begin{frame}[rotateFooter]}
-%     Add a frame option |rotateFooter| to display a rotated footer. 
+%     Add a frame option |rotateFooter| to display a rotated footer.
 %		To do it, we must add a global boolean variable, capture the option at the begin of the frame and patch the end of the frame.
 %     \UnitTested
 %     \TestFiles{gotham-test-048}
 %    \begin{macrocode}
-% bool to trigger 
-% Capture new options/keys for frames 
+% bool to trigger
+% Capture new options/keys for frames
 \define@key{beamerframe}{rotateFooter}[true]{
 	\bool_set_true:N \l_gotham_RotateFooter
 }
@@ -6277,12 +6608,12 @@
 %%%%%%
 % \begin{implementation}
 %   \begin{macro}{\begin{frame}[noRotateFooter]}
-%     Add a frame option |noRotateFooter| to display a none-rotated footer. 
+%     Add a frame option |noRotateFooter| to display a none-rotated footer.
 %		To do it, we must add a global boolean variable, capture the option at the begin of the frame and patch the end of the frame.
 %     \UnitTested
 %     \TestFiles{gotham-test-048}
 %    \begin{macrocode}
-% Capture new options/keys for frames 
+% Capture new options/keys for frames
 \define@key{beamerframe}{noRotateFooter}[true]{
 	\bool_set_false:N \l_gotham_RotateFooter
 }
@@ -6293,14 +6624,14 @@
 % \begin{documentation}
 % \begin{function}{\useoutertheme}
 %	\begin{syntax}
-%		\cs{useoutertheme}\oarg{option1=value1, ...}\marg{gotham} 
+%		\cs{useoutertheme}\oarg{option1=value1, ...}\marg{gotham}
 %		\textrm{where the options are (default marked as} \defopt{default}\textrm{):}
 %     \meta{rotateFooter default} = \oarg{\defopt{off} \textbar on }
 %	\end{syntax}
 % 	The option |rotateFooter default=on| can enable the rotation of the footer on every frame; but it can all be turned on for specific frames when using the frame option |\begin{frame}[rotateFooter]|.
 % \end{function}
 % \end{documentation}
-%%%% 
+%%%%
 % \begin{implementation}
 % 	\begin{macro}{outer key -- interface}
 % 		Controls the outer settings for sidebar canvas right and sidebar canvas left.
@@ -6337,7 +6668,7 @@
 %     |\gothamHposRightRotFooter| is controlling the horizontal positioning of the right part of the rotatated footer.
 %     |\gothamVposLeftRotFooter| is controlling the vertical positioning of the left part of the rotatated footer.
 %     |\gothamVposRightRotFooter| is controlling the vertical positioning of the right part of the rotatated footer.
-%    
+%
 %   \end{variable}
 % \end{documentation}
 %%%%%%
@@ -6349,7 +6680,7 @@
 \newlength{\gothamFootlineRuleHeight}
 \newlength{\gothamFootlineRuleLength}
 
-\setlength{\gothamFootlineRuleLeftPadding}{7mm} 
+\setlength{\gothamFootlineRuleLeftPadding}{7mm}
 \setlength{\gothamFootlineRuleHeight}{0.0pt}
 % \setlength{\gothamFootlineRuleHeight}{0.5pt} % This is nice also but have a cleaner default, I turned it to 0.
 \setlength{\gothamFootlineRuleLength}{15mm}
@@ -6372,7 +6703,7 @@
 %   \begin{variable}{\hlenRightRotFooter, \hlenLeftRotFooter}
 %     Temporary variables for the horizontal length of the rotated footer
 %    \begin{macrocode}
-% Not used yet because I need to have a latex3 settowidth equivalent. 
+% Not used yet because I need to have a latex3 settowidth equivalent.
 % I will maybe take inspiration from https://tex.stackexchange.com/questions/492367/does-expl3-have-alternative-to-settowidth-and-settoheight
 % \dim_new:N \l__gotham_HLen_rightRotFooter_dim
 % \dim_new:N \l__gotham_HLen_leftRotFooter_dim
@@ -6385,6 +6716,7 @@
 % \begin{implementation}
 %   \begin{macro}{\defbeamertemplate{frame~footer}{default/gotham}}
 %     Template for frame footer used by gotham, allowing a rotated footer.
+% 		\changes{v1.2.0}{2024-11-11}{add hook gothamHookFooter and gothamFootlineHRightOffset}
 %     \UnitTested
 %     \TestFiles{gotham-test-048}
 %    \begin{macrocode}
@@ -6393,7 +6725,7 @@
 	%%% Add a ruler but wihtout affecting the dimensions of the footline
 	\vbox to 0pt{
 		% Vertical stretch to ensure proper spacing
-		\vss 
+		\vss
 		\hbox to 0pt{
 			\hspace*{\gothamFootlineRuleLeftPadding}
 			% \usebeamercolor{frametitle}
@@ -6405,7 +6737,7 @@
 				\dimexpr \gothamFootlineHeight -0.25em\relax
 			}
 			% Horizontal stretch to ensure proper spacing
-			\hss 
+			\hss
 		}
 	}
 	%%% Add Hook
@@ -6426,13 +6758,13 @@
 	}
 	\hfill \
 	%%% Add short title
-	\hfill \ \insertshorttitle 
+	\hfill \ \insertshorttitle
 		% make sure that the vertical space is constant: strut.
 		\gotham@strut
-	\hfill \ 
+	\hfill \
 	\hfill \
 	%%% Add short author
-	\bool_if:NTF \l_gotham_RotateFooter {	
+	\bool_if:NTF \l_gotham_RotateFooter {
 		% rotateFooter true
 		\settowidth{\hlenRightRotFooter}{\hspace{\gothamRightFooterPadding}\usebeamertemplate{page~number~in~head/foot}\hspace*{\gothamFootlineHRightOffset}}
 		\addtolength{\hlenRightRotFooter}{\gothamHposRightRotFooter}
@@ -6441,7 +6773,7 @@
 		\end{picture}
 	}{
 		% rotateFooter false
-		\insertshortauthor 
+		\insertshortauthor
 	}
 	%%% Decrease space between progress bar and footer
 	\vspace*{\gothamFooterHOffset}
@@ -6454,14 +6786,14 @@
 % \begin{documentation}
 % \begin{function}{\useoutertheme}
 %	\begin{syntax}
-%		\cs{useoutertheme}\oarg{option1=value1, ...}\marg{gotham} 
+%		\cs{useoutertheme}\oarg{option1=value1, ...}\marg{gotham}
 %		\textrm{where the options are (default marked as} \defopt{default}\textrm{):}
 %     \meta{footer template} = \oarg{\defopt{gotham} \textbar ... }
 %	\end{syntax}
 % 	The option |footer template| can which template to use as a footer.
 % \end{function}
 % \end{documentation}
-%%%% 
+%%%%
 % \begin{implementation}
 % 	\begin{macro}{outer key -- interface}
 % 		Controls the outer settings for footer template.
@@ -6472,8 +6804,8 @@
 	% footer template
 	footer~template .usage:n = { general },
 	footer~template .default:n = { gotham },
-	footer~template .code:n = { 
-		\__gotham_set_prop_template:nn{frame~footer/default}{#1} 
+	footer~template .code:n = {
+		\__gotham_set_prop_template:nn{frame~footer/default}{#1}
 		\setbeamertemplate{frame~footer}[
 			default/\prop_item:Nn \l__gotham_template_name_prop {frame~footer/default}
 		]
@@ -6493,7 +6825,7 @@
 %     \UnitTested
 %     \TestFiles{gotham-test-046}
 %    \begin{macrocode}
-% 
+%
 \def\inserttotalframenumber{100}
 %    \end{macrocode}
 %   \end{macro}
@@ -6515,7 +6847,7 @@
 %     Variable lengths controling the vertical and horizontal positioning of the |circle| frame numbering template.
 %   \end{variable}
 % \end{documentation}
-%%%% 
+%%%%
 % \begin{implementation}
 %   \begin{variable}{\gothamCircleNumberingVshift, \gothamCircleNumberingHshift}
 %     Length used in |raisebox| and |hspace| in |circle| frame numbering.
@@ -6534,19 +6866,19 @@
 %     \UnitTested
 %     \TestFiles{gotham-test-048}
 %    \begin{macrocode}
-\defbeamertemplate{page~number~in~head/foot}{circle}{	
+\defbeamertemplate{page~number~in~head/foot}{circle}{
 	% horizontal space between the circle and the right part of the footer (email).
 	\hspace{+2em}
 	% \raisebox{lift}[height][depth]{text} => lift here = vertical space between the bottom of the page (or the progress bar) and the center of the circle
 	\raisebox{\gothamCircleNumberingVshift}[0pt][0pt]{
 		\begin{tikzpicture}[remember~picture, overlay]
 			\coordinate (circleCenter);
-			
+
 			\usebeamercolor{frametitle}
 
 			\draw[fill, color=frametitle.bg] (circleCenter) circle (6mm);
 			\draw[fill, color=frametitle.fg] (circleCenter) circle (5mm);
-			\node[color=frametitle.bg] at (circleCenter) 
+			\node[color=frametitle.bg] at (circleCenter)
 				{\small$^{\insertframenumber}\negmedspace/\negthinspace\sb{\inserttotalframenumber}$}
 			;
 		\end{tikzpicture}
@@ -6561,7 +6893,7 @@
 % \begin{documentation}
 % \begin{function}{\useoutertheme}
 %	\begin{syntax}
-%		\cs{useoutertheme}\oarg{option1=value1, ...}\marg{gotham} 
+%		\cs{useoutertheme}\oarg{option1=value1, ...}\marg{gotham}
 %		\textrm{where the options are (default marked as} \defopt{default}\textrm{):}
 %     \meta{numbering} = \oarg{\defopt{none} \textbar framenumber \textbar totalframenumber \textbar appendixframenumber \textbar pagenumber \textbar totalpagenumber \textbar circle \textbar ... }
 %		\meta{framesubtitle template} = \oarg{\defopt{gotham subnewline} \textbar ...}
@@ -6569,7 +6901,7 @@
 %	The 'package' (useoutertheme) options can control |frame numbering|  templates used in |footer| template.
 % \end{function}
 % \end{documentation}
-%%%% 
+%%%%
 % \begin{implementation}
 % 	\begin{macro}{outer key -- interface}
 % 		Controls the outer settings for frame numbering.
@@ -6647,7 +6979,7 @@
 
 % \begin{implementation}
 % 	\begin{macro}{\defbeamertemplate{section~in~head/foot}{default/empty}}
-% 		Empty template for section in headline, compensating the height of a line. 
+% 		Empty template for section in headline, compensating the height of a line.
 % 		\UnitTested
 % 		\TestFiles{gotham-test-048}
 %    \begin{macrocode}
@@ -6691,9 +7023,9 @@
 {
 	\settoheight{\gotham@temp@heightFrametitle}{\gotham@strut}
 	\addtolength{\gotham@temp@heightFrametitle}{\gothamFrametitleToppading+\gothamFrametitleBottompading+\gothamProgressHeadFootLineheight}
-	
+
 	\setlength{\gotham@temp@PaperheightFrametitle}{\paperheight-\gotham@temp@heightFrametitle-\gothamFootlineHeight-\gothamFootlineDepth-\gothamProgressHeadFootLineheight}
-	
+
 	\vspace{-0.6\paperheight}
 	\rotatebox{90}{
 		%,ht=1.75ex,dp=2.75ex
@@ -6709,9 +7041,9 @@
 {
 	\settoheight{\gotham@temp@heightFrametitle}{\gotham@strut}
 	\addtolength{\gotham@temp@heightFrametitle}{\gothamFrametitleToppading+\gothamFrametitleBottompading+\gothamProgressHeadFootLineheight}
-	
+
 	\setlength{\gotham@temp@PaperheightFrametitle}{\paperheight-\gotham@temp@heightFrametitle-\gothamFootlineHeight-\gothamFootlineDepth-\gothamProgressHeadFootLineheight}
-	
+
 	\vspace{\gotham@temp@heightFrametitle}
 	\hspace{-2.3em}
 	\rotatebox{-90}{
@@ -6815,7 +7147,7 @@
 % \begin{documentation}
 % \begin{function}{\useoutertheme}
 %	\begin{syntax}
-%		\cs{useoutertheme}\oarg{option1=value1, ...}\marg{gotham} 
+%		\cs{useoutertheme}\oarg{option1=value1, ...}\marg{gotham}
 %		\textrm{where the options are (default marked as} \defopt{default}\textrm{):}
 %     \meta{mini frames shape} = \oarg{\defopt{gotham minibullet} \textbar default (bullet from beamer) \textbar tick \textbar box \textbar gotham box \textbar gotham minibox \textbar ... }
 %		\meta{framesubtitle template} = \oarg{\defopt{gotham subnewline} \textbar ...}
@@ -6823,7 +7155,7 @@
 %	The 'package' (useoutertheme) options can control |frame numbering|  templates used in |footer| template.
 % \end{function}
 % \end{documentation}
-%%%% 
+%%%%
 % \begin{implementation}
 % 	\begin{macro}{outer key -- interface}
 % 		Controls the outer settings for mini frames shape template.
@@ -6836,7 +7168,7 @@
 	mini~frames~shape .usage:n = { general },
 	mini~frames~shape .default:n = { gotham~minibullet },
 	% \__gotham_set_template:nn{title~page}{#1}
-	mini~frames~shape .code:n = { 
+	mini~frames~shape .code:n = {
 		% \__gotham_set_template:nn{mini~frames}{#1}% This can not work since this is an alias, so go back to normal
 		\setbeamertemplate{mini~frames}[#1]
 	},
@@ -6953,11 +7285,11 @@
 	\resizebox{\beamer@boxsize}{!}{\hspace{-0.75pt}$\blacklozenge$}
 }
 \defbeamertemplate{miniframe~subsection~todo}{gotham~mini}{
-	\hspace{-0.15pt}	
+	\hspace{-0.15pt}
 	\resizebox{\beamer@boxsize}{!}{\hspace{-0.75pt}$\lozenge$}
 }
 \defbeamertemplate{miniframe~subsection~done}{gotham~mini}{
-	\hspace{-0.15pt}	
+	\hspace{-0.15pt}
 	\resizebox{\beamer@boxsize}{!}{\hspace{-0.75pt}$\blacklozenge$}
 }
 % \defbeamertemplate{miniframe~subsubsection}{gotham~mini}{
@@ -7025,7 +7357,7 @@
 % 		\TestFiles{gotham-test-048}
 %    \begin{macrocode}
 \defbeamertemplateparent{mini~frames~bundle}
-{ 	miniframe~home, miniframe~current~slide, 
+{ 	miniframe~home, miniframe~current~slide,
 	miniframe~done~current~section, miniframe~todo~current~section, miniframe~done~other~section, miniframe~todo~other~section,
 	miniframe~section~current, miniframe~section~done, miniframe~section~todo,
 	miniframe~subsection~current, miniframe~subsection~done, miniframe~subsection~todo,
@@ -7038,7 +7370,7 @@
 % \begin{documentation}
 % \begin{function}{\useoutertheme}
 %	\begin{syntax}
-%		\cs{useoutertheme}\oarg{option1=value1, ...}\marg{gotham} 
+%		\cs{useoutertheme}\oarg{option1=value1, ...}\marg{gotham}
 %		\textrm{where the options are (default marked as} \defopt{default}\textrm{):}
 %     \meta{mini frames bundle} = \oarg{\defopt{gotham minibullet} \textbar default (bullet from beamer) \textbar tick \textbar box \textbar gotham box \textbar gotham minibox \textbar ... }
 %		\meta{framesubtitle template} = \oarg{\defopt{gotham subnewline} \textbar ...}
@@ -7046,7 +7378,7 @@
 %	The 'package' (useoutertheme) options can control |mini frame|  templates.
 % \end{function}
 % \end{documentation}
-%%%% 
+%%%%
 % \begin{implementation}
 % 	\begin{macro}{outer key -- interface}
 % 		Controls the outer settings for mini frames bundle template.
@@ -7059,7 +7391,7 @@
 	mini~frames~bundle .usage:n = { general },
 	mini~frames~bundle .default:n = { gotham~mini },
 	% \__gotham_set_template:nn{title~page}{#1}
-	mini~frames~bundle .code:n = { 
+	mini~frames~bundle .code:n = {
 		% \__gotham_set_template:nn{mini~frames}{#1}% This can not work since this is an alias, so go back to normal
 		\setbeamertemplate{mini~frames~bundle}[#1]
 	},
@@ -7075,14 +7407,14 @@
 % \begin{documentation}
 % \begin{function}{\useoutertheme}
 %	\begin{syntax}
-%		\cs{useoutertheme}\oarg{option1=value1, ...}\marg{gotham} 
+%		\cs{useoutertheme}\oarg{option1=value1, ...}\marg{gotham}
 %		\textrm{where the options are (default marked as} \defopt{default}\textrm{):}
 %     \meta{mini frames compress} = \oarg{\defopt{on} \textbar off }
 %	\end{syntax}
 %	The 'package' (useoutertheme) options can control |compress| option in mini frames.
 % \end{function}
 % \end{documentation}
-%%%% 
+%%%%
 % \begin{implementation}
 % 	\begin{macro}{outer key -- interface}
 % 		Controls the outer settings for mini frames compress template.
@@ -7261,7 +7593,7 @@
 				}
 			\fi%
 		\fi% \ifnum#3=1
-		
+
 		%% end of modif to add section number and subsection symbol.
 		\hbox to 0pt{%
 			\beamer@tempdim=-\beamer@vboxoffset%
@@ -7297,7 +7629,7 @@
 					% \fi%
 					%%
 					%% CHANGE FROM HERE: I rewrote this part.
-					% If first page (ie. 1/1) 
+					% If first page (ie. 1/1)
 					\def\gotham@temp@i{1/1}
 					\def\gotham@temp@ii{#4}
 					\ifx\gotham@temp@i\gotham@temp@ii
@@ -7355,12 +7687,12 @@
 % \begin{variable}{gothamZerosectionframes}
 % 	Boolean variable to flag if they are frame in a zeroth section.
 %  This variable helps to adapt the spreading of |mini frames nav| bar.
-%  This variable is automatically set if the spread is set correctly at the beginning of the presention. 
+%  This variable is automatically set if the spread is set correctly at the beginning of the presention.
 %  If the spreading or the mini frame nav is disable at the zeroth section then reactivated latter, it might create unwanted spreading.
 %  In such situation the variable has to be set manually to correct the spreading.
 % \end{variable}
 % \end{documentation}
-%%%% 
+%%%%
 % \begin{implementation}
 % 	\begin{variable}{gothamZerosectionframes}
 % 		Boolean variable to flag if they are frame in a zeroth section.
@@ -7381,7 +7713,7 @@
 	% spreading by default
 	\ifbool{gothamZerosectionframes}{
 		%true
-		% spreading 
+		% spreading
 		\hskip-0.5ex~plus~1fill
 	}{
 		%false
@@ -7408,7 +7740,7 @@
 		\ifnum\value{framenumber}>0%
 			\hskip-0ex%
 			\global\booltrue{gothamZerosectionframes}%
-		\fi\fi% 
+		\fi\fi%
 		\gothamInsertNavlength%
 	}{}{}
 	%% Remove hfill between sections => flush right bullet bar, if not corrected.
@@ -7434,14 +7766,14 @@
 % \begin{documentation}
 % \begin{function}{\useoutertheme}
 %	\begin{syntax}
-%		\cs{useoutertheme}\oarg{option1=value1, ...}\marg{gotham} 
+%		\cs{useoutertheme}\oarg{option1=value1, ...}\marg{gotham}
 %		\textrm{where the options are (default marked as} \defopt{default}\textrm{):}
 %     \meta{mini frames nav spreading} = \oarg{\defopt{centering} \textbar spreading \textbar left \textbar right }
 %	\end{syntax}
 %	The 'package' (useoutertheme) options can control spreading of the mini frames navigation.
 % \end{function}
 % \end{documentation}
-%%%% 
+%%%%
 % \begin{implementation}
 % 	\begin{macro}{outer key -- interface}
 % 		Controls the outer settings for mini frames navigation spreading.
@@ -7494,13 +7826,13 @@
 		\renewcommand{\gothamPatchInsertNav}{
 			\box\beamer@sectionbox\hfill\hskip.3cm
 		}
-		%% Remove hfill between sections => flush right bullet bar, if not corrected.		
+		%% Remove hfill between sections => flush right bullet bar, if not corrected.
 		% \patchcmd{\sectionentry}{\hskip1.875ex plus 1fill}{\hskip 3.5ex}{}{}
 		\renewcommand{\gothamPatchSectionentry}{
 			\hskip~3.5ex
 		}
 	},
-	mini~frames~nav~spreading / left .code:n = { 
+	mini~frames~nav~spreading / left .code:n = {
 		%
 		\renewcommand{\gothamInsertNavlength}{
 			\ifbool{gothamZerosectionframes}{
@@ -7518,7 +7850,7 @@
 		\renewcommand{\gothamPatchInsertNav}{
 			\box\beamer@sectionbox\hfil\hskip.3cm
 		}
-		%% Remove hfill between sections => flush right bullet bar, if not corrected.		
+		%% Remove hfill between sections => flush right bullet bar, if not corrected.
 		% \patchcmd{\sectionentry}{\hskip1.875ex plus 1fill}{\hskip 3.5ex}{}{}
 		\renewcommand{\gothamPatchSectionentry}{
 			\hskip~3.5ex
@@ -7542,7 +7874,7 @@
 		\renewcommand{\gothamPatchInsertNav}{
 			\box\beamer@sectionbox\hfil\hskip.3cm
 		}
-		%% Remove hfill between sections => flush right bullet bar, if not corrected.		
+		%% Remove hfill between sections => flush right bullet bar, if not corrected.
 		% \patchcmd{\sectionentry}{\hskip1.875ex plus 1fill}{\hskip 3.5ex}{}{}
 		\renewcommand{\gothamPatchSectionentry}{
 			\hskip~3.5ex
@@ -7557,14 +7889,14 @@
 % \begin{documentation}
 % \begin{function}{\useoutertheme}
 %	\begin{syntax}
-%		\cs{useoutertheme}\oarg{option1=value1, ...}\marg{gotham} 
+%		\cs{useoutertheme}\oarg{option1=value1, ...}\marg{gotham}
 %		\textrm{where the options are (default marked as} \defopt{default}\textrm{):}
 %     \meta{mini frames nav sectioning} = \oarg{\defopt{on} \textbar off }
 %	\end{syntax}
 %	The 'package' (useoutertheme) options can control navigation sectioning option in mini frames.
 % \end{function}
 % \end{documentation}
-%%%% 
+%%%%
 % \begin{implementation}
 % 	\begin{macro}{outer key -- interface}
 % 		Controls the outer settings for mini frames navigation sectioning template.
@@ -7577,8 +7909,8 @@
 	mini~frames~nav~sectioning .usage:n = { general },
 	mini~frames~nav~sectioning .default:n = { secsubsection },
 
-	mini~frames~nav~sectioning / none .code:n = { 
-		% 
+	mini~frames~nav~sectioning / none .code:n = {
+		%
 		\__gotham_set_template:nn{section~in~head/foot~shaded}{default/empty}
 		\__gotham_set_template:nn{section~in~head/foot}{default/empty}
 		\renewcommand{\gothamPatchSectionbox}{
@@ -7587,13 +7919,13 @@
 			\dp\beamer@sectionbox=0pt
 		}
 	},
-	mini~frames~nav~sectioning / section .code:n = { 
-		% 
+	mini~frames~nav~sectioning / section .code:n = {
+		%
 		\__gotham_set_template:nn{section~in~head/foot~shaded}{default} %from Beamer
 		\__gotham_set_template:nn{section~in~head/foot}{default} %from Beamer
 	},
-	mini~frames~nav~sectioning / secsubsection .code:n = { 
-		% 
+	mini~frames~nav~sectioning / secsubsection .code:n = {
+		%
 		\__gotham_set_template:nn{section~in~head/foot~shaded}{default/gotham~secSubsec}
 		\__gotham_set_template:nn{section~in~head/foot}{default/gotham~secSubsec}
 	},
@@ -7607,14 +7939,14 @@
 % \begin{documentation}
 % \begin{function}{\useoutertheme}
 %	\begin{syntax}
-%		\cs{useoutertheme}\oarg{option1=value1, ...}\marg{gotham} 
+%		\cs{useoutertheme}\oarg{option1=value1, ...}\marg{gotham}
 %		\textrm{where the options are (default marked as} \defopt{default}\textrm{):}
 %     \meta{mini frames nav position} = \oarg{\defopt{none} \textbar head \textbar foot \textbar left \textbar right}
 %	\end{syntax}
 %	The 'package' (useoutertheme) options can control navigation position option in mini frames.
 % \end{function}
 % \end{documentation}
-%%%% 
+%%%%
 % \begin{implementation}
 % 	\begin{macro}{outer key -- interface}
 % 		Controls the outer settings for mini frames navigation position template.
@@ -7629,78 +7961,78 @@
 	mini~frames~nav~position .usage:n = { general },
 	mini~frames~nav~position .default:n = { none },
 
-	mini~frames~nav~position / none .code:n = { 
-		% 
+	mini~frames~nav~position / none .code:n = {
+		%
 		% reset if it has modified by another progressbar strategy
 		% \__gotham_set_prop_template:nn{sidebar~canvas~right/default}{#1}
 		\tl_set:Nn \l__gotham_out_tmp_mfnposi_tl {none}
 
 		% head
-		\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {head} { 
+		\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {head} {
 			% True: nothing to do it is already occupied.
 		}{
 			\setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
 		}
 		% frametitle
-		% \tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {frametitle} { 
+		% \tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {frametitle} {
 		% 	% True: nothing to do it is already occupied.
 		% }{
 		% 	\setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
 		% }
 		% foot
-		\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {footline} { 
+		\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {footline} {
 			% True: nothing to do it is already occupied.
 		}{
 			\setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
 		}
 		% left
-		\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {left} { 
+		\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {left} {
 			% True: nothing to do it is already occupied.
 		}{
 			\setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
 		}
 		% right
-		\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {right} { 
+		\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {right} {
 			% True: nothing to do it is already occupied.
 		}{
 			\setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
 		}
 	},
-	mini~frames~nav~position / head .code:n = { 
-		% 
-		\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} { 
+	mini~frames~nav~position / head .code:n = {
+		%
+		\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} {
 			% True: nothing to do it is already done.
-		}{ 
+		}{
 			% False : remember that choice in order to do not apply it several time and add to beamer template.
-			\tl_set:Nn \l__gotham_out_tmp_mfnposi_tl {head}	
+			\tl_set:Nn \l__gotham_out_tmp_mfnposi_tl {head}
 
-			\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {head} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {head} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
 			}
-			% \tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {frametitle} { 
+			% \tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {frametitle} {
 			% 	% True: nothing to do it is already occupied.
 			% }{
 			% 	\setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
 			% }
-			\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {footline} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {footline} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
 			}
-			\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {left} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {left} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
 			}
-			\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {right} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {right} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
 			}
 
-			% 
+			%
 			\addtobeamertemplate{headline}{}{
 				\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} {
 					\usebeamertemplate*{mini~nav~progress~head/foot}
@@ -7708,35 +8040,35 @@
 			}
 		}
 	},
-	mini~frames~nav~position / foot .code:n = { 
-		% 
-		\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} { 
+	mini~frames~nav~position / foot .code:n = {
+		%
+		\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} {
 			% True: nothing to do it is already done.
-		}{ 
+		}{
 			% False : remember that choice in order to do not apply it several time and add to beamer template.
-			\tl_set:Nn \l__gotham_out_tmp_mfnposi_tl {foot}	
+			\tl_set:Nn \l__gotham_out_tmp_mfnposi_tl {foot}
 
-			\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {head} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {head} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
 			}
-			% \tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {frametitle} { 
+			% \tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {frametitle} {
 			% 	% True: nothing to do it is already occupied.
 			% }{
 			% 	\setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
 			% }
-			\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {footline} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {footline} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
 			}
-			\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {left} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {left} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
 			}
-			\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {right} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {right} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
@@ -7749,89 +8081,89 @@
 			}
 		}
 	},
-	mini~frames~nav~position / left .code:n = { 
-		% 
-		\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} { 
+	mini~frames~nav~position / left .code:n = {
+		%
+		\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} {
 			% True: nothing to do it is already done.
-		}{ 
+		}{
 			% False : remember that choice in order to do not apply it several time and add to beamer template.
-			\tl_set:Nn \l__gotham_out_tmp_mfnposi_tl {left}	
+			\tl_set:Nn \l__gotham_out_tmp_mfnposi_tl {left}
 
-			\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {head} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {head} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
 			}
-			% \tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {frametitle} { 
+			% \tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {frametitle} {
 			% 	% True: nothing to do it is already occupied.
 			% }{
 			% 	\setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
 			% }
-			\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {footline} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {footline} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
 			}
-			\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {left} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {left} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
 			}
-			\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {right} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {right} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
 			}
 
-			% 
+			%
 			\addtobeamertemplate{sidebar~left}{}{
 				\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} {
 					\usebeamertemplate*{mini~nav~progress~left}
 				}{}
 			}
-		} 
+		}
 	},
-	mini~frames~nav~position / right .code:n = { 
-		% 
-		\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} { 
+	mini~frames~nav~position / right .code:n = {
+		%
+		\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} {
 			% True: nothing to do it is already done.
-		}{ 
+		}{
 			% False : remember that choice in order to do not apply it several time and add to beamer template.
 			\tl_set:Nn \l__gotham_out_tmp_mfnposi_tl {right}
 
-			\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {head} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {head} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
 			}
-			% \tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {frametitle} { 
+			% \tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {frametitle} {
 			% 	% True: nothing to do it is already occupied.
 			% }{
 			% 	\setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
 			% }
-			\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {footline} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {footline} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
 			}
-			\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {left} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {left} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
 			}
-			\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {right} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {right} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
 			}
 
-			% 
+			%
 			\addtobeamertemplate{sidebar~right}{}{
 				\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} {
 					\usebeamertemplate*{mini~nav~progress~right}
 				}{}
 			}
-		} 
+		}
 	},
 
 	mini~frames~nav~position / unknown .code:n = { \PackageWarning{ gotham } { The~choice~'#1'~is~unknown~for~the~(known)~option~'mini~frames~nav~position',~so~being~ignored. }{helping~message: mini~frames~nav~position / unknown} },
@@ -7885,7 +8217,7 @@
 % \begin{implementation}
 % 	\begin{function}{\__gotham_rectangle_box_progressbar:n}
 %     \begin{arguments}
-%       \item |width| of the progress bar. 
+%       \item |width| of the progress bar.
 %     \end{arguments}
 % 		Command to draw a rectangular progress bar that can go from left to right or the opposite and that can include a navigation miniframes bar.
 % 		\TestFiles{gotham-test-048}
@@ -7893,12 +8225,12 @@
 % #1: 'linewidth'
 \cs_new_protected:Npn \__gotham_rectangle_box_progressbar:n #1
 {
-	% 
+	%
 	\setlength{\gotham@progressinheadfoot}{
 		#1 * \ratio{\insertframenumber pt}{\inserttotalframenumber pt}
 	}
 
-	% 
+	%
 	\begin{beamercolorbox}[wd=#1]{progress~bar~in~head/foot}
 		\begin{tikzpicture}
 			\usebeamercolor{progress~bar~in~head/foot}
@@ -7907,15 +8239,15 @@
 			\fill[color=progress~bar~in~head/foot.bg]
 				(0pt, 0pt) rectangle ++ (#1, \gothamProgressHeadFootLineheight)
 			;
-			
+
 			\bool_if:NTF \l_gotham_progbar_advancement_tlbr_bool {
-				% from left to right 
+				% from left to right
 				% orange rectangle progressing
 				\fill[color=progress~bar~in~head/foot.fg]
 					(0pt, 0pt) rectangle ++ (\gotham@progressinheadfoot, \gothamProgressHeadFootLineheight)
 				;
 			}{
-				% from right to left 
+				% from right to left
 				% orange rectangle progressing
 				\fill[color=progress~bar~in~head/foot.fg]
 					(#1, \gothamProgressHeadFootLineheight) rectangle ++ (-\gotham@progressinheadfoot, -\gothamProgressHeadFootLineheight)
@@ -7924,15 +8256,15 @@
 
 			\bool_if:NTF \l_gotham_pmfn_bool {
 				% progress miniframes navigation is on.
-				\node at (#1/2, \gothamProgressHeadFootLineheight/2) 
-					[text~height=0.1pt, text~depth=0.05pt, inner~sep=0pt] %draw=red, 
+				\node at (#1/2, \gothamProgressHeadFootLineheight/2)
+					[text~height=0.1pt, text~depth=0.05pt, inner~sep=0pt] %draw=red,
 					{
 						\usebeamercolor[fg]{normal~text}
 						% \fontsize{3.5pt}{0pt}\selectfont
 						\raisebox{0.5\gothamProgressHeadFootLineheight+1.4pt}[0pt][0pt]{
 							%\dohead
 							\hfuzz=#1
-							\insertnavigation{#1} 
+							\insertnavigation{#1}
 						}
 					}
 				;
@@ -7969,12 +8301,12 @@
 %    \begin{macrocode}
 \defbeamertemplate{progress~bar~in~left}{gotham~rectangle}{
 	\nointerlineskip
-	
+
 	\settoheight{\gotham@temp@heightFrametitle}{\gotham@strut}
 	\addtolength{\gotham@temp@heightFrametitle}{\gothamFrametitleToppading+\gothamFrametitleBottompading+\gothamProgressHeadFootLineheight}
-	
+
 	\setlength{\gotham@temp@PaperheightFrametitle}{\paperheight-\gotham@temp@heightFrametitle-\gothamFootlineHeight-\gothamFootlineDepth-0.25\baselineskip}
-	
+
 	\vspace{0.12275\paperheight}
 	\rotatebox{90}{
 		\__gotham_rectangle_box_progressbar:n {\gotham@temp@PaperheightFrametitle}
@@ -7982,10 +8314,10 @@
 }
 \defbeamertemplate{progress~bar~in~right}{gotham~rectangle}{
 	\nointerlineskip
-	
+
 	\settoheight{\gotham@temp@heightFrametitle}{\gotham@strut}
 	\addtolength{\gotham@temp@heightFrametitle}{\gothamFrametitleToppading+\gothamFrametitleBottompading+\gothamProgressHeadFootLineheight}
-	
+
 	\setlength{\gotham@temp@PaperheightFrametitle}{\paperheight-\gotham@temp@heightFrametitle-\gothamFootlineHeight-\gothamFootlineDepth-0.25\baselineskip}
 
 	\hspace{-\gothamProgressHeadFootLineheight}
@@ -8001,7 +8333,7 @@
 % \begin{implementation}
 % 	\begin{function}{\__gotham_rounded_box_progressbar:nnnn}
 %     \begin{arguments}
-%       \item |width| Name of the option to add, this name should also correspond to the name of the environment followed by the suffix 'env'. 
+%       \item |width| Name of the option to add, this name should also correspond to the name of the environment followed by the suffix 'env'.
 %       \item |ratio progressbar/extra command|
 %       \item |colorbox name|
 %       \item |extra command|
@@ -8022,7 +8354,7 @@
 
 	% 1.035\gothamProgressHeadFootLineheight is to include the border inside the box.
 	\begin{beamercolorbox}[wd=#1, ht=1.035\gothamProgressHeadFootLineheight]{#3}
-		\;\hfill 
+		\;\hfill
 		%\tikzexternaldisable%
 		\begin{tikzpicture}[rounded~corners=0.5\gothamProgressHeadFootLineheight, very~thin]
 			\usebeamercolor{progress~bar~in~head/foot}
@@ -8031,15 +8363,15 @@
 			\shade[top~color=progress~bar~in~head/foot.bg!65, bottom~color=progress~bar~in~head/foot.bg!65, middle~color=progress~bar~in~head/foot.bg]
 				(0pt, 0pt) rectangle ++ (#2#1, \gothamProgressHeadFootLineheight)
 			;
-			
+
 			\bool_if:NTF \l_gotham_progbar_advancement_tlbr_bool {
-				% from left to right 
+				% from left to right
 				% orange rectangle progressing
 				\shade[draw=progress~bar~in~head/foot.fg, top~color=progress~bar~in~head/foot.fg!70, bottom~color=progress~bar~in~head/foot.fg!70, middle~color=progress~bar~in~head/foot.fg]
 					(0pt, 0pt) rectangle ++ (\gotham@progressinheadfoot, \gothamProgressHeadFootLineheight)
 				;
 			}{
-				% from right to left 
+				% from right to left
 				% orange rectangle progressing
 				\shade[draw=progress~bar~in~head/foot.fg, top~color=progress~bar~in~head/foot.fg!70, bottom~color=progress~bar~in~head/foot.fg!70, middle~color=progress~bar~in~head/foot.fg]
 					(#2#1, \gothamProgressHeadFootLineheight) rectangle ++ (-\gotham@progressinheadfoot, -\gothamProgressHeadFootLineheight)
@@ -8048,15 +8380,15 @@
 
 			\bool_if:NTF \l_gotham_pmfn_bool {
 				% progress miniframes navigation is on.
-				\node at (#2#1/2, \gothamProgressHeadFootLineheight/2) 
-					[text~height=0.1pt, text~depth=0.05pt, inner~sep=0pt] %draw=red, 
+				\node at (#2#1/2, \gothamProgressHeadFootLineheight/2)
+					[text~height=0.1pt, text~depth=0.05pt, inner~sep=0pt] %draw=red,
 					{
 						\usebeamercolor[fg]{normal~text}
 						% \fontsize{3.5pt}{0pt}\selectfont
 						\raisebox{0.5\gothamProgressHeadFootLineheight+1.4pt}[0pt][0pt]{
 							\hfuzz=#2#1
 							%\dohead
-							\insertnavigation{#2#1} 
+							\insertnavigation{#2#1}
 						}
 					}
 				;
@@ -8104,12 +8436,12 @@
 %    \begin{macrocode}
 \defbeamertemplate{progress~bar~in~left}{gotham~rounded~box}{
 	\nointerlineskip
-	
+
 	\settoheight{\gotham@temp@heightFrametitle}{\gotham@strut}
 	\addtolength{\gotham@temp@heightFrametitle}{\gothamFrametitleToppading+\gothamFrametitleBottompading+\gothamProgressHeadFootLineheight}
-	
+
 	\setlength{\gotham@temp@PaperheightFrametitle}{\paperheight-\gotham@temp@heightFrametitle-\gothamFootlineHeight-\gothamFootlineDepth-0.25\baselineskip}
-	
+
 	\vspace{0.12275\paperheight}
 	% \hspace{\gothamProgressHeadFootLineheight}
 	\rotatebox{90}{
@@ -8124,10 +8456,10 @@
 }
 \defbeamertemplate{progress~bar~in~right}{gotham~rounded~box}{
 	\nointerlineskip
-	
+
 	\settoheight{\gotham@temp@heightFrametitle}{\gotham@strut}
 	\addtolength{\gotham@temp@heightFrametitle}{\gothamFrametitleToppading+\gothamFrametitleBottompading+\gothamProgressHeadFootLineheight}
-	
+
 	\setlength{\gotham@temp@PaperheightFrametitle}{\paperheight-\gotham@temp@heightFrametitle-\gothamFootlineHeight-\gothamFootlineDepth-0.25\baselineskip}
 
 	\hspace{-\gothamProgressHeadFootLineheight-0.2pt}
@@ -8195,8 +8527,8 @@
 % the angle token by the counter radius
 \fp_new:N \l_gotham_angle_counterradius_fp
 % requires xfp for asind
-\fp_set:Nn \l_gotham_angle_counterradius_fp { 
-	\fpeval{ 2* asind (\gothamCounterCircleRadius / (2*\gothamCounterRadius)) } 
+\fp_set:Nn \l_gotham_angle_counterradius_fp {
+	\fpeval{ 2* asind (\gothamCounterCircleRadius / (2*\gothamCounterRadius)) }
 }
 %    \end{macrocode}
 %   \end{variable}
@@ -8249,7 +8581,7 @@
 		\node at (localCenter) {\gothamInstituteLogoCircle[1.9\gothamProgressCircLogoRadius]};
 
 		%% draw progress circle/bar
-		\bool_if:NTF \l_gotham_ProgCircleMoving_bool { 
+		\bool_if:NTF \l_gotham_ProgCircleMoving_bool {
 			% the circular counter with a moving counter
 
 			%% compute the angle for the progress circle
@@ -8260,10 +8592,10 @@
 				\fp_set:Nn \l_gotham_ratio_progresscircle_fp {(360)*(\insertframenumber/\inserttotalframenumber)}
 			}
 			%\fi
-	
+
 			% draw the arc progress bar
 			\draw[
-				color=progress~bar~in~head/foot.fg, 
+				color=progress~bar~in~head/foot.fg,
 				line~width=0.6*\gothamProgressCircBorderWidth
 			]
 				(localCenter)
@@ -8272,14 +8604,14 @@
 					xshift=\gothamCounterRadius
 				]localCenter)
 				arc[
-					radius=\gothamCounterRadius, 
+					radius=\gothamCounterRadius,
 					start~angle=0,
 					end~angle={\fp_eval:n \l_gotham_ratio_progresscircle_fp}
 				]
 			;
 
 			% draw a point at the beginning of the progress circle
-			\fill[fill=frametitle.bg] 
+			\fill[fill=frametitle.bg]
 				([
 					xshift={\gothamCounterRadius}
 				]localCenter.center)
@@ -8288,7 +8620,7 @@
 			% place the current frame number
 			\node[
 				% fill=standin.bg, draw=progress~bar~in~head/foot.bg, thick, circle, minimum~width={\gothamCounterCircleRadius}, text~width={0pt}
-			] 
+			]
 				(pagenumframe) at (
 					[rotate=
 							{\fp_eval:n {\l_gotham_ratio_progresscircle_fp}},
@@ -8296,7 +8628,7 @@
 					]localCenter) {}
 			;
 			\filldraw[
-				draw=progress~bar~in~head/foot.bg, 
+				draw=progress~bar~in~head/foot.bg,
 				fill=standin.bg,
 				thick,
 			]
@@ -8306,7 +8638,7 @@
 			\node[at=(pagenumframe.center), anchor=center] {
 				{\usebeamercolor[fg]{standin}\tiny\insertframenumber}
 			};
-		}{ 
+		}{
 			%\else gothamProgCircleMoving
 			% the circular counter with a fixed counter
 
@@ -8318,10 +8650,10 @@
 				\fp_set:Nn \l_gotham_ratio_progresscircle_fp {(360-2\l_gotham_angle_counterradius_fp)*(\insertframenumber/\inserttotalframenumber) +\l_gotham_angle_counterradius_fp}
 			}
 			%\fi
-	
+
 			% draw the arc progress bar
 			\draw[
-				color=progress~bar~in~head/foot.fg, 
+				color=progress~bar~in~head/foot.fg,
 				line~width=0.6*\gothamProgressCircBorderWidth
 			]
 				(localCenter)
@@ -8330,21 +8662,21 @@
 					xshift=\gothamCounterRadius
 				]localCenter)
 				arc[
-					radius=\gothamCounterRadius, 
-					start~angle={\fp_eval:n \l_gotham_angle_counterradius_fp}, 
+					radius=\gothamCounterRadius,
+					start~angle={\fp_eval:n \l_gotham_angle_counterradius_fp},
 					end~angle={\fp_eval:n \l_gotham_ratio_progresscircle_fp}
 				]
 			;
 
 			% draw a point at the end of the progress circle
-			\fill[fill=frametitle.bg] 
+			\fill[fill=frametitle.bg]
 				([
 					rotate={\fp_eval:n {\l_gotham_ratio_progresscircle_fp}}, xshift={\gothamCounterRadius}
 				]localCenter.center)
 				circle (0.3*\gothamProgressCircBorderWidth)
 			;
 			% place the total number of frames
-			\node[] (leftick) 
+			\node[] (leftick)
 			at ([xshift={\gothamProgressCircLogoOuterRadius+1.25ex}]localCenter) {}
 			;
 			%% draw a line ticks
@@ -8355,17 +8687,17 @@
 				([xshift=\gothamProgressCircLogoOuterRadius,yshift={-0.05ex}] localCenter)
 				rectangle ([yshift={0.05ex}] leftick)
 			;
-			\node[ at=(leftick), anchor=west, inner~sep = 1pt,] 
+			\node[ at=(leftick), anchor=west, inner~sep = 1pt,]
 				{\usebeamercolor[fg]{frametitle}\tiny\inserttotalframenumber}
 			;
 			% place the current frame number
 			\node[
 				% fill=standin.bg, draw=progress~bar~in~head/foot.bg, thick, circle, minimum~width={\gothamCounterCircleRadius}, text~width={0pt}
-			] 
+			]
 				(pagenumframe) at ([xshift=\gothamCounterRadius]localCenter) {}
 			;
 			\filldraw[
-				draw=progress~bar~in~head/foot.bg, 
+				draw=progress~bar~in~head/foot.bg,
 				fill=standin.bg,
 				thick,
 			]
@@ -8378,13 +8710,13 @@
 		}
 		%\fi gothamProgCircleMoving
 	\end{tikzpicture}
-	\bool_if:NTF \l_gotham_ProgCircleMoving_bool { 
+	\bool_if:NTF \l_gotham_ProgCircleMoving_bool {
 		% nothing
 		\hspace{\gothamProgressCircLogoOuterRadius+0.75ex}
 	}{
 		% else
 		% extra space to compensate the total number of frame
-		\hspace{\gothamProgressCircLogoOuterRadius+3ex} 
+		\hspace{\gothamProgressCircLogoOuterRadius+3ex}
 	}
   	% \tikzexternalenable
 }
@@ -8395,14 +8727,14 @@
 % \begin{documentation}
 % \begin{function}{\useoutertheme}
 %	\begin{syntax}
-%		\cs{useoutertheme}\oarg{option1=value1, ...}\marg{gotham} 
+%		\cs{useoutertheme}\oarg{option1=value1, ...}\marg{gotham}
 %		\textrm{where the options are (default marked as} \defopt{default}\textrm{):}
 %     \meta{progressbar~position} = \oarg{\defopt{foot} \textbar none \textbar head \textbar circlehead \textbar ... }
 %	\end{syntax}
 %	The 'package' (useoutertheme) options can control |progress bar|  templates that be placed in the head (over the frametitle), frametitle (under it), below the footer or the circlehead (around the logo in the frametitle).
 % \end{function}
 % \end{documentation}
-%%%% 
+%%%%
 % \begin{implementation}
 % 	\begin{macro}{outer key -- interface}
 % 		Controls the outer settings for progress bar.
@@ -8417,179 +8749,179 @@
 	progressbar~position .usage:n = { general },
 	progressbar~position .default:n = { none },
 
-	progressbar~position / none .code:n = { 
+	progressbar~position / none .code:n = {
 		% reset if it has modified by another progressbar~position strategy
 		% \__gotham_set_prop_template:nn{sidebar~canvas~right/default}{#1}
 		\tl_set:Nn \l__gotham_out_tmp_pbar_tl {none}
 
 		% head
-		\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} { 
+		\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} {
 			% True: nothing to do it is already occupied.
 		}{
 			\setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
 		}
 		% frametitle
-		% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {frametitle} { 
+		% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {frametitle} {
 		% 	% True: nothing to do it is already occupied.
 		% }{
 			\setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
 		% }
 		% foot
-		\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} { 
+		\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} {
 			% True: nothing to do it is already occupied.
 		}{
 			\setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
 		}
 		% left
-		\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} { 
+		\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} {
 			% True: nothing to do it is already occupied.
 		}{
 			\setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
 		}
 		% right
-		\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} { 
+		\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} {
 			% True: nothing to do it is already occupied.
 		}{
 			\setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
 		}
 
 		% logo
-		\__gotham_set_prop_template:nn{includeLogo/default}{gotham~square}		
+		\__gotham_set_prop_template:nn{includeLogo/default}{gotham~square}
 		% section in head
 		\setbeamertemplate{section~in~head/foot~shaded}[default/\prop_item:Nn \l__gotham_template_name_prop {section~in~head/foot~shaded/default}]
 		\setbeamertemplate{section~in~head/foot}[default/\prop_item:Nn \l__gotham_template_name_prop {section~in~head/foot/default}]
 	},
-	progressbar~position / head .code:n = { 
-		\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {head} { 
+	progressbar~position / head .code:n = {
+		\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {head} {
 			% True: nothing to do it is already done.
-		} { 
+		} {
 			% False : remember that choice in order to do not apply it several time and add to beamer template.
 			\tl_set:Nn \l__gotham_out_tmp_pbar_tl {head}
-			
-			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} { 
+
+			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
 			}
-			% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {frametitle} { 
+			% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {frametitle} {
 			% 	% True: nothing to do it is already occupied.
 			% }{
 				\setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
 			% }
-			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
 			}
-			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
 			}
-			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
 			}
 
-			% 
+			%
 			\addtobeamertemplate{headline}{}{
-				\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {head} { 
+				\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {head} {
 					\usebeamertemplate*{progress~bar~in~head/foot}
 				}{}
 			}
 		}
 	},
 	progressbar~position / frametitle .code:n = {
-		\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {frametitle} { 
+		\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {frametitle} {
 			% True: nothing to do it is already done.
-		} { 
+		} {
 			% False : remember that choice in order to do not apply it several time and add to beamer template.
 			\tl_set:Nn \l__gotham_out_tmp_pbar_tl {frametitle}
 
-			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
 			}
-			% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {frametitle} { 
+			% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {frametitle} {
 			% 	% True: nothing to do it is already occupied.
 			% }{
 				\setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
 			% }
-			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
 			}
-			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
 			}
-			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
 			}
 
-			% 
+			%
 			\addtobeamertemplate{frametitle}{}{
-				\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {frametitle} { 
+				\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {frametitle} {
 					\usebeamertemplate*{progress~bar~in~head/foot}
 				}{}
 			}
 		}
 	},
 	progressbar~position / foot .code:n = {
-		\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {footline} { 
+		\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {footline} {
 			% True: nothing to do it is already done.
-		} { 
+		} {
 			% False : remember that choice in order to do not apply it several time and add to beamer template.
 			\tl_set:Nn \l__gotham_out_tmp_pbar_tl {footline}
 
-			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
 			}
-			% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {frametitle} { 
+			% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {frametitle} {
 			% 	% True: nothing to do it is already occupied.
 			% }{
 				\setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
 			% }
-			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
 			}
-			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
 			}
-			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
 			}
 
-			% 
+			%
 			\addtobeamertemplate{footline}{}{
-				\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {footline} { 
+				\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {footline} {
 					\usebeamertemplate*{progress~bar~in~head/foot}
 				}{}
 			}
 		}
 	},
 	progressbar~position / circlehead .code:n = {
-		\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {circlehead} { 
+		\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {circlehead} {
 			% True: nothing to do it is already done.
-		} { 
+		} {
 			% False : remember that choice in order to do not apply it several time and add to beamer template.
 			\tl_set:Nn \l__gotham_out_tmp_pbar_tl {circlehead}
 
-			% 
+			%
 			%%%\prop_put:Nnn \l__gotham_template_name_SAVE_prop {includeLogo/default} {gotham~square} % not needed after all.
 			\__gotham_set_prop_template:nn{includeLogo/default}{gotham~circle}
 			\__gotham_set_template:nn{section~in~head/foot~shaded}{default/gotham~secSubsec}
@@ -8597,10 +8929,10 @@
 			% \__gotham_set_template:nn{headline}{default/gotham~section}
 			% \setbeamertemplate{headline}[default/gotham~section]
 
-			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} {
 				% True: it is already occupied, so let's emulate the gotham section
 				\addtobeamertemplate{headline}{}{
-					\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {circlehead} { 
+					\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {circlehead} {
 						\begin{beamercolorbox}[wd=1.0\paperwidth, ht=2.5ex, dp=1.4ex, left]{headfoot}
 							\usebeamerfont{section~in~head/foot}\hspace*{3.5ex}
 							\usebeamertemplate{section~in~head/foot}
@@ -8611,22 +8943,22 @@
 				% \setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
 				\__gotham_set_template:nn{headline}{default/gotham~section}
 			}
-			% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {frametitle} { 
+			% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {frametitle} {
 			% 	% True: nothing to do it is already occupied.
 			% }{
 				\setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
 			% }
-			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
 			}
-			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
 			}
-			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
@@ -8634,82 +8966,82 @@
 		}
 	},
 	progressbar~position / left .code:n = {
-		\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {left} { 
+		\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {left} {
 			% True: nothing to do it is already done.
-		} { 
+		} {
 			% False : remember that choice in order to do not apply it several time and add to beamer template.
 			\tl_set:Nn \l__gotham_out_tmp_pbar_tl {left}
 
-			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
 			}
-			% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {frametitle} { 
+			% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {frametitle} {
 			% 	% True: nothing to do it is already occupied.
 			% }{
 				\setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
 			% }
-			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
 			}
-			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
 			}
-			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
 			}
 
-			% 
+			%
 			\addtobeamertemplate{sidebar~left}{}{
-				\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {left} { 
+				\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {left} {
 					\usebeamertemplate*{progress~bar~in~left}
 				}{}
 			}
 		}
 	},
 	progressbar~position / right .code:n = {
-		\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {right} { 
+		\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {right} {
 			% True: nothing to do it is already done.
-		} { 
+		} {
 			% False : remember that choice in order to do not apply it several time and add to beamer template.
 			\tl_set:Nn \l__gotham_out_tmp_pbar_tl {right}
 
-			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{headline}[default/\prop_item:Nn \l__gotham_template_name_prop {headline/default}]
 			}
-			% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {frametitle} { 
+			% \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {frametitle} {
 			% 	% True: nothing to do it is already occupied.
 			% }{
 				\setbeamertemplate{frametitle}[default/\prop_item:Nn \l__gotham_template_name_prop {frametitle/default}]
 			% }
-			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{footline}[default/\prop_item:Nn \l__gotham_template_name_prop {footline/default}]
 			}
-			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{sidebar~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~left/default}]
 			}
-			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} { 
+			\tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {right} {
 				% True: nothing to do it is already occupied.
 			}{
 				\setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
 			}
 
-			% 
+			%
 			\addtobeamertemplate{sidebar~right}{}{
-				\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {right} { 
+				\tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {right} {
 					\usebeamertemplate*{progress~bar~in~right}
 				}{}
 			}
@@ -8725,14 +9057,14 @@
 % \begin{documentation}
 % \begin{function}{\useoutertheme}
 %	\begin{syntax}
-%		\cs{useoutertheme}\oarg{option1=value1, ...}\marg{gotham} 
+%		\cs{useoutertheme}\oarg{option1=value1, ...}\marg{gotham}
 %		\textrm{where the options are (default marked as} \defopt{default}\textrm{):}
 %     \meta{progressbar style} = \oarg{\defopt{rectangle} \textbar rounded box \textbar moving circle \textbar fixed circle }
 %	\end{syntax}
 %	The 'package' (useoutertheme) options can control |progress bar style|  templates that .
 % \end{function}
 % \end{documentation}
-%%%% 
+%%%%
 % \begin{implementation}
 % 	\begin{macro}{outer key -- interface}
 % 		Controls the outer settings for progress bar style.
@@ -8746,7 +9078,7 @@
 	progressbar~style .usage:n = { general },
 	progressbar~style .default:n = { rectangle },
 
-	progressbar~style / rectangle .code:n = { 
+	progressbar~style / rectangle .code:n = {
 		%
 		% \defbeamertemplate*{progress~bar~in~head/foot}{gotham~rectangle}
 		\__gotham_set_template:nn{progress~bar~in~head/foot}{gotham~rectangle}
@@ -8754,19 +9086,19 @@
 		\__gotham_set_template:nn{progress~bar~in~right}{gotham~rectangle}
 	},
 
-	progressbar~style / rounded~box .code:n = { 
+	progressbar~style / rounded~box .code:n = {
 		%
 		\__gotham_set_template:nn{progress~bar~in~head/foot}{gotham~rounded~box}
 		\__gotham_set_template:nn{progress~bar~in~left}{gotham~rounded~box}
 		\__gotham_set_template:nn{progress~bar~in~right}{gotham~rounded~box}
 	},
 
-	progressbar~style / moving~circle .code:n = { 
+	progressbar~style / moving~circle .code:n = {
 		%
 		\bool_set_true:N \l_gotham_ProgCircleMoving_bool
 	},
 
-	progressbar~style / fixed~circle .code:n = { 
+	progressbar~style / fixed~circle .code:n = {
 		%
 		\bool_set_false:N \l_gotham_ProgCircleMoving_bool
 	},
@@ -8780,14 +9112,14 @@
 % \begin{documentation}
 % \begin{function}{\useoutertheme}
 %	\begin{syntax}
-%		\cs{useoutertheme}\oarg{option1=value1, ...}\marg{gotham} 
+%		\cs{useoutertheme}\oarg{option1=value1, ...}\marg{gotham}
 %		\textrm{where the options are (default marked as} \defopt{default}\textrm{):}
 %     \meta{progressbar~advancement} = \oarg{\defopt{tlbr} \textbar brlt }
 %	\end{syntax}
 %	The 'package' (useoutertheme) options can control |progress bar| advandement: tlbr) from top left corner to the bottom and right or brlt) from the bottom right to the left and top.
 % \end{function}
 % \end{documentation}
-%%%% 
+%%%%
 % \begin{implementation}
 % 	\begin{macro}{outer key -- interface}
 % 		Controls the outer settings for progress bar style.
@@ -8801,20 +9133,20 @@
 	progressbar~advancement .usage:n = { general },
 	progressbar~advancement .default:n = { tlbr },
 
-	progressbar~advancement / tlbr .code:n = { 
+	progressbar~advancement / tlbr .code:n = {
 		%
 		\bool_set_true:N \l_gotham_progbar_advancement_tlbr_bool
 	},
-	progressbar~advancement / TLBR .code:n = { 
+	progressbar~advancement / TLBR .code:n = {
 		%
 		\bool_set_true:N \l_gotham_progbar_advancement_tlbr_bool
 	},
 
-	progressbar~advancement / brlt .code:n = { 
+	progressbar~advancement / brlt .code:n = {
 		%
 		\bool_set_false:N \l_gotham_progbar_advancement_tlbr_bool
 	},
-	progressbar~advancement / BRLT .code:n = { 
+	progressbar~advancement / BRLT .code:n = {
 		%
 		\bool_set_false:N \l_gotham_progbar_advancement_tlbr_bool
 	},
@@ -8828,14 +9160,14 @@
 % \begin{documentation}
 % \begin{function}{\useoutertheme}
 %	\begin{syntax}
-%		\cs{useoutertheme}\oarg{option1=value1, ...}\marg{gotham} 
+%		\cs{useoutertheme}\oarg{option1=value1, ...}\marg{gotham}
 %		\textrm{where the options are (default marked as} \defopt{default}\textrm{):}
 %     \meta{progressbar mfn} = \oarg{\defopt{off} \textbar on }
 %	\end{syntax}
 %	The 'package' (useoutertheme) options can control if the progress bar includes a miniframe navigation.
 % \end{function}
 % \end{documentation}
-%%%% 
+%%%%
 % \begin{implementation}
 % 	\begin{macro}{outer key -- interface}
 % 		Controls the outer settings for progress bar style.
@@ -8849,9 +9181,9 @@
 	progressbar~mfn .usage:n = { general },
 	progressbar~mfn .default:n = { off },
 
-	progressbar~mfn / true .code:n = { 
+	progressbar~mfn / true .code:n = {
 		\bool_set_true:N \l_gotham_pmfn_bool
-		
+
 		\__gotham_set_template:nn{section~in~head/foot~shaded}{default/empty}
 		\__gotham_set_template:nn{section~in~head/foot}{default/empty}
 		\renewcommand{\gothamPatchSectionbox}{
@@ -8860,9 +9192,9 @@
 			\dp\beamer@sectionbox=0.ex
 		}
 	},
-	progressbar~mfn / on .code:n = { 
+	progressbar~mfn / on .code:n = {
 		\bool_set_true:N \l_gotham_pmfn_bool
-		
+
 		\__gotham_set_template:nn{section~in~head/foot~shaded}{default/empty}
 		\__gotham_set_template:nn{section~in~head/foot}{default/empty}
 		\renewcommand{\gothamPatchSectionbox}{
@@ -8871,9 +9203,9 @@
 			\dp\beamer@sectionbox=0.ex
 		}
 	},
-	progressbar~mfn / enable .code:n = { 
+	progressbar~mfn / enable .code:n = {
 		\bool_set_true:N \l_gotham_pmfn_bool
-		
+
 		\__gotham_set_template:nn{section~in~head/foot~shaded}{default/empty}
 		\__gotham_set_template:nn{section~in~head/foot}{default/empty}
 		\renewcommand{\gothamPatchSectionbox}{
@@ -8903,16 +9235,16 @@
 % 		\TestFiles{gotham-test-048}
 %    \begin{macrocode}
 % when no value is given, default is called.
-\keys_set:nn { gotham / outer } { 
+\keys_set:nn { gotham / outer } {
 	sidebar~canvas~right~template, sidebar~canvas~left~template,
 	edging~default,
 	frametitle~template, framesubtitle~template, frametitle~continuation~template,
-	numbering, 
+	numbering,
 	rotateFooter~default,
 	footer~template,
-	mini~frames~shape, mini~frames~bundle, 
+	mini~frames~shape, mini~frames~bundle,
 	mini~frames~compress,
-	mini~frames~nav~spreading, 
+	mini~frames~nav~spreading,
 	mini~frames~nav~sectioning,
 	mini~frames~nav~position,
 	progressbar~position, progressbar~style, progressbar~advancement, progressbar~mfn,
@@ -8980,7 +9312,7 @@
 \useoutertheme{gotham}
 %
 %
-%	
+%
 
 %%%%%  Setting keys  %%%%%
 
@@ -9029,17 +9361,17 @@
 }
 
 % Set default keys/options from keyval
-% \__gotham_set_default_from_keyval: variant, keyval, group command 
+% \__gotham_set_default_from_keyval: variant, keyval, group command
 \cs_new_protected:Npn \__gotham_set_default_from_keyval:nnn #1 #2 #3
 {	%%
 	% Check if keyvalues have been given.
 	\tl_if_novalue:nTF {#2}
 	{ % no user keys given so _user_keys_prop is taking pkg prop
-		\prop_set_eq:cc { l__gotham_#3_#1_user_keys_prop } { c__gotham_#3_pkg_keys_prop } 
+		\prop_set_eq:cc { l__gotham_#3_#1_user_keys_prop } { c__gotham_#3_pkg_keys_prop }
 	}{ % user key given and put it in prop
-		\prop_put_from_keyval:cn { l__gotham_#3_#1_user_keys_prop } {#2} 
+		\prop_put_from_keyval:cn { l__gotham_#3_#1_user_keys_prop } {#2}
 	}% end if
-	%	
+	%
 	% xx
 	\__gotham_set_default_auxi:cnn { l__gotham_#3_#1_user_keys_prop } {#1} {#3}
 	%
@@ -9047,22 +9379,22 @@
 	\keys_set:nn { gotham/#3/#1 } { default }
 }
 %
-% prop-key-val, variant, group command 
+% prop-key-val, variant, group command
 \cs_new_protected:Npn \__gotham_set_default_auxi:Nnn #1 #2 #3
-{ 
-	\__gotham_set_default_auxii:fnn { \prop_to_keyval:N #1 } {#2} {#3} 
+{
+	\__gotham_set_default_auxii:fnn { \prop_to_keyval:N #1 } {#2} {#3}
 }
 \cs_generate_variant:Nn \__gotham_set_default_auxi:Nnn { c }
 %
-% key-val, variant, group command 
+% key-val, variant, group command
 \cs_new_protected:Npn \__gotham_set_default_auxii:nnn #1 #2 #3
-{ 
-	\keys_define:nn { gotham/#3/#2 } { default .meta:n = {#1} } 
+{
+	\keys_define:nn { gotham/#3/#2 } { default .meta:n = {#1} }
 }
 \cs_generate_variant:Nn \__gotham_set_default_auxii:nnn { f }
 %
 %
-% (re)set keys/options by default for a group of commands. 
+% (re)set keys/options by default for a group of commands.
 % \gothamset m:options:#1
 \DeclareDocumentCommand{\gothamset}{ m }
 {
@@ -9119,7 +9451,7 @@
 %       \item |height| of the picture
 %     \end{arguments}
 %     Command to be redefined by users.
-%     \TestFiles{ gotham-test-046b}
+%     \TestFiles{gotham-test-046b}
 %    \begin{macrocode}
 \DeclareDocumentCommand{\gothamreset}{m}{
 	% commands
@@ -9153,7 +9485,7 @@
 	\setlength{\gothamFrametitleLeftpading}{2.2ex}
 	\setlength{\gothamFrametitleRightpading}{2.2ex}
 	\setlength{\gothamFramesubtitleStrutend}{0pt}
-	\setlength{\gothamFootlineVOffset}{-0.5ex} 
+	\setlength{\gothamFootlineVOffset}{-0.5ex}
 	\setlength{\gothamFootlineDepth}{0.1ex}
 	\setlength{\gothamFootlineHeight}{1.5ex}
 	\setlength{\gothamFootlineHRightOffset}{\spaceskip}
@@ -9161,10 +9493,10 @@
 	\setlength{\gothamHposRightRotFooter}{2pt}
 	\setlength{\gothamVposLeftRotFooter}{15pt}
 	\setlength{\gothamVposRightRotFooter}{15pt}
-	\setlength{\gothamLeftFooterPadding}{2.0ex} 
-	\setlength{\gothamRightFooterPadding}{3.5ex} 
+	\setlength{\gothamLeftFooterPadding}{2.0ex}
+	\setlength{\gothamRightFooterPadding}{3.5ex}
 	\setlength{\gothamFooterHOffset}{0pt}
-	\setlength{\gothamFootlineRuleLeftPadding}{7mm} 
+	\setlength{\gothamFootlineRuleLeftPadding}{7mm}
 	\setlength{\gothamFootlineRuleHeight}{0.0pt}
 	\setlength{\gothamFootlineRuleLength}{15mm}
 	\setlength{\gothamProgressCircHeight}{1.8\baselineskip}
@@ -9175,7 +9507,7 @@
 	\setlength{\gothamProgressHeadFootLineheight}{1.2ex}
 
 	% options to default
-	\keys_set:nn { gotham/all/all } { default }	
+	\keys_set:nn { gotham/all/all } { default }
 }
 %    \end{macrocode}
 %   \end{function}

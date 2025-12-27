@@ -9,7 +9,7 @@
 %% Copyright (C) 2023-20** by Romain NOËL <romainoel@free.fr>
 %% 
 %% This work may be distributed and/or modified under the
-%% conditions of the LaTeX Project Public License, either version 1.3
+%% conditions of the LaTeX Project Public License, either version 1.3c
 %% of this license or (at your option) any later version.
 %% The latest version of this license is in
 %% http://www.latex-project.org/lppl.txt
@@ -21,7 +21,7 @@
 %% The Current Maintainer of this work is Romain NOËL.
 %% Contributors: Romain NOËL (2023-20**)
 %% 
-\ProvidesExplPackage{beamerouterthemegotham}{2025-07-02}{1.2.2.a}{gotham outer theme}
+\ProvidesExplPackage{beamerouterthemegotham}{2025-12-25}{1.2.4.a}{gotham outer theme}
 \RequirePackage{expl3}
 \RequirePackage{xfp}
 \RequirePackage{calc}
@@ -147,7 +147,7 @@ As~example:~if~'\c_backslash_str defbeamertemplate{background}{watermark/gotham~
 \PackageError{beamerinnerthemegotham}
 {The~beamer~template~named~'#1'~with~the~option~'#2'~does~not~exist}
 {helping~message unknown setbeamertemplate option}
-} 
+}
 }
 }
 
@@ -193,7 +193,7 @@ As~example:~if~'\c_backslash_str defbeamertemplate{background}{watermark/gotham~
 %%%%%%
 \bool_new:N \l_gotham_defaultEdging
 \bool_set_false:N \l_gotham_defaultEdging
-\BeforeBeginEnvironment{frame}{ 
+\BeforeBeginEnvironment{frame}{
 \bool_if:NTF \l_gotham_defaultEdging {
 \setbeamertemplate{sidebar~canvas~left}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~canvas~left/default}]
 \setbeamertemplate{sidebar~canvas~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~canvas~right/default}]
@@ -454,7 +454,7 @@ framesubtitle~template .code:n = {
 
 \defbeamertemplate{frametitle~continuation}{default/gotham}{
 \usebeamerfont{frametitle}
-{ 
+{
 (\romannumeral \insertcontinuationcount)
 }
 }
@@ -516,6 +516,12 @@ dp={\gothamFootlineDepth},
 \end{beamercolorbox}
 }
 \prop_put:Nnn \l__gotham_template_name_prop {footline/default} {gotham}
+
+%%%%%%
+\newenvironment{nopagenumberenv}{
+\setbeamertemplate{page~number~in~head/foot}[none]
+}{}
+\__gotham_add_beamerframe_key:n {nopagenumber}
 
 %%% Footer  %%%
 
@@ -640,7 +646,7 @@ rotateFooter~default / unknown .code:n = { \PackageWarning{ gotham } { The~choic
 \hfill \
 \hfill \
 %%% Add short author
-\bool_if:NTF \l_gotham_RotateFooter { 
+\bool_if:NTF \l_gotham_RotateFooter {
 \settowidth{\hlenRightRotFooter}{\hspace{\gothamRightFooterPadding}\usebeamertemplate{page~number~in~head/foot}\hspace*{\gothamFootlineHRightOffset}}
 \addtolength{\hlenRightRotFooter}{\gothamHposRightRotFooter}
 \begin{picture}(0,0)(0,0)
@@ -679,7 +685,7 @@ default/\prop_item:Nn \l__gotham_template_name_prop {frame~footer/default}
 \setlength{\gothamCircleNumberingVshift}{1.4mm}
 \setlength{\gothamCircleNumberingHshift}{2.6mm}
 
-\defbeamertemplate{page~number~in~head/foot}{circle}{ 
+\defbeamertemplate{page~number~in~head/foot}{circle}{
 \hspace{+2em}
 \raisebox{\gothamCircleNumberingVshift}[0pt][0pt]{
 \begin{tikzpicture}[remember~picture, overlay]
@@ -935,11 +941,11 @@ mini~frames~shape .code:n = {
 \resizebox{\beamer@boxsize}{!}{\hspace{-0.75pt}$\blacklozenge$}
 }
 \defbeamertemplate{miniframe~subsection~todo}{gotham~mini}{
-\hspace{-0.15pt} 
+\hspace{-0.15pt}
 \resizebox{\beamer@boxsize}{!}{\hspace{-0.75pt}$\lozenge$}
 }
 \defbeamertemplate{miniframe~subsection~done}{gotham~mini}{
-\hspace{-0.15pt} 
+\hspace{-0.15pt}
 \resizebox{\beamer@boxsize}{!}{\hspace{-0.75pt}$\blacklozenge$}
 }
 
@@ -1277,7 +1283,7 @@ mini~frames~nav~spreading / centering .code:n = {
 \renewcommand{\gothamPatchInsertNav}{
 \box\beamer@sectionbox\hfill\hskip.3cm
 }
-%% Remove hfill between sections => flush right bullet bar, if not corrected. 
+%% Remove hfill between sections => flush right bullet bar, if not corrected.
 \renewcommand{\gothamPatchSectionentry}{
 \hskip~3.5ex
 }
@@ -1293,7 +1299,7 @@ mini~frames~nav~spreading / left .code:n = {
 \renewcommand{\gothamPatchInsertNav}{
 \box\beamer@sectionbox\hfil\hskip.3cm
 }
-%% Remove hfill between sections => flush right bullet bar, if not corrected. 
+%% Remove hfill between sections => flush right bullet bar, if not corrected.
 \renewcommand{\gothamPatchSectionentry}{
 \hskip~3.5ex
 }
@@ -1309,7 +1315,7 @@ mini~frames~nav~spreading / right .code:n = {
 \renewcommand{\gothamPatchInsertNav}{
 \box\beamer@sectionbox\hfil\hskip.3cm
 }
-%% Remove hfill between sections => flush right bullet bar, if not corrected. 
+%% Remove hfill between sections => flush right bullet bar, if not corrected.
 \renewcommand{\gothamPatchSectionentry}{
 \hskip~3.5ex
 }
@@ -1374,7 +1380,7 @@ mini~frames~nav~position / none .code:n = {
 mini~frames~nav~position / head .code:n = {
 \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {head} {
 }{
-\tl_set:Nn \l__gotham_out_tmp_mfnposi_tl {head} 
+\tl_set:Nn \l__gotham_out_tmp_mfnposi_tl {head}
 
 \tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {head} {
 }{
@@ -1403,7 +1409,7 @@ mini~frames~nav~position / head .code:n = {
 mini~frames~nav~position / foot .code:n = {
 \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {foot} {
 }{
-\tl_set:Nn \l__gotham_out_tmp_mfnposi_tl {foot} 
+\tl_set:Nn \l__gotham_out_tmp_mfnposi_tl {foot}
 
 \tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {head} {
 }{
@@ -1432,7 +1438,7 @@ mini~frames~nav~position / foot .code:n = {
 mini~frames~nav~position / left .code:n = {
 \tl_if_eq:VnTF \l__gotham_out_tmp_mfnposi_tl {left} {
 }{
-\tl_set:Nn \l__gotham_out_tmp_mfnposi_tl {left} 
+\tl_set:Nn \l__gotham_out_tmp_mfnposi_tl {left}
 
 \tl_if_eq:VnTF \l__gotham_out_tmp_pbar_tl {head} {
 }{
@@ -1865,7 +1871,7 @@ progressbar~position / none .code:n = {
 \setbeamertemplate{sidebar~right}[default/\prop_item:Nn \l__gotham_template_name_prop {sidebar~right/default}]
 }
 
-\__gotham_set_prop_template:nn{includeLogo/default}{gotham~square} 
+\__gotham_set_prop_template:nn{includeLogo/default}{gotham~square}
 \setbeamertemplate{section~in~head/foot~shaded}[default/\prop_item:Nn \l__gotham_template_name_prop {section~in~head/foot~shaded/default}]
 \setbeamertemplate{section~in~head/foot}[default/\prop_item:Nn \l__gotham_template_name_prop {section~in~head/foot/default}]
 },
