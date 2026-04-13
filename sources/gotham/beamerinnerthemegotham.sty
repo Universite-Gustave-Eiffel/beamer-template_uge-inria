@@ -21,7 +21,7 @@
 %% The Current Maintainer of this work is Romain NOËL.
 %% Contributors: Romain NOËL (2023-20**)
 %% 
-\ProvidesExplPackage{beamerinnerthemegotham}{2025-12-25}{1.2.4.a}{gotham inner theme}
+\ProvidesExplPackage{beamerinnerthemegotham}{2026-04-02}{1.2.5.a}{gotham inner theme}
 \RequirePackage{expl3}
 \RequirePackage{calc}
 \RequirePackage{tikz}
@@ -1727,10 +1727,15 @@ align=left
 },
 }
 
+\defbeamertemplate{part~in~toc}{gotham~bullet}{
+\leavevmode
+{{\inserttocpartnumber}.}~\inserttocpart
+\par \vspace{-0.2cm}
+}
 \defbeamertemplate{section~in~toc}{gotham~bullet}{
 \hspace*{0.4cm}\tikz[baseline=-0.5ex]\node[section~number]{\textbf{\inserttocsectionnumber}};
 \ \tikz[baseline=-0.5ex]\node[section]{\usebeamerfont*{toc~title}\inserttocsection};\\[-0.35cm]
-\hspace*{1.13cm}{\usebeamercolor*[fg]{footer} \rule{0.6\paperwidth}{0.2pt}{\par\vskip-0.35\baselineskip}\nointerlineskip}
+\hspace*{1.13cm}{\usebeamercolor*[fg]{footer} \rule{0.69\linewidth}{0.2pt}{\par\vskip-0.35\baselineskip}\nointerlineskip}
 }
 \defbeamertemplate{subsection~in~toc}{gotham~bullet}{
 \leavevmode
@@ -1747,7 +1752,7 @@ align=left
 \defbeamertemplate{section~in~toc~shaded}{gotham~bullet}{
 \hspace*{0.4cm}\tikz[baseline=-0.5ex]\node[section~number, fill=colorBackElement!40]{\usebeamerfont*{toc~subtitle}\textbf{\inserttocsectionnumber}};
 \ \tikz[baseline=-0.5ex]\node[section, text=colorBackElement!20]{\usebeamerfont*{toc~title}\inserttocsection};\\[-0.35cm]
-\hspace*{1.13cm}{\usebeamercolor*[fg]{footer} \rule{0.6\paperwidth}{0.2pt}{\par\vskip-0.35\baselineskip}\nointerlineskip}
+\hspace*{1.13cm}{\usebeamercolor*[fg]{footer} \rule{0.69\linewidth}{0.2pt}{\par\vskip-0.35\baselineskip}\nointerlineskip}
 }
 \defbeamertemplate{subsection~in~toc~shaded}{gotham~bullet}{
 \leavevmode

@@ -23,7 +23,7 @@
 \input expl3-generic \relax
 %</internal>
 %<class>\NeedsTeXFormat{LaTeX3e}
-%<package>\ProvidesExplPackage{beamerthemegotham}{2025-12-25}{1.2.4.a}{A modern, minimal-ish, versatile and extendable yet robust theme for Beamer}
+%<package>\ProvidesExplPackage{beamerthemegotham}{2026-04-02}{1.2.5.a}{A modern, minimal-ish, versatile and extendable yet robust theme for Beamer}
 %<author>Romain NOEL</author>
 %<maintainer>Romain NOEL</maintainer>
 %<url>https://gitlab.com/RomainNOEL/beamertheme-gotham</url>
@@ -39,8 +39,8 @@
 	% \usepackage{gotham}
 	% \usepackage{readprov}
 	% 	\ReadPackageInfos{beamerthemegotham}
-	\edef\GothamVersion{v1.2.4.a} %{\fileversion}
-	\edef\GothamDate{2025-12-25} %{\filedate}
+	\edef\GothamVersion{v1.2.5.a} %{\fileversion}
+	\edef\GothamDate{2026-04-02} %{\filedate}
 
 	\usepackage{parskip}
 	\usepackage{setspace}
@@ -196,7 +196,7 @@
 %\begin{implementation}
 %    \begin{macrocode}
 %<*font>
-\ProvidesExplPackage{beamerfontthemegotham}{2025-12-25}{1.2.4.a}{gotham font theme}
+\ProvidesExplPackage{beamerfontthemegotham}{2026-04-02}{1.2.5.a}{gotham font theme}
 \RequirePackage{expl3}
 % \RequirePackage{xparse}
 % \RequirePackage{etoolbox}
@@ -1130,7 +1130,7 @@
 %\begin{implementation}
 %    \begin{macrocode}
 %<*color>
-\ProvidesExplPackage{beamercolorthemegotham}{2025-12-25}{1.2.4.a}{Gotham color theme}
+\ProvidesExplPackage{beamercolorthemegotham}{2026-04-02}{1.2.5.a}{Gotham color theme}
 \RequirePackage{expl3}
 % \RequirePackage{xparse}
 \RequirePackage{xcolor}
@@ -1810,7 +1810,7 @@
 %\begin{implementation}
 %    \begin{macrocode}
 %<*inner>
-\ProvidesExplPackage{beamerinnerthemegotham}{2025-12-25}{1.2.4.a}{gotham inner theme}
+\ProvidesExplPackage{beamerinnerthemegotham}{2026-04-02}{1.2.5.a}{gotham inner theme}
 \RequirePackage{expl3}
 % \RequirePackage{xparse}
 \RequirePackage{calc}
@@ -4616,13 +4616,20 @@
 %     Template definitions for |gotham bullet| style of ToC that appear in section \textbar subsection \textbar subsubsection frame.
 % 		\changes{v1.2.1}{2025-02-10}{adapt shaded subsection in toc}
 % 		\changes{v1.2.3}{2025-07-27}{protect from interaction with minted}
+% 		\changes{v1.2.5}{2026-03-25}{improve section bullet hline to linewidth}
 %     \UnitTested
-%     \TestFiles{gotham-test-042, gotham-test-057}
+%     \TestFiles{gotham-test-042, gotham-test-057, gotham-test-1046}
 %    \begin{macrocode}
+\defbeamertemplate{part~in~toc}{gotham~bullet}{
+	\leavevmode
+	{{\inserttocpartnumber}.}~\inserttocpart
+	% \\
+	\par \vspace{-0.2cm}
+}
 \defbeamertemplate{section~in~toc}{gotham~bullet}{
 	\hspace*{0.4cm}\tikz[baseline=-0.5ex]\node[section~number]{\textbf{\inserttocsectionnumber}};
 	\ \tikz[baseline=-0.5ex]\node[section]{\usebeamerfont*{toc~title}\inserttocsection};\\[-0.35cm]
-	\hspace*{1.13cm}{\usebeamercolor*[fg]{footer} \rule{0.6\paperwidth}{0.2pt}{\par\vskip-0.35\baselineskip}\nointerlineskip}
+	\hspace*{1.13cm}{\usebeamercolor*[fg]{footer} \rule{0.69\linewidth}{0.2pt}{\par\vskip-0.35\baselineskip}\nointerlineskip}
 }
 \defbeamertemplate{subsection~in~toc}{gotham~bullet}{
 	\leavevmode
@@ -4642,7 +4649,7 @@
 \defbeamertemplate{section~in~toc~shaded}{gotham~bullet}{
 	\hspace*{0.4cm}\tikz[baseline=-0.5ex]\node[section~number, fill=colorBackElement!40]{\usebeamerfont*{toc~subtitle}\textbf{\inserttocsectionnumber}};
 	\ \tikz[baseline=-0.5ex]\node[section, text=colorBackElement!20]{\usebeamerfont*{toc~title}\inserttocsection};\\[-0.35cm]
-	\hspace*{1.13cm}{\usebeamercolor*[fg]{footer} \rule{0.6\paperwidth}{0.2pt}{\par\vskip-0.35\baselineskip}\nointerlineskip}
+	\hspace*{1.13cm}{\usebeamercolor*[fg]{footer} \rule{0.69\linewidth}{0.2pt}{\par\vskip-0.35\baselineskip}\nointerlineskip}
 }
 \defbeamertemplate{subsection~in~toc~shaded}{gotham~bullet}{
 	\leavevmode
@@ -5381,7 +5388,7 @@
 %\begin{implementation}
 %    \begin{macrocode}
 %<*outer>
-\ProvidesExplPackage{beamerouterthemegotham}{2025-12-25}{1.2.4.a}{gotham outer theme}
+\ProvidesExplPackage{beamerouterthemegotham}{2026-04-02}{1.2.5.a}{gotham outer theme}
 \RequirePackage{expl3}
 \RequirePackage{xfp}
 \RequirePackage{calc}
