@@ -126,6 +126,14 @@
 	\usepackage{derivative} % standard and customable derivative operators
 	\usepackage{siunitx} % International System units
 	% \usepackage{tensorsop} % work in progress ^^
+	\usepackage{tensorstyles}
+		\newcommand{\glsarg}{}
+		\newcommand{\glsstar}{}
+		\NewDocumentCommand{\tsr}{s o m o}{
+			\IfBooleanT{#1}{\renewcommand{\glsstar}{*}}
+			\IfNoValueTF{#2}{}{\renewcommand{\glsarg}{#2}}
+			\IfNoValueTF{#4}{\gls{#3}}{\gls{#3}[#4]}
+		}
 	\usepackage{amsthm, thmtools} % replacement of ntheorem
 		\declaretheorem{theorem}
 		% Define a theorem style that uses Beamer's 'block' environment
