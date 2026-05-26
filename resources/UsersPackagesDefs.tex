@@ -126,7 +126,11 @@
 	\usepackage{derivative} % standard and customable derivative operators
 	\usepackage{siunitx} % International System units
 	% \usepackage{tensorsop} % work in progress ^^
-	\usepackage{tensorstyles}
+	\IfFileExists{tensorstyles.sty}{
+		\usepackage{tensorstyles}
+	}{
+		\PackageWarning{beamer-template_uge-inria}{tensorstyles.sty not found, skipping}
+	}
 		\newcommand{\glsarg}{}
 		\newcommand{\glsstar}{}
 		\NewDocumentCommand{\tsr}{s o m o}{
