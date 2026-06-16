@@ -98,14 +98,19 @@
 		\hspace*{1.0\paperwidth}
 		\includegraphics[height=0.08\paperheight]{\PathSO/UGE/logos/UGE-logo_white.pdf}
 		\\[-90pt]
-		\hspace{1.2691\paperwidth}\includegraphics[width=0.668\paperwidth]{\PathSO/Inria/logos/header_i4s-crop.pdf}
+		\hspace{1.2689\paperwidth}\includegraphics[height=0.10562\paperheight]{\PathSO/Inria/logos/header_i4s-crop.pdf}
 		\\[443pt]
 	}
 
-	\logo{\includegraphics[height=0.5cm]{\PathSO/UGE/logos/UGE-logo.pdf}}
-	\addtobeamertemplate{logo}{\vspace{0.75\paperheight}}{} % Top Right
-	%\addtobeamertemplate{logo}{}{\hspace{0.885\paperwidth}} % Bottom Left
-	%\addtobeamertemplate{logo}{\vspace{0.72\paperheight}}{\hspace{0.885\paperwidth}} % Top Left
+	% \logo{\includegraphics[height=0.5cm]{\PathSO/UGE/logos/UGE-logo.pdf}}
+	% 	\addtobeamertemplate{logo}{\vspace{0.75\paperheight}}{} % Top Right
+	% 	%\addtobeamertemplate{logo}{}{\hspace{0.885\paperwidth}} % Bottom Left
+	% 	%\addtobeamertemplate{logo}{\vspace{0.72\paperheight}}{\hspace{0.885\paperwidth}} % Top Left
+
+	\renewcommand{\gothamInstituteLogoSquare}[1][4ex]{
+		\includegraphics[height=#1-1.75ex]{\PathSO/UGE/logos/UGE-logo.pdf}
+		\includegraphics[height=#1-1.75ex]{\PathSO/Inria/logos/inr_logo_rouge.pdf}
+	}
 
 
 	\usepackage{ccicons}
