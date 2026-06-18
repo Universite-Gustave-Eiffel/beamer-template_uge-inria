@@ -7,43 +7,58 @@
 %%%%---- OS & FONT     -------------------------%%%%
 %%%%---- POLICE     ----------------------------%%%%
 %%%%---- TEXT FORMATTING -----------------------%%%%
-	% \usepackage{enumitem}
+	\usepackage[autostyle]{csquotes}
+	% \usepackage{enumitem}  % not working with beamer
 	% \usepackage{ulem}
 
+	%%% SMALL CAPS (requires graphics for scalebox)
+		\ExplSyntaxOn
+			% Create a new command to fake Small Caps by scaling uppercase with one mandatory argument.
+			\DeclareDocumentCommand{\fakesc}{ m }{
+				\textapperance_smallcaps:n { #1 }
+			}
+
+			%–– user-adjustable scaling parameters
+			\tl_new:N \l__fauxsc_hscale_dim  \tl_set:Nn \l__fauxsc_hscale_dim {.83}
+			\tl_new:N \l__fauxsc_vscale_dim  \tl_set:Nn \l__fauxsc_vscale_dim {.72}%.72
+
+			\tl_new:N \l__textapperance_textsmallcaps_input_tl% Initialize string variable
+			\cs_new_protected:Npn \textapperance_smallcaps:n #1 {
+				% Fully expand contents and store them in the variable
+				\tl_set:Nx \l__textapperance_textsmallcaps_input_tl { #1 }
+
+				% Replace everything thats NOT a capital letter NEITHER punctuation by \textsmaller[2]{\uppercase{<match>}}
+				\regex_replace_all:nnN { ([^A-Z\ \,\.\;\:\!\?\'\"\(\)\[\]\{\}0-9]+) }{
+					% { \c{relscale}{0.75}\cB\{\c{uppercase}\cB\{\0\cE\}\cE\}} }
+					\c{scalebox}{
+						\c{l__fauxsc_hscale_dim}}[\c{l__fauxsc_vscale_dim}]{
+						\cB\{\c{uppercase}\cB\{\0\cE\}\cE\}
+					}
+				} \l__textapperance_textsmallcaps_input_tl
+				\tl_use:N \l__textapperance_textsmallcaps_input_tl % print the result
+			}
+		\ExplSyntaxOff
+
 	%%%% Personal %%%%
-	\makeatletter
-		\newcommand{\ie}{\@ifstar{\emph{i.e.\@}}{\emph{id est}\ }}
-		\newcommand{\eg}{\@ifstar{\emph{e.g.\@}}{\emph{exempli gratia}\ }}
-		\newcommand{\cad}{\@ifstar{c.-\`a.-d.\@}{c'est-à-dire}\ }
-		\newcommand{\cf}{\@ifstar{\emph{cf.\@}}{\emph{confer}\ }}
-	\makeatother
+		\NewDocumentCommand{\foreignText}{m}{\emph{#1}} % conventional police for family names
+		\makeatletter
+			\NewDocumentCommand{\ie}{s}{\IfBooleanTF#1{\foreignText{i.e.\@}}{\foreignText{id est}\ }}
+			\NewDocumentCommand{\eg}{s}{\IfBooleanTF#1{\foreignText{e.g.\@}}{\foreignText{exempli gratia}\ }}
+			\NewDocumentCommand{\cf}{s}{\IfBooleanTF#1{\foreignText{cf.\@}}{\foreignText{confer}\ }}
+			\NewDocumentCommand{\etc}{s}{\IfBooleanTF#1{\foreignText{etc.\@}}{\foreignText{et cetera}\ }}
+			\NewDocumentCommand{\etali}{s}{\IfBooleanTF#1{\foreignText{et al.\@}}{\foreignText{et alii}\ }}
+			\NewDocumentCommand{\cad}{s}{\IfBooleanTF#1{c.\texthyp{}à\texthyp{}d.\@}{c'est\texthyp{}à\texthyp{}dire\ }}
+		\makeatother
+		\NewDocumentCommand{\famName}{m}{\fakesc{#1}} %\fakesc conventional police for family names
+		\newcommand{\famDash}{\textendash} % conventional dash between two family names
+		\newcommand{\famNames}[2]{\famName{#1}\famDash\famName{#2}} \newcommand{\famNamess}[3]{\famName{#1}\famDash\famName{#2}\famDash\famName{#3}}
+		\newcommand{\parDash}{\textemdash} % conventional "parenthesis" dash
+		\newcommand{\texthyp}{-} % text hyphenation (between two words)
+		\newcommand{\md}{\,.} % math period (dot)
+		\newcommand{\mc}{\,,} % math comma
+		\newcommand{\fd}{.} % float period (dot)
 
 	\ExplSyntaxOn
-		%% Create a new command to fake Small Caps by scaling uppercase with one mandatory argument.
-		\DeclareDocumentCommand{\fakesc}{ m }{
-			\textapperance_smallcaps:n { #1 }
-		}
-
-		%  user-adjustable scaling parameters
-		\tl_new:N \l__fauxsc_hscale_dim  \tl_set:Nn \l__fauxsc_hscale_dim {.83}
-		\tl_new:N \l__fauxsc_vscale_dim  \tl_set:Nn \l__fauxsc_vscale_dim {.72}%.72
-
-		\tl_new:N \l__textapperance_textsmallcaps_input_tl% Initialize string variable
-		\cs_new_protected:Npn \textapperance_smallcaps:n #1 {
-			% Fully expand contents and store them in the variable
-			\tl_set:Nx \l__textapperance_textsmallcaps_input_tl { #1 }
-
-			% Replace everything thats NOT a capital letter NEITHER punctuation by \textsmaller[2]{\uppercase{<match>}}
-			\regex_replace_all:nnN { ([^A-Z\ \,\.\;\:\!\?\'\"\(\)\[\]\{\}0-9]+) }{
-				% { \c{relscale}{0.75}\cB\{\c{uppercase}\cB\{\0\cE\}\cE\}} }
-				\c{scalebox}{
-					\c{l__fauxsc_hscale_dim}}[\c{l__fauxsc_vscale_dim}]{
-					\cB\{\c{uppercase}\cB\{\0\cE\}\cE\}
-				}
-			} \l__textapperance_textsmallcaps_input_tl
-			\tl_use:N \l__textapperance_textsmallcaps_input_tl % print the result
-		}
-
 		%% Adapt some language element to the command \langue.
 		% Test: does \langue exist?
 		\cs_if_exist:cTF { langue }{
@@ -51,9 +66,9 @@
 			% Now compare its expansion to the string "french".
 			\str_if_eq:VnTF \langue { french }{
 				% ⟨true⟩ branch so its adapt some commands
-				\renewcommand{\partContentName}{Contenu\ de\ la\ partie}
-				\renewcommand{\secContentName}{Contenu\ de\ la\ section}
-				\renewcommand{\subsecContentName}{Contenu\ de\ la\ sous-section}
+				\renewcommand{\partContentName}{Contenu de la partie}
+				\renewcommand{\secContentName}{Contenu de la section}
+				\renewcommand{\subsecContentName}{Contenu de la sous-section}
 			}{
 				% ⟨false⟩ branch (exists but isn’t “french”) so do nothing
 			}
@@ -77,13 +92,11 @@
 		}
 	\ExplSyntaxOff
 
-	\newcommand{\famName}[1]{\fakesc{#1}}%\textsc
-
 
 %%%%---- SPACING & JUSTIFICATION ---------------%%%%
 %%%%---- LAYOUT & MARGINS ----------------------%%%%
 	\usepackage{changepage}
-   \usepackage{appendixnumberbeamer} % Manage frame numbering in appendixes in beamer
+	\usepackage{appendixnumberbeamer} % Manage frame numbering in appendixes in beamer
 
 
 %%%%---- FOOT PAGE & HEAD ----------------------%%%%
@@ -103,8 +116,47 @@
 	\usepackage{import}
 	\usepackage{tikz} %
 	\usepackage{pgfplots} %
-		\pgfplotsset{compat=newest} %
-		\pdfsuppresswarningpagegroup=1
+		\pgfplotsset{compat=newest} % set compatibility
+		\ifboolexpr{bool {xetex} or bool {luatex}}{
+			%\pdfsuppresswarningpagegroup=1 %. no need with lua
+		}{
+			\pdfsuppresswarningpagegroup=1 % remove some unnecessary warnings
+		}
+
+
+% %%%%---- SWOT ------------------------%%%%
+% 	\usepackage[most]{tcolorbox}
+
+% 		\colorlet{helpful}{lime!70}
+% 		\colorlet{harmful}{red!30}
+% 		\colorlet{internal}{yellow!20}
+% 		\colorlet{external}{cyan!30}
+% 		\colorlet{S}{helpful!50!internal}
+% 		\colorlet{W}{harmful!50!internal}
+% 		\colorlet{O}{helpful!50!external}
+% 		\colorlet{T}{harmful!50!external}
+
+% 		\newcommand{\texta}{Helpful\par \tiny (to achieve the objective)}
+% 		\newcommand{\textb}{Harmful\par \tiny (to achieve the objective)}
+% 		\newcommand{\textcn}{%
+% 			\rotatebox[origin=c]{90}{\parbox[t]{3cm}{\centering Internal origin\\ \tiny (product\slash company attributes)\par}}%
+% 		}
+% 		\newcommand{\textdn}{%
+% 			\rotatebox[origin=c]{90}{\parbox[b]{3cm}{\centering External origin\\ \tiny (environment\slash market attributes)\par}}%
+% 		}
+
+% 		\newcommand{\texts}{strength 1\par strength 2}
+% 		\newcommand{\textw}{weakness 1\par weakness 2}
+% 		\newcommand{\texto}{opportunity 1\par opportunity 2}
+% 		\newcommand{\textt}{threat 1\par threat 2}
+
+% 		\tcbset{
+% 			swotbox/.style={size=normal, boxrule=0pt,%
+% 				colback=#1, watermark text=#1, width=.5\linewidth-5mm%
+% 			},
+% 			header/.style={size=small, boxrule=0pt, width=.5\linewidth-5mm, colback=#1, valign=center, halign=center},
+% 			firstcol/.style={header=#1, width=1cm}
+% 		}
 
 
 %%%%---- TABLES & BOXES ------------------------%%%%
@@ -115,10 +167,40 @@
 		% \UseTblrLibrary{diagbox} % for cells with a diagbox
 		% \UseTblrLibrary{varwidth} % for cell with variable width
 		% \UseTblrLibrary{amsmath} % to improve with +array, +matrix, +bmatrix, +Bmatrix, +pmatrix, +vmatrix, +Vmatrix and +cases
-		% \UseTblrLibrary{siunitx} % for cell using SI formatting
+		\UseTblrLibrary{siunitx} % for cell using SI formatting
+	\usepackage[l3]{csvsimple} % to import CSV file as tables
 
 
-%%%%---- SYMBOLS -------------------------------%%%%
+%%---- SYMBOLS -------------------------------%%%%
+	%%%% Check list %%%%%
+		\newlist{todolist}{itemize}{2}
+		\setlist[todolist]{label=$\circ$}
+		%\ifboolexpr{bool {xetex} or bool {luatex}}{
+			\usepackage{utfsym}
+			\newcommand{\wontdo}{%
+				%\rlap{$\square$}{%
+				%	\raisebox{-0.25pt}{\textcolor{red}{\Large\hspace{0.5pt}\sffamily x}%
+				%	}%
+				%}%
+				\textcolor{red!85!black}{\usym{1F5F5}}
+				\hspace{-2.5pt}%
+			}
+			\newcommand{\done}{%
+				%\rlap{$\square$}{\raisebox{1.pt}{\textcolor{green}{\large\hspace{0.00pt} }}%
+				%}%
+				\textcolor{green!65!black}{\usym{1F5F9}}
+				\hspace{-3.15pt}%
+			}
+			\newcommand{\wip}{%
+				\rlap{$\square$}{\raisebox{1.65pt}{\scriptsize\hspace{0.75pt}$\sim$}%
+				}%
+				\hspace{0.9pt}%
+			}
+			\newcommand{\todos}{$\square$}
+		%}{
+		%}
+
+
 %%%%---- MATHS & PHYSICS -----------------------%%%%
 	\usepackage{amsmath, amsfonts, amssymb} % American Math Standard
 	\usepackage{mathtools} % extension of AMS with tools
@@ -126,7 +208,7 @@
 	\usepackage{derivative} % standard and customable derivative operators
 	\usepackage{siunitx} % International System units
 	% \usepackage{tensorsop} % work in progress ^^
-	\usepackage{tensorstyles}
+	\usepackage{tensorstyles} % display tensors with standards
 		\newcommand{\glsarg}{}
 		\newcommand{\glsstar}{}
 		\NewDocumentCommand{\tsr}{s o m o}{
@@ -134,30 +216,61 @@
 			\IfNoValueTF{#2}{}{\renewcommand{\glsarg}{#2}}
 			\IfNoValueTF{#4}{\gls{#3}}{\gls{#3}[#4]}
 		}
-	\usepackage{amsthm, thmtools} % replacement of ntheorem
-		\declaretheorem{theorem}
-		% Define a theorem style that uses Beamer's 'block' environment
-		\renewenvironment{theorem}[1][]{%
-			\refstepcounter{theorem}% Increment the theorem counter
-			\begin{block}{\thmname{Theorem}~\thmnumber{\thetheorem}\if\relax\detokenize{#1}\relax\else~(#1)\fi:}%
-		}{%
-			\end{block}%
-		}
-	% \usepackage{empheq} % emphasize equations
-	\usepackage[only,llbracket,rrbracket]{stmaryrd}
-	% \usepackage{bm}
+		\usepackage{bm} % bold math
+		\usepackage{bbm} % or bbold or dsfont blackboard/double stroke/double struck font (for math set)
+	\usepackage{keytheorems} % replacement of amsthm, ntheorem, thmtools
+		% custom below
+	\usepackage{empheq} % emphasize equations
+	\usepackage{xsim} % For exercises
+		% custom below
+	\usepackage[only,llbracket,rrbracket]{stmaryrd} % double square bracket
+	\ifboolexpr{bool {xetex} or bool {luatex}}{
+		\usepackage{unicode-math}
+	}{
+		% \usepackage[bb=dsserif]{mathalpha}
+	}
 
 
-%%%%---- THEOREMS ------------------------------%%%%
 %%%%---- CHEMISTRY & BIO -----------------------%%%%
-%%%%---- CODING, LINKS & OTHERS ----------------%%%%
-	% \usepackage{listings} % to include piece of codes
+	% \usepackage{chemfig} % draw molecules
+	% \usepackage{mhchem} % chemical formulae/equations
+
+%%%%---- CODING --------------------------------%%%%
+	\usepackage{listings} % to include piece of codes
+		\lstset{
+			numbers=left,
+			breaklines=true,
+			basicstyle=\ttfamily,
+			keywordstyle=\bfseries\color{blue},
+			numberstyle=\color{gray}
+		}
 	\usepackage{pseudo} % for flexible pseudocode
+		% \newtcbtheorem{algorithm}{Algorithm}{pseudo/booktabs, float}{alg} % create a floating env for algorithms with tcolorbox
 		\floatstyle{ruled} % create a env for algorithms with Float
-		\newfloat{algorithm}{htbp}{alg}
+		\newfloat{algorithm}{htbp}{alg}[section]
 		\floatname{algorithm}{Algorithm}
+
+
+%%%%---- LINKS & REFERENCES ----------------%%%%
+	\usepackage{hyperref} % hypertext references (url, mailto, file, jump to links)
+		% hyperref: setup below
 	\usepackage{cleveref}%
-	\usepackage{standalone} 	% Other include compilable alone.
+	\usepackage{standalone}  % Other include compilable alone.
+		\newcommand{\plotsize}{}	 % new command to pass pgfplotset to the build standalone
+		% Update the local values.
+		\newcommand{\UpdateLineAndBaseLength}{
+			\setlength{\localbaselineskip}{\the\baselineskip}
+			\setlength{\locallinewidth}{\the\linewidth}
+		}
+		% redefine the \pgfplotsset for standalone command.
+		\newcommand{\UpdatePlotSize}[2]{%
+			\renewcommand{\plotsize}{% redefine the \pgfplotsset to pass to the build standalone command.
+				\string\AtBeginDocument\string{%
+					\string\pgfplotsset\string{#1\string}%
+					\string\def\string\svgwidth\string{#2\string}%
+					\string}%
+			}%
+		}
 
 
 %%%%---- INDEX & GLOSSARIES --------------------%%%%
@@ -173,8 +286,8 @@
 		% define style of the abbreviation in the text
 		\setabbreviationstyle[acronym]{long-short}
 		\setabbreviationstyle[foreignabbreviation]{long-short-user}
-		\setabbreviationstyle[inline]{long-short}	%
-		\setabbreviationstyle[footer]{footnote} 	%
+		\setabbreviationstyle[inline]{long-short} %
+		\setabbreviationstyle[footer]{footnote} %
 
 
 		% \newcommand{\AtEndPreambPerso}{
@@ -212,33 +325,29 @@
 
 
 %%%%---- BIBLIOGRAPHY --------------------------%%%%
-	\usepackage[%citestyle=numeric,  	% style de citation : alphabetic, numeric, 		authoryear,
-		%bibstyle=numeric, 	% style de la biblio : alphabetic, authoryear, numeric,
-		style=numeric,			% style gloabel + apa, ieee, ams : style predefinit par certains organisme
+	\usepackage[%citestyle=numeric,  % style de citation : alphabetic, numeric, authoryear,
+		%bibstyle=numeric, % style de la biblio : alphabetic, authoryear, numeric,
+		style=alphabetic,  % style gloabel + apa, ieee, ams : style predefinit par certains organisme
+		subentry,  % have entry that referes to another (not with authoryear)
 		sorting=none,
-		mcite=true,				% collapsing  multiple  citations into one
-		subentry,				% have entry that referes to another (not with authoryear)
-		labelnumber, 			%
-		citetracker=true,		% To track citations
-		% backref=true,			% afficher les pages ou les citations sont dans la biblio
+		mcite=true,  % collapsing  multiple  citations into one
+		labelnumber,  %
+		citetracker=true,  % To track citations
+		% backref=true,  % afficher les pages ou les citations sont dans la biblio
 		url=false,
-		giveninits=true,   	% Initials for first name
-		maxcitenames=3,			% nb max de noms lors de \cite, audela "et al."
-		maxbibnames=100,		% nb max de noms dans la biblio, audela "et al."
-		defernumbers=true,		% ne pas charger toute la base de donnees, uniquement le necessaire
-		backend=biber			% bibtex, biber
+		giveninits=true,  % Initials for first name
+		maxcitenames=3,  % nb max de noms lors de \cite, audela "et al."
+		maxbibnames=100,  % nb max de noms dans la biblio, audela "et al."
+		defernumbers=true,  % ne pas charger toute la base de donnees, uniquement le necessaire
+		backend=biber,  % bibtex, biber
 	]{biblatex}
 
+		% Remove URL fields
 		% \AtEveryBibitem{\clearfield{url}}
-		\renewcommand{\mkbibnamefamily}[1]{\textsc{#1}}
 
-		% Let us now load the bib files.
-		%% \addbibresource[datatype=bibtex]{\Pathbasebib}
-		% requires etoolbox to loop from a CSV list. (etoolbox is loaded implicitly by ...)
-		%\addbibresource[datatype=bibtex]{\Pathbasebib}
-		\newcommand{\mylistDo}[1]{ \addbibresource[datatype=bibtex]{#1} }%
-		%\forcsvlist{\mylistDo}{\expandafter\Pathbasebib}
-		\expandafter\forcsvlist\expandafter\mylistDo\expandafter{\Pathbasebib}
+		% Family names with the command famName to control their cases
+		\DefineBibliographyExtras{french}{\restorecommand\mkbibnamefamily}
+		\renewcommand{\mkbibnamefamily}[1]{\famName{#1}}
 
 		% Create a \defbibentrysetlabel command in order to redefine the printing of mcite manually
 		\makeatletter
@@ -267,28 +376,46 @@
 			\addbibresource{\blxmset@bibfile@name}
 		\makeatother
 
+		% Add a dot at the end.
 		\renewcommand{\entrysetpunct}{.\newline}
+
+
+		%%%% SPECIFIC BEAMER-BIBLATEX %%%%
 
 		% Change the footnote style with letters to avoid confusion.
 		\renewcommand{\thefootnote}{\alph{footnote}}
 		% Change the style of the printing biblio to let appear the numbers like in the footnote
 		\setbeamertemplate{bibliography item}{\insertbiblabel}
 
+		% Create a new command for footnote without markers.
+		\makeatletter
+			\def\blfootnote{\gdef\@thefnmark{}\@footnotetext}
+		\makeatother
+
 		% Define the new cite command using the footnote
 		\DeclareCiteCommand{\footfullciteBeamer}
 		{\usebibmacro{prenote}}
-		{%
-			\renewcommand{\thefootnote}{\arabic{footnote}}% Switch to footnote with numbers
-			\footnotemark[\thefield{labelnumber}]% Add the mark corresponding to the number entry%
-			\footnotetext[\thefield{labelnumber}]{%  Add the footnote text with same number entry.
-				% \printfield{labelnumber}
+		{% OLD WAY
+			% \renewcommand{\thefootnote}{[\arabic{footnote}]}% Switch to footnote with numbers
+			% \footnotemark[\thefield{labelnumber}]% Add the mark corresponding to the number entry%
+			% \footnotetext[\thefield{labelnumber}]{% Add the footnote text with same number entry.
+			% 	\,\printnames{labelname}% The name
+			% 	\setunit{\printdelim{nametitledelim}}% separator
+			% 	\printfield[citetitle]{labeltitle}% The title
+			% 	\setunit{\addperiod\space}% separator
+			% 	\printfield{year}% The year
+			% }%
+			% \renewcommand{\thefootnote}{\alph{footnote}}% Switch back to footnote with letters.
+			% NEW WAY: preserves bib/citation style
+			\textsuperscript{\footnotesize\printtext[bibhyperref]{[\usebibmacro{cite}]}}%
+			\blfootnote{%
+				\textsuperscript{\printtext{[\usebibmacro{cite}]}}
 				\printnames{labelname}% The name
 				\setunit{\printdelim{nametitledelim}}% separator
 				\printfield[citetitle]{labeltitle}% The title
 				\setunit{\addperiod\space}% separator
 				\printfield{year}% The year
 			}%
-			\renewcommand{\thefootnote}{\alph{footnote}}% Switch back to footnote with letters.
 		}
 		{\multicitedelim}
 		{\usebibmacro{postnote}}
@@ -305,12 +432,131 @@
 		{\multicitedelim}
 		{\usebibmacro{postnote}}
 
+		% Define the new cite command using the footnote
+		\DeclareCiteCommand{\nofullciteBeamer}
+		{\usebibmacro{prenote}}
+		{% OLD WAY
+			% \renewcommand{\thefootnote}{\arabic{footnote}}% Switch to footnote with numbers
+			% \footnotemark[\thefield{labelnumber}]% Add the mark corresponding to the number entry%
+			% \renewcommand{\thefootnote}{\alph{footnote}}% Switch back to footnote with letters.
+			% NEW WAY: preserves bib/citation style
+			\textsuperscript{\footnotesize\printtext[bibhyperref]{[\usebibmacro{cite}]}}%
+		}
+		{\multicitedelim}
+		{\usebibmacro{postnote}}
+
+		%%%% END SPECIFIC BEAMER-BIBLATEX %%%%
+
+
+		%%%%%%%% RESOURCES %%%%%%%%%%
+		% BIBIO FILES
+
+		%% Let us now load the bib files with a custom command similar to natbib.
+		%
+		% requires etoolbox to loop from a CSV list. (etoolbox is loaded implicitly by ...)
+		%\addbibresource[datatype=bibtex]{\Pathbasebib}
+		\newcommand{\myListAddBib}[1]{ \addbibresource[datatype=bibtex]{#1} }
+		%\forcsvlist{\mylistDo}{\expandafter\Pathbasebib}
+		\expandafter\forcsvlist\expandafter\myListAddBib\expandafter{\Pathbasebib}
+		\expandafter\forcsvlist\expandafter\myListAddBib\expandafter{\PathbrefOtherbib}
+
+
+%%%%---- THEOREM  (settings) ---------------------------%%%%
+	% \usepackage{keytheorems} % SETUP
+
+		% Plain style: corollary, lemma, conjecture
+		\newkeytheorem{corollary}[name=Corollary, style=plain]
+		\newkeytheorem{lemma}[name=Lemma, style=plain]
+		\newkeytheorem{conjecture}[name=Conjecture, style=plain]
+
+		% Break style: theorem
+		\newkeytheorem{theorem}[name=Theorem, style=plain]
+		\newkeytheorem{paradox}[name=Paradox, style=plain]
+		%\newkeytheorem{proof}[name=Proof, style=break]
+
+		% Definition style: property, proposition, contraposition, consequence, hypothesis
+		\newkeytheorem{property}[name=Property, style=definition]
+		\newkeytheorem{proposition}[name=Proposition, style=definition]
+		\newkeytheorem{contraposition}[name=Contraposition, style=definition]
+		\newkeytheorem{consequence}[name=Consequence, style=definition]
+		\newkeytheorem{hypothesis}[name=Hypothesis, style=definition]
+
+		% Defbreak style: Definition, reminder
+		\newkeytheorem{definition}[name=Definition, style=definition]
+		\newkeytheorem{reminder}[name=Reminder, style=definition]
+
+		% Remark style: remark, example, counterexample, exercise
+		\newkeytheorem{remark}[name=Remark, style=remark]
+		\newkeytheorem{example}[name=Example, style=remark]
+		\newkeytheorem{counterexample}[name=CounterExample, style=remark]
+		%\newkeytheorem{exercise}[name=Exercise, style=remark]  % Giving to XSIM
+
+
+		\definecolor{profOnlyColor}{RGB}{110, 110, 110}
+		\newbool{printProfOnly}
+		\booltrue{printProfOnly}
+
+	\ExplSyntaxOn
+		\NewDocumentEnvironment{myProfOrNotPrintEnv}{+b}{%
+			% before myProfOrNotPrintEnv
+			\bool_if:NTF \l__mythm_inProfOnly_bool
+			{% true
+				\ifbool{printProfOnly}{
+					\color{profOnlyColor}
+					#1
+				}{% then to nothing so it will not be printed
+					%\begin{comment}
+					\begin{keythms_orig_theorem}
+				}%
+			}{% FALSE
+				#1
+			}
+		}{% after myProfOrNotPrintEnv
+			\bool_if:NTF \l__mythm_inProfOnly_bool
+			{% true
+				\ifbool{printProfOnly}{% nothing special
+				}{% eventually close some environments
+					%\end{comment}
+				}%
+			}{% FALSE: nothing to do
+			}
+		}
+
+		\bool_new:N \l__mythm_inProfOnly_bool
+		\bool_set_false:N \l__mythm_inProfOnly_bool
+
+		\keys_define:nn { keytheorems/thmuse }
+		{
+			profOnly  .choice:,
+			profOnly / false .code:n = {
+				\bool_set_false:N \l__mythm_inProfOnly_bool
+				\bool_set_false:N \l__keythms_thmuse_ignore_bool
+			},
+			profOnly / true .code:n = {
+				\bool_set_true:N \l__mythm_inProfOnly_bool
+				\ifbool{printProfOnly}{}{
+					\bool_set_true:N \l__keythms_thmuse_ignore_bool
+				}
+			},
+			profOnly  .initial:n = false,
+		}
+	\ExplSyntaxOff
+
+	\addtotheoremhook{prehead}{\begin{myProfOrNotPrintEnv}}
+	\addtotheoremhook{postfoot}{\end{myProfOrNotPrintEnv}}
+
+
+%%%%---- EXERCISE (XSIM) ---------------------------%%%%
+%%%%---- TRANSLATION ---------------------------%%%%
+
 
 %%%%---- MULTIMEDIA ---------------------------%%%%
 	% from float package
 		\floatstyle{plain} % create a env for algorithms with Float
 		\newfloat{video}{H}{vid}
 		\floatname{video}{Video}
+		\DeclareCaptionSubType*{video}
+		\renewcommand\thesubvideo{\alph{subvideo}}
 	\usepackage{animate} % Create embedded animation from images on all OS and viewer !
 
 		% Os variables for the macros
@@ -362,7 +608,6 @@
 		\fi
 
 
-%%%%---- TRANSLATION ---------------------------%%%%
-%%%%---- VARIABLES -----------------------------%%%%
-%%%%---- MACROS --------------------------------%%%%
-%%%%---- HYPHENATIONS & ACRONYMS --------------%%%%
+%%%%---- HYPHENATIONS --------------%%%%
+
+% EoF

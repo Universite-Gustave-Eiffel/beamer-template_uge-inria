@@ -1,10 +1,10 @@
 %% -------------------------------------------------------------------
-%% Copyright 2024 Romain NOËL
+%% Copyright 2024- 20** Romain NOËL
 %%
 %% Based on the inria theme presentation ppt and graphical charter
 %% -------------------------------------------------------------------
 
-\ProvidesExplPackage{beamerouterthemegothaminria}{2024-10-15}{1.0.0.a}{inria outer theme}
+\ProvidesExplPackage{beamerouterthemegothaminria}{2026-06-18}{1.1.0.a}{inria outer theme}
 
 %\mode<presentation>
 
@@ -60,11 +60,13 @@
 
 \defbeamertemplate{frametitle}{default/inria~oldA}{
 	\nointerlineskip
+	% \vspace*{\dimexpr -3.45ex + 19.05pt \relax }
 	\begin{beamercolorbox}[
 			wd=\paperwidth,
 			sep=0pt,
-			leftskip=\gothamFrametitleLeftpading,
-			rightskip=\gothamFrametitleRightpading,
+			leftskip=9.79pt,
+			% rightskip=\gothamFrametitleRightpading,
+			ht= 6.359mm,
 		]{frametitle}
 		\gotham@frametitlestrut@start
 		\tikz[overlay,remember~picture]{
@@ -92,11 +94,13 @@
 
 \defbeamertemplate{frametitle}{default/inria~oldB}{
 	\nointerlineskip
+	% \vspace*{\dimexpr -3.45ex + 19.05pt \relax }
 	\begin{beamercolorbox}[
 			wd=\paperwidth,
 			sep=0pt,
-			leftskip=\gothamFrametitleLeftpading,
-			rightskip=\gothamFrametitleRightpading,
+			leftskip=9.79pt,
+			% rightskip=\gothamFrametitleRightpading,
+			ht= 6.359mm,
 		]{frametitle}
 		\gotham@frametitlestrut@start
 		\tikz[overlay,remember~picture]{
@@ -123,11 +127,26 @@
 
 \defbeamertemplate{frametitle}{default/inria~oldC}{
 	\nointerlineskip
+	% \makeatletter
+	% 	\@ifclasswith{beamer}{9pt}
+	% 	{\vspace*{0.89pt}}
+	% 	{}
+
+	% 	\@ifclasswith{beamer}{10pt}
+	% 	{\vspace*{-1.67pt}}
+	% 	{}
+
+	% 	\@ifclasswith{beamer}{11pt}
+	% 	{\vspace*{-2.75pt}}
+	% 	{}
+	% \makeatother
+	% \vspace*{\dimexpr -3.45ex + 19.05pt \relax }
 	\begin{beamercolorbox}[
 			wd=\paperwidth,
 			sep=0pt,
-			leftskip=\gothamFrametitleLeftpading,
-			rightskip=\gothamFrametitleRightpading,
+			leftskip=9.79pt,
+			% rightskip=\gothamFrametitleRightpading,
+			ht= 6.359mm,
 		]{frametitle}
 		\gotham@frametitlestrut@start
 		\tikz[overlay,remember~picture]{
@@ -163,7 +182,7 @@
 		]{frametitle}
 		\gotham@frametitlestrut@start
 		\tikz[overlay,remember~picture]{
-			\node at (0.2, 0.4) 
+			\node at (0.2, 0.4)
 			{\includegraphics[width=10pt]{\PathSOinria/logos/coin_degrade.pdf}};% top left corner
 		}
 		\hspace{4.mm}
@@ -213,11 +232,11 @@
 %%%%%%%%%%%%%
 
 % \setlength{\rightFooterPadding}{22.5ex}
-% \setlength{\gothamFootlineRuleLeftPadding}{7mm} 
+% \setlength{\gothamFootlineRuleLeftPadding}{7mm}
 % \setlength{\gothamFootlineRuleHeight}{0.0pt}
 \setlength{\gothamFootlineRuleHeight}{0.5pt} % This is nice also but have a cleaner default, I turned it to 0.
 \setlength{\gothamFootlineRuleLength}{\linewidth}
-\setlength{\gothamFootlineHeight}{2.ex} 
+\setlength{\gothamFootlineHeight}{2.ex}
 
 
 % \defbeamertemplate*{frame footer}{inria~RF}[1][]{
@@ -239,7 +258,7 @@
 % 	% add a ruler but wihtout affecting the dimensions of the footline
 % 	\vbox to 0pt{
 % 		% Vertical stretch to ensure proper spacing
-% 		\vss 
+% 		\vss
 % 		\hbox to 0pt{
 % 			\hspace*{\gothamFootlineRuleLeftPadding}
 % 			\usebeamercolor{frametitle}
@@ -249,7 +268,7 @@
 % 				\dimexpr \gothamFootlineHeight -0.25em\relax
 % 			}
 % 			% Horizontal stretch to ensure proper spacing
-% 			\hss 
+% 			\hss
 % 		}
 % 	}
 % 	\hspace{\gothamLeftFooterPadding}
@@ -266,13 +285,13 @@
 % 		\insertshortdate
 % 	}
 % 	\hfill \
-% 	\hfill \ \insertshorttitle 
+% 	\hfill \ \insertshorttitle
 % 	% make sure that the vertical space is constant: strut.
 % 	\gotham@strut
-% 	\hfill \ 
+% 	\hfill \
 % 	\hfill \
 % 	% \ifbool{rotateFooter}{
-% 	\bool_if:NTF \l_gotham_RotateFooter {	
+% 	\bool_if:NTF \l_gotham_RotateFooter {
 % 		% rotateFooter true
 % 		\settowidth{\hlenRightRotFooter}{\hspace{\gothamRightFooterPadding}\usebeamertemplate{page~number~in~head/foot}}
 % 		\addtolength{\hlenRightRotFooter}{\gothamHposRightRotFooter}
@@ -281,7 +300,7 @@
 % 		\end{picture}
 % 	}{
 % 		% rotateFooter false
-% 		\insertshortauthor 
+% 		\insertshortauthor
 % 		%\hspace{-7em}
 % 	}
 % 	% decrease space between progress bar and footer

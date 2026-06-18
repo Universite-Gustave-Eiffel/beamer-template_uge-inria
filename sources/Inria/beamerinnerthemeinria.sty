@@ -1,10 +1,10 @@
 %% -------------------------------------------------------------------
-%% Copyright 2024 Romain NOËL
+%% Copyright 2024-20** Romain NOËL
 %%
 %% Based on the Inria theme presentation ppt and graphical charter
 %% -------------------------------------------------------------------
 
-\ProvidesExplPackage{beamerinnerthemegothamInria}{2024-10-15}{1.0.0.a}{Inria inner theme}
+\ProvidesExplPackage{beamerinnerthemegothamInria}{2026-06-18}{1.1.0.a}{Inria inner theme}
 
 %\mode<presentation>
 
@@ -18,7 +18,7 @@
 
 % % The command to insert the institute logo on title page
 % \newcommand{\UGEtitlelogo}{
-% 	\ifbool{darkBG}{% Dark true 
+% 	\ifbool{darkBG}{% Dark true
 % 		\ifnum\insertaspectratio=169 % 16:9
 % 			\includegraphics[height=0.08\paperheight]{\PathSOuge/logos/UGE-logo.pdf}
 % 		\else
@@ -39,14 +39,14 @@
 
 % % The command to insert the background title page
 % \newcommand{\UGEtitlepage}{
-% 	\ifbool{darkBG}{% Dark true 
+% 	\ifbool{darkBG}{% Dark true
 % 		\ifnum\insertaspectratio=169 % 16:9
 % 			\includegraphics[width=\paperwidth, height=\paperheight]{\PathSOuge/logos/pattern-titlepage-reverse.pdf}
 % 		\else
 % 		\ifnum\insertaspectratio=43 % 4:3
 % 			\includegraphics[width=\paperwidth, height=\paperheight]{\PathSOuge/logos/pattern-titlepage-reverse-43.pdf}
 % 		\fi% end 4:3
-% 		\fi% end 19:9	
+% 		\fi% end 19:9
 % 	}{% Light
 % 		\ifnum\insertaspectratio=169 % 16:9
 % 			\includegraphics[width=\paperwidth, height=\paperheight]{\PathSOuge/logos/pattern-titlepage.pdf}
@@ -69,7 +69,7 @@
 	%
 	\tikz[overlay, remember~picture]{
 		% dark rectangle in the center of the page
-		\node [rectangle, fill=InriaDarkgray, 
+		\node [rectangle, fill=InriaDarkgray,
 			minimum~width=15\paperwidth/16, minimum~height=7.5\paperheight/9
 		] (box) at ([shift={(0,-0.222)}]current~page.center) {};
 	}
@@ -80,10 +80,10 @@
 	% reuse the background from TOC
 	\setbeamertemplate{background~canvas}[titlepage/inria~old]
 	\usebeamertemplate{background~canvas}
-	
+
 	% red rectangle on top left corner
 	\tikz[overlay, remember~picture]{
-		\node [rectangle, fill=InriaRed, anchor=north~west, minimum~width=0.3\paperwidth+1pt, minimum~height=4.5cm+1pt, align=center] 
+		\node [rectangle, fill=InriaRed, anchor=north~west, minimum~width=0.3\paperwidth+1pt, minimum~height=4.5cm+1pt, align=center]
 		(box) at ([shift={(-1pt,1pt)}]current~page.north~west) { \pgfuseimage{InriaLogoSection}\\\vspace{25pt}};
 	}
 	\tikz[overlay, remember~picture]{
@@ -91,12 +91,12 @@
 			\ifx\inserttitlegraphic\@empty\else\inserttitlegraphic\fi
 		};
 	}
-	
+
 	\vspace{-4pt}
 	\addtolength{\leftskip}{13em}
 	\dim_add:Nn \l__gotham_titleseparator_width_dim {-15em}
 	{
-		\ifbool{darkBG}{% Dark true 
+		\ifbool{darkBG}{% Dark true
 			\setbeamercolor{normal~text}{fg=colorDark, }
 		}{% Light
 			\setbeamercolor{normal~text}{fg=colorPale, }
@@ -137,7 +137,7 @@
 			outer~sep=0pt, inner~sep=0pt},
 	]
 		\useasboundingbox (0,0) rectangle (\paperwidth,\paperheight);
-		\node [mainlogo] at (.05\paperwidth, \paperheight-.05\paperwidth+1pt) 
+		\node [mainlogo] at (.05\paperwidth, \paperheight-.05\paperwidth+1pt)
 			{\includegraphics[width=.3\textwidth]{\PathSOinria/logos/RF-INria_Bloc-marque.png}}
 		;
 		\node [align=left] at (current~page.south~west){
@@ -167,7 +167,7 @@
 	% \setkeys{beamerframe}{c}
 	% \setkeys{beamerframe}{noframenumbering}
 	% \centering
-	
+
 	\setbeamertemplate{background~canvas}[standout/\prop_item:Nn \l__gotham_template_name_prop {background~canvas/standout}]
 	% \usebeamertemplate{background~canvas}%[standout/gotham]
 	\usebeamerfont{standout}
@@ -176,7 +176,7 @@
 		%true : empty background (transparent)
 		\setbeamercolor{background~canvas}{
 			use=primary~palette,
-			bg=primary~palette.fg 
+			bg=primary~palette.fg
 		}
 	}{
 		%false : background not empty (dark or light)
@@ -207,7 +207,7 @@
 	% 	\centering
 	% 	\textit{Merci.}
 	% 	\\
-	
+
 		% \includegraphics[width=6em]{\PathSOinria/logos/Filet-7pt.pdf}
 	% \end{minipage}
 }
@@ -225,7 +225,7 @@
 	% 	%true : empty background (transparent)
 	% 	\setbeamercolor{background~canvas}{
 	% 		use=primary~palette,
-	% 		bg=primary~palette.fg 
+	% 		bg=primary~palette.fg
 	% 	}
 	% }{
 	% 	%false : background not empty (dark or light)
@@ -251,7 +251,7 @@
 	%
 	\tikz[overlay, remember~picture]{
 		% dark rectangle in the center of the page
-		\node [rectangle, fill=InriaDarkgray, 
+		\node [rectangle, fill=InriaDarkgray,
 			minimum~width=15\paperwidth/16, minimum~height=7.5\paperheight/9
 		] (box) at ([shift={(0,-0.222)}]current~page.center) {};
 	}
@@ -259,7 +259,8 @@
 
 \defbeamertemplate{frametitle}{toc/inria~old}{
 	\nointerlineskip
-	\hspace*{-\leftskip-3\gothamFrametitleLeftpading}
+	% \hspace*{-\leftskip-3\gothamFrametitleLeftpading}
+	\hspace{-0.3\paperwidth-4.6mm}
 	\begin{beamercolorbox}[
 			wd=0.3\paperwidth,
 			sep=0pt,
@@ -340,7 +341,7 @@
 	\setbeamertemplate{sidebar~canvas~right}[empty]
 	\setbeamertemplate{footline}[empty]
 	\setbeamertemplate{logo}[empty]
-	
+
 	% \addtolength{\leftskip}{4.25cm}
 	\setlength{\sectionhoffset}{7em}
 	\setbeamercolor{frametitleSection}{bg=InriaRed}
@@ -353,7 +354,8 @@
 
 \defbeamertemplate{frametitle}{section/inria~old}{
 	\nointerlineskip
-	\hspace*{-\leftskip-3\gothamFrametitleLeftpading}
+	%\hspace*{-\leftskip-3\gothamFrametitleLeftpading}
+	\hspace*{-9.89mm}
 	\begin{beamercolorbox}[
 			wd=0.3\paperwidth,
 			sep=0pt,
@@ -557,11 +559,11 @@
 	\setbeamertemplate{sidebar~canvas~right}[empty]
 	\setbeamertemplate{footline}[empty]
 	\setbeamertemplate{logo}[empty]
-	
+
 	\setbeamercolor{frametitleSection}{bg=InriaRed}
 	\setbeamercolor{frametitle}{use=standin, fg=standin.fg, bg=}
 	\setbeamertemplate{frametitle}[toc/inria~old]
-	
+
 	\addtolength{\leftskip}{12em}
 	% \setbeamertemplate{part~in~toc}[inria~old]
 	\setbeamertemplate{section~in~toc}[inria~old]
@@ -588,7 +590,7 @@
 	\setbeamertemplate{sidebar~canvas~right}[empty]
 	\setbeamertemplate{footline}[empty]
 	\setbeamertemplate{logo}[empty]
-	
+
 	\addtolength{\leftskip}{1cm}
 	% \setbeamertemplate{part~in~toc}[inria~RF]
 	\setbeamertemplate{section~in~toc}[inria~RF]
