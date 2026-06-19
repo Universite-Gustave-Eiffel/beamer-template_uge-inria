@@ -173,32 +173,30 @@
 
 %%---- SYMBOLS -------------------------------%%%%
 	%%%% Check list %%%%%
-		\newlist{todolist}{itemize}{2}
-		\setlist[todolist]{label=$\circ$}
-		%\ifboolexpr{bool {xetex} or bool {luatex}}{
-			\usepackage{utfsym}
-			\newcommand{\wontdo}{%
-				%\rlap{$\square$}{%
-				%	\raisebox{-0.25pt}{\textcolor{red}{\Large\hspace{0.5pt}\sffamily x}%
-				%	}%
-				%}%
-				\textcolor{red!85!black}{\usym{1F5F5}}
-				\hspace{-2.5pt}%
-			}
-			\newcommand{\done}{%
-				%\rlap{$\square$}{\raisebox{1.pt}{\textcolor{green}{\large\hspace{0.00pt} }}%
-				%}%
-				\textcolor{green!65!black}{\usym{1F5F9}}
-				\hspace{-3.15pt}%
-			}
-			\newcommand{\wip}{%
-				\rlap{$\square$}{\raisebox{1.65pt}{\scriptsize\hspace{0.75pt}$\sim$}%
-				}%
-				\hspace{0.9pt}%
-			}
-			\newcommand{\todos}{$\square$}
-		%}{
-		%}
+		% \newlist{todolist}{itemize}{2}
+		% \setlist[todolist]{label=$\circ$}
+		% %\ifboolexpr{bool {xetex} or bool {luatex}}{
+		% 	\usepackage{utfsym}
+		% 	\newcommand{\wontdo}{%
+		% 		%\rlap{$\square$}{%
+		% 		%	\raisebox{-0.25pt}{\textcolor{red}{\Large\hspace{0.5pt}\sffamily x}%
+		% 		%	}%
+		% 		%}%
+		% 		\textcolor{red!85!black}{\usym{1F5F5}}
+		% 		\hspace{-2.5pt}%
+		% 	}
+		% 	\newcommand{\done}{%
+		% 		%\rlap{$\square$}{\raisebox{1.pt}{\textcolor{green}{\large\hspace{0.00pt} }}%
+		% 		%}%
+		% 		\textcolor{green!65!black}{\usym{1F5F9}}
+		% 		\hspace{-3.15pt}%
+		% 	}
+		% 	\newcommand{\wip}{%
+		% 		\rlap{$\square$}{\raisebox{1.65pt}{\scriptsize\hspace{0.75pt}$\sim$}%
+		% 		}%
+		% 		\hspace{0.9pt}%
+		% 	}
+		% 	\newcommand{\todos}{$\square$}
 
 
 %%%%---- MATHS & PHYSICS -----------------------%%%%
@@ -208,16 +206,16 @@
 	\usepackage{derivative} % standard and customable derivative operators
 	\usepackage{siunitx} % International System units
 	% \usepackage{tensorsop} % work in progress ^^
-	\usepackage{tensorstyles} % display tensors with standards
-		\newcommand{\glsarg}{}
-		\newcommand{\glsstar}{}
-		\NewDocumentCommand{\tsr}{s o m o}{
-			\IfBooleanT{#1}{\renewcommand{\glsstar}{*}}
-			\IfNoValueTF{#2}{}{\renewcommand{\glsarg}{#2}}
-			\IfNoValueTF{#4}{\gls{#3}}{\gls{#3}[#4]}
-		}
-		\usepackage{bm} % bold math
-		\usepackage{bbm} % or bbold or dsfont blackboard/double stroke/double struck font (for math set)
+	% \usepackage{tensorstyles} % display tensors with standards
+	% 	\newcommand{\glsarg}{}
+	% 	\newcommand{\glsstar}{}
+	% 	\NewDocumentCommand{\tsr}{s o m o}{
+	% 		\IfBooleanT{#1}{\renewcommand{\glsstar}{*}}
+	% 		\IfNoValueTF{#2}{}{\renewcommand{\glsarg}{#2}}
+	% 		\IfNoValueTF{#4}{\gls{#3}}{\gls{#3}[#4]}
+	% 	}
+	% 	\usepackage{bm} % bold math
+	% 	\usepackage{bbm} % or bbold or dsfont blackboard/double stroke/double struck font (for math set)
 	\usepackage{keytheorems} % replacement of amsthm, ntheorem, thmtools
 		% custom below
 	\usepackage{empheq} % emphasize equations
